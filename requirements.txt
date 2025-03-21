@@ -1,1 +1,99 @@
-numpy==1.21.0 
+# Core dependencies
+flask
+fastapi
+uvicorn
+numpy
+pandas
+scikit-learn
+tensorflow
+transformers
+torch
+pillow
+python-dotenv
+requests
+httpx
+aiohttp
+gunicorn
+pymongo
+redis
+pyjwt
+bcrypt
+authlib
+flask-cors
+pytorch
+flask
+fasttext
+redis
+contractions
+num2words
+pmdarima
+
+# NLP & AI dependencies
+nltk
+spacy
+gensim
+textblob
+sentence-transformers
+fasttext
+langdetect
+imbalanced-learn
+xgboost
+catboost
+lightgbm
+
+# API integrations & financial data sources
+mpesa-api
+alpaca-trade-api
+yfinance
+newsapi-python
+tweepy
+praw
+cryptocompare
+
+# Jupyter & Data Science dependencies
+jupyter
+notebook
+jupyterlab
+seaborn
+matplotlib
+plotly
+ipywidgets
+nbformat
+nbconvert
+pydantic
+statsmodels
+prophet
+keras
+opencv-python
+
+# Testing dependencies
+pytest
+pytest-cov
+selenium
+
+# Deployment dependencies
+docker
+kubernetes
+dask
+ray
+
+# Web Scraping & Financial Data Sources
+beautifulsoup4
+scrapy
+
+# Database & ORM dependencies
+sqlalchemy
+asyncpg
+
+# Chatbot frameworks
+rasa
+chatterbot
+chatterbot-corpus
+
+# System Monitoring & Logging
+loguru
+psutil
+
+# Swahili NLP Support
+polyglot
+swahili-stanza
