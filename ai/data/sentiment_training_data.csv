@@ -1,1 +1,203 @@
-sentiment,text 
+text,sentiment,confidence,domain,language
+"I'm excited about starting my investment journey with M-Pesa!",positive,0.95,investment,english
+"The NSE stocks have been performing terribly this month.",negative,0.87,stock_market,english
+"What's the current interest rate for KCB M-Pesa loans?",neutral,0.92,loans,english
+"I'm worried I won't have enough savings for retirement.",negative,0.84,retirement,english
+"The new mobile money regulations are making transactions more secure.",positive,0.79,regulations,english
+"My investment portfolio grew by 15% this year!",positive,0.96,investment,english
+"I don't understand how to calculate my tax returns.",negative,0.71,taxation,english
+"Can you explain how Treasury bonds work in Kenya?",neutral,0.94,bonds,english
+"I'm frustrated with the high transaction fees on money transfers.",negative,0.88,banking,english
+"Equity Bank's interest rates for savings accounts are reasonable.",positive,0.76,banking,english
+"The process to open an investment account was simple and straightforward.",positive,0.85,investment,english
+"I lost a significant amount in cryptocurrency last month.",negative,0.92,crypto,english
+"What are the benefits of joining a SACCO in Kenya?",neutral,0.89,savings,english
+"The insurance premiums are too expensive for what they cover.",negative,0.83,insurance,english
+"I've managed to clear my loan ahead of schedule!",positive,0.94,loans,english
+"NSSF doesn't provide adequate retirement benefits.",negative,0.79,retirement,english
+"How does inflation affect my investments?",neutral,0.91,investment,english
+"The M-Shwari loan disbursement was incredibly fast.",positive,0.87,loans,english
+"I hate how complicated the tax filing system is in Kenya.",negative,0.89,taxation,english
+"What's the minimum amount needed to invest in government securities?",neutral,0.95,bonds,english
+"The new banking app has made managing my finances so much easier!",positive,0.93,banking,english
+"I regret investing in that penny stock recommended by my friend.",negative,0.86,stock_market,english
+"How do I calculate potential returns on NSE investments?",neutral,0.88,stock_market,english
+"I'm thrilled with the dividends I received from my Safaricom shares!",positive,0.91,stock_market,english
+"My loan application was rejected without a clear explanation.",negative,0.85,loans,english
+"Which money market fund has the best returns in Kenya?",neutral,0.93,investment,english
+"The financial literacy program has transformed how I manage money.",positive,0.89,education,english
+"I'm stressed about my increasing debt levels.",negative,0.92,loans,english
+"What are the current forex exchange rates for USD to KES?",neutral,0.95,forex,english
+"The real estate investment trust performed better than expected.",positive,0.84,real_estate,english
+"I'm disappointed with the customer service at my bank.",negative,0.78,banking,english
+"How do I diversify my investment portfolio in Kenya?",neutral,0.91,investment,english
+"Nimefurahi sana na faida niliyopata kutoka kwa uwekezaji wangu!",positive,0.88,investment,swahili
+"Benki yangu imepandisha ada za akaunti bila ilani.",negative,0.82,banking,swahili
+"Je, ni mikopo gani inayopatikana kwa wafanyabiashara wadogo?",neutral,0.90,loans,swahili
+"Hisa za NSE zimeshuka thamani wiki hii.",negative,0.85,stock_market,swahili
+"Nimeokoa pesa nyingi kupitia akaunti yangu ya M-Shwari.",positive,0.87,savings,swahili
+"Nifanyeje ili kupata mkopo wa nyumba?",neutral,0.94,mortgage,swahili
+"Bima ya afya ni gharama sana kwa familia yangu.",negative,0.81,insurance,swahili
+"Napenda jinsi huduma za benki za mtandao zinavyofanya maisha kuwa rahisi.",positive,0.89,banking,swahili
+"Ni shilingi ngapi inahitajika kuanza biashara ndogo?",neutral,0.92,business,swahili
+"Nimejuta kuwekeza katika cryptocurrency.",negative,0.83,crypto,swahili
+"My investment in Safaricom stocks has doubled in value!",positive,0.93,stock_market,english
+"The high interest rates are making loan repayments unbearable.",negative,0.89,loans,english
+"What's the difference between equity and debt financing?",neutral,0.94,investment,english
+"The new tax policies will benefit small business owners.",positive,0.76,taxation,english
+"I can't afford to pay these school fees with my current salary.",negative,0.87,personal_finance,english
+"Which SACCOs offer the best dividend rates in Kenya?",neutral,0.90,savings,english
+"The digital loan repayment period is conveniently flexible.",positive,0.82,loans,english
+"I'm concerned about the security of mobile banking transactions.",negative,0.74,banking,english
+"How do I monitor the performance of my stocks on the NSE?",neutral,0.93,stock_market,english
+"The financial advice from my bank representative was incredibly helpful!",positive,0.91,advisory,english
+"The investment minimum requirements are too high for average Kenyans.",negative,0.85,investment,english
+"What documents are needed to open a business account?",neutral,0.96,banking,english
+"I love how M-Pesa has made sending money to family so simple.",positive,0.94,mobile_money,english
+"My insurance claim was denied without proper explanation.",negative,0.88,insurance,english
+"How frequently should I review my investment portfolio?",neutral,0.91,investment,english
+"The budgeting app has helped me save more money each month!",positive,0.87,personal_finance,english
+"The bank's hidden charges are frustrating and deceptive.",negative,0.90,banking,english
+"What are the benefits of long-term versus short-term investments?",neutral,0.92,investment,english
+"Ninafurahia faida za chama changu cha kuweka na kukopa.",positive,0.85,savings,swahili
+"Gharama za elimu ya watoto wangu zinaongezeka kila mwaka.",negative,0.79,education,swahili
+"Jinsi gani ninaweza kutumia M-Pesa kufanya biashara?",neutral,0.93,mobile_money,swahili
+"I received a great return on my Treasury bonds investment.",positive,0.86,bonds,english
+"The inflation rate is making my savings worthless.",negative,0.89,savings,english
+"What's the process for transferring shares in Kenya?",neutral,0.95,stock_market,english
+"The financial planning workshop taught me valuable skills.",positive,0.84,education,english
+"I'm anxious about market volatility affecting my retirement funds.",negative,0.82,retirement,english
+"How do pension schemes work in Kenya?",neutral,0.91,retirement,english
+"My experience with the mobile trading platform has been excellent.",positive,0.88,trading,english
+"The loan interest accumulated faster than I expected.",negative,0.81,loans,english
+"What investment options are available for low-income earners?",neutral,0.94,investment,english
+"Fuliza has been a lifesaver during financial emergencies!",positive,0.87,mobile_money,english
+"The account maintenance fees are eating into my savings.",negative,0.85,banking,english
+"How can I calculate my net worth?",neutral,0.96,personal_finance,english
+"I'm pleased with how quickly my loan was approved.",positive,0.89,loans,english
+"The stock I invested in has consistently underperformed.",negative,0.83,stock_market,english
+"What's the difference between active and passive investment?",neutral,0.92,investment,english
+"The financial advisor provided clear, actionable advice.",positive,0.90,advisory,english
+"I feel trapped in a cycle of debt with these microloans.",negative,0.88,loans,english
+"How do I register for KRA PIN for tax purposes?",neutral,0.95,taxation,english
+"The dividend payout exceeded my expectations this quarter!",positive,0.91,investment,english
+"I'm upset that my insurance premium increased without warning.",negative,0.86,insurance,english
+"What factors affect exchange rates between KES and other currencies?",neutral,0.93,forex,english
+"I'm thrilled that my SACCO loan was approved at a low interest rate.",positive,0.89,loans,english
+"The market crash wiped out a significant portion of my investments.",negative,0.94,stock_market,english
+"How does compound interest work for savings accounts?",neutral,0.91,savings,english
+"Automated bill payments have simplified managing my monthly expenses.",positive,0.87,personal_finance,english
+"I'm frustrated that my bank doesn't offer weekend customer service.",negative,0.79,banking,english
+"What's the best strategy for investing in Kenyan real estate?",neutral,0.90,real_estate,english
+"The mobile banking app update has greatly improved usability.",positive,0.85,banking,english
+"My retirement savings aren't growing fast enough for comfort.",negative,0.82,retirement,english
+"How do REITs work in the Kenyan market?",neutral,0.94,real_estate,english
+"Natumia M-Pesa kila siku kwa malipo ya biashara yangu.",neutral,0.88,mobile_money,swahili
+"Nimefurahi sana kupokea mkopo kutoka kwa SACCO yangu.",positive,0.91,loans,swahili
+"Bei za mafuta zinapanda kila wiki, inafanya biashara kuwa ngumu.",negative,0.86,business,swahili
+"Nini kinahitajika kufungua akaunti ya benki?",neutral,0.95,banking,swahili
+"Mapato yangu hayatoshi kulipia mikopo yangu yote.",negative,0.90,loans,swahili
+"Nimefanikiwa kuokoa pesa za kutosha kununua nyumba!",positive,0.93,savings,swahili
+"Je, kuna faida gani ya kuwekeza katika dhahabu?",neutral,0.89,investment,swahili
+"I'm delighted with the growth of my diversified portfolio.",positive,0.92,investment,english
+"The excessive paperwork required for a business loan is discouraging.",negative,0.84,loans,english
+"What's the difference between stocks and bonds?",neutral,0.96,investment,english
+"The customer service at Equity Bank exceeded my expectations.",positive,0.88,banking,english
+"I'm disappointed that the interest on my savings is so low.",negative,0.81,savings,english
+"How do I set up a trust fund for my children in Kenya?",neutral,0.93,estate_planning,english
+"The financial literacy workshop was incredibly informative!",positive,0.90,education,english
+"The high transaction fees make international transfers impractical.",negative,0.87,forex,english
+"What are the tax implications of selling property in Kenya?",neutral,0.95,taxation,english
+"The digital wallet has revolutionized how I manage daily expenses.",positive,0.89,mobile_money,english
+"I regret investing so heavily in one sector of the market.",negative,0.83,investment,english
+"How can I improve my credit score in Kenya?",neutral,0.94,credit,english
+"Safaricom dividends have consistently provided reliable income.",positive,0.91,stock_market,english
+"The bank's minimum balance requirement is unreasonably high.",negative,0.86,banking,english
+"What steps should I take to start investing in Treasury bonds?",neutral,0.92,bonds,english
+"The automated savings feature helps me save without thinking about it!",positive,0.89,savings,english
+"I'm worried about currency depreciation affecting my savings.",negative,0.82,forex,english
+"How do I calculate potential mortgage payments?",neutral,0.95,mortgage,english
+"I appreciate how transparent this investment platform is about fees.",positive,0.87,investment,english
+"The frequent system downtimes make mobile banking unreliable.",negative,0.84,banking,english
+"What's the best way to save for university education in Kenya?",neutral,0.93,education,english
+"The returns on my money market fund have been excellent!",positive,0.90,investment,english
+"I'm stressed about meeting the monthly loan repayment deadline.",negative,0.85,loans,english
+"How does the Nairobi Securities Exchange index work?",neutral,0.94,stock_market,english
+"Nimefurahishwa na huduma za kibenki za mtandaoni!",positive,0.89,banking,swahili
+"Kodi zangu zinaonekana kuwa kubwa sana mwaka huu.",negative,0.83,taxation,swahili
+"Nina maswali kuhusu jinsi ya kuwekeza katika hisa za Safaricom.",neutral,0.92,stock_market,swahili
+"Biashara yangu inakua vizuri baada ya kupata mkopo.",positive,0.90,business,swahili
+"Bei za nyumba ni juu sana kwa mtu wa kawaida kununua.",negative,0.87,real_estate,swahili
+"Je, ni vipi ninaweza kupanga matumizi yangu vizuri?",neutral,0.94,personal_finance,swahili
+"CBK's regulatory framework has improved banking sector stability.",positive,0.83,regulations,english
+"The brokerage fees are too high for small investors like me.",negative,0.85,investment,english
+"What's the current inflation rate in Kenya?",neutral,0.96,economics,english
+"I'm impressed with how quickly my loan application was processed.",positive,0.89,loans,english
+"The mandatory fees for maintaining a dormant account are unfair.",negative,0.82,banking,english
+"How do I calculate capital gains tax on property sales?",neutral,0.91,taxation,english
+"The new investment app offers commission-free trading!",positive,0.88,investment,english
+"I'm frustrated by hidden charges on my credit card statement.",negative,0.90,banking,english
+"What documentation is needed for a business loan application?",neutral,0.95,loans,english
+"My experience with the online forex trading platform has been positive.",positive,0.84,forex,english
+"The constant bank system downtimes are affecting my business operations.",negative,0.87,banking,english
+"How do I monitor my credit score in Kenya?",neutral,0.93,credit,english
+"The financial advisor helped me create a realistic retirement plan.",positive,0.89,advisory,english
+"I'm concerned about the security of my online banking information.",negative,0.80,banking,english
+"What are the risks associated with cryptocurrency investments?",neutral,0.94,crypto,english
+"The cash-back rewards program has saved me significant money!",positive,0.91,banking,english
+"I'm dissatisfied with the poor interest rates on fixed deposits.",negative,0.85,savings,english
+"How can I start investing with a small amount of money?",neutral,0.92,investment,english
+"The mobile wallet interface is intuitive and user-friendly.",positive,0.86,mobile_money,english
+"The loan repayment terms are too rigid for my fluctuating income.",negative,0.83,loans,english
+"What's the procedure for transferring funds internationally?",neutral,0.95,forex,english
+"Nina furaha kwamba biashara yangu inafanya vizuri baada ya mkopo.",positive,0.88,business,swahili
+"Gharama za bima ya afya zinapanda kila mwaka.",negative,0.84,insurance,swahili
+"Ninahitaji kujua jinsi ya kusajili kampuni Kenya.",neutral,0.93,business,swahili
+"Nimefanikiwa kulipa mkopo wangu mapema!",positive,0.92,loans,swahili
+"Riba za mikopo ya benki ni juu sana kwa wafanyabiashara wadogo.",negative,0.87,banking,swahili
+"Je, ni vipi ninaweza kuwekeza katika hisa za kampuni za Kenya?",neutral,0.90,stock_market,swahili
+"The digital banking platform has transformed how I manage finances.",positive,0.88,banking,english
+"I'm worried about the economic impact of rising national debt.",negative,0.79,economics,english
+"How do mutual funds work compared to direct stock investments?",neutral,0.94,investment,english
+"I successfully negotiated a lower interest rate on my home loan!",positive,0.91,mortgage,english
+"The penalties for early withdrawal from fixed deposits are excessive.",negative,0.85,savings,english
+"What are the requirements for opening an offshore account?",neutral,0.92,banking,english
+"The financial planning app has simplified budgeting for my family.",positive,0.87,personal_finance,english
+"I'm upset that my insurance claim is taking so long to process.",negative,0.83,insurance,english
+"How do I evaluate the performance of different investment funds?",neutral,0.95,investment,english
+"The personalized financial advice was worth every shilling!",positive,0.90,advisory,english
+"The bank's customer service response time is frustratingly slow.",negative,0.86,banking,english
+"What investment strategies work best in volatile markets?",neutral,0.93,investment,english
+"I've seen significant growth since diversifying my investment portfolio.",positive,0.89,investment,english
+"The overdraft fees are excessively punitive for small account holders.",negative,0.84,banking,english
+"How can I protect my savings against inflation?",neutral,0.91,savings,english
+"The mobile banking app's biometric security gives me peace of mind.",positive,0.85,banking,english
+"I feel misled by the advertised interest rates versus actual returns.",negative,0.82,investment,english
+"What factors should I consider when choosing between SACCOs?",neutral,0.96,savings,english
+"Nafurahi kuwa na akaunti ya akiba inayolipa riba nzuri.",positive,0.89,savings,swahili
+"Hali ya uchumi inafanya biashara kuwa ngumu sana.",negative,0.86,economics,swahili
+"Ninataka kujua jinsi ya kutuma pesa nje ya nchi.",neutral,0.93,forex,swahili
+"Nimefurahi kuona faida kubwa kutoka kwa uwekezaji wangu!",positive,0.92,investment,swahili
+"Mikopo ya haraka haraka ina riba kubwa sana.",negative,0.88,loans,swahili
+"Je, ni hati gani zinahitajika kufungua akaunti ya benki?",neutral,0.95,banking,swahili
+"The retirement planning workshop provided valuable insights.",positive,0.84,retirement,english
+"I'm disappointed with the poor communication from my investment advisor.",negative,0.80,advisory,english
+"How do treasury bills differ from treasury bonds?",neutral,0.94,bonds,english
+"The new financial regulations have improved consumer protection!",positive,0.86,regulations,english
+"The market volatility has negatively impacted my portfolio value.",negative,0.87,investment,english
+"What's the process for filing tax returns online in Kenya?",neutral,0.95,taxation,english
+"The debt consolidation loan has significantly reduced my monthly payments.",positive,0.89,loans,english
+"I feel trapped by predatory lending practices from digital lenders.",negative,0.92,loans,english
+"How does dollar-cost averaging work for long-term investments?",neutral,0.91,investment,english
+"The financial inclusion initiatives have made banking accessible to everyone!",positive,0.85,banking,english
+"I'm stressed about the lack of transparency in investment fee structures.",negative,0.83,investment,english
+"What strategies can help minimize taxes on investment income?",neutral,0.93,taxation,english
+"The seamless integration between my bank account and investment platform is fantastic.",positive,0.88,banking,english
+"I regret not diversifying my investments before the market downturn.",negative,0.86,investment,english
+"How do I calculate the potential return on investment for a business?",neutral,0.94,business,english
+"Nimenufaika sana na mafunzo ya usimamizi wa fedha.",positive,0.87,education,swahili
+"Benki yangu imefunga tawi la karibu na biashara yangu.",negative,0.81,banking,swahili
+"Nitafanyaje ili kupata leseni ya biashara Kenya?",neutral,0.92,business,swahili
+"Mfumo wa kodi mpya unawasaidia wafanyabiashara wadogo!",positive,0.84,taxation,swahili
+"Msaada wa kitaalamu wa fedha ni ghali sana kwa mtu wa kawaida.",negative,0.79,advisory,swahili
+"Je, ni vipi ninaweza kupanga matumizi yangu ya mwezi?",neutral,0.95,personal_finance,swahili
