@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PesaGuru - Forex Rates & Market Insights</title>
+    <link rel="stylesheet" href="../../assets/css/Market_Data_and_Insights/forex_rates.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Chart.js for interactive charts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="page-header">
+        <div class="logo-container">
+            <img src="../../../assets/images/logo.png" alt="PesaGuru Logo" class="logo">
+            <h1>PesaGuru</h1>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="../Financial_Advisory_Services/investment_planning.html">Investment Planning</a></li>
+                <li><a href="../Market_Data_and_Insights/live_market_data.html">Market Data</a></li>
+                <li><a href="../Market_Data_and_Insights/crypto_trends.html">Crypto Trends</a></li>
+                <li class="active"><a href="../Market_Data_and_Insights/forex_rates.html">Forex Rates</a></li>
+                <li><a href="../Chatbot Interaction/chatbot.html">AI Assistant</a></li>
+            </ul>
+        </nav>
+        <div class="user-profile">
+            <a href="../User_Profile_and_Settings/profile_overview.html">
+                <i class="fas fa-user-circle"></i>
+                <span id="user-name">My Profile</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="forex-dashboard">
+        <!-- Page Title and Last Update -->
+        <section class="page-title">
+            <h2>Foreign Exchange Rates & Market Insights</h2>
+            <p class="last-update">Last updated: <span id="last-update-time">Loading...</span></p>
+            <div class="refresh-button">
+                <button id="refresh-data"><i class="fas fa-sync-alt"></i> Refresh Data</button>
+            </div>
+        </section>
+
+        <!-- Quick Currency Converter -->
+        <section class="currency-converter card">
+            <h3><i class="fas fa-exchange-alt"></i> Currency Converter</h3>
+            <div class="converter-container">
+                <div class="input-group">
+                    <input type="number" id="amount-from" value="1" min="0" step="0.01" aria-label="Amount to convert">
+                    <select id="currency-from" aria-label="Source currency">
+                        <option value="KES" selected>Kenyan Shilling (KES)</option>
+                        <option value="USD">US Dollar (USD)</option>
+                        <option value="EUR">Euro (EUR)</option>
+                        <option value="GBP">British Pound (GBP)</option>
+                        <option value="JPY">Japanese Yen (JPY)</option>
+                        <option value="AED">UAE Dirham (AED)</option>
+                        <option value="ZAR">South African Rand (ZAR)</option>
+                        <option value="CNY">Chinese Yuan (CNY)</option>
+                        <option value="INR">Indian Rupee (INR)</option>
+                    </select>
+                </div>
+                <div class="swap-button">
+                    <button id="swap-currencies" aria-label="Swap currencies"><i class="fas fa-arrows-alt-h"></i></button>
+                </div>
+                <div class="input-group">
+                    <input type="number" id="amount-to" readonly aria-label="Converted amount">
+                    <select id="currency-to" aria-label="Target currency">
+                        <option value="KES">Kenyan Shilling (KES)</option>
+                        <option value="USD" selected>US Dollar (USD)</option>
+                        <option value="EUR">Euro (EUR)</option>
+                        <option value="GBP">British Pound (GBP)</option>
+                        <option value="JPY">Japanese Yen (JPY)</option>
+                        <option value="AED">UAE Dirham (AED)</option>
+                        <option value="ZAR">South African Rand (ZAR)</option>
+                        <option value="CNY">Chinese Yuan (CNY)</option>
+                        <option value="INR">Indian Rupee (INR)</option>
+                    </select>
+                </div>
+            </div>
+            <p class="conversion-rate">1 <span id="from-currency-code">KES</span> = <span id="conversion-rate">Loading...</span> <span id="to-currency-code">USD</span></p>
+            <div class="conversion-details">
+                <p>Interbank Rate <small>(for reference only)</small></p>
+                <div class="bid-ask">
+                    <span>Bid: <span id="bid-rate">Loading...</span></span>
+                    <span>Ask: <span id="ask-rate">Loading...</span></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Forex Rates Dashboard -->
+        <div class="dashboard-grid">
+            <!-- Live KES Exchange Rates -->
+            <section class="live-rates card">
+                <h3><i class="fas fa-globe"></i> Live KES Exchange Rates</h3>
+                <div class="rates-container">
+                    <table id="forex-rates-table">
+                        <thead>
+                            <tr>
+                                <th>Currency</th>
+                                <th>Code</th>
+                                <th>Rate to KES</th>
+                                <th>Daily Change</th>
+                            </tr>
+                        </thead>
+                        <tbody id="forex-rates-body">
+                            <!-- Rates will be populated by JavaScript -->
+                            <tr class="placeholder-row">
+                                <td colspan="4">Loading exchange rates...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="cbk-notice">
+                    <p>Source: Central Bank of Kenya and Exchange Rate APIs. Updated hourly.</p>
+                </div>
+            </section>
+
+            <!-- Forex Chart -->
+            <section class="forex-chart card">
+                <h3><i class="fas fa-chart-line"></i> Exchange Rate Trends</h3>
+                <div class="chart-controls">
+                    <div class="currency-select">
+                        <label for="chart-currency">Currency Pair:</label>
+                        <select id="chart-currency">
+                            <option value="USD-KES">USD/KES</option>
+                            <option value="EUR-KES">EUR/KES</option>
+                            <option value="GBP-KES">GBP/KES</option>
+                            <option value="JPY-KES">JPY/KES</option>
+                        </select>
+                    </div>
+                    <div class="timeframe-select">
+                        <label for="chart-timeframe">Timeframe:</label>
+                        <select id="chart-timeframe">
+                            <option value="1D">1 Day</option>
+                            <option value="1W">1 Week</option>
+                            <option value="1M" selected>1 Month</option>
+                            <option value="3M">3 Months</option>
+                            <option value="6M">6 Months</option>
+                            <option value="1Y">1 Year</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="forex-chart"></canvas>
+                </div>
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <span class="legend-color price-line"></span>
+                        <span>Exchange Rate</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color ma-line"></span>
+                        <span>7-Day Moving Average</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Forex Insights -->
+            <section class="ai-insights card">
+                <h3><i class="fas fa-robot"></i> AI Forex Market Insights</h3>
+                <div class="insights-container">
+                    <div class="insight-header">
+                        <h4>Market Sentiment Analysis</h4>
+                        <span class="sentiment-badge neutral">NEUTRAL</span>
+                    </div>
+                    <div class="trend-analysis">
+                        <p id="ai-analysis-text">Analyzing market trends and generating insights...</p>
+                    </div>
+                    <div class="predictions">
+                        <h4>Projected Trends (Next 7 Days)</h4>
+                        <div class="prediction-cards" id="prediction-container">
+                            <!-- Will be populated by JavaScript -->
+                            <div class="prediction-card">
+                                <h5>USD/KES</h5>
+                                <div class="prediction-arrow up"><i class="fas fa-arrow-up"></i></div>
+                                <p class="prediction-value">+1.2%</p>
+                                <p class="confidence">Confidence: Medium</p>
+                            </div>
+                            <div class="prediction-card">
+                                <h5>EUR/KES</h5>
+                                <div class="prediction-arrow down"><i class="fas fa-arrow-down"></i></div>
+                                <p class="prediction-value">-0.8%</p>
+                                <p class="confidence">Confidence: High</p>
+                            </div>
+                            <div class="prediction-card">
+                                <h5>GBP/KES</h5>
+                                <div class="prediction-arrow stable"><i class="fas fa-minus"></i></div>
+                                <p class="prediction-value">±0.3%</p>
+                                <p class="confidence">Confidence: Medium</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="disclaimer">
+                        <p><i class="fas fa-info-circle"></i> AI predictions are for informational purposes only and should not be the sole basis for financial decisions.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Forex Alerts Setup -->
+            <section class="forex-alerts card">
+                <h3><i class="fas fa-bell"></i> Forex Rate Alerts</h3>
+                <div class="alerts-container">
+                    <p class="alerts-intro">Get notified when currency rates hit your desired targets.</p>
+                    <form id="alert-form">
+                        <div class="form-group">
+                            <label for="alert-currency">Currency Pair</label>
+                            <select id="alert-currency" required>
+                                <option value="">Select Currency Pair</option>
+                                <option value="USD-KES">USD/KES</option>
+                                <option value="EUR-KES">EUR/KES</option>
+                                <option value="GBP-KES">GBP/KES</option>
+                                <option value="JPY-KES">JPY/KES</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="alert-type">Alert Type</label>
+                            <select id="alert-type" required>
+                                <option value="">Select Alert Type</option>
+                                <option value="above">Price Above</option>
+                                <option value="below">Price Below</option>
+                                <option value="percent-change">Percent Change (24h)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="alert-value">Alert Value</label>
+                            <input type="number" id="alert-value" placeholder="Enter target value" required>
+                        </div>
+                        <div class="form-group notification-method">
+                            <label>Notification Method</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="notify-email" checked>
+                                    <label for="notify-email">Email</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="notify-sms">
+                                    <label for="notify-sms">SMS</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="notify-push" checked>
+                                    <label for="notify-push">Push Notification</label>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary">Create Alert</button>
+                    </form>
+
+                    <div class="active-alerts">
+                        <h4>Your Active Alerts</h4>
+                        <div id="alerts-list">
+                            <!-- Will be populated by JavaScript -->
+                            <p class="no-alerts-message">You don't have any active alerts. Create one above.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Market News & Events -->
+            <section class="market-news card">
+                <h3><i class="fas fa-newspaper"></i> Forex Market News</h3>
+                <div class="news-container">
+                    <div class="economic-calendar">
+                        <h4>Economic Events Calendar</h4>
+                        <div class="calendar-date-selector">
+                            <button id="prev-day" aria-label="Previous day"><i class="fas fa-chevron-left"></i></button>
+                            <span id="calendar-current-date">Today, March 9, 2025</span>
+                            <button id="next-day" aria-label="Next day"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        <div class="events-list" id="economic-events">
+                            <!-- Will be populated by JavaScript -->
+                            <div class="event-item">
+                                <div class="event-time">10:00 AM</div>
+                                <div class="event-details">
+                                    <span class="event-country"><img src="../../../assets/images/flags/us.png" alt="US" class="flag-icon"> US</span>
+                                    <span class="event-title">Federal Reserve Interest Rate Decision</span>
+                                    <span class="event-impact high">High Impact</span>
+                                </div>
+                            </div>
+                            <div class="event-item">
+                                <div class="event-time">2:30 PM</div>
+                                <div class="event-details">
+                                    <span class="event-country"><img src="../../../assets/images/flags/eu.png" alt="EU" class="flag-icon"> EU</span>
+                                    <span class="event-title">ECB Economic Bulletin</span>
+                                    <span class="event-impact medium">Medium Impact</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-articles">
+                        <h4>Latest Forex News</h4>
+                        <div class="articles-list" id="forex-news">
+                            <!-- Will be populated by JavaScript -->
+                            <div class="article-item">
+                                <div class="article-time">1 hour ago</div>
+                                <div class="article-details">
+                                    <h5 class="article-title">CBK Holds Key Interest Rate at 9.5% Amid Inflation Concerns</h5>
+                                    <p class="article-summary">The Central Bank of Kenya maintained its benchmark interest rate, citing ongoing inflation pressures and volatility in global markets.</p>
+                                    <a href="#" class="read-more">Read More</a>
+                                </div>
+                            </div>
+                            <div class="article-item">
+                                <div class="article-time">3 hours ago</div>
+                                <div class="article-details">
+                                    <h5 class="article-title">Kenyan Shilling Strengthens Against Dollar on Improved Exports</h5>
+                                    <p class="article-summary">The KES gained 0.8% against the USD following positive export data from the agricultural sector.</p>
+                                    <a href="#" class="read-more">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Trading Signals Dashboard -->
+            <section class="trading-signals card">
+                <h3><i class="fas fa-chart-bar"></i> Forex Trading Signals</h3>
+                <div class="signals-disclaimer">
+                    <p><i class="fas fa-exclamation-triangle"></i> Trading signals are for educational purposes only. PesaGuru does not recommend specific trades.</p>
+                </div>
+                <div class="signals-container">
+                    <div class="signals-filter">
+                        <label for="signals-timeframe">Timeframe:</label>
+                        <select id="signals-timeframe">
+                            <option value="h1">1 Hour</option>
+                            <option value="h4" selected>4 Hours</option>
+                            <option value="d1">Daily</option>
+                            <option value="w1">Weekly</option>
+                        </select>
+                    </div>
+                    <table class="signals-table">
+                        <thead>
+                            <tr>
+                                <th>Currency Pair</th>
+                                <th>Signal</th>
+                                <th>Direction</th>
+                                <th>Strength</th>
+                                <th>Technical Indicators</th>
+                            </tr>
+                        </thead>
+                        <tbody id="signals-body">
+                            <!-- Will be populated by JavaScript -->
+                            <tr>
+                                <td>USD/KES</td>
+                                <td><span class="signal-badge buy">BUY</span></td>
+                                <td><span class="direction-arrow up"><i class="fas fa-arrow-up"></i></span></td>
+                                <td>
+                                    <div class="strength-meter">
+                                        <div class="strength-bar strength-75" aria-label="Strength level: 7.5 out of 10"></div>
+                                    </div>
+                                    <span class="strength-value">7.5/10</span>
+                                </td>
+                                <td>
+                                    <div class="indicators">
+                                        <span class="indicator-bubble rsi positive">RSI</span>
+                                        <span class="indicator-bubble macd positive">MACD</span>
+                                        <span class="indicator-bubble ema positive">EMA</span>
+                                        <span class="indicator-bubble bb neutral">BB</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>EUR/KES</td>
+                                <td><span class="signal-badge sell">SELL</span></td>
+                                <td><span class="direction-arrow down"><i class="fas fa-arrow-down"></i></span></td>
+                                <td>
+                                    <div class="strength-meter">
+                                        <div class="strength-bar strength-60" aria-label="Strength level: 6 out of 10"></div>
+                                    </div>
+                                    <span class="strength-value">6/10</span>
+                                </td>
+                                <td>
+                                    <div class="indicators">
+                                        <span class="indicator-bubble rsi negative">RSI</span>
+                                        <span class="indicator-bubble macd negative">MACD</span>
+                                        <span class="indicator-bubble ema neutral">EMA</span>
+                                        <span class="indicator-bubble bb negative">BB</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="indicators-legend">
+                        <h4>Indicators Legend</h4>
+                        <div class="legend-items">
+                            <div class="legend-item"><span class="indicator-bubble rsi">RSI</span> <span>Relative Strength Index</span></div>
+                            <div class="legend-item"><span class="indicator-bubble macd">MACD</span> <span>Moving Average Convergence Divergence</span></div>
+                            <div class="legend-item"><span class="indicator-bubble ema">EMA</span> <span>Exponential Moving Average</span></div>
+                            <div class="legend-item"><span class="indicator-bubble bb">BB</span> <span>Bollinger Bands</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="page-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About PesaGuru</h4>
+                <p>PesaGuru provides personalized financial advisory services and investment planning resources for Kenyan users.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="../Learning_Resources/investment_strategies.html">Investment Strategies</a></li>
+                    <li><a href="../Learning_Resources/tax_compliance.html">Tax Compliance</a></li>
+                    <li><a href="../Tools_and_Calculators/investment_calculator.html">Investment Calculator</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Email: support@pesaguru.co.ke</p>
+                <p>Phone: +254 700 123 456</p>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 PesaGuru - All rights reserved</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Disclaimer</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Forex Rate Alert Modal -->
+    <div id="alert-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Alert Created Successfully</h3>
+            <p>You will be notified when your target rate is reached.</p>
+            <button class="btn-primary">OK</button>
+        </div>
+    </div>
+
+    <!-- Chat Widget -->
+    <div class="chat-widget">
+        <button class="chat-button" id="open-chat">
+            <i class="fas fa-comments"></i>
+            <span>Ask PesaGuru</span>
+        </button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/Market_Data_and_Insights/forex_rates.js"></script>
+</body>
+</html>

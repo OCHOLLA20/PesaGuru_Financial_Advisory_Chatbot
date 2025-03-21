@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PesaGuru - Budget Savings Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/Financial_Advisory_Services/budgeting_savings.css">
+    <style>
+        /* Progress bar classes - moved from inline styles */
+        .progress-70 { width: 70%; }
+        .progress-50 { width: 50%; }
+        .progress-85 { width: 85%; }
+        .progress-30 { width: 30%; }
+        .progress-60 { width: 60%; }
+        .progress-90 { width: 90%; }
+        .progress-37-5 { width: 37.5%; }
+        
+        /* Add some basic styles for screen reader only text */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-header">
+                    <div class="logo-container">
+                        <img src="../../assets/images/logo.png" alt="PesaGuru Logo" class="logo">
+                        <h1 class="logo-text">PesaGuru</h1>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <ul class="menu-items">
+                    <li class="menu-item active">
+                        <a href="#"><i class="fas fa-home"></i>Dashboard</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="../../pages/Financial_Advisory_Services/add_expense.html">
+                            <i class="fas fa-plus"></i> Add Expense ➕
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="../../pages/Financial_Advisory_Services/Set_a_Savings_Goal.html">
+                            <i class="fas fa-trophy"></i> Set a Savings Goal 🏆
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="../../pages/Financial_Advisory_Services/check_Reports.html">
+                            <i class="fas fa-file-alt"></i> Check Reports 📑
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <ul class="menu-items">
+                    <li class="menu-item">
+                        <a href="../../pages/Support_and_Assistance/help_center.html">
+                            <i class="fas fa-question-circle"></i> Help
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="../../pages/User_Profile_and_Settings/financial_goals.html">
+                            <i class="fas fa-bullseye"></i> Financial Goals
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="../../pages/User_Profile_and_Settings/security_settings.html">
+                            <i class="fas fa-cog"></i> Settings
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <h1>Dashboard</h1>
+                    <p class="greeting">Good morning, <span id="user-name">User</span>!</p>
+                </div>
+                <div class="header-right">
+                    <div class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search transactions, reports...">
+                    </div>
+                    <div class="header-actions">
+                        <button class="currency-toggle">KES <i class="fas fa-chevron-down"></i></button>
+                        <!-- Fixed: Added title attribute for theme toggle button -->
+                        <button class="theme-toggle" title="Toggle dark mode">
+                            <i class="fas fa-moon"></i>
+                            <span class="sr-only">Toggle dark mode</span>
+                        </button>
+                        <button class="notification-btn"><i class="fas fa-bell"></i><span class="notification-badge">3</span></button>
+                        <div class="user-profile">
+                            <img src="https://storage.googleapis.com/a1aa/image/0U7xzC3_YA8vvhRz7YZBOcGa8zL2Ythwhf2wE3wxzV8.jpg" alt="User profile">
+                            <span>Hailey Patrick</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Financial Overview Cards -->
+            <section class="financial-overview">
+                <div class="card">
+                    <div class="card-icon assets-icon">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Total Assets</h3>
+                        <p class="card-value">KES 58,463</p>
+                        <p class="card-change positive">+23% <span>from last month</span></p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon balance-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Account Balance</h3>
+                        <p class="card-value">KES 25,780</p>
+                        <p class="card-change positive">+37% <span>from last month</span></p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon income-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Monthly Income</h3>
+                        <p class="card-value">KES 13,583</p>
+                        <p class="card-change positive">+45% <span>from last month</span></p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon expenses-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Monthly Expenses</h3>
+                        <p class="card-value">KES 8,921</p>
+                        <p class="card-change negative">-27% <span>from last month</span></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main Dashboard Content -->
+            <div class="dashboard-content">
+                <!-- Left Column -->
+                <div class="content-left">
+                    <!-- Financial Statistics -->
+                    <section class="section financial-statistics">
+                        <div class="section-header">
+                            <h2>Financial Statistics</h2>
+                            <div class="section-actions">
+                                <button class="btn-outline">Weekly</button>
+                                <button class="btn-outline active">Monthly</button>
+                                <button class="btn-outline">Yearly</button>
+                            </div>
+                        </div>
+                        <div class="statistics-chart">
+                            <canvas id="financialChart"></canvas>
+                        </div>
+                    </section>
+
+                    <!-- Recent Transactions -->
+                    <section class="section recent-transactions">
+                        <div class="section-header">
+                            <h2>Recent Transactions</h2>
+                            <button class="btn-text">View All <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                        <div class="transactions-list">
+                            <div class="transaction-item">
+                                <div class="transaction-details">
+                                    <img src="https://storage.googleapis.com/a1aa/image/6URA0tdXk4Z-U7zX10aJBIO3no87FYCmaCJ7n0WZEII.jpg" alt="Phone Store">
+                                    <div>
+                                        <h4>Phone Store</h4>
+                                        <p>Phone</p>
+                                    </div>
+                                </div>
+                                <div class="transaction-amount">
+                                    <p class="amount negative">-KES 899</p>
+                                    <p class="date">6 May 2024, 10 AM</p>
+                                </div>
+                            </div>
+                            
+                            <div class="transaction-item">
+                                <div class="transaction-details">
+                                    <img src="https://storage.googleapis.com/a1aa/image/nsHlSJNJZWyGYRHYIEXzxGQ8C5O1nZobe3WAJONjJuY.jpg" alt="Shoe Store">
+                                    <div>
+                                        <h4>Shoe Store</h4>
+                                        <p>Shoe</p>
+                                    </div>
+                                </div>
+                                <div class="transaction-amount">
+                                    <p class="amount negative">-KES 1,550</p>
+                                    <p class="date">7 May 2024, 8 PM</p>
+                                </div>
+                            </div>
+                            
+                            <div class="transaction-item">
+                                <div class="transaction-details">
+                                    <img src="https://storage.googleapis.com/a1aa/image/5JiA_4lxB6wfQX0zv_MXWgRJz4EYWLVhwYWYjQ069mc.jpg" alt="Air Ticket">
+                                    <div>
+                                        <h4>Air Ticket</h4>
+                                        <p>Flight ticket</p>
+                                    </div>
+                                </div>
+                                <div class="transaction-amount">
+                                    <p class="amount negative">-KES 800</p>
+                                    <p class="date">8 May 2024, 7 AM</p>
+                                </div>
+                            </div>
+                            
+                            <div class="transaction-item">
+                                <div class="transaction-details">
+                                    <img src="https://storage.googleapis.com/a1aa/image/LOsS8VckJN-X74gtdV2zNUvDn6VyrOgaMMCypyxhTI4.jpg" alt="Fund Payment">
+                                    <div>
+                                        <h4>Fund Payment</h4>
+                                        <p>Membership Rewards</p>
+                                    </div>
+                                </div>
+                                <div class="transaction-amount">
+                                    <p class="amount positive">+KES 2,120</p>
+                                    <p class="date">10 May 2024, 3 PM</p>
+                                </div>
+                            </div>
+                            
+                            <div class="transaction-item">
+                                <div class="transaction-details">
+                                    <img src="https://storage.googleapis.com/a1aa/image/cr2-yGTMY7FSjrQSWvad83tEVsA796xoKCjUwIpRIwo.jpg" alt="Top Up">
+                                    <div>
+                                        <h4>Top Up</h4>
+                                        <p>Gift Certificate</p>
+                                    </div>
+                                </div>
+                                <div class="transaction-amount">
+                                    <p class="amount positive">+KES 1,920</p>
+                                    <p class="date">11 May 2024, 1 PM</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Right Column -->
+                <div class="content-right">
+                    <!-- Monthly Budget -->
+                    <section class="section monthly-budget">
+                        <div class="section-header">
+                            <h2>Monthly Budget</h2>
+                            <button class="btn-text">Set Budget <i class="fas fa-plus"></i></button>
+                        </div>
+                        <div class="budget-donut-chart">
+                            <canvas id="budgetDonutChart"></canvas>
+                        </div>
+                        <div class="budget-categories">
+                            <div class="budget-category">
+                                <div class="category-icon home-icon">
+                                    <i class="fas fa-home"></i>
+                                </div>
+                                <div class="category-details">
+                                    <h4>Residential Costs</h4>
+                                    <div class="progress-container">
+                                        <!-- Fixed: Removed inline style -->
+                                        <div class="progress-bar progress-70"></div>
+                                    </div>
+                                    <p>KES 1,200 / KES 1,800</p>
+                                </div>
+                            </div>
+                            
+                            <div class="budget-category">
+                                <div class="category-icon transportation-icon">
+                                    <i class="fas fa-car"></i>
+                                </div>
+                                <div class="category-details">
+                                    <h4>Transportation</h4>
+                                    <div class="progress-container">
+                                        <!-- Fixed: Removed inline style -->
+                                        <div class="progress-bar progress-50"></div>
+                                    </div>
+                                    <p>KES 362 / KES 700</p>
+                                </div>
+                            </div>
+                            
+                            <div class="budget-category">
+                                <div class="category-icon education-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <div class="category-details">
+                                    <h4>Education</h4>
+                                    <div class="progress-container">
+                                        <!-- Fixed: Removed inline style -->
+                                        <div class="progress-bar progress-85"></div>
+                                    </div>
+                                    <p>KES 3,450 / KES 4,000</p>
+                                </div>
+                            </div>
+                            
+                            <div class="budget-category">
+                                <div class="category-icon holiday-icon">
+                                    <i class="fas fa-plane"></i>
+                                </div>
+                                <div class="category-details">
+                                    <h4>Holiday</h4>
+                                    <div class="progress-container">
+                                        <!-- Fixed: Removed inline style -->
+                                        <div class="progress-bar progress-30"></div>
+                                    </div>
+                                    <p>KES 290 / KES 1,000</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Savings Goals -->
+                    <section class="section savings-goals">
+                        <div class="section-header">
+                            <h2>Savings Goals</h2>
+                            <button class="btn-text">New Goal <i class="fas fa-plus"></i></button>
+                        </div>
+                        <div class="goals-list">
+                            <div class="goal-item">
+                                <div class="goal-icon vacation-icon">
+                                    <i class="fas fa-umbrella-beach"></i>
+                                </div>
+                                <div class="goal-details">
+                                    <div class="goal-info">
+                                        <h4>Mombasa Vacation</h4>
+                                        <p class="goal-amount">KES 12,000 / KES 20,000</p>
+                                    </div>
+                                    <div class="progress-container">
+                                        <!-- Fixed: Removed inline style -->
+                                        <div class="progress-bar progress-60"></div>
+                                        <p class="progress-text">60%</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="goal-item">
+                                <div class="goal-icon emergency-icon">
+                                    <i class="fas fa-first-aid"></i>
+                                </div>
+                                <div class="goal-details">
+                                    <div class="goal-info">
+                                        <h4>Emergency Fund</h4>
+                                        <p class="goal-amount">KES 45,000 / KES 50,000</p>
+                                    </div>
+                                    <div class="progress-container">
+                                        <!-- Fixed: Removed inline style -->
+                                        <div class="progress-bar progress-90"></div>
+                                        <p class="progress-text">90%</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="goal-item">
+                                <div class="goal-icon gadget-icon">
+                                    <i class="fas fa-laptop"></i>
+                                </div>
+                                <div class="goal-details">
+                                    <div class="goal-info">
+                                        <h4>New Laptop</h4>
+                                        <p class="goal-amount">KES 30,000 / KES 80,000</p>
+                                    </div>
+                                    <div class="progress-container">
+                                        <!-- Fixed: Removed inline style -->
+                                        <div class="progress-bar progress-37-5"></div>
+                                        <p class="progress-text">37.5%</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- AI Recommendations -->
+                    <section class="section ai-recommendations">
+                        <div class="section-header">
+                            <h2>Smart Recommendations</h2>
+                        </div>
+                        <div class="recommendations-list">
+                            <div class="recommendation-item">
+                                <div class="recommendation-icon">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div class="recommendation-content">
+                                    <h4>Reduce subscription costs</h4>
+                                    <p>You could save KES 450 monthly by canceling unused subscriptions.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="recommendation-item">
+                                <div class="recommendation-icon">
+                                    <i class="fas fa-piggy-bank"></i>
+                                </div>
+                                <div class="recommendation-content">
+                                    <h4>Increase emergency fund</h4>
+                                    <p>Consider adding KES 1,000 more to your emergency fund monthly.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="recommendation-item">
+                                <div class="recommendation-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="recommendation-content">
+                                    <h4>Investment opportunity</h4>
+                                    <p>Based on your profile, a low-risk mutual fund could yield 8% annually.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Payouts Table -->
+            <section class="section payouts">
+                <div class="section-header">
+                    <h2>All Payouts</h2>
+                    <button class="btn-text">Download Report <i class="fas fa-download"></i></button>
+                </div>
+                <div class="payouts-table-container">
+                    <table class="payouts-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Charges</th>
+                                <th>Refunds</th>
+                                <th>Fees</th>
+                                <th>Total</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Electricity</td>
+                                <td><span class="status-badge paid">Paid</span></td>
+                                <td>KES 5,985.56</td>
+                                <td>-KES 21.72</td>
+                                <td>KES 0.00</td>
+                                <td>KES 4,920.00</td>
+                                <td>
+                                    <button class="btn-icon" title="Electricity payment options" aria-label="Electricity payment options">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Water Costs</td>
+                                <td><span class="status-badge pending">Pending</span></td>
+                                <td>KES 4,876.00</td>
+                                <td>KES 0.00</td>
+                                <td>-KES 13.17</td>
+                                <td>KES 4,498.00</td>
+                                <td>
+                                    <button class="btn-icon" title="Water costs payment options" aria-label="Water costs payment options">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Pay tax</td>
+                                <td><span class="status-badge paid">Paid</span></td>
+                                <td>KES 1,985.56</td>
+                                <td>KES 0.00</td>
+                                <td>-KES 9.17</td>
+                                <td>KES 1,978.00</td>
+                                <td>
+                                    <button class="btn-icon" title="Tax payment options" aria-label="Tax payment options">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Internet Bill</td>
+                                <td><span class="status-badge paid">Paid</span></td>
+                                <td>KES 2,500.00</td>
+                                <td>KES 0.00</td>
+                                <td>KES 0.00</td>
+                                <td>KES 2,500.00</td>
+                                <td>
+                                    <button class="btn-icon" title="Internet bill payment options" aria-label="Internet bill payment options">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Netflix Subscription</td>
+                                <td><span class="status-badge upcoming">Upcoming</span></td>
+                                <td>KES 1,100.00</td>
+                                <td>KES 0.00</td>
+                                <td>KES 0.00</td>
+                                <td>KES 1,100.00</td>
+                                <td>
+                                    <button class="btn-icon" title="Netflix subscription payment options" aria-label="Netflix subscription payment options">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Chatbot Widget -->
+            <div class="chatbot-widget">
+                <button class="chatbot-toggle" title="Open chat assistant" aria-label="Open chat assistant">
+                    <i class="fas fa-robot"></i>
+                    <span class="sr-only">Chat with PesaGuru Assistant</span>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="../../assets/js/Financial_Advisory_Services/budgeting_savings.js"></script>
+</body>
+</html>

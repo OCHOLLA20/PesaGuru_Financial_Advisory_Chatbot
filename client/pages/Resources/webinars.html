@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PesaGuru - Financial Webinars & Events</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <style>
+        /* Webinar Specific Styles */
+        .webinar-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
+            height: 100%;
+        }
+        
+        .webinar-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .webinar-date {
+            color: #0056b3;
+            font-weight: 600;
+        }
+        
+        .webinar-speaker {
+            font-style: italic;
+            color: #555;
+        }
+        
+        .webinar-tag {
+            font-size: 0.8rem;
+            padding: 3px 10px;
+            border-radius: 12px;
+            margin-right: 5px;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+        
+        .tag-investment {
+            background-color: #e1f5fe;
+            color: #0277bd;
+        }
+        
+        .tag-stocks {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .tag-savings {
+            background-color: #fff8e1;
+            color: #ff8f00;
+        }
+        
+        .tag-loan {
+            background-color: #fce4ec;
+            color: #c2185b;
+        }
+        
+        .tag-retirement {
+            background-color: #e8eaf6;
+            color: #3949ab;
+        }
+        
+        .featured-webinar {
+            border-left: 4px solid #007bff;
+        }
+        
+        .webinar-live-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #dc3545;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            animation: pulse 1.5s infinite;
+        }
+        
+        .past-webinar {
+            opacity: 0.9;
+        }
+        
+        .past-webinar img {
+            filter: grayscale(30%);
+        }
+        
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        
+        .filter-btn {
+            margin-right: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .webinar-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .webinar-info i {
+            margin-right: 8px;
+            color: #6c757d;
+            width: 16px;
+        }
+
+        .header-banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../../assets/images/nairobi-skyline.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 30px;
+        }
+        
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .countdown-box {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 10px 15px;
+            margin: 0 5px;
+            border-radius: 5px;
+            min-width: 60px;
+            text-align: center;
+        }
+        
+        .countdown-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .countdown-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="../../index.html">
+                <i class="fas fa-money-bill-wave me-2"></i>PesaGuru
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+        title="Toggle navigation" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Chatbot_Interaction/chatbot.html">Chatbot</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Market_Data_and_Insights/live_market_data.html">Market Data</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">
+                            Resources
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="financial_literacy.html">Financial Literacy</a></li>
+                            <li><a class="dropdown-item active" href="webinars_forums.html">Webinars & Forums</a></li>
+                            <li><a class="dropdown-item" href="investment_strategies.html">Investment Strategies</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Tools_and_Calculators/investment_calculator.html">Tools</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="../Authentication/login.html" class="btn btn-outline-light me-2">Login</a>
+                    <a href="../Authentication/register.html" class="btn btn-light">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Banner with Next Webinar Countdown -->
+    <section class="header-banner text-center">
+        <div class="container">
+            <h1 class="display-4">Financial Webinars & Events</h1>
+            <p class="lead">Expand your financial knowledge with expert-led webinars on investment, savings, and wealth management</p>
+            
+            <div class="mt-4">
+                <h3>Next Webinar: NSE Investment Strategies for Beginners</h3>
+                <p>Starting in:</p>
+                <div class="countdown-timer">
+                    <div class="countdown-box">
+                        <div class="countdown-value" id="days">02</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-box">
+                        <div class="countdown-value" id="hours">18</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-box">
+                        <div class="countdown-value" id="minutes">45</div>
+                        <div class="countdown-label">Mins</div>
+                    </div>
+                    <div class="countdown-box">
+                        <div class="countdown-value" id="seconds">33</div>
+                        <div class="countdown-label">Secs</div>
+                    </div>
+                </div>
+                <a href="#register-webinar" class="btn btn-primary btn-lg mt-3">Register Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container py-4">
+        <!-- Filter Options -->
+        <section class="mb-5">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2>Find Webinars</h2>
+                <div class="input-group webinar-search">
+                    <input type="text" class="form-control" placeholder="Search webinars...">
+                    <button class="btn btn-outline-secondary" type="button" aria-label="Search webinars">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="filter-options">
+                        <button class="btn btn-outline-primary filter-btn active">All</button>
+                        <button class="btn btn-outline-primary filter-btn">Upcoming</button>
+                        <button class="btn btn-outline-primary filter-btn">Past Recordings</button>
+                        <button class="btn btn-outline-primary filter-btn">Investment</button>
+                        <button class="btn btn-outline-primary filter-btn">Stock Market</button>
+                        <button class="btn btn-outline-primary filter-btn">Savings</button>
+                        <button class="btn btn-outline-primary filter-btn">Loans</button>
+                    </div>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <div class="btn-group">
+                        <button class="btn btn-outline-secondary" aria-label="Sort by date">
+                            <i class="fas fa-sort-amount-down"></i> Sort by Date
+                        </button>
+                        <button class="btn btn-outline-secondary" aria-label="Grid view">
+                            <i class="fas fa-th-large"></i>
+                        </button>
+                        <button class="btn btn-outline-secondary" aria-label="List view">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Upcoming Webinars -->
+        <section class="mb-5">
+            <h2>Upcoming Webinars</h2>
+            <p class="text-muted">Register for our upcoming live webinars to enhance your financial knowledge</p>
+            
+            <div class="row">
+                <!-- Featured Webinar -->
+                <div class="col-lg-8">
+                    <div class="card featured-webinar webinar-card mb-4">
+                        <div class="card-body position-relative">
+                            <span class="webinar-live-badge">Featured</span>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="../../assets/images/illustrations/stock-market-webinar.jpg" 
+                                         alt="NSE Investment Strategies" class="img-fluid rounded mb-3">
+                                </div>
+                                <div class="col-md-8">
+                                    <h3 class="card-title">NSE Investment Strategies for Beginners</h3>
+                                    <div class="webinar-info">
+                                        <i class="far fa-calendar-alt"></i>
+                                        <span class="webinar-date">March 22, 2025 • 6:00 PM EAT</span>
+                                    </div>
+                                    <div class="webinar-info">
+                                        <i class="far fa-user"></i>
+                                        <span class="webinar-speaker">John Kamau, Investment Analyst at Equity Securities</span>
+                                    </div>
+                                    <div class="webinar-info">
+                                        <i class="fas fa-video"></i>
+                                        <span>Live on Zoom</span>
+                                    </div>
+                                    <div class="mt-2 mb-3">
+                                        <span class="webinar-tag tag-investment">Investment</span>
+                                        <span class="webinar-tag tag-stocks">NSE</span>
+                                    </div>
+                                    <p class="card-text">Learn the fundamentals of investing in the Nairobi Securities Exchange. This beginner-friendly webinar will cover stock selection, understanding market trends, and building a diversified portfolio with Kenyan stocks.</p>
+                                    <a href="#register-webinar" class="btn btn-primary">Register Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sidebar Upcoming Webinars -->
+                <div class="col-lg-4">
+                    <div class="card webinar-card mb-3">
+                        <div class="card-body">
+                            <h4 class="card-title">M-Pesa & Digital Payments: Maximizing Benefits</h4>
+                            <div class="webinar-info">
+                                <i class="far fa-calendar-alt"></i>
+                                <span class="webinar-date">March 28, 2025 • 7:00 PM EAT</span>
+                            </div>
+                            <div class="webinar-info">
+                                <i class="far fa-user"></i>
+                                <span class="webinar-speaker">Sarah Njeri, Fintech Consultant</span>
+                            </div>
+                            <div class="mt-2">
+                                <span class="webinar-tag tag-savings">Digital Banking</span>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary btn-sm mt-3">Learn More</a>
+                        </div>
+                    </div>
+                    
+                    <div class="card webinar-card mb-3">
+                        <div class="card-body">
+                            <h4 class="card-title">Real Estate Investment in Kenya: 2025 Outlook</h4>
+                            <div class="webinar-info">
+                                <i class="far fa-calendar-alt"></i>
+                                <span class="webinar-date">April 5, 2025 • 3:00 PM EAT</span>
+                            </div>
+                            <div class="webinar-info">
+                                <i class="far fa-user"></i>
+                                <span class="webinar-speaker">David Omondi, Real Estate Analyst</span>
+                            </div>
+                            <div class="mt-2">
+                                <span class="webinar-tag tag-investment">Real Estate</span>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary btn-sm mt-3">Learn More</a>
+                        </div>
+                    </div>
+                    
+                    <div class="card webinar-card">
+                        <div class="card-body">
+                            <h4 class="card-title">Tax Planning for Small Business Owners</h4>
+                            <div class="webinar-info">
+                                <i class="far fa-calendar-alt"></i>
+                                <span class="webinar-date">April 12, 2025 • 5:30 PM EAT</span>
+                            </div>
+                            <div class="webinar-info">
+                                <i class="far fa-user"></i>
+                                <span class="webinar-speaker">James Wachira, Tax Consultant</span>
+                            </div>
+                            <div class="mt-2">
+                                <span class="webinar-tag tag-savings">Tax Planning</span>
+                                <span class="webinar-tag tag-loan">Business</span>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary btn-sm mt-3">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="card webinar-card h-100">
+                        <div class="card-body">
+                            <h4 class="card-title">KES/USD Forex Trading Fundamentals</h4>
+                            <div class="webinar-info">
+                                <i class="far fa-calendar-alt"></i>
+                                <span class="webinar-date">April 18, 2025 • 7:00 PM EAT</span>
+                            </div>
+                            <div class="webinar-info">
+                                <i class="far fa-user"></i>
+                                <span class="webinar-speaker">Michael Mwangi, Forex Analyst</span>
+                            </div>
+                            <div class="mt-2 mb-3">
+                                <span class="webinar-tag tag-investment">Forex</span>
+                            </div>
+                            <p class="card-text">Understand how forex markets work with focus on the Kenya Shilling and major currency pairs. Learn about factors affecting exchange rates and basic trading strategies.</p>
+                            <a href="#" class="btn btn-outline-primary">Register</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card webinar-card h-100">
+                        <div class="card-body">
+                            <h4 class="card-title">Retirement Planning for Young Professionals</h4>
+                            <div class="webinar-info">
+                                <i class="far fa-calendar-alt"></i>
+                                <span class="webinar-date">April 25, 2025 • 6:00 PM EAT</span>
+                            </div>
+                            <div class="webinar-info">
+                                <i class="far fa-user"></i>
+                                <span class="webinar-speaker">Elizabeth Akinyi, Retirement Specialist</span>
+                            </div>
+                            <div class="mt-2 mb-3">
+                                <span class="webinar-tag tag-retirement">Retirement</span>
+                                <span class="webinar-tag tag-savings">Savings</span>
+                            </div>
+                            <p class="card-text">Start your retirement planning early! Learn about NSSF, personal pension plans, and investment strategies to build wealth for your retirement years.</p>
+                            <a href="#" class="btn btn-outline-primary">Register</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card webinar-card h-100">
+                        <div class="card-body">
+                            <h4 class="card-title">Women in Investment: Breaking Barriers</h4>
+                            <div class="webinar-info">
+                                <i class="far fa-calendar-alt"></i>
+                                <span class="webinar-date">May 2, 2025 • 4:00 PM EAT</span>
+                            </div>
+                            <div class="webinar-info">
+                                <i class="far fa-user"></i>
+                                <span class="webinar-speaker">Grace Muthoni, Investment Manager</span>
+                            </div>
+                            <div class="mt-2 mb-3">
+                                <span class="webinar-tag tag-investment">Investing</span>
+                                <span class="webinar-tag tag-stocks">Empowerment</span>
+                            </div>
+                            <p class="card-text">Join this empowering session focused on women investors in Kenya. Learn how to overcome common challenges and build confidence in making investment decisions.</p>
+                            <a href="#" class="btn btn-outline-primary">Register</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-outline-primary">View All Upcoming Webinars <i class="fas fa-arrow-right ms-2"></i></a>
+            </div>
+        </section>
+        
+        <!-- Past Webinars -->
+        <section class="mb-5">
+            <h2>Past Webinars</h2>
+            <p class="text-muted">Access recordings of our previous webinars and continue learning at your own pace</p>
+            
+            <div class="row">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card webinar-card past-webinar">
+                        <img src="../../assets/images/illustrations/safaricom-investment.jpg" class="card-img-top" alt="Safaricom Stock Analysis">
+                        <div class="card-body">
+                            <h4 class="card-title">Safaricom Stock Analysis: Growth Potential</h4>
+                            <div class="webinar-info">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>March 5, 2025</span>
+                            </div>
+                            <div class="webinar-info">
+                                <i class="far fa-user"></i>
+                                <span class="webinar-speaker">Peter Karanja, Equity Analyst</span>
+                            </div>
+                            <div class="mt-2 mb-3">
+                                <span class="webinar-tag tag-stocks">NSE</span>
+                                <span class="webinar-tag tag-investment">Stocks</span>
+                            </div>
+                            <p class="card-text">A deep dive into Safaricom's financial performance, growth prospects, and investment potential in the telecoms sector.</p>
+                            <a href="#" class="btn btn-outline-secondary">Watch Recording</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="card webinar-card past-webinar">
+                        <img src="../../assets/images/illustrations/debt-management.jpg" class="card-img-top" alt="Debt Management">
+                        <div class="card-body">
+                            <h4 class="card-title">Smart Debt Management: Loans & Credit</h4>
+                            <div class="webinar-info">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>February 20, 2025</span>
+                            </div>
+                            <div class="webinar-info">
+                                <i class="far fa-user"></i>
+                                <span class="webinar-speaker">Nancy Wairimu, Financial Advisor</span>
+                            </div>
+                            <div class="mt-2 mb-3">
+                                <span class="webinar-tag tag-loan">Debt</span>
+                                <span class="webinar-tag tag-savings">Personal Finance</span>
+                            </div>
+                            <p class="card-text">Learn effective strategies for managing loans, improving your credit score, and avoiding debt traps in the Kenyan financial landscape.</p>
+                            <a href="#" class="btn btn-outline-secondary">Watch Recording</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="card webinar-card past-webinar">
+                        <img src="../../assets/images/illustrations/digital-banking.jpg" class="card-img-top" alt="Digital Banking">
+                        <div class="card-body">
+                            <h4 class="card-title">Digital Banking Innovations in Kenya</h4>
+                            <div class="webinar-info">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>February 12, 2025</span>
+                            </div>
+                            <div class="webinar-info">
+                                <i class="far fa-user"></i>
+                                <span class="webinar-speaker">Alex Kimani, Digital Banking Expert</span>
+                            </div>
+                            <div class="mt-2 mb-3">
+                                <span class="webinar-tag tag-savings">Digital Banking</span>
+                                <span class="webinar-tag tag-loan">Fintech</span>
+                            </div>
+                            <p class="card-text">Explore the latest digital banking innovations in Kenya and how they're transforming personal finance management.</p>
+                            <a href="#" class="btn btn-outline-secondary">Watch Recording</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="card webinar-card past-webinar">
+                        <img src="../../assets/images/illustrations/unit-trusts.jpg" class="card-img-top" alt="Unit Trusts">
+                        <div class="card-body">
+                            <h4 class="card-title">Unit Trusts vs. Direct Stock Investment</h4>
+                            <div class="webinar-info">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>January 28, 2025</span>
+                            </div>
+                            <div class="webinar-info">
+                                <i class="far fa-user"></i>
+                                <span class="webinar-speaker">Robert Kipkoech, Fund Manager</span>
+                            </div>
+                            <div class="mt-2 mb-3">
+                                <span class="webinar-tag tag-investment">Mutual Funds</span>
+                                <span class="webinar-tag tag-stocks">Diversification</span>
+                            </div>
+                            <p class="card-text">Compare the pros and cons of investing in unit trusts versus direct stock investments in the Kenyan market.</p>
+                            <a href="#" class="btn btn-outline-secondary">Watch Recording</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="card webinar-card past-webinar">
+                        <img src="../../assets/images/illustrations/crypto-investing.jpg" class="card-img-top" alt="Cryptocurrency">
+                        <div class="card-body">
+                            <h4 class="card-title">Cryptocurrency: Risks & Opportunities</h4>
+                            <div class="webinar-info">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>January 15, 2025</span>
+                            </div>
+                            <div class="webinar-info">
+                                <i class="far fa-user"></i>
+                                <span class="webinar-speaker">Samuel Gitonga, Blockchain Expert</span>
+                            </div>
+                            <div class="mt-2 mb-3">
+                                <span class="webinar-tag tag-investment">Crypto</span>
+                                <span class="webinar-tag tag-stocks">Digital Assets</span>
+                            </div>
+                            <p class="card-text">Understand the fundamentals of cryptocurrency investing, regulatory landscape in Kenya, and how to approach this volatile asset class.</p>
+                            <a href="#" class="btn btn-outline-secondary">Watch Recording</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="card webinar-card past-webinar">
+                        <img src="../../assets/images/illustrations/emergency-fund.jpg" class="card-img-top" alt="Emergency Fund">
+                        <div class="card-body">
+                            <h4 class="card-title">Building an Emergency Fund in Uncertain Times</h4>
+                            <div class="webinar-info">
+                                <i class="far fa-calendar-alt"></i>
+                                <span>January 8, 2025</span>
+                            </div>
+                            <div class="webinar-info">
+                                <i class="far fa-user"></i>
+                                <span class="webinar-speaker">Jane Mwangi, Financial Planner</span>
+                            </div>
+                            <div class="mt-2 mb-3">
+                                <span class="webinar-tag tag-savings">Emergency Fund</span>
+                                <span class="webinar-tag tag-loan">Financial Security</span>
+                            </div>
+                            <p class="card-text">Learn practical strategies for building and maintaining an emergency fund in Kenya's economic environment.</p>
+                            <a href="#" class="btn btn-outline-secondary">Watch Recording</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-outline-secondary">View All Past Webinars <i class="fas fa-arrow-right ms-2"></i></a>
+            </div>
+        </section>
+        
+        <!-- Registration Form -->
+        <section id="register-webinar" class="mb-5">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Register for Our Next Webinar</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>NSE Investment Strategies for Beginners</h4>
+                            <p><strong>Date:</strong> March 22, 2025</p>
+                            <p><strong>Time:</strong> 6:00 PM - 7:30 PM EAT</p>
+                            <p><strong>Speaker:</strong> John Kamau, Investment Analyst</p>
+                            <p><strong>Platform:</strong> Zoom (link will be sent after registration)</p>
+                            
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle me-2"></i> This webinar is free for all PesaGuru members. Non-members can register for KES 500.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="fullName" class="form-label">Full Name</label>
+                                    <input type="text" class="form-control" id="fullName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" id="phone" placeholder="+254">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="investmentExperience">Investment Experience</label>
+                                    <select class="form-select" id="investmentExperience" name="investmentExperience">
+                                        <option>Beginner - No experience</option>
+                                        <option>Intermediate - Some experience</option>
+                                        <option>Advanced - Experienced investor</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="speakerQuestions">Questions for the Speaker (Optional)</label>
+                                    <textarea class="form-control" id="speakerQuestions" name="speakerQuestions" rows="3" placeholder="Type your questions here"></textarea>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="notifications">
+                                    <label class="form-check-label" for="notifications">Send me notifications about future webinars</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Register Now</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Become a Speaker -->
+        <section class="mb-5">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h3>Share Your Financial Expertise</h3>
+                            <p>Are you a financial expert interested in sharing your knowledge with our community? We're always looking for experienced professionals to host webinars on various financial topics.</p>
+                            <p class="mb-0"><strong>Topics of interest:</strong> Investment strategies, stock analysis, personal finance, retirement planning, entrepreneurship, and more.</p>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <a href="#" class="btn btn-outline-primary">Become a Speaker</a>
+                            <p class="mt-2 text-muted small">Our team will review your application and get back to you.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- FAQs -->
+        <section class="mb-5">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="accordion" id="webinarFAQ">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            How do I join a webinar after registration?
+                        </button>
+                    </h2>
+                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#webinarFAQ">
+                        <div class="accordion-body">
+                            After registering, you'll receive a confirmation email with the Zoom link and calendar invitation. Simply click the link at the scheduled time to join. We recommend joining 5 minutes early to test your connection.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            Are the webinars recorded?
+                        </button>
+                    </h2>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#webinarFAQ">
+                        <div class="accordion-body">
+                            Yes, all our webinars are recorded and made available in our "Past Webinars" section within 48 hours after the live session. Premium members get immediate access to all recordings, while free members can access select recordings.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            Can I ask questions during the webinar?
+                        </button>
+                    </h2>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#webinarFAQ">
+                        <div class="accordion-body">
+                            Absolutely! We encourage interaction. You can submit questions through the Q&A feature in Zoom, and the speaker will address them during the designated Q&A section. You can also submit questions in advance during registration.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                            What if I miss a webinar I registered for?
+                        </button>
+                    </h2>
+                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#webinarFAQ">
+                        <div class="accordion-body">
+                            If you miss a live webinar, don't worry! All registrants receive a link to the recording via email after the event. You can also find all past webinar recordings in your PesaGuru account dashboard.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                            Are the webinars available in Swahili?
+                        </button>
+                    </h2>
+                    <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#webinarFAQ">
+                        <div class="accordion-body">
+                            Most of our webinars are conducted in English, but we do offer select webinars in Swahili. Check the webinar description for language information. We're working to increase our Swahili content based on community feedback.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
+                            How can I get presentation slides?
+                        </button>
+                    </h2>
+                    <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#webinarFAQ">
+                        <div class="accordion-body">
+                            Presentation slides and additional resources are shared with all registrants after the webinar. You'll receive an email with links to download these materials, and they'll also be available in the webinar's page in the "Past Webinars" section.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Newsletter Signup -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center">
+                    <h3>Never Miss a Webinar</h3>
+                    <p class="mb-4">Subscribe to our newsletter to get notified about upcoming webinars and financial insights</p>
+                    <form class="row g-3 justify-content-center">
+                        <div class="col-md-8">
+                            <input type="email" class="form-control" placeholder="Enter your email address">
+                        </div>
+                        <div class="col-md-auto">
+                            <button type="submit" class="btn btn-primary">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>PesaGuru</h5>
+                    <p>Your AI financial advisor for personalized investment planning in Kenya.</p>
+                    <div class="social-icons">
+                        <a href="#" class="text-white me-2" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-2" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-2" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-white" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4 mb-md-0">
+                    <h5>Resources</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light">Financial Literacy</a></li>
+                        <li><a href="#" class="text-light">Webinars & Forums</a></li>
+                        <li><a href="#" class="text-light">Investment Strategies</a></li>
+                        <li><a href="#" class="text-light">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-4 mb-md-0">
+                    <h5>Tools</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light">Investment Calculator</a></li>
+                        <li><a href="#" class="text-light">Loan Calculator</a></li>
+                        <li><a href="#" class="text-light">Retirement Planner</a></li>
+                        <li><a href="#" class="text-light">Budget Planner</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-4 mb-md-0">
+                    <h5>Company</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light">About Us</a></li>
+                        <li><a href="#" class="text-light">Contact</a></li>
+                        <li><a href="#" class="text-light">Careers</a></li>
+                        <li><a href="#" class="text-light">Press</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h5>Legal</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light">Privacy Policy</a></li>
+                        <li><a href="#" class="text-light">Terms of Service</a></li>
+                        <li><a href="#" class="text-light">Data Protection</a></li>
+                        <li><a href="#" class="text-light">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 bg-secondary">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2025 PesaGuru. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0">
+                        <span>Regulated by:</span>
+                        <a href="#" class="text-light ms-2">Capital Markets Authority (CMA)</a>
+                        <span class="mx-2">|</span>
+                        <a href="#" class="text-light">Central Bank of Kenya (CBK)</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom Scripts -->
+    <script>
+        // Simple countdown script for demo purposes
+        function updateCountdown() {
+            // Set the target date (March 22, 2025 at 6:00 PM EAT)
+            const targetDate = new Date('2025-03-22T18:00:00+03:00').getTime();
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+            
+            // Calculate time components
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // Update the countdown display
+            document.getElementById('days').innerHTML = days.toString().padStart(2, '0');
+            document.getElementById('hours').innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').innerHTML = seconds.toString().padStart(2, '0');
+            
+            // If countdown is over
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById('days').innerHTML = '00';
+                document.getElementById('hours').innerHTML = '00';
+                document.getElementById('minutes').innerHTML = '00';
+                document.getElementById('seconds').innerHTML = '00';
+            }
+        }
+        
+        // Update countdown every second
+        updateCountdown();
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        
+        // Filter buttons handling
+        document.querySelectorAll('.filter-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // In a real implementation, you would filter the webinars here
+                console.log('Filter selected:', this.textContent.trim());
+            });
+        });
+    </script>
+</body>
+</html>

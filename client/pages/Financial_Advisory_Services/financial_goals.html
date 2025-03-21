@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Goals - PesaGuru</title>
+    <link rel="stylesheet" href="../../assets/css/Financial_Advisory_Services/financial_goals.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.css">
+</head>
+<body class="light-mode">
+    <!-- Main Container (includes sidebar and content) -->
+    <div class="container">
+        <!-- Left Navigation Panel -->
+        <aside class="sidebar">
+            <!-- Logo & App Name -->
+            <div class="sidebar-header">
+                <img src="../../assets/images/logo.png" alt="PesaGuru Logo">
+                <h2>PesaGuru</h2>
+            </div>
+
+            <!-- User Profile Quick View -->
+            <div class="sidebar-user-profile">
+                <img src="../../assets/images/user-avatar.png" alt="User Avatar">
+                <div class="user-info">
+                    <h4 id="userName">John Doe</h4>
+                    <p>Premium Member</p>
+                </div>
+            </div>
+
+            <!-- Primary Navigation Menu -->
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <h3>Dashboard & Goals</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                        <li class="active"><a href="#"><i class="fas fa-bullseye"></i> My Financial Goals</a></li>
+                        <li><a href="#"><i class="fas fa-plus-circle"></i> Create New Goal</a></li>
+                        <li><a href="#"><i class="fas fa-sliders-h"></i> Adjust Contributions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-section">
+                    <h3>Goal Categories</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-piggy-bank"></i> Savings Goals</a></li>
+                        <li><a href="#"><i class="fas fa-chart-line"></i> Investment Goals</a></li>
+                        <li><a href="#"><i class="fas fa-home"></i> Homeownership</a></li>
+                        <li><a href="#"><i class="fas fa-graduation-cap"></i> Education Fund</a></li>
+                        <li><a href="#"><i class="fas fa-umbrella"></i> Retirement Planning</a></li>
+                        <li><a href="#"><i class="fas fa-shopping-cart"></i> Major Purchases</a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-section">
+                    <h3>Reports & Analytics</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-calendar-alt"></i> Goal Timeline</a></li>
+                        <li><a href="#"><i class="fas fa-chart-pie"></i> Growth Projections</a></li>
+                        <li><a href="#"><i class="fas fa-file-download"></i> Download Reports</a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-section">
+                    <h3>Preferences</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-money-bill-wave"></i> Auto-Savings Setup</a></li>
+                        <li><a href="#"><i class="fas fa-sync"></i> Recurring Adjustments</a></li>
+                        <li><a href="#"><i class="fas fa-globe"></i> Currency Settings</a></li>
+                    </ul>
+                </div>
+            </nav>
+            
+            <!-- AI Assistant Widget -->
+            <div class="ai-assistant-widget">
+                <div class="widget-header">
+                    <i class="fas fa-robot"></i>
+                    <h3>PesaGuru AI</h3>
+                </div>
+                <p>Need help optimizing your goals?</p>
+                <button class="ai-assistant-btn">Ask AI Assistant</button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Header Bar -->
+            <header class="header">
+                <div class="header-left">
+                    <button class="back-btn" aria-label="Go back">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <button class="toggle-sidebar-btn" id="sidebarToggle" aria-label="Toggle sidebar">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="page-title">Financial Goals</h1>
+                </div>
+                
+                <div class="header-center">
+                    <div class="search-container">
+                        <input type="text" id="searchInput" placeholder="Search goals..." aria-label="Search Goals">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="filter-dropdown">
+                        <button class="filter-btn">
+                            <i class="fas fa-filter"></i> Filter
+                        </button>
+                        <div class="filter-dropdown-content">
+                            <a href="#" data-filter="all">All Goals</a>
+                            <a href="#" data-filter="active">Active</a>
+                            <a href="#" data-filter="completed">Completed</a>
+                            <a href="#" data-filter="expired">Expired</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <button class="add-goal-btn" id="createGoalBtn">
+                        <i class="fas fa-plus"></i> New Goal
+                    </button>
+                    <button class="view-progress-btn">
+                        <i class="fas fa-chart-bar"></i> View Progress
+                    </button>
+                    <button class="header-btn notifications" id="notificationBtn" aria-label="Notifications" title="View Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge" id="notificationCount">3</span>
+                    </button>
+                    <button class="header-btn theme-toggle" id="themeToggle" aria-label="Toggle Dark Mode" title="Toggle Dark Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <div class="user-profile">
+                        <img src="../../assets/images/user-avatar.png" alt="User Avatar">
+                        <span>Hello, <span id="headerUserName">John</span>!</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content Container -->
+            <div class="financial-goals-container">
+                <section class="page-title-section">
+                    <h1>Financial Goals</h1>
+                    <p>Set, track, and achieve your financial ambitions</p>
+                </section>
+
+                <section class="goals-overview">
+                    <div class="overview-metrics">
+                        <div class="metric-card">
+                            <h3>Active Goals</h3>
+                            <p class="metric-value">5</p>
+                            <p class="metric-change positive">+1 from last month</p>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Total Savings</h3>
+                            <p class="metric-value">KES 345,000</p>
+                            <p class="metric-change positive">+KES 45,000 from last month</p>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Next Milestone</h3>
+                            <p class="metric-value">Emergency Fund 50%</p>
+                            <p class="metric-change">Expected in 2 months</p>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Achieved Goals</h3>
+                            <p class="metric-value">2</p>
+                            <div class="badge-container">
+                                <span class="achievement-badge"><i class="fas fa-trophy"></i></span>
+                                <span class="achievement-badge"><i class="fas fa-award"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="goals-management">
+                    <div class="section-header">
+                        <h2>My Financial Goals</h2>
+                        <button class="primary-btn" id="createGoalBtnAlt">
+                            <i class="fas fa-plus"></i> Create New Goal
+                        </button>
+                    </div>
+
+                    <div class="goal-filters">
+                        <button class="filter-btn active" data-filter="all">All Goals</button>
+                        <button class="filter-btn" data-filter="essential">Essential</button>
+                        <button class="filter-btn" data-filter="important">Important</button>
+                        <button class="filter-btn" data-filter="optional">Optional</button>
+                        <div class="sort-dropdown">
+                            <button class="sort-btn">
+                                <i class="fas fa-sort"></i> Sort By: <span id="currentSortOption">Deadline</span>
+                            </button>
+                            <div class="sort-dropdown-content">
+                                <a href="#" data-sort="deadline">Deadline</a>
+                                <a href="#" data-sort="priority">Priority</a>
+                                <a href="#" data-sort="progress">Progress</a>
+                                <a href="#" data-sort="amount">Amount</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="goals-list">
+                        <!-- Emergency Fund Goal Card -->
+                        <div class="goal-card" data-category="emergency" data-priority="essential">
+                            <div class="goal-header">
+                                <div class="goal-icon emergency">
+                                    <i class="fas fa-piggy-bank"></i>
+                                </div>
+                                <div class="goal-title">
+                                    <h3>Emergency Fund</h3>
+                                    <span class="priority-badge essential">Essential</span>
+                                </div>
+                                <div class="goal-actions">
+                                    <button class="action-btn edit-btn" title="Edit Emergency Fund">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn more-btn" title="More options for Emergency Fund">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="goal-details">
+                                <div class="goal-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill progress-fill-40"></div>
+                                    </div>
+                                    <div class="progress-stats">
+                                        <p>KES 240,000 of KES 600,000</p>
+                                        <p class="progress-percentage">40%</p>
+                                    </div>
+                                </div>
+                                <div class="goal-info">
+                                    <div class="info-item">
+                                        <span class="info-label">Target Date:</span>
+                                        <span class="info-value">Dec 31, 2025</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Monthly Contribution:</span>
+                                        <span class="info-value">KES 30,000</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Estimated Completion:</span>
+                                        <span class="info-value">Oct 15, 2025</span>
+                                    </div>
+                                </div>
+                                <div class="goal-actions-footer">
+                                    <button class="secondary-btn deposit-btn">
+                                        <i class="fas fa-plus-circle"></i> Add Funds
+                                    </button>
+                                    <button class="secondary-btn adjust-btn">
+                                        <i class="fas fa-sliders-h"></i> Adjust Plan
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Home Ownership Goal Card -->
+                        <div class="goal-card" data-category="home" data-priority="important">
+                            <div class="goal-header">
+                                <div class="goal-icon home">
+                                    <i class="fas fa-home"></i>
+                                </div>
+                                <div class="goal-title">
+                                    <h3>Home Ownership</h3>
+                                    <span class="priority-badge important">Important</span>
+                                </div>
+                                <div class="goal-actions">
+                                    <button class="action-btn edit-btn" title="Edit Home Ownership">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn more-btn" title="More options for Home Ownership">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="goal-details">
+                                <div class="goal-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill progress-fill-25"></div>
+                                    </div>
+                                    <div class="progress-stats">
+                                        <p>KES 750,000 of KES 3,000,000</p>
+                                        <p class="progress-percentage">25%</p>
+                                    </div>
+                                </div>
+                                <div class="goal-info">
+                                    <div class="info-item">
+                                        <span class="info-label">Target Date:</span>
+                                        <span class="info-value">Jun 30, 2027</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Monthly Contribution:</span>
+                                        <span class="info-value">KES 50,000</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Estimated Completion:</span>
+                                        <span class="info-value">Aug 15, 2027</span>
+                                    </div>
+                                </div>
+                                <div class="goal-actions-footer">
+                                    <button class="secondary-btn deposit-btn">
+                                        <i class="fas fa-plus-circle"></i> Add Funds
+                                    </button>
+                                    <button class="secondary-btn adjust-btn">
+                                        <i class="fas fa-sliders-h"></i> Adjust Plan
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Education Goal Card -->
+                        <div class="goal-card" data-category="education" data-priority="important">
+                            <div class="goal-header">
+                                <div class="goal-icon education">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <div class="goal-title">
+                                    <h3>MBA Program</h3>
+                                    <span class="priority-badge important">Important</span>
+                                </div>
+                                <div class="goal-actions">
+                                    <button class="action-btn edit-btn" title="Edit MBA Program">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn more-btn" title="More options for MBA Program">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="goal-details">
+                                <div class="goal-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill progress-fill-60"></div>
+                                    </div>
+                                    <div class="progress-stats">
+                                        <p>KES 450,000 of KES 750,000</p>
+                                        <p class="progress-percentage">60%</p>
+                                    </div>
+                                </div>
+                                <div class="goal-info">
+                                    <div class="info-item">
+                                        <span class="info-label">Target Date:</span>
+                                        <span class="info-value">Aug 30, 2025</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Monthly Contribution:</span>
+                                        <span class="info-value">KES 25,000</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Estimated Completion:</span>
+                                        <span class="info-value">Jul 20, 2025</span>
+                                    </div>
+                                </div>
+                                <div class="goal-actions-footer">
+                                    <button class="secondary-btn deposit-btn">
+                                        <i class="fas fa-plus-circle"></i> Add Funds
+                                    </button>
+                                    <button class="secondary-btn adjust-btn">
+                                        <i class="fas fa-sliders-h"></i> Adjust Plan
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Travel Goal Card -->
+                        <div class="goal-card" data-category="travel" data-priority="optional">
+                            <div class="goal-header">
+                                <div class="goal-icon travel">
+                                    <i class="fas fa-plane"></i>
+                                </div>
+                                <div class="goal-title">
+                                    <h3>European Vacation</h3>
+                                    <span class="priority-badge optional">Optional</span>
+                                </div>
+                                <div class="goal-actions">
+                                    <button class="action-btn edit-btn" title="Edit European Vacation">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn more-btn" title="More options for European Vacation">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="goal-details">
+                                <div class="goal-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill progress-fill-75"></div>
+                                    </div>
+                                    <div class="progress-stats">
+                                        <p>KES 225,000 of KES 300,000</p>
+                                        <p class="progress-percentage">75%</p>
+                                    </div>
+                                </div>
+                                <div class="goal-info">
+                                    <div class="info-item">
+                                        <span class="info-label">Target Date:</span>
+                                        <span class="info-value">May 15, 2025</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Monthly Contribution:</span>
+                                        <span class="info-value">KES 20,000</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Estimated Completion:</span>
+                                        <span class="info-value">Apr 22, 2025</span>
+                                    </div>
+                                </div>
+                                <div class="goal-actions-footer">
+                                    <button class="secondary-btn deposit-btn">
+                                        <i class="fas fa-plus-circle"></i> Add Funds
+                                    </button>
+                                    <button class="secondary-btn adjust-btn">
+                                        <i class="fas fa-sliders-h"></i> Adjust Plan
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Investment Goal Card -->
+                        <div class="goal-card" data-category="investment" data-priority="important">
+                            <div class="goal-header">
+                                <div class="goal-icon investment">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="goal-title">
+                                    <h3>Stock Portfolio</h3>
+                                    <span class="priority-badge important">Important</span>
+                                </div>
+                                <div class="goal-actions">
+                                    <button class="action-btn edit-btn" title="Edit Stock Portfolio">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn more-btn" title="More options for Stock Portfolio">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="goal-details">
+                                <div class="goal-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill progress-fill-30"></div>
+                                    </div>
+                                    <div class="progress-stats">
+                                        <p>KES 150,000 of KES 500,000</p>
+                                        <p class="progress-percentage">30%</p>
+                                    </div>
+                                </div>
+                                <div class="goal-info">
+                                    <div class="info-item">
+                                        <span class="info-label">Target Date:</span>
+                                        <span class="info-value">Dec 15, 2026</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Monthly Contribution:</span>
+                                        <span class="info-value">KES 15,000</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Estimated Completion:</span>
+                                        <span class="info-value">Jan 30, 2027</span>
+                                    </div>
+                                </div>
+                                <div class="goal-actions-footer">
+                                    <button class="secondary-btn deposit-btn">
+                                        <i class="fas fa-plus-circle"></i> Add Funds
+                                    </button>
+                                    <button class="secondary-btn adjust-btn">
+                                        <i class="fas fa-sliders-h"></i> Adjust Plan
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="progress-visualization">
+                    <div class="section-header">
+                        <h2>Goals Progress Overview</h2>
+                        <div class="visualization-controls">
+                            <button class="viz-btn active" data-viz="chart">
+                                <i class="fas fa-chart-pie"></i> Chart View
+                            </button>
+                            <button class="viz-btn" data-viz="timeline">
+                                <i class="fas fa-stream"></i> Timeline View
+                            </button>
+                            <div class="currency-selector">
+                                <label for="currencySelect">Currency:</label>
+                                <select id="currencySelect">
+                                    <option value="KES" selected>KES</option>
+                                    <option value="USD">USD</option>
+                                    <option value="EUR">EUR</option>
+                                    <option value="GBP">GBP</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="visualization-container">
+                        <div class="chart-container active" id="chartView">
+                            <div class="chart-wrapper">
+                                <canvas id="goalsPieChart"></canvas>
+                            </div>
+                            <div class="chart-wrapper">
+                                <canvas id="goalsProgressChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="timeline-container" id="timelineView">
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-date">May 2025</div>
+                                    <div class="timeline-content">
+                                        <h4>European Vacation</h4>
+                                        <p>Expected completion</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-date">Aug 2025</div>
+                                    <div class="timeline-content">
+                                        <h4>MBA Program</h4>
+                                        <p>Expected completion</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-date">Dec 2025</div>
+                                    <div class="timeline-content">
+                                        <h4>Emergency Fund</h4>
+                                        <p>Target completion date</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-date">Dec 2026</div>
+                                    <div class="timeline-content">
+                                        <h4>Stock Portfolio</h4>
+                                        <p>Target completion date</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-date">Jun 2027</div>
+                                    <div class="timeline-content">
+                                        <h4>Home Ownership</h4>
+                                        <p>Target completion date</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="smart-recommendations">
+                    <div class="section-header">
+                        <h2>Smart Recommendations</h2>
+                        <span class="ai-badge"><i class="fas fa-robot"></i> AI-Powered</span>
+                    </div>
+
+                    <div class="recommendations-list">
+                        <div class="recommendation-card">
+                            <div class="recommendation-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div class="recommendation-content">
+                                <h3>Accelerate Your Emergency Fund</h3>
+                                <p>Based on your recent spending patterns, you could increase your monthly contribution by KES 5,000 without affecting your lifestyle.</p>
+                                <div class="recommendation-impact">
+                                    <span class="impact-label">Impact:</span>
+                                    <span class="impact-value positive">Complete 1.5 months earlier</span>
+                                </div>
+                                <div class="recommendation-actions">
+                                    <button class="primary-btn apply-btn">Apply Recommendation</button>
+                                    <button class="text-btn dismiss-btn">Dismiss</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="recommendation-card">
+                            <div class="recommendation-icon">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <div class="recommendation-content">
+                                <h3>Optimize Your Investment Strategy</h3>
+                                <p>Consider moving your Stock Portfolio savings to a Money Market Fund which currently offers 9.5% annually vs. your current 5.2%.</p>
+                                <div class="recommendation-impact">
+                                    <span class="impact-label">Impact:</span>
+                                    <span class="impact-value positive">+KES 21,500 over 1 year</span>
+                                </div>
+                                <div class="recommendation-actions">
+                                    <button class="primary-btn apply-btn">Learn More</button>
+                                    <button class="text-btn dismiss-btn">Dismiss</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="recommendation-card">
+                            <div class="recommendation-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="recommendation-content">
+                                <h3>Adjust Your European Vacation Timeline</h3>
+                                <p>Traveling in September instead of May could save you approximately 20% on flight and accommodation costs.</p>
+                                <div class="recommendation-impact">
+                                    <span class="impact-label">Impact:</span>
+                                    <span class="impact-value positive">Save ~KES 60,000</span>
+                                </div>
+                                <div class="recommendation-actions">
+                                    <button class="primary-btn apply-btn">Adjust Timeline</button>
+                                    <button class="text-btn dismiss-btn">Dismiss</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="auto-contribution">
+                    <div class="section-header">
+                        <h2>Automatic Contributions</h2>
+                        <button class="primary-btn" id="setupAutoBtn">
+                            <i class="fas fa-plus"></i> Setup New Auto-Save
+                        </button>
+                    </div>
+
+                    <div class="auto-contribution-list">
+                        <div class="auto-contribution-card active">
+                            <div class="auto-contribution-header">
+                                <div class="contribution-goal">
+                                    <h3>Emergency Fund</h3>
+                                    <span class="contribution-source">From M-Pesa (254712345678)</span>
+                                </div>
+                                <div class="contribution-status">
+                                    <span class="status-badge active">Active</span>
+                                    <div class="toggle-switch">
+                                        <input type="checkbox" id="auto1" class="toggle-input" checked aria-label="Toggle Emergency Fund auto-contribution">
+                                        <label for="auto1" class="toggle-label"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="auto-contribution-details">
+                                <div class="detail-item">
+                                    <span class="detail-label">Amount:</span>
+                                    <span class="detail-value">KES 30,000</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Frequency:</span>
+                                    <span class="detail-value">Monthly (1st)</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Next Transfer:</span>
+                                    <span class="detail-value">Apr 1, 2025</span>
+                                </div>
+                            </div>
+                            <div class="auto-contribution-actions">
+                                <button class="secondary-btn edit-auto-btn">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                                <button class="secondary-btn history-btn">
+                                    <i class="fas fa-history"></i> History
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="auto-contribution-card active">
+                            <div class="auto-contribution-header">
+                                <div class="contribution-goal">
+                                    <h3>Home Ownership</h3>
+                                    <span class="contribution-source">From KCB Savings (1234567890)</span>
+                                </div>
+                                <div class="contribution-status">
+                                    <span class="status-badge active">Active</span>
+                                    <div class="toggle-switch">
+                                        <input type="checkbox" id="auto2" class="toggle-input" checked aria-label="Toggle Home Ownership auto-contribution">
+                                        <label for="auto2" class="toggle-label"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="auto-contribution-details">
+                                <div class="detail-item">
+                                    <span class="detail-label">Amount:</span>
+                                    <span class="detail-value">KES 50,000</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Frequency:</span>
+                                    <span class="detail-value">Monthly (15th)</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Next Transfer:</span>
+                                    <span class="detail-value">Mar 15, 2025</span>
+                                </div>
+                            </div>
+                            <div class="auto-contribution-actions">
+                                <button class="secondary-btn edit-auto-btn">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                                <button class="secondary-btn history-btn">
+                                    <i class="fas fa-history"></i> History
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="auto-contribution-card paused">
+                            <div class="auto-contribution-header">
+                                <div class="contribution-goal">
+                                    <h3>European Vacation</h3>
+                                    <span class="contribution-source">From Equity Account (0987654321)</span>
+                                </div>
+                                <div class="contribution-status">
+                                    <span class="status-badge paused">Paused</span>
+                                    <div class="toggle-switch">
+                                        <input type="checkbox" id="auto3" class="toggle-input" aria-label="Toggle European Vacation auto-contribution">
+                                        <label for="auto3" class="toggle-label"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="auto-contribution-details">
+                                <div class="detail-item">
+                                    <span class="detail-label">Amount:</span>
+                                    <span class="detail-value">KES 20,000</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Frequency:</span>
+                                    <span class="detail-value">Monthly (25th)</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Paused On:</span>
+                                    <span class="detail-value">Feb 10, 2025</span>
+                                </div>
+                            </div>
+                            <div class="auto-contribution-actions">
+                                <button class="secondary-btn edit-auto-btn">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                                <button class="secondary-btn history-btn">
+                                    <i class="fas fa-history"></i> History
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="export-share">
+                    <div class="section-header">
+                        <h2>Export & Share</h2>
+                    </div>
+                    <div class="export-options">
+                        <div class="export-card">
+                            <div class="export-icon">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div class="export-content">
+                                <h3>PDF Financial Goals Summary</h3>
+                                <p>Generate a detailed report of all your financial goals with progress metrics and projections.</p>
+                                <button class="secondary-btn export-btn">
+                                    <i class="fas fa-download"></i> Export PDF
+                                </button>
+                            </div>
+                        </div>
+                        <div class="export-card">
+                            <div class="export-icon">
+                                <i class="fas fa-file-excel"></i>
+                            </div>
+                            <div class="export-content">
+                                <h3>Excel/CSV Tracking Template</h3>
+                                <p>Download your financial goals data in a spreadsheet format for manual tracking and analysis.</p>
+                                <button class="secondary-btn export-btn">
+                                    <i class="fas fa-download"></i> Export Excel
+                                </button>
+                            </div>
+                        </div>
+                        <div class="export-card">
+                            <div class="export-icon">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
+                            <div class="export-content">
+                                <h3>Share Financial Progress</h3>
+                                <p>Share your financial progress with a financial advisor or family member.</p>
+                                <button class="secondary-btn share-btn">
+                                    <i class="fas fa-share-alt"></i> Share Progress
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Create Goal Modal -->
+    <div class="modal" id="createGoalModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create New Financial Goal</h2>
+                <button class="close-btn" id="closeCreateGoalModal" title="Close modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="createGoalForm">
+                    <div class="form-group">
+                        <label for="goalName">Goal Name</label>
+                        <input type="text" id="goalName" placeholder="Enter goal name..." required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="goalCategory">Goal Category</label>
+                        <select id="goalCategory" required>
+                            <option value="" disabled selected>Select category</option>
+                            <option value="emergency">Emergency Fund</option>
+                            <option value="home">Home Ownership</option>
+                            <option value="education">Education</option>
+                            <option value="vehicle">Vehicle Purchase</option>
+                            <option value="retirement">Retirement</option>
+                            <option value="investment">Investment</option>
+                            <option value="travel">Travel & Lifestyle</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="goalAmount">Target Amount</label>
+                        <div class="amount-input">
+                            <span class="currency-symbol">KES</span>
+                            <input type="number" id="goalAmount" placeholder="Enter amount..." required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="initialSaving">Initial Saving</label>
+                            <div class="amount-input">
+                                <span class="currency-symbol">KES</span>
+                                <input type="number" id="initialSaving" placeholder="Initial amount...">
+                            </div>
+                        </div>
+                        <div class="form-group half">
+                            <label for="monthlyContribution">Monthly Contribution</label>
+                            <div class="amount-input">
+                                <span class="currency-symbol">KES</span>
+                                <input type="number" id="monthlyContribution" placeholder="Monthly amount..." required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="targetDate">Target Date</label>
+                        <input type="date" id="targetDate" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="priorityLevel">Priority Level</label>
+                        <select id="priorityLevel" required>
+                            <option value="" disabled selected>Select priority</option>
+                            <option value="essential">Essential</option>
+                            <option value="important">Important</option>
+                            <option value="optional">Optional</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="goalNotes">Notes (Optional)</label>
+                        <textarea id="goalNotes" placeholder="Add any additional details about this goal..."></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="secondary-btn" id="cancelCreateGoal">Cancel</button>
+                        <button type="submit" class="primary-btn">Create Goal</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auto-contribution Setup Modal -->
+    <div class="modal" id="autoContributionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Setup Automatic Contribution</h2>
+                <button class="close-btn" id="closeAutoModal" title="Close modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="autoContributionForm">
+                    <div class="form-group">
+                        <label for="autoGoal">Select Goal</label>
+                        <select id="autoGoal" required>
+                            <option value="" disabled selected>Select goal</option>
+                            <option value="emergency">Emergency Fund</option>
+                            <option value="home">Home Ownership</option>
+                            <option value="education">MBA Program</option>
+                            <option value="travel">European Vacation</option>
+                            <option value="investment">Stock Portfolio</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fundingSource">Funding Source</label>
+                        <select id="fundingSource" required>
+                            <option value="" disabled selected>Select source</option>
+                            <option value="Mpesa">M-Pesa (254712345678)</option>
+                            <option value="kcb">KCB Savings (1234567890)</option>
+                            <option value="equity">Equity Account (0987654321)</option>
+                            <option value="add-new">+ Add New Account</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contributionAmount">Contribution Amount</label>
+                        <div class="amount-input">
+                            <span class="currency-symbol">KES</span>
+                            <input type="number" id="contributionAmount" placeholder="Enter amount..." required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="frequency">Contribution Frequency</label>
+                        <select id="frequency" required>
+                            <option value="" disabled selected>Select frequency</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="bi-weekly">Bi-Weekly</option>
+                            <option value="monthly">Monthly</option>
+                            <option value="quarterly">Quarterly</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group hidden" id="weeklyOptions">
+                        <label for="weekDay">Day of Week</label>
+                        <select id="weekDay">
+                            <option value="monday">Monday</option>
+                            <option value="tuesday">Tuesday</option>
+                            <option value="wednesday">Wednesday</option>
+                            <option value="thursday">Thursday</option>
+                            <option value="friday">Friday</option>
+                            <option value="saturday">Saturday</option>
+                            <option value="sunday">Sunday</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group hidden" id="monthlyOptions">
+                        <label for="monthDay">Day of Month</label>
+                        <select id="monthDay">
+                            <option value="1">1st</option>
+                            <option value="5">5th</option>
+                            <option value="10">10th</option>
+                            <option value="15">15th</option>
+                            <option value="20">20th</option>
+                            <option value="25">25th</option>
+                            <option value="last">Last day</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="startDate">Start Date</label>
+                        <input type="date" id="startDate" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="endCondition">End Condition</label>
+                        <select id="endCondition" required>
+                            <option value="goal-complete">When goal is complete</option>
+                            <option value="specific-date">On specific date</option>
+                            <option value="never">Never (until manually stopped)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group hidden" id="endDateContainer">
+                        <label for="endDate">End Date</label>
+                        <input type="date" id="endDate">
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="secondary-btn" id="cancelAutoSetup">Cancel</button>
+                        <button type="submit" class="primary-btn">Setup Auto-Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Panel -->
+    <div class="notification-panel" id="notificationPanel">
+        <div class="notification-header">
+            <h3>Notifications</h3>
+            <button class="mark-all-read-btn">Mark all as read</button>
+        </div>
+        <div class="notification-list">
+            <div class="notification-item unread">
+                <div class="notification-icon goal">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div class="notification-content">
+                    <p class="notification-text">You're only KES 75,000 away from completing your European Vacation goal!</p>
+                    <p class="notification-time">2 hours ago</p>
+                </div>
+                <button class="mark-read-btn" title="Mark as read">
+                    <i class="fas fa-circle"></i>
+                </button>
+            </div>
+            <div class="notification-item unread">
+                <div class="notification-icon savings">
+                    <i class="fas fa-piggy-bank"></i>
+                </div>
+                <div class="notification-content">
+                    <p class="notification-text">Your automatic contribution of KES 30,000 to Emergency Fund was successful.</p>
+                    <p class="notification-time">Yesterday</p>
+                </div>
+                <button class="mark-read-btn" title="Mark as read">
+                    <i class="fas fa-circle"></i>
+                </button>
+            </div>
+            <div class="notification-item unread">
+                <div class="notification-icon recommendation">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="notification-content">
+                    <p class="notification-text">New recommendation: Optimize your investment portfolio for better returns.</p>
+                    <p class="notification-time">2 days ago</p>
+                </div>
+                <button class="mark-read-btn" title="Mark as read">
+                    <i class="fas fa-circle"></i>
+                </button>
+            </div>
+            <div class="notification-item">
+                <div class="notification-icon milestone">
+                    <i class="fas fa-flag-checkered"></i>
+                </div>
+                <div class="notification-content">
+                    <p class="notification-text">Congratulations! You've reached 50% of your MBA Program goal.</p>
+                    <p class="notification-time">1 week ago</p>
+                </div>
+            </div>
+        </div>
+        <div class="notification-footer">
+            <a href="#" class="view-all-link">View all notifications</a>
+        </div>
+    </div>
+
+    <!-- JavaScript Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="../../assets/js/Financial_Advisory_Services/financial_goals.js"></script>
+    <script src="../../assets/js/Services/financialGoalsService.js"></script>
+</body>
+</html>

@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PesaGuru - Frequently Asked Questions</title>
+    <style>
+        :root {
+            --primary-color: #0062cc;
+            --primary-light: #e6f0ff;
+            --secondary-color: #28a745;
+            --text-color: #333;
+            --light-gray: #f8f9fa;
+            --border-color: #dee2e6;
+            --box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            background-color: white;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .header h1 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .header p {
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 12px 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 25px;
+            font-size: 16px;
+            background-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>');
+            background-position: 15px center;
+            background-repeat: no-repeat;
+            background-size: 20px;
+            padding-left: 45px;
+            transition: border-color 0.3s;
+        }
+        
+        .search-box:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 98, 204, 0.1);
+        }
+        
+        .faq-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .category-btn {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .category-btn:hover, .category-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .faq-section {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .faq-section-header {
+            background-color: var(--primary-light);
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .faq-section-header h2 {
+            margin: 0;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            position: relative;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .faq-question:after {
+            content: '+';
+            font-size: 22px;
+            color: var(--primary-color);
+        }
+        
+        .faq-question.active:after {
+            content: '−';
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+        }
+        
+        .faq-answer.show {
+            padding: 0 20px 20px;
+            max-height: 500px;
+        }
+        
+        .highlight {
+            background-color: yellow;
+            padding: 2px;
+            border-radius: 2px;
+        }
+        
+        .faq-cta {
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            background-color: var(--primary-light);
+            border-radius: 8px;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .faq-cta h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+        
+        .cta-btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-btn:hover {
+            background-color: #218838;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header {
+                padding: 20px 15px;
+            }
+            
+            .faq-question {
+                padding: 15px;
+            }
+            
+            .faq-answer.show {
+                padding: 0 15px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>Frequently Asked Questions</h1>
+            <p>Find answers to common questions about PesaGuru, your AI-powered financial advisory and investment planning chatbot for Kenya.</p>
+        </div>
+        
+        <!-- Search Box -->
+        <div class="search-container">
+            <input type="text" class="search-box" id="faqSearch" placeholder="Search for questions or keywords...">
+        </div>
+        
+        <!-- FAQ Categories -->
+        <div class="faq-categories">
+            <button class="category-btn active" data-target="all">All</button>
+            <button class="category-btn" data-target="getting-started">Getting Started</button>
+            <button class="category-btn" data-target="investment">Investment & Trading</button>
+            <button class="category-btn" data-target="payments">Deposits & Payments</button>
+            <button class="category-btn" data-target="security">Security & Privacy</button>
+            <button class="category-btn" data-target="support">Customer Support</button>
+        </div>
+        
+        <!-- Getting Started Section -->
+        <div class="faq-section" id="getting-started">
+            <div class="faq-section-header">
+                <h2>Getting Started with PesaGuru</h2>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How do I create a PesaGuru account?</div>
+                <div class="faq-answer">
+                    <p>Creating a PesaGuru account is simple and takes just a few minutes:</p>
+                    <ol>
+                        <li>Download the PesaGuru app from Google Play Store or Apple App Store, or visit our website at <strong>www.pesaguru.co.ke</strong></li>
+                        <li>Click on "Sign Up" or "Create Account"</li>
+                        <li>Enter your phone number and email address</li>
+                        <li>Create a strong password</li>
+                        <li>Verify your phone number with the OTP (One-Time Password) sent to you</li>
+                        <li>Complete your profile by providing your personal details</li>
+                        <li>Accept the terms and conditions</li>
+                    </ol>
+                    <p>Once these steps are completed, you'll have access to basic features. To unlock full financial advisory services, you'll need to complete account verification.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What documents do I need to verify my account?</div>
+                <div class="faq-answer">
+                    <p>To fully verify your PesaGuru account and access all features, you'll need to provide:</p>
+                    <ul>
+                        <li><strong>Identification documents:</strong> A clear photo of your National ID card, Passport, or Alien ID (both sides)</li>
+                        <li><strong>Proof of residence:</strong> A utility bill (water, electricity, internet) not older than 3 months, or a bank statement</li>
+                        <li><strong>A selfie:</strong> A clear photo of yourself holding your ID document</li>
+                    </ul>
+                    <p>These documents are required to comply with Know Your Customer (KYC) regulations set by the Central Bank of Kenya and Capital Markets Authority.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How do I open a CDS account for NSE trading?</div>
+                <div class="faq-answer">
+                    <p>A Central Depository System (CDS) account is required to trade on the Nairobi Securities Exchange (NSE). To open one through PesaGuru:</p>
+                    <ol>
+                        <li>Ensure your PesaGuru account is fully verified</li>
+                        <li>Navigate to "Investment" > "Stock Market" > "Open CDS Account"</li>
+                        <li>Fill in the required information and submit the digital CDS form</li>
+                        <li>Upload your KYC documents if prompted</li>
+                        <li>Sign the digital forms using your PIN</li>
+                    </ol>
+                    <p>PesaGuru partners with licensed stockbrokers in Kenya to facilitate your CDS account opening. The process typically takes 2-3 business days. Once approved, your CDS account number will be displayed in your profile, and you can start trading NSE stocks.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Is PesaGuru available outside Kenya?</div>
+                <div class="faq-answer">
+                    <p>Currently, PesaGuru is optimized for the Kenyan market and available primarily to Kenyan residents or citizens. However, our services can be accessed globally with some limitations:</p>
+                    <ul>
+                        <li><strong>Kenyan citizens abroad:</strong> Can use PesaGuru for investment planning and monitoring their Kenyan investments</li>
+                        <li><strong>Non-Kenyan residents:</strong> Can access market insights and educational resources, but may face restrictions for trading and certain payment services</li>
+                    </ul>
+                    <p>To use PesaGuru outside Kenya, you'll need:</p>
+                    <ul>
+                        <li>A Kenyan phone number for verification</li>
+                        <li>A Kenyan bank account or M-Pesa account for transactions</li>
+                    </ul>
+                    <p>We're working on expanding our services to other East African countries in the near future.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Investment & Trading Section -->
+        <div class="faq-section" id="investment">
+            <div class="faq-section-header">
+                <h2>Investment & Trading</h2>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How does PesaGuru provide financial advice?</div>
+                <div class="faq-answer">
+                    <p>PesaGuru uses a combination of artificial intelligence and financial expertise to provide personalized financial advice:</p>
+                    <ul>
+                        <li><strong>AI-powered chatbot:</strong> Our conversational AI analyzes your financial goals, risk tolerance, and current financial situation to generate personalized recommendations</li>
+                        <li><strong>Data-driven insights:</strong> We process real-time market data from the NSE, CBK, and other reliable sources to inform our recommendations</li>
+                        <li><strong>Risk profiling:</strong> We assess your risk tolerance through interactive questionnaires to tailor advice to your comfort level</li>
+                        <li><strong>Financial education:</strong> We provide contextual educational content to help you make informed decisions</li>
+                    </ul>
+                    <p>PesaGuru offers guidance across various financial areas including budgeting, savings, investments, retirement planning, and tax optimization strategies tailored to the Kenyan context.</p>
+                    <p><em>Note: While PesaGuru provides financial guidance, it's not a substitute for professional financial advice from certified financial planners for complex financial situations.</em></p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What investment options does PesaGuru offer?</div>
+                <div class="faq-answer">
+                    <p>PesaGuru provides access to and information about a wide range of investment options suitable for Kenyan investors:</p>
+                    <ul>
+                        <li><strong>Stocks:</strong> Trade shares on the Nairobi Securities Exchange (NSE)</li>
+                        <li><strong>Treasury Bills & Bonds:</strong> Invest in government securities through CBK</li>
+                        <li><strong>Money Market Funds:</strong> Access various money market funds from top Kenyan fund managers</li>
+                        <li><strong>Unit Trusts:</strong> Invest in diversified portfolios managed by professional fund managers</li>
+                        <li><strong>REITs:</strong> Invest in Real Estate Investment Trusts listed on the NSE</li>
+                        <li><strong>Fixed Deposits:</strong> Compare rates across different banks and invest directly</li>
+                        <li><strong>Sacco Deposits:</strong> Information on various Sacco investment options</li>
+                        <li><strong>Pension Plans:</strong> Personal pension plans to supplement NSSF</li>
+                    </ul>
+                    <p>Based on your risk profile, financial goals, and investment timeline, PesaGuru will recommend suitable investment options and help you allocate your investment across different asset classes.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How can I analyze NSE stocks using PesaGuru?</div>
+                <div class="faq-answer">
+                    <p>PesaGuru offers comprehensive tools for analyzing stocks on the Nairobi Securities Exchange (NSE):</p>
+                    <ul>
+                        <li><strong>Real-time market data:</strong> Access current stock prices, indices, and market movements</li>
+                        <li><strong>Technical analysis:</strong> View interactive charts with various technical indicators (moving averages, RSI, MACD, etc.)</li>
+                        <li><strong>Fundamental analysis:</strong> Access company financials, key performance ratios (P/E, EPS, dividend yield), and annual reports</li>
+                        <li><strong>Company profiles:</strong> Get detailed information about listed companies, their sectors, and performance history</li>
+                        <li><strong>News sentiment:</strong> See how news and events are affecting stock prices</li>
+                        <li><strong>Watchlists:</strong> Create personalized watchlists to track stocks you're interested in</li>
+                        <li><strong>Stock screener:</strong> Filter stocks based on specific criteria (sector, price, volume, performance)</li>
+                    </ul>
+                    <p>To analyze a specific stock, simply search for the company name or ticker symbol in the app, and you'll get access to all these analytical tools. You can also ask the chatbot specific questions about any NSE-listed company.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What are the risks involved in trading on NSE?</div>
+                <div class="faq-answer">
+                    <p>Investing in the Nairobi Securities Exchange, like any stock market, involves various risks that you should be aware of:</p>
+                    <ul>
+                        <li><strong>Market risk:</strong> Stock prices can fluctuate due to overall market movements, impacting your investment value</li>
+                        <li><strong>Liquidity risk:</strong> Some NSE stocks have low trading volumes, making it difficult to buy or sell quickly without affecting the price</li>
+                        <li><strong>Company-specific risk:</strong> Individual companies face business risks that can affect their stock performance</li>
+                        <li><strong>Economic risk:</strong> Kenya's economic conditions, including inflation, interest rates, and currency fluctuations, can impact stock performance</li>
+                        <li><strong>Political risk:</strong> Political events and policy changes can create market volatility</li>
+                        <li><strong>Sector risk:</strong> Certain industries may underperform due to sector-specific challenges</li>
+                    </ul>
+                    <p>To mitigate these risks:</p>
+                    <ul>
+                        <li>Diversify your investments across different companies and sectors</li>
+                        <li>Consider your investment time horizon (longer periods typically reduce volatility risk)</li>
+                        <li>Only invest money you can afford to lose</li>
+                        <li>Stay informed about market developments</li>
+                        <li>Use PesaGuru's risk assessment tools to match investments to your risk tolerance</li>
+                    </ul>
+                    <p>Remember: Past performance is not indicative of future results. All investments carry risk, and it's important to make informed decisions based on your personal financial situation and goals.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Deposits, Withdrawals & Payments Section -->
+        <div class="faq-section" id="payments">
+            <div class="faq-section-header">
+                <h2>Deposits, Withdrawals & Payments</h2>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How do I deposit money into my PesaGuru account?</div>
+                <div class="faq-answer">
+                    <p>PesaGuru offers several convenient methods to deposit funds into your account:</p>
+                    <ol>
+                        <li><strong>M-Pesa:</strong>
+                            <ul>
+                                <li>Go to the "Deposit" section in the app</li>
+                                <li>Select "M-Pesa" as your deposit method</li>
+                                <li>Enter the amount you wish to deposit</li>
+                                <li>Confirm the transaction and you'll receive an M-Pesa prompt on your phone</li>
+                                <li>Enter your M-Pesa PIN to complete the transaction</li>
+                            </ul>
+                        </li>
+                        <li><strong>Bank Transfer:</strong>
+                            <ul>
+                                <li>Use the unique bank account details provided in your PesaGuru account</li>
+                                <li>Make a transfer from your bank</li>
+                                <li>Funds typically reflect within 1-2 business days</li>
+                            </ul>
+                        </li>
+                        <li><strong>Card Payment:</strong>
+                            <ul>
+                                <li>Select "Card" as your deposit method</li>
+                                <li>Enter your card details (we accept Visa, Mastercard, and most major cards)</li>
+                                <li>Complete the secure payment process</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <p>Deposits via M-Pesa are processed instantly, while bank transfers may take 1-2 business days to reflect in your account. The minimum deposit amount is KSh 100, and there is no maximum limit for verified accounts.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Does PesaGuru support M-Pesa transactions?</div>
+                <div class="faq-answer">
+                    <p>Yes, PesaGuru fully integrates with M-Pesa, Kenya's leading mobile money service, offering comprehensive support for various transactions:</p>
+                    <ul>
+                        <li><strong>Deposits:</strong> Instantly fund your PesaGuru account using M-Pesa</li>
+                        <li><strong>Withdrawals:</strong> Transfer funds from PesaGuru to your M-Pesa account</li>
+                        <li><strong>Investments:</strong> Make direct investments using your M-Pesa balance</li>
+                        <li><strong>Bill payments:</strong> Pay bills directly through the app</li>
+                        <li><strong>Scheduled transactions:</strong> Set up recurring deposits or payments</li>
+                    </ul>
+                    <p>To use M-Pesa with PesaGuru:</p>
+                    <ol>
+                        <li>Ensure your PesaGuru account is registered with the same phone number as your M-Pesa account</li>
+                        <li>Verify your phone number during the account setup process</li>
+                        <li>Navigate to "Payments" or "Deposit" within the app and select the M-Pesa option</li>
+                    </ol>
+                    <p>Our M-Pesa integration is secured through the official Safaricom Daraja API, ensuring all transactions are safe and compliant with regulatory requirements.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Are there any transaction fees?</div>
+                <div class="faq-answer">
+                    <p>PesaGuru maintains a transparent fee structure for various transactions:</p>
+                    <h4>Deposit Fees:</h4>
+                    <ul>
+                        <li><strong>M-Pesa:</strong> Standard Safaricom charges apply (typically 0-0.5% of transaction value)</li>
+                        <li><strong>Bank transfers:</strong> No charge from PesaGuru, but your bank may apply their standard EFT fees</li>
+                        <li><strong>Card payments:</strong> 2.5% of deposit amount</li>
+                    </ul>
+                    
+                    <h4>Withdrawal Fees:</h4>
+                    <ul>
+                        <li><strong>To M-Pesa:</strong> KSh 20 for withdrawals below KSh 5,000; KSh 35 for withdrawals above KSh 5,000</li>
+                        <li><strong>To bank account:</strong> KSh 50 flat fee</li>
+                    </ul>
+                    
+                    <h4>Investment Transaction Fees:</h4>
+                    <ul>
+                        <li><strong>NSE stocks:</strong> 1.5% of transaction value (includes broker commission and statutory charges)</li>
+                        <li><strong>Treasury bonds/bills:</strong> 0.2% of transaction value</li>
+                        <li><strong>Money market funds:</strong> No direct fees (fund managers charge management fees from returns)</li>
+                    </ul>
+                    
+                    <h4>Account Maintenance:</h4>
+                    <ul>
+                        <li><strong>Basic account:</strong> No monthly fees</li>
+                        <li><strong>Premium account:</strong> KSh 250 per month (includes advanced financial advisory and premium features)</li>
+                    </ul>
+                    
+                    <p>All fees are transparently displayed before you confirm any transaction. PesaGuru does not charge any hidden fees.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How long do withdrawals take?</div>
+                <div class="faq-answer">
+                    <p>Withdrawal processing times vary depending on the withdrawal method:</p>
+                    <ul>
+                        <li><strong>M-Pesa withdrawals:</strong> Processed instantly, funds typically reflect in your M-Pesa account within minutes</li>
+                        <li><strong>Bank account withdrawals:</strong>
+                            <ul>
+                                <li>Same bank: 1 business day</li>
+                                <li>Different bank: 1-3 business days</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p><strong>Withdrawal processing hours:</strong></p>
+                    <ul>
+                        <li>M-Pesa withdrawals are processed 24/7</li>
+                        <li>Bank withdrawals initiated after 3:00 PM or during weekends/public holidays will be processed on the next business day</li>
+                    </ul>
+                    <p><strong>Withdrawal limits:</strong></p>
+                    <ul>
+                        <li>Minimum withdrawal: KSh 100</li>
+                        <li>Maximum daily withdrawal to M-Pesa: KSh 150,000 (per Safaricom limits)</li>
+                        <li>Maximum daily withdrawal to bank account: KSh 1,000,000</li>
+                    </ul>
+                    <p>For security reasons, first-time withdrawals to a new bank account may require additional verification and could take up to 24 hours to process.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Security & Privacy Section -->
+        <div class="faq-section" id="security">
+            <div class="faq-section-header">
+                <h2>Security & Privacy</h2>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How does PesaGuru protect my personal and financial data?</div>
+                <div class="faq-answer">
+                    <p>PesaGuru employs multiple layers of security to protect your personal and financial information:</p>
+                    <ul>
+                        <li><strong>End-to-end encryption:</strong> All data transmitted between your device and our servers is encrypted using AES-256 standards</li>
+                        <li><strong>Secure data storage:</strong> Personal and financial data is stored in encrypted databases with strict access controls</li>
+                        <li><strong>Multi-factor authentication (MFA):</strong> Additional security layer beyond passwords</li>
+                        <li><strong>Biometric authentication:</strong> Support for fingerprint and facial recognition</li>
+                        <li><strong>Session timeouts:</strong> Automatic logout after periods of inactivity</li>
+                        <li><strong>Regular security audits:</strong> Our systems undergo regular penetration testing by cybersecurity experts</li>
+                        <li><strong>Compliance with regulations:</strong> We adhere to Kenya's Data Protection Act (2019) and international security standards</li>
+                    </ul>
+                    <p>PesaGuru never stores your complete card details or M-Pesa PIN. We use tokenization for payment information, working with PCI-DSS compliant payment processors.</p>
+                    <p>Our privacy policy (available in the app settings) details how we collect, use, and protect your data. We never share your personal information with third parties without your explicit consent, except when required by law.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What should I do if I suspect fraud?</div>
+                <div class="faq-answer">
+                    <p>If you suspect any fraudulent activity on your PesaGuru account, take these immediate steps:</p>
+                    <ol>
+                        <li><strong>Secure your account:</strong>
+                            <ul>
+                                <li>Change your password immediately</li>
+                                <li>Enable multi-factor authentication if not already active</li>
+                                <li>Log out of all devices (option available in security settings)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Report to PesaGuru:</strong>
+                            <ul>
+                                <li>Call our fraud hotline: 0800-PESAGURU (0800-72724878)</li>
+                                <li>Use the "Report Fraud" option in the app menu</li>
+                                <li>Email us at security@pesaguru.co.ke with details of the suspicious activity</li>
+                            </ul>
+                        </li>
+                        <li><strong>Document everything:</strong>
+                            <ul>
+                                <li>Take screenshots of any suspicious transactions or activities</li>
+                                <li>Note down times and details of any unauthorized access</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <p>Our security team is available 24/7 and will:</p>
+                    <ul>
+                        <li>Investigate the reported incident</li>
+                        <li>Freeze your account temporarily if necessary to prevent further unauthorized activity</li>
+                        <li>Guide you through the recovery process</li>
+                        <li>Help you report to relevant authorities if needed</li>
+                    </ul>
+                    <p><strong>Remember:</strong> PesaGuru will never call or email you asking for your password, PIN, or full card details. Be vigilant against phishing attempts.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How can I change my password?</div>
+                <div class="faq-answer">
+                    <p>Changing your password in PesaGuru is a straightforward process:</p>
+                    <h4>Through the app or website:</h4>
+                    <ol>
+                        <li>Log in to your PesaGuru account</li>
+                        <li>Navigate to "Settings" (gear icon) or "Profile"</li>
+                        <li>Select "Security" or "Account Security"</li>
+                        <li>Tap on "Change Password"</li>
+                        <li>Enter your current password</li>
+                        <li>Enter your new password (must meet our security requirements)</li>
+                        <li>Confirm your new password</li>
+                        <li>Tap "Save" or "Update"</li>
+                    </ol>
+                    <p>You'll receive a confirmation email and/or SMS that your password has been changed.</p>
+                    
+                    <h4>If you've forgotten your password:</h4>
+                    <ol>
+                        <li>On the login screen, tap "Forgot Password"</li>
+                        <li>Enter your registered email address or phone number</li>
+                        <li>Select whether you want to receive a reset link via email or SMS</li>
+                        <li>Click on the reset link received</li>
+                        <li>Create a new password and confirm it</li>
+                    </ol>
+                    
+                    <p><strong>Password requirements:</strong></p>
+                    <ul>
+                        <li>Minimum 8 characters</li>
+                        <li>At least one uppercase letter</li>
+                        <li>At least one lowercase letter</li>
+                        <li>At least one number</li>
+                        <li>At least one special character (e.g., !, @, #, $)</li>
+                    </ul>
+                    <p>For security purposes, we recommend changing your password regularly and avoiding using the same password across multiple services.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Does PesaGuru comply with financial regulations?</div>
+                <div class="faq-answer">
+                    <p>Yes, PesaGuru strictly adheres to all relevant financial regulations and legal frameworks in Kenya:</p>
+                    <ul>
+                        <li><strong>Central Bank of Kenya (CBK) regulations:</strong> We comply with digital lending regulations, Know Your Customer (KYC) requirements, and Anti-Money Laundering (AML) policies</li>
+                        <li><strong>Capital Markets Authority (CMA) guidelines:</strong> Our investment advisory services adhere to CMA regulations for financial advice and securities trading</li>
+                        <li><strong>Data Protection Act (2019):</strong> We comply with Kenya's data privacy laws regarding the collection, storage, and processing of personal data</li>
+                        <li><strong>Communications Authority of Kenya (CAK) requirements:</strong> Our digital services meet telecommunications and digital communications standards</li>
+                    </ul>
+                    <p>Key compliance measures we implement:</p>
+                    <ul>
+                        <li><strong>Mandatory KYC process:</strong> Identity verification for all users</li>
+                        <li><strong>Transaction monitoring:</strong> Automated systems to detect and prevent suspicious activities</li>
+                        <li><strong>Regular audits:</strong> Independent review of our compliance procedures</li>
+                        <li><strong>Secure record-keeping:</strong> Maintaining transaction records as required by law</li>
+                        <li><strong>Clear disclaimers:</strong> Transparent communication about risks associated with investments</li>
+                        <li><strong>Regular reporting:</strong> Submitting required reports to regulatory authorities</li>
+                    </ul>
+                    <p>Our partnerships with licensed financial institutions ensure that all investment services are provided through proper regulatory channels. For stock trading, we partner with licensed stockbrokers registered with the NSE.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Customer Support Section -->
+        <div class="faq-section" id="support">
+            <div class="faq-section-header">
+                <h2>Customer Support</h2>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How can I contact PesaGuru support?</div>
+                <div class="faq-answer">
+                    <p>PesaGuru offers multiple channels to reach our customer support team:</p>
+                    <ul>
+                        <li><strong>In-app chat support:</strong> Available directly within the PesaGuru app by tapping on the "Help" or "Support" icon</li>
+                        <li><strong>Email support:</strong> support@pesaguru.co.ke</li>
+                        <li><strong>Phone support:</strong> 0800-PESAGURU (0800-72724878) or +254 20 5230000</li>
+                        <li><strong>WhatsApp support:</strong> +254 700 000000</li>
+                        <li><strong>Social media:</strong> Direct messages via our official Twitter, Facebook, and Instagram accounts</li>
+                    </ul>
+                    <p>For specific inquiries, you can use these dedicated channels:</p>
+                    <ul>
+                        <li><strong>Technical issues:</strong> tech.support@pesaguru.co.ke</li>
+                        <li><strong>Account verification:</strong> verification@pesaguru.co.ke</li>
+                        <li><strong>Security concerns:</strong> security@pesaguru.co.ke</li>
+                    </ul>
+                    <p>You can also visit our physical office during business hours at:</p>
+                    <p>PesaGuru Limited<br>
+                    8th Floor, Adak Tower<br>
+                    Ringroad Kilimani<br>
+                    Nairobi, Kenya</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What are the customer service hours?</div>
+                <div class="faq-answer">
+                    <p>PesaGuru provides customer support through multiple channels with varying hours of operation:</p>
+                    <h4>AI Chatbot Support:</h4>
+                    <ul>
+                        <li>Available 24/7, 365 days a year</li>
+                        <li>Can answer common questions, provide guidance, and assist with basic troubleshooting</li>
+                    </ul>
+                    
+                    <h4>Live Human Support:</h4>
+                    <ul>
+                        <li><strong>In-app chat support:</strong> Monday to Friday, 8:00 AM to 8:00 PM; Saturday, 9:00 AM to 5:00 PM (East Africa Time)</li>
+                        <li><strong>Phone support:</strong> Monday to Friday, 8:00 AM to 8:00 PM; Saturday, 9:00 AM to 5:00 PM (East Africa Time)</li>
+                        <li><strong>Email support:</strong> Monitored during business hours, with responses typically within 24 hours</li>
+                        <li><strong>WhatsApp support:</strong> Monday to Friday, 8:00 AM to 8:00 PM (East Africa Time)</li>
+                    </ul>
+                    
+                    <h4>Emergency Support (for account security issues):</h4>
+                    <ul>
+                        <li>Available 24/7 via our emergency hotline: 0800-SECURE (0800-732873)</li>
+                    </ul>
+                    
+                    <p>Our support hours may be extended during special events or market volatility. Please note that during high-volume periods, response times may be longer than usual. Priority is given to security-related issues.</p>
+                    
+                    <p>Support is unavailable on Kenyan public holidays, though our AI chatbot remains operational to assist with basic inquiries.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Can I request personalized financial advice?</div>
+                <div class="faq-answer">
+                    <p>Yes, PesaGuru offers personalized financial advice through several channels:</p>
+                    
+                    <h4>Through the AI-powered chatbot (available to all users):</h4>
+                    <ul>
+                        <li>Ask specific financial questions directly in the chat interface</li>
+                        <li>Complete a financial health check to receive tailored recommendations</li>
+                        <li>Set financial goals and receive personalized strategies to achieve them</li>
+                        <li>Analyze your spending patterns for customized budgeting advice</li>
+                    </ul>
+                    
+                    <h4>Premium advisory services (available to Premium account holders):</h4>
+                    <ul>
+                        <li><strong>Virtual consultation:</strong> Schedule one-on-one video calls with certified financial advisors</li>
+                        <li><strong>Custom investment portfolio:</strong> Receive a personalized investment strategy based on your goals</li>
+                        <li><strong>Detailed financial planning:</strong> Get comprehensive long-term financial plans</li>
+                        <li><strong>Regular portfolio reviews:</strong> Quarterly assessment of your investments with adjustment recommendations</li>
+                    </ul>
+                    
+                    <p>To request personalized advice:</p>
+                    <ol>
+                        <li>Ensure your profile information is complete (including financial goals, income, expenses, and risk tolerance)</li>
+                        <li>Use the "Financial Advisory" section in the app</li>
+                        <li>For Premium users, use the "Book Advisor" feature to schedule a consultation</li>
+                    </ol>
+                    
+                    <p>The quality of advice improves as you use the app more, as our AI learns from your financial behavior and preferences.</p>
+                    
+                    <p><em>Note: While our AI provides guidance based on financial best practices and market data, complex financial situations may require consultation with human financial experts. PesaGuru's advice should not replace professional financial, tax, or legal advice for complicated cases.</em></p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How do I report a bug or issue?</div>
+                <div class="faq-answer">
+                    <p>If you encounter a bug or technical issue while using PesaGuru, please report it through one of these methods:</p>
+                    
+                    <h4>In-app reporting (preferred method):</h4>
+                    <ol>
+                        <li>Navigate to Settings > Help & Support > Report a Bug</li>
+                        <li>Select the issue category (e.g., login problem, payment issue, app crash)</li>
+                        <li>Describe the issue in detail, including what you were doing when it occurred</li>
+                        <li>Attach screenshots if possible (highly recommended)</li>
+                        <li>Submit the report</li>
+                    </ol>
+                    
+                    <h4>Alternative reporting methods:</h4>
+                    <ul>
+                        <li><strong>Email:</strong> bugs@pesaguru.co.ke with subject line "Bug Report"</li>
+                        <li><strong>Support chat:</strong> Describe the issue to our support team through the in-app chat</li>
+                        <li><strong>Phone:</strong> Call our technical support at +254 20 5230001</li>
+                    </ul>
+                    
+                    <p>When reporting a bug, please include:</p>
+                    <ul>
+                        <li>Your device model and operating system version</li>
+                        <li>The app version (found in Settings > About)</li>
+                        <li>Steps to reproduce the issue</li>
+                        <li>What you expected to happen vs. what actually happened</li>
+                        <li>Time and date when the issue occurred</li>
+                    </ul>
+                    
+                    <p>Our technical team reviews all bug reports and prioritizes fixes based on severity and impact. You may receive follow-up questions to help us better understand and resolve the issue.</p>
+                    
+                    <p>For critical issues affecting your account security or finances, please call our support line immediately rather than using email or in-app reporting.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CTA Section -->
+        <div class="faq-cta">
+            <h3>Still have questions?</h3>
+            <p>Our support team is ready to help you with any other questions you might have about PesaGuru.</p>
+            <a href="#" class="cta-btn">Contact Support</a>
+        </div>
+    </div>
+    
+    <script>
+        // Toggle FAQ answers
+        document.addEventListener('DOMContentLoaded', function() {
+            const questions = document.querySelectorAll('.faq-question');
+            
+            questions.forEach(question => {
+                question.addEventListener('click', function() {
+                    // Toggle active state for the question
+                    this.classList.toggle('active');
+                    
+                    // Toggle show class for the answer
+                    const answer = this.nextElementSibling;
+                    answer.classList.toggle('show');
+                });
+            });
+            
+            // Category filtering
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const faqSections = document.querySelectorAll('.faq-section');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const target = this.getAttribute('data-target');
+                    
+                    // Show/hide sections based on target
+                    if (target === 'all') {
+                        faqSections.forEach(section => section.style.display = 'block');
+                    } else {
+                        faqSections.forEach(section => {
+                            if (section.id === target) {
+                                section.style.display = 'block';
+                            } else {
+                                section.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            });
+            
+            // Search functionality
+            const searchBox = document.getElementById('faqSearch');
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            searchBox.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                if (searchTerm.length < 2) {
+                    // Reset display if search term is too short
+                    faqItems.forEach(item => {
+                        item.style.display = 'block';
+                        
+                        // Remove any existing highlights
+                        const question = item.querySelector('.faq-question');
+                        const answer = item.querySelector('.faq-answer');
+                        
+                        question.innerHTML = question.innerText;
+                        answer.innerHTML = answer.innerHTML.replace(/<mark class="highlight">(.*?)<\/mark>/g, '$1');
+                    });
+                    
+                    // Show all sections
+                    faqSections.forEach(section => section.style.display = 'block');
+                    
+                    return;
+                }
+                
+                // First, hide all sections
+                faqSections.forEach(section => section.style.display = 'none');
+                
+                let sectionsWithMatches = new Set();
+                
+                // Search through items
+                faqItems.forEach(item => {
+                    const question = item.querySelector('.faq-question');
+                    const answer = item.querySelector('.faq-answer');
+                    const questionText = question.innerText.toLowerCase();
+                    const answerText = answer.innerText.toLowerCase();
+                    
+                    if (questionText.includes(searchTerm) || answerText.includes(searchTerm)) {
+                        item.style.display = 'block';
+                        
+                        // Get parent section and add to set of matches
+                        const parentSection = item.closest('.faq-section');
+                        sectionsWithMatches.add(parentSection.id);
+                        
+                        // Highlight matching text in question
+                        if (questionText.includes(searchTerm)) {
+                            const regex = new RegExp(searchTerm, 'gi');
+                            question.innerHTML = question.innerText.replace(regex, match => `<mark class="highlight">${match}</mark>`);
+                        }
+                        
+                        // Highlight matching text in answer
+                        if (answerText.includes(searchTerm)) {
+                            const regex = new RegExp(searchTerm, 'gi');
+                            answer.innerHTML = answer.innerHTML.replace(regex, match => `<mark class="highlight">${match}</mark>`);
+                            
+                            // Make answer visible
+                            answer.classList.add('show');
+                            question.classList.add('active');
+                        }
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                // Show only sections with matches
+                faqSections.forEach(section => {
+                    if (sectionsWithMatches.has(section.id)) {
+                        section.style.display = 'block';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

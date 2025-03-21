@@ -1,0 +1,4083 @@
+/* ========== GENERAL STYLES ========== */
+:root {
+    /* Color Palette */
+    --primary-color: #0A5C6D;
+    --primary-light: #178299;
+    --primary-dark: #074655;
+    --secondary-color: #12486B;
+    --accent-color: #F4A261;
+    --positive-color: #4CAF50;
+    --negative-color: #F44336;
+    --warning-color: #FFC107;
+    --info-color: #2196F3;
+    --background-color: #F8F9FA;
+    --card-bg-color: #FFFFFF;
+    --text-dark: #343A40;
+    --text-muted: #6C757D;
+    --border-color: #E1E5EA;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+  
+    /* Chart Colors */
+    --color-green: #4CAF50;
+    --color-blue: #2196F3;
+    --color-yellow: #FFC107;
+    --color-purple: #9C27B0;
+    --color-orange: #FF5722;
+}
+  
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+body {
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--text-dark);
+    background-color: var(--background-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+  
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--primary-dark);
+}
+  
+h1 {
+    font-size: 1.75rem;
+}
+  
+h2 {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1.25rem;
+}
+  
+h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+  
+p {
+    margin-bottom: 1rem;
+}
+  
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+    font-size: inherit;
+}
+  
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+}
+  
+a:hover {
+    color: var(--primary-light);
+}
+
+ul, ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+}
+
+th, td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
+    font-weight: 600;
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Utility Classes */
+.positive {
+    color: var(--positive-color);
+}
+
+.negative {
+    color: var(--negative-color);
+}
+
+.neutral {
+    color: var(--text-muted);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+  
+/* ========== HEADER STYLES ========== */
+.main-header {
+    background-color: var(--card-bg-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px var(--shadow-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+  
+.header-left, .header-right {
+    display: flex;
+    align-items: center;
+}
+  
+.header-center {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: center;
+}
+  
+.logo {
+    height: 40px;
+    margin-right: 1rem;
+}
+  
+.search-container {
+    display: flex;
+    align-items: center;
+    background-color: var(--background-color);
+    border-radius: 24px;
+    padding: 0.35rem 0.75rem;
+    width: 300px;
+    border: 1px solid var(--border-color);
+    margin-right: 1rem;
+}
+  
+.search-input {
+    border: none;
+    background: none;
+    flex-grow: 1;
+    outline: none;
+    font-size: 0.875rem;
+}
+  
+.search-button, .refresh-button {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    margin-left: 0.5rem;
+    transition: color 0.2s;
+}
+  
+.search-button:hover, .refresh-button:hover {
+    color: var(--primary-color);
+}
+  
+.refresh-button {
+    margin: 0 1rem;
+}
+  
+.page-title {
+    margin: 0;
+    color: var(--primary-color);
+}
+  
+.portfolio-button, .notification-button, .theme-toggle {
+    display: flex;
+    align-items: center;
+    color: var(--text-muted);
+    margin-left: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s, color 0.2s;
+}
+  
+.portfolio-button:hover, .notification-button:hover, .theme-toggle:hover {
+    background-color: var(--background-color);
+    color: var(--primary-color);
+}
+  
+.portfolio-button span {
+    margin-left: 0.5rem;
+}
+  
+.notification-container {
+    position: relative;
+}
+  
+.notification-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--negative-color);
+    color: white;
+    font-size: 0.75rem;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.user-profile {
+    margin-left: 1.5rem;
+    position: relative;
+}
+  
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid var(--primary-light);
+}
+  
+.user-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 50px;
+    background-color: var(--card-bg-color);
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 10px var(--shadow-color);
+    width: 180px;
+    border: 1px solid var(--border-color);
+    z-index: 10;
+}
+  
+.user-profile:hover .user-dropdown {
+    display: block;
+}
+  
+.user-dropdown a {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: var(--text-dark);
+    border-bottom: 1px solid var(--border-color);
+}
+  
+.user-dropdown a:last-child {
+    border-bottom: none;
+}
+  
+.user-dropdown a:hover {
+    background-color: var(--background-color);
+    color: var(--primary-color);
+}
+  
+/* ========== MAIN CONTAINER STYLES ========== */
+.main-container {
+    display: flex;
+    flex-grow: 1;
+    padding: 1.5rem;
+    gap: 1.5rem;
+}
+  
+/* Sidebar - Quick Actions */
+.quick-actions {
+    display: flex;
+    flex-direction: column;
+    width: 220px;
+    flex-shrink: 0;
+}
+  
+.action-button {
+    display: flex;
+    align-items: center;
+    padding: 0.875rem 1rem;
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px var(--shadow-color);
+}
+  
+.action-button i {
+    margin-right: 0.75rem;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+}
+  
+.action-button:hover {
+    background-color: var(--primary-light);
+    color: white;
+    transform: translateY(-2px);
+}
+  
+.action-button:hover i {
+    color: white;
+}
+  
+.action-button.ai-assistant {
+    background-color: var(--accent-color);
+    color: var(--text-dark);
+    margin-top: 0.5rem;
+}
+  
+.action-button.ai-assistant i {
+    color: var(--text-dark);
+}
+  
+.action-button.ai-assistant:hover {
+    background-color: var(--primary-light);
+    color: white;
+}
+  
+.action-button.ai-assistant:hover i {
+    color: white;
+}
+  
+/* Main Content Area */
+.content-area {
+    flex-grow: 1;
+    background-color: var(--card-bg-color);
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    padding: 1.5rem;
+    overflow: hidden;
+}
+  
+/* Tab Navigation */
+.tab-navigation {
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+    scrollbar-width: thin;
+}
+  
+.tab-navigation::-webkit-scrollbar {
+    height: 4px;
+}
+  
+.tab-navigation::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    border-radius: 4px;
+}
+  
+.tab-button {
+    padding: 0.75rem 1.25rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    border-bottom: 3px solid transparent;
+    margin-right: 0.5rem;
+    white-space: nowrap;
+    transition: all 0.2s;
+}
+  
+.tab-button:hover {
+    color: var(--primary-color);
+}
+  
+.tab-button.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+  
+/* Tab Content */
+.tab-pane {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+}
+  
+.tab-pane.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+  
+/* ========== DASHBOARD COMPONENTS ========== */
+/* Overview Section */
+.overview-section {
+    margin-bottom: 2rem;
+}
+  
+.portfolio-stats {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+  
+.stats-card {
+    flex: 1;
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+  
+.stats-card h3 {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+  
+.stats-card .value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+  
+.stats-card .change {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+  
+.stats-card .change.positive {
+    color: var(--positive-color);
+}
+  
+.stats-card .change.negative {
+    color: var(--negative-color);
+}
+  
+.period {
+    color: var(--text-muted);
+    font-weight: normal;
+}
+  
+.risk-meter {
+    height: 6px;
+    background-color: #e9ecef;
+    border-radius: 3px;
+    margin-top: 0.75rem;
+    overflow: hidden;
+}
+  
+.risk-level {
+    height: 100%;
+    background: linear-gradient(to right, var(--positive-color), var(--warning-color), var(--negative-color));
+}
+  
+.risk-level-65 {
+    width: 65%;
+}
+  
+.portfolio-chart-container {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+  
+.chart-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+  
+.time-filters {
+    display: flex;
+}
+  
+.time-filter {
+    font-size: 0.8125rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    margin-left: 0.25rem;
+    background-color: var(--card-bg-color);
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+}
+  
+.time-filter:hover {
+    background-color: var(--border-color);
+}
+  
+.time-filter.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+  
+/* Asset Allocation Section */
+.allocation-section {
+    margin-bottom: 2rem;
+}
+  
+.allocation-container {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+  
+.chart-container {
+    flex: 1;
+    min-width: 0;
+}
+  
+.allocation-breakdown {
+    flex: 1;
+    min-width: 0;
+}
+  
+.allocation-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+  
+.allocation-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    margin-right: 1rem;
+}
+  
+.color-green {
+    background-color: var(--color-green);
+}
+  
+.color-blue {
+    background-color: var(--color-blue);
+}
+  
+.color-yellow {
+    background-color: var(--color-yellow);
+}
+  
+.color-purple {
+    background-color: var(--color-purple);
+}
+  
+.color-orange {
+    background-color: var(--color-orange);
+}
+  
+.allocation-details h4 {
+    font-size: 0.9375rem;
+    margin-bottom: 0.25rem;
+}
+  
+.allocation-details p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+  
+.ai-recommendation {
+    background-color: var(--background-color);
+    border-left: 4px solid var(--accent-color);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+  
+.ai-recommendation-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+  
+.ai-recommendation-header i {
+    font-size: 1.25rem;
+    color: var(--accent-color);
+    margin-right: 0.75rem;
+}
+  
+.ai-recommendation-header h3 {
+    margin: 0;
+    color: var(--text-dark);
+}
+  
+.ai-recommendation p {
+    margin-bottom: 1rem;
+}
+  
+.ai-recommendation .action-button {
+    display: inline-flex;
+    margin-bottom: 0;
+}
+  
+/* Risk Analysis Section */
+.risk-analysis-section {
+    margin-bottom: 2rem;
+}
+  
+.risk-analysis-container {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+  
+.risk-chart {
+    flex: 3;
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+  
+.risk-metrics {
+    flex: 2;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+  
+.metric-card {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+  
+.metric-card h3 {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+  
+.metric-value {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+  
+.metric-description {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+  
+.optimization-options {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+  
+.optimization-controls {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+  
+.optimization-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+  
+.optimization-option input[type="radio"] {
+    margin-right: 0.5rem;
+}
+  
+.radio-label {
+    font-size: 0.9375rem;
+}
+  
+.optimize-button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+  
+.optimize-button:hover {
+    background-color: var(--primary-dark);
+}
+  
+/* Investment Tools Section */
+.investment-tools-section {
+    margin-bottom: 1rem;
+}
+  
+.tools-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+  
+.tool-card {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 2px 6px var(--shadow-color);
+    transition: transform 0.2s;
+}
+  
+.tool-card:hover {
+    transform: translateY(-5px);
+}
+  
+.tool-icon {
+    background-color: var(--primary-light);
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+}
+  
+.tool-icon i {
+    font-size: 1.5rem;
+}
+  
+.tool-card h3 {
+    font-size: 1.125rem;
+    margin-bottom: 0.75rem;
+}
+  
+.tool-card p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+    height: 2.5em; /* Fixed height for description */
+}
+  
+.tool-button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    display: inline-block;
+}
+  
+.tool-button:hover {
+    background-color: var(--primary-dark);
+}
+
+/* ========== RISK PROFILING TAB ========== */
+.risk-assessment-section {
+    margin-bottom: 2rem;
+}
+
+.questionnaire-container {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+    margin-bottom: 2rem;
+}
+
+.questionnaire-progress {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+}
+
+.progress-bar {
+    height: 8px;
+    background-color: var(--border-color);
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background-color: var(--primary-color);
+    width: 0%; /* Will be updated via JS */
+    transition: width 0.3s ease;
+}
+
+.question-card {
+    display: none;
+    background-color: var(--card-bg-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+    animation: fadeIn 0.3s ease;
+}
+
+.question-card.active {
+    display: block;
+}
+
+.question-card h3 {
+    margin-bottom: 1.25rem;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.option {
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+}
+
+.option:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+    border-color: var(--primary-light);
+}
+
+.option input[type="radio"] {
+    margin-right: 0.75rem;
+    margin-top: 0.25rem;
+    flex-shrink: 0;
+}
+
+.next-question {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.next-question:hover {
+    background-color: var(--primary-dark);
+}
+
+.submit-container {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.submit-questionnaire {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.submit-questionnaire:disabled {
+    background-color: var(--border-color);
+    color: var(--text-muted);
+    cursor: not-allowed;
+}
+
+.submit-questionnaire:not(:disabled):hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.risk-profile-result {
+    margin-bottom: 2rem;
+}
+
+.profile-card {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.profile-header i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-right: 1rem;
+}
+
+.risk-profile-type {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.risk-score-meter {
+    display: flex;
+    align-items: center;
+    margin: 1.5rem 0;
+}
+
+.meter-label {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    width: 100px;
+}
+
+.meter {
+    flex-grow: 1;
+    height: 8px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    margin: 0 1rem;
+    position: relative;
+}
+
+.meter-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 55%; /* Will be updated via JS */
+    background: linear-gradient(to right, var(--positive-color), var(--warning-color), var(--negative-color));
+    border-radius: 4px;
+}
+
+.risk-score {
+    text-align: center;
+    font-size: 1.125rem;
+    margin-top: 1rem;
+}
+
+/* Chart Legends */
+.chart-legend {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+}
+
+.your-portfolio {
+    background-color: var(--primary-color);
+}
+
+.suggested-portfolio {
+    background-color: var(--accent-color);
+}
+
+.market-benchmark {
+    background-color: var(--text-muted);
+}
+
+/* Diversification Strategies */
+.strategy-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.strategy-tab {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    background-color: var(--background-color);
+    transition: all 0.2s;
+}
+
+.strategy-tab:hover {
+    background-color: var(--border-color);
+}
+
+.strategy-tab.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.strategy-pane {
+    display: none;
+}
+
+.strategy-pane.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.allocation-visual {
+    margin-bottom: 1.5rem;
+}
+
+.strategy-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.benefits-risks {
+    display: flex;
+    gap: 2rem;
+}
+
+.benefits, .risks {
+    flex: 1;
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+}
+
+.feature-list li {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: flex-start;
+}
+
+.feature-list i {
+    margin-right: 0.5rem;
+    margin-top: 0.25rem;
+}
+
+.fa-check {
+    color: var(--positive-color);
+}
+
+.fa-times {
+    color: var(--negative-color);
+}
+
+.apply-strategy {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    align-self: flex-start;
+}
+
+.apply-strategy:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Stress Testing */
+.stress-testing {
+    margin-top: 2rem;
+}
+
+.stress-test-scenarios {
+    display: flex;
+    gap: 2rem;
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.scenario-selector {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.scenario-dropdown {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.25rem;
+    background-color: var(--card-bg-color);
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.run-stress-test {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.run-stress-test:hover {
+    background-color: var(--primary-dark);
+}
+
+.stress-test-results {
+    flex: 2;
+}
+
+.scenario-name {
+    color: var(--primary-color);
+}
+
+.key-findings {
+    margin-top: 1.5rem;
+}
+
+.key-findings ul {
+    list-style: none;
+    padding: 0;
+}
+
+.key-findings li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.key-findings li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+}
+
+.ai-recommendations {
+    margin-top: 1.5rem;
+}
+
+.ai-recommendations ul {
+    list-style: none;
+    padding: 0;
+}
+
+.ai-recommendations li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.ai-recommendations li:before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+}
+
+.apply-recommendations {
+    background-color: var(--accent-color);
+    color: var(--text-dark);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    margin-top: 1rem;
+}
+
+.apply-recommendations:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* ========== STOCK MARKET TAB ========== */
+.market-overview-section {
+    margin-bottom: 2rem;
+}
+
+.market-indices {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.index-card {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.index-card h3 {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.index-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.index-change {
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.last-updated {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.compare-previous {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.market-movers {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.movers-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.movers-tab {
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    background-color: var(--card-bg-color);
+    transition: all 0.2s;
+}
+
+.movers-tab:hover {
+    background-color: var(--border-color);
+}
+
+.movers-tab.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.movers-pane {
+    display: none;
+}
+
+.movers-pane.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.movers-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.movers-table th, .movers-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.movers-table th {
+    font-weight: 600;
+    color: var(--text-muted);
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Stock Comparison Tool */
+.stock-comparison-tool {
+    margin-bottom: 2rem;
+}
+
+.comparison-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.stock-selectors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.stock-select {
+    flex: 1;
+    min-width: 200px;
+}
+
+.stock-select label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.stock-dropdown {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.25rem;
+    background-color: var(--card-bg-color);
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.add-stock-btn {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background-color: var(--accent-color);
+    color: var(--text-dark);
+    border-radius: 0.25rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.add-stock-btn i {
+    margin-right: 0.5rem;
+}
+
+.add-stock-btn:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.comparison-timeframe, .comparison-metrics {
+    flex: 1;
+    min-width: 200px;
+}
+
+.timeframe-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.timeframe-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    background-color: var(--card-bg-color);
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    transition: all 0.2s;
+}
+
+.timeframe-btn:hover {
+    background-color: var(--border-color);
+}
+
+.timeframe-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.metric-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.metric-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.metric-option input[type="checkbox"] {
+    margin-right: 0.5rem;
+}
+
+.comparison-chart-container {
+    margin-bottom: 1.5rem;
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.comparison-table {
+    overflow-x: auto;
+}
+
+.comparison-table table {
+    min-width: 100%;
+}
+
+.comparison-table th, .comparison-table td {
+    white-space: nowrap;
+}
+
+/* Investment Strategies */
+.investment-strategies {
+    margin-bottom: 2rem;
+}
+
+.strategies-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.strategy-card {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+    transition: transform 0.2s;
+}
+
+.strategy-card:hover {
+    transform: translateY(-5px);
+}
+
+.strategy-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary-light);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.strategy-icon i {
+    font-size: 1.25rem;
+}
+
+.strategy-card h3 {
+    margin-bottom: 0.75rem;
+}
+
+.strategy-card p {
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.strategy-highlights {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1rem;
+}
+
+.strategy-highlights li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.strategy-highlights li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+}
+
+.recommended-stocks {
+    margin-bottom: 1.5rem;
+}
+
+.recommended-stocks h4 {
+    font-size: 0.9375rem;
+    margin-bottom: 0.5rem;
+}
+
+.recommended-stocks ul {
+    list-style: none;
+    padding: 0;
+}
+
+.recommended-stocks li {
+    padding-left: 1.5rem;
+    position: relative;
+    margin-bottom: 0.25rem;
+}
+
+.recommended-stocks li:before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+}
+
+.view-strategy {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.view-strategy:hover {
+    background-color: var(--primary-dark);
+}
+
+/* AI Stock Recommendations */
+.ai-recommendations {
+    margin-bottom: 2rem;
+}
+
+.ai-recommendation-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.ai-recommendation-header i {
+    font-size: 2rem;
+    color: var(--accent-color);
+}
+
+.recommendation-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.recommendation-card {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+    position: relative;
+    padding-top: 3rem;
+}
+
+.recommendation-type {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0.5rem;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.recommendation-type.buy {
+    background-color: var(--positive-color);
+    color: white;
+}
+
+.recommendation-type.hold {
+    background-color: var(--warning-color);
+    color: var(--text-dark);
+}
+
+.recommendation-type.sell {
+    background-color: var(--negative-color);
+    color: white;
+}
+
+.recommendation-card h3 {
+    margin-bottom: 0.5rem;
+}
+
+.current-price, .target-price {
+    margin-bottom: 0.5rem;
+    font-size: 0.9375rem;
+}
+
+.potential-return {
+    display: inline-block;
+    padding: 0.35rem 0.75rem;
+    background-color: var(--positive-color);
+    color: white;
+    border-radius: 1rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.potential-return.negative {
+    background-color: var(--negative-color);
+}
+
+.recommendation-reason {
+    margin-bottom: 1.5rem;
+}
+
+.recommendation-reason h4 {
+    font-size: 0.9375rem;
+    margin-bottom: 0.5rem;
+}
+
+.recommendation-reason p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.action-buttons {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.add-to-watchlist, .buy-stock, .sell-stock {
+    flex: 1;
+    padding: 0.5rem;
+    text-align: center;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+}
+
+.add-to-watchlist {
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-dark);
+}
+
+.add-to-watchlist:hover {
+    background-color: var(--border-color);
+}
+
+.buy-stock {
+    background-color: var(--positive-color);
+    color: white;
+}
+
+.buy-stock:hover {
+    background-color: #3d8b40;
+}
+
+.sell-stock {
+    background-color: var(--negative-color);
+    color: white;
+}
+
+.sell-stock:hover {
+    background-color: #d32f2f;
+}
+
+.stock-screener {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+    text-align: center;
+}
+
+.stock-screener h3 {
+    margin-bottom: 0.75rem;
+}
+
+.stock-screener p {
+    margin-bottom: 1.25rem;
+}
+
+.open-screener {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.open-screener:hover {
+    background-color: var(--primary-dark);
+}
+
+/* ========== FIXED INCOME TAB ========== */
+.fixed-income-overview {
+    margin-bottom: 2rem;
+}
+
+.market-data-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.market-card {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.market-card h3 {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.rate-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.rate-change {
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.yield-curve-container {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.yield-curve-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.curve-timeframe {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.curve-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    background-color: var(--card-bg-color);
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    transition: all 0.2s;
+}
+
+.curve-btn:hover {
+    background-color: var(--border-color);
+}
+
+.curve-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.yield-curve-chart {
+    margin-bottom: 1.5rem;
+}
+
+.yield-curve-table {
+    overflow-x: auto;
+}
+
+/* Fixed Income Strategies */
+.fixed-income-strategies {
+    margin-bottom: 2rem;
+}
+
+.strategy-blocks {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.strategy-block {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.strategy-comparison {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.comparison-column {
+    flex: 1;
+    background-color: var(--card-bg-color);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.comparison-column h4 {
+    text-align: center;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+}
+
+.ideal-for {
+    margin-top: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.02);
+    padding: 1rem;
+    border-radius: 0.25rem;
+}
+
+.ideal-for h5 {
+    font-size: 0.9375rem;
+    margin-bottom: 0.5rem;
+}
+
+.ideal-for p {
+    font-size: 0.875rem;
+    margin: 0;
+}
+
+.comparison-table-container {
+    margin-bottom: 1.5rem;
+}
+
+.comparison-table {
+    width: 100%;
+}
+
+.yield-vs-maturity {
+    background-color: var(--card-bg-color);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.tax-advantage-explanation {
+    padding: 1rem;
+    background-color: var(--card-bg-color);
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.tax-comparison {
+    display: flex;
+    gap: 2rem;
+    margin: 1.5rem 0;
+}
+
+.calculation-example {
+    background-color: rgba(0, 0, 0, 0.02);
+    padding: 1rem;
+    border-radius: 0.25rem;
+    margin-top: 1rem;
+}
+
+.calculation-example p {
+    margin-bottom: 0.5rem;
+}
+
+.calculation-example p:last-child {
+    margin-bottom: 0;
+}
+
+.tax-free-bonds-table {
+    margin-top: 1rem;
+}
+
+/* AI Insights Section */
+.insights-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.insight-card {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.insight-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary-light);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.insight-icon i {
+    font-size: 1.25rem;
+}
+
+.insight-content {
+    color: var(--text-muted);
+}
+
+.key-takeaway {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.02);
+    border-radius: 0.25rem;
+    border-left: 3px solid var(--accent-color);
+}
+
+.key-takeaway h4 {
+    font-size: 0.9375rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+}
+
+.key-takeaway p {
+    margin: 0;
+    font-size: 0.875rem;
+}
+
+.forecast-chart {
+    margin: 1rem 0;
+}
+
+.allocation-chart-container {
+    margin: 1rem 0;
+}
+
+.allocation-explanation ul {
+    list-style: none;
+    padding: 0;
+}
+
+.allocation-explanation li {
+    padding-left: 1.5rem;
+    position: relative;
+    margin-bottom: 0.25rem;
+}
+
+.allocation-explanation li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+}
+
+/* ========== CRYPTOCURRENCY TAB ========== */
+.crypto-market-overview {
+    margin-bottom: 2rem;
+}
+
+.crypto-market-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.market-stat-card {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.market-stat-card h3 {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.stat-change {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.major-crypto-prices {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.crypto-prices-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.crypto-price-card {
+    background-color: var(--card-bg-color);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.crypto-icon {
+    margin-right: 1rem;
+}
+
+.crypto-icon img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.crypto-details {
+    flex-grow: 1;
+}
+
+.crypto-details h4 {
+    font-size: 0.9375rem;
+    margin-bottom: 0.25rem;
+}
+
+.price {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.change {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.price-chart {
+    width: 80px;
+    height: 40px;
+}
+
+.view-more-container {
+    text-align: center;
+}
+
+.view-more-crypto {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.view-more-crypto:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Crypto Chart Analysis */
+.crypto-chart-analysis {
+    margin-bottom: 2rem;
+}
+
+.chart-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.crypto-selector, .timeframe-selector, .display-selector, .indicator-selector {
+    flex: 1;
+    min-width: 200px;
+}
+
+.crypto-select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.25rem;
+    background-color: var(--card-bg-color);
+    font-family: inherit;
+    font-size: inherit;
+    margin-top: 0.5rem;
+}
+
+.display-options, .indicator-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.display-option, .indicator-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.display-option input, .indicator-option input {
+    margin-right: 0.5rem;
+}
+
+.main-chart-container {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+    margin-bottom: 1.5rem;
+}
+
+.chart-analysis-section {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.technical-indicators {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.indicator-card {
+    background-color: var(--card-bg-color);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.indicator-card.overall-summary {
+    grid-column: span 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.indicator-summary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+}
+
+.indicator-summary.buy {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: var(--positive-color);
+}
+
+.indicator-summary.neutral {
+    background-color: rgba(255, 193, 7, 0.1);
+    color: var(--warning-color);
+}
+
+.indicator-summary.sell {
+    background-color: rgba(244, 67, 54, 0.1);
+    color: var(--negative-color);
+}
+
+.indicator-signal {
+    font-weight: 600;
+}
+
+.indicator-details {
+    width: 100%;
+}
+
+.indicator-details tr td:first-child {
+    color: var(--text-muted);
+}
+
+.indicator-details tr td:last-child {
+    text-align: right;
+    font-weight: 500;
+}
+
+.summary-text {
+    font-size: 0.9375rem;
+    text-align: center;
+    max-width: 600px;
+}
+
+/* Crypto Investment Strategies */
+.crypto-investment-strategies {
+    margin-bottom: 2rem;
+}
+
+.strategy-description {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.benefits-risks {
+    display: flex;
+    gap: 2rem;
+    margin: 1.5rem 0;
+}
+
+.benefits, .risks {
+    flex: 1;
+    background-color: var(--card-bg-color);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.asset-recommendations {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.asset-recommendation {
+    background-color: var(--card-bg-color);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: flex-start;
+}
+
+.asset-icon {
+    margin-right: 1rem;
+}
+
+.asset-icon img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.asset-details h5 {
+    font-size: 0.9375rem;
+    margin-bottom: 0.5rem;
+}
+
+.asset-details p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.investment-tips {
+    background-color: var(--card-bg-color);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-top: 1.5rem;
+}
+
+/* Market Sentiment Analysis */
+.market-sentiment-analysis {
+    margin-bottom: 2rem;
+}
+
+.sentiment-overview {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.sentiment-gauge-container, .sentiment-chart-container {
+    flex: 1;
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.sentiment-gauge {
+    margin: 2rem 0;
+    position: relative;
+}
+
+.gauge-scale {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.gauge-scale span {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.extreme-fear {
+    color: var(--negative-color) !important;
+}
+
+.extreme-greed {
+    color: var(--positive-color) !important;
+}
+
+.gauge-indicator {
+    height: 8px;
+    background: linear-gradient(to right, var(--negative-color), var(--warning-color), var(--positive-color));
+    border-radius: 4px;
+    position: relative;
+}
+
+.gauge-indicator:after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: white;
+    border: 2px solid var(--accent-color);
+    border-radius: 50%;
+    top: -2px;
+    left: 67%; /* This will be updated by JS */
+    transform: translateX(-50%);
+}
+
+.sentiment-score {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 1.125rem;
+}
+
+.sentiment-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* AI Predictions */
+.ai-predictions {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.predictions-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.prediction-card {
+    background-color: var(--card-bg-color);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.time-frame {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.prediction-direction {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.prediction-direction.bullish {
+    color: var(--positive-color);
+}
+
+.prediction-direction.bearish {
+    color: var(--negative-color);
+}
+
+.prediction-direction.neutral {
+    color: var(--warning-color);
+}
+
+.prediction-description {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.confidence-level {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.confidence-meter {
+    height: 8px;
+    background-color: var(--border-color);
+    border-radius: 4px;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.confidence-fill {
+    height: 100%;
+    width: 65%; /* Will be updated by JS */
+    background-color: var(--primary-color);
+    border-radius: 4px;
+}
+
+/* ========== RETIREMENT PLANNING TAB ========== */
+.retirement-overview {
+    margin-bottom: 2rem;
+}
+
+.retirement-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.progress-circle {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1rem;
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.status-text {
+    text-align: center;
+    font-weight: 500;
+}
+
+.target-date {
+    color: var(--text-muted);
+}
+
+.adjust-button {
+    background-color: var(--accent-color);
+    color: var(--text-dark);
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    margin-top: 0.5rem;
+}
+
+.adjust-button:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.projection-graph {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.projection-legend {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.current-path {
+    background-color: var(--primary-color);
+}
+
+.target-path {
+    background-color: var(--warning-color);
+}
+
+.optimized-path {
+    background-color: var(--accent-color);
+}
+
+/* Pension & Retirement Accounts */
+.retirement-options {
+    margin-bottom: 2rem;
+}
+
+.options-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.option-card {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.option-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary-light);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.option-icon i {
+    font-size: 1.25rem;
+}
+
+.option-details {
+    margin: 1rem 0;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.9375rem;
+}
+
+.detail-label {
+    color: var(--text-muted);
+}
+
+.detail-value {
+    font-weight: 500;
+}
+
+.option-description {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.view-details {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.view-details:hover {
+    background-color: var(--primary-dark);
+}
+
+.add-account-container {
+    text-align: center;
+}
+
+.add-account {
+    background-color: var(--accent-color);
+    color: var(--text-dark);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+}
+
+.add-account i {
+    margin-right: 0.5rem;
+}
+
+.add-account:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Passive Income Strategies */
+.passive-income-strategies {
+    margin-bottom: 2rem;
+}
+
+.strategies-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.strategy-card {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.9375rem;
+}
+
+.recommendations {
+    margin-top: 1.5rem;
+}
+
+.recommendations h4 {
+    font-size: 0.9375rem;
+    margin-bottom: 0.75rem;
+}
+
+.strategy-button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    margin-top: 1rem;
+}
+
+.strategy-button:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Retirement Planning Tools */
+.tools-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+/* ========== TOOLS & CALCULATORS TAB ========== */
+.tools-overview {
+    margin-bottom: 2rem;
+}
+
+.section-description {
+    max-width: 800px;
+    margin: 0 auto 1.5rem;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.tool-item {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.tool-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.tool-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary-light);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+}
+
+.tool-icon i {
+    font-size: 1.25rem;
+}
+
+.tool-description {
+    margin-bottom: 1.5rem;
+    color: var(--text-muted);
+}
+
+.calculator-container {
+    display: flex;
+    gap: 2rem;
+}
+
+.calculator-form {
+    flex: 1;
+}
+
+.calculator-results {
+    flex: 1;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.25rem;
+    background-color: var(--card-bg-color);
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.calculate-button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.calculate-button:hover {
+    background-color: var(--primary-dark);
+}
+
+.results-summary {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.result-item {
+    background-color: var(--card-bg-color);
+    border-radius: 0.25rem;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.result-item h4 {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.result-value {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.quiz-container {
+    background-color: var(--card-bg-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.question-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+}
+
+.prev-question, .next-question {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.prev-question:disabled {
+    background-color: var(--border-color);
+    color: var(--text-muted);
+    cursor: not-allowed;
+}
+
+.prev-question:not(:disabled):hover, .next-question:hover {
+    background-color: var(--primary-dark);
+}
+
+.goals-container {
+    display: flex;
+    gap: 2rem;
+}
+
+.goal-form {
+    flex: 1;
+}
+
+.goals-list {
+    flex: 1;
+}
+
+.goal-item {
+    background-color: var(--card-bg-color);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1rem;
+    display: flex;
+}
+
+.goal-details {
+    flex-grow: 1;
+}
+
+.goal-details h5 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.goal-progress {
+    margin: 1rem 0;
+}
+
+.goal-progress .progress-bar {
+    margin-bottom: 0.5rem;
+}
+
+.goal-progress .progress {
+    width: 20%; /* Will be updated via JS */
+}
+
+.monthly-saving {
+    font-size: 0.9375rem;
+}
+
+.goal-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-left: 1rem;
+}
+
+.edit-goal, .delete-goal {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.edit-goal {
+    background-color: var(--info-color);
+    color: white;
+}
+
+.delete-goal {
+    background-color: var(--negative-color);
+    color: white;
+}
+
+.edit-goal:hover, .delete-goal:hover {
+    transform: scale(1.1);
+}
+
+/* Simulations Section */
+.simulations-section {
+    margin-top: 2rem;
+}
+
+.simulation-container {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.simulation-header {
+    margin-bottom: 1.5rem;
+}
+
+.scenario-builder {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.scenario-options {
+    flex: 1;
+}
+
+.scenario-section {
+    margin-bottom: 1.5rem;
+}
+
+.option-group {
+    margin-top: 0.75rem;
+}
+
+.scenario-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+}
+
+.scenario-option input {
+    margin-right: 0.5rem;
+}
+
+.slider-control {
+    margin-bottom: 1rem;
+}
+
+.slider-control label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.slider {
+    width: 100%;
+    height: 6px;
+    appearance: none;
+    background-color: var(--border-color);
+    border-radius: 3px;
+    margin-bottom: 0.5rem;
+    outline: none;
+}
+
+.slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.slider-value {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.run-simulation {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    align-self: flex-end;
+}
+
+.run-simulation:hover {
+    background-color: var(--primary-dark);
+}
+
+.simulation-results {
+    display: flex;
+    gap: 2rem;
+}
+
+.results-chart-container {
+    flex: 3;
+}
+
+.results-summary {
+    flex: 2;
+}
+
+.summary-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-item {
+    background-color: var(--card-bg-color);
+    border-radius: 0.25rem;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.stat-item h5 {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.probability {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+}
+
+.ai-recommendation {
+    background-color: var(--card-bg-color);
+    border-radius: 0.25rem;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-left: 3px solid var(--accent-color);
+}
+
+/* ========== AI INSIGHTS TAB ========== */
+.ai-insights-header {
+    margin-bottom: 2rem;
+}
+
+.insights-description {
+    max-width: 800px;
+    margin: 0 auto 1.5rem;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.market-summary-section {
+    margin-bottom: 2rem;
+}
+
+.market-summary-container {
+    margin-bottom: 1.5rem;
+}
+
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.summary-card {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.trend-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+}
+
+.trend-indicator.positive {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: var(--positive-color);
+}
+
+.trend-indicator.negative {
+    background-color: rgba(244, 67, 54, 0.1);
+    color: var(--negative-color);
+}
+
+.trend-indicator.neutral {
+    background-color: rgba(255, 193, 7, 0.1);
+    color: var(--warning-color);
+}
+
+.trend-description {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.key-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.metric {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+}
+
+.metric-label {
+    color: var(--text-muted);
+}
+
+.metric-value {
+    font-weight: 500;
+}
+
+/* Market Predictions Section */
+.market-predictions-section {
+    margin-bottom: 2rem;
+}
+
+.predictions-container {
+    display: flex;
+    gap: 2rem;
+}
+
+.prediction-chart {
+    flex: 3;
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.prediction-details {
+    margin-top: 1.5rem;
+}
+
+.prediction-point {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.point-marker {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 1rem;
+    margin-top: 0.25rem;
+}
+
+.point-marker.positive {
+    background-color: var(--positive-color);
+}
+
+.point-marker.negative {
+    background-color: var(--negative-color);
+}
+
+.point-marker.neutral {
+    background-color: var(--warning-color);
+}
+
+.point-details h5 {
+    font-size: 0.9375rem;
+    margin-bottom: 0.25rem;
+}
+
+.point-details p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.other-predictions {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.prediction-item {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.prediction-header {
+    margin-bottom: 1rem;
+}
+
+.predicted-changes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.change-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9375rem;
+}
+
+.time-period {
+    color: var(--text-muted);
+}
+
+.change-value {
+    font-weight: 500;
+}
+
+.change-value.up {
+    color: var(--negative-color); /* For currency, increase means weakening */
+}
+
+.change-value.down {
+    color: var(--positive-color); /* For currency, decrease means strengthening */
+}
+
+.change-value.neutral {
+    color: var(--warning-color);
+}
+
+.sector-predictions {
+    list-style: none;
+    padding: 0;
+}
+
+.sector-predictions li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.9375rem;
+}
+
+.sector {
+    font-weight: 500;
+}
+
+.prediction.positive {
+    color: var(--positive-color);
+}
+
+.prediction.negative {
+    color: var(--negative-color);
+}
+
+.prediction.neutral {
+    color: var(--warning-color);
+}
+
+/* Portfolio Adjustments Section */
+.portfolio-adjustments-section {
+    margin-bottom: 1.5rem;
+}
+
+.adjustments-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.current-vs-recommended {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.allocation-comparison {
+    display: flex;
+    gap: 2rem;
+}
+
+.allocation-chart {
+    flex: 1;
+}
+
+.allocation-chart h4 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.allocation-changes {
+    margin-top: 1.5rem;
+}
+
+.changes-table {
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.changes-table th, .changes-table td {
+    padding: 0.75rem;
+    text-align: left;
+}
+
+.change-up {
+    color: var(--positive-color);
+    font-weight: 500;
+}
+
+.change-down {
+    color: var(--negative-color);
+    font-weight: 500;
+}
+
+.change-neutral {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.risk-recession-analysis {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 6px var(--shadow-color);
+    margin-top: 1.5rem;
+}
+
+.risk-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.risk-metric {
+    background-color: var(--card-bg-color);
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.probability-meter {
+    height: 8px;
+    background-color: var(--border-color);
+    border-radius: 4px;
+    margin: 0.75rem 0;
+    overflow: hidden;
+}
+
+.probability-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--positive-color), var(--warning-color), var(--negative-color));
+}
+
+.probability-value {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.probability-description, .forecast-description {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.forecast-chart {
+    margin: 0.75rem 0;
+    height: 100px;
+}
+
+/* ========== INVESTMENT CHATBOT TAB ========== */
+.chatbot-interface {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.chatbot-header {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.chatbot-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.75rem;
+}
+
+.chatbot-title i {
+    font-size: 1.75rem;
+    color: var(--accent-color);
+    margin-right: 1rem;
+}
+
+.chatbot-description {
+    max-width: 800px;
+    margin: 0 auto;
+    color: var(--text-muted);
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 2px 6px var(--shadow-color);
+    margin-bottom: 2rem;
+}
+
+.chat-messages {
+    flex-grow: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.message {
+    max-width: 80%;
+    display: flex;
+    align-items: flex-start;
+}
+
+.ai-message {
+    align-self: flex-start;
+}
+
+.user-message {
+    align-self: flex-end;
+    margin-left: auto;
+    flex-direction: row-reverse;
+}
+
+.message-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+}
+
+.user-message .message-avatar {
+    margin-right: 0;
+    margin-left: 1rem;
+}
+
+.message-content {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.ai-message .message-content {
+    border-top-left-radius: 0;
+}
+
+.user-message .message-content {
+    background-color: var(--primary-color);
+    color: white;
+    border-top-right-radius: 0;
+}
+
+.message-content p {
+    margin-bottom: 0.75rem;
+}
+
+.message-content p:last-child {
+    margin-bottom: 0;
+}
+
+.message-content ul {
+    margin-bottom: 0;
+}
+
+.message-time {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+    align-self: flex-end;
+}
+
+.user-message .message-time {
+    text-align: right;
+}
+
+.chat-input {
+    padding: 1rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    align-items: flex-start;
+    background-color: white;
+}
+
+.input-options {
+    position: relative;
+    margin-right: 0.75rem;
+}
+
+.option-button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--background-color);
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.option-button:hover {
+    background-color: var(--primary-light);
+    color: white;
+}
+
+.quick-questions-dropdown {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 250px;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 10px var(--shadow-color);
+    padding: 0.75rem 0;
+    z-index: 10;
+    display: none;
+}
+
+.input-options:hover .quick-questions-dropdown {
+    display: block;
+}
+
+.question-suggestion {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.question-suggestion:hover {
+    background-color: var(--background-color);
+}
+
+.chat-input textarea {
+    flex-grow: 1;
+    resize: none;
+    border: none;
+    background-color: var(--background-color);
+    padding: 0.75rem 1rem;
+    border-radius: 1.5rem;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+    min-height: 48px;
+}
+
+.input-actions {
+    display: flex;
+    margin-left: 0.75rem;
+}
+
+.action-button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--background-color);
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.5rem;
+    transition: all 0.2s;
+}
+
+.action-button:hover {
+    background-color: var(--border-color);
+}
+
+.send-button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.send-button:hover {
+    background-color: var(--primary-dark);
+}
+
+.data-table {
+    width: 100%;
+    margin: 0.75rem 0;
+    font-size: 0.875rem;
+}
+
+.data-table th, .data-table td {
+    padding: 0.5rem;
+    text-align: left;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.data-table th {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatbot-features {
+    margin-top: 2rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.feature-card {
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.feature-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary-light);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+}
+
+.feature-icon i {
+    font-size: 1.25rem;
+}
+
+.feature-card h4 {
+    margin-bottom: 0.75rem;
+}
+
+.feature-card p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* ========== AI CHAT BUBBLE ========== */
+.ai-chat-bubble {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+}
+
+.ai-chat-toggle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+}
+
+.ai-chat-toggle i {
+    font-size: 1.5rem;
+}
+
+.ai-chat-toggle:hover {
+    transform: scale(1.05);
+    background-color: var(--primary-light);
+}
+
+.ai-chat-panel {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    width: 350px;
+    height: 450px;
+    background-color: var(--card-bg-color);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: scale(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s;
+}
+
+.ai-chat-panel.open {
+    transform: scale(1);
+}
+
+.ai-chat-header {
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ai-chat-header h3 {
+    margin: 0;
+    color: white;
+}
+
+.close-chat {
+    color: white;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.close-chat:hover {
+    opacity: 1;
+}
+
+.ai-chat-messages {
+    flex-grow: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.ai-message, .user-message {
+    max-width: 80%;
+}
+
+.ai-message {
+    align-self: flex-start;
+    display: flex;
+    align-items: flex-start;
+}
+
+.user-message {
+    align-self: flex-end;
+}
+
+.ai-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--primary-light);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.75rem;
+    flex-shrink: 0;
+}
+
+.message-content {
+    background-color: var(--background-color);
+    padding: 0.75rem 1rem;
+    border-radius: 1rem;
+}
+
+.user-message .message-content {
+    background-color: var(--primary-light);
+    color: white;
+}
+
+.ai-message .message-content {
+    border-top-left-radius: 0;
+}
+
+.user-message .message-content {
+    border-top-right-radius: 0;
+}
+
+.message-content p {
+    margin: 0;
+    font-size: 0.9375rem;
+}
+
+.ai-chat-input {
+    padding: 0.75rem 1rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+}
+
+.ai-chat-input input {
+    flex-grow: 1;
+    border: none;
+    background-color: var(--background-color);
+    padding: 0.6rem 1rem;
+    border-radius: 1.5rem;
+    outline: none;
+    font-size: 0.9375rem;
+}
+
+.send-message {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.75rem;
+    transition: background-color 0.2s;
+}
+
+.send-message:hover {
+    background-color: var(--primary-light);
+}
+
+/* ========== FOOTER STYLES ========== */
+.main-footer {
+    background-color: var(--card-bg-color);
+    border-top: 1px solid var(--border-color);
+    padding: 1.5rem;
+    text-align: center;
+    margin-top: auto;
+}
+
+.footer-links {
+    margin-bottom: 1rem;
+}
+
+.footer-links a {
+    margin: 0 0.75rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+}
+
+.footer-copyright {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+/* ========== RESPONSIVE STYLES ========== */
+@media (max-width: 1200px) {
+    .tools-container, .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .market-indices, .crypto-market-stats, .market-data-cards, .summary-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .crypto-prices-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .technical-indicators {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .indicator-card.overall-summary {
+        grid-column: span 2;
+    }
+    
+    .asset-recommendations {
+        grid-template-columns: 1fr;
+    }
+    
+    .sentiment-overview, .predictions-container {
+        flex-direction: column;
+    }
+    
+    .retirement-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .options-container, .strategies-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .recommendation-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .risk-metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .main-container {
+        flex-direction: column;
+    }
+    
+    .quick-actions {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+    }
+    
+    .action-button {
+        flex-shrink: 0;
+        margin-right: 0.75rem;
+        margin-bottom: 0;
+    }
+    
+    .portfolio-stats {
+        flex-direction: column;
+    }
+    
+    .allocation-container, .risk-analysis-container, .strategy-comparison {
+        flex-direction: column;
+    }
+    
+    .benefits-risks {
+        flex-direction: column;
+    }
+    
+    .simulation-results {
+        flex-direction: column;
+    }
+    
+    .allocation-comparison {
+        flex-direction: column;
+    }
+    
+    .goals-container {
+        flex-direction: column;
+    }
+    
+    .scenario-builder {
+        flex-direction: column;
+    }
+    
+    .calculator-container {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-center {
+        display: none;
+    }
+    
+    .portfolio-button span {
+        display: none;
+    }
+    
+    .tools-container, .features-grid, .market-indices, 
+    .crypto-market-stats, .market-data-cards, .summary-cards, 
+    .retirement-stats, .options-container, .strategies-container,
+    .prediction-cards, .recommendations-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .tools-grid, .technical-indicators, .sentiment-metrics, .predictions-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .indicator-card.overall-summary {
+        grid-column: span 1;
+    }
+    
+    .optimization-controls {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .comparison-table, .yield-curve-table {
+        overflow-x: auto;
+    }
+    
+    .movers-table {
+        font-size: 0.875rem;
+    }
+    
+    .ai-chat-panel {
+        width: calc(100% - 2rem);
+        right: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .main-header {
+        padding: 0.75rem;
+    }
+    
+    .main-container {
+        padding: 1rem;
+    }
+    
+    .content-area {
+        padding: 1rem;
+    }
+    
+    .tab-button {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.875rem;
+    }
+    
+    .risk-metrics {
+        grid-template-columns: 1fr;
+    }
+    
+    .summary-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .message {
+        max-width: 100%;
+    }
+}
+
+/* ========== DARK MODE STYLES ========== */
+body.dark-mode {
+    --background-color: #1E2126;
+    --card-bg-color: #2C303A;
+    --text-dark: #E1E5EA;
+    --text-muted: #9CA3AF;
+    --border-color: #4B5563;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .theme-toggle i {
+    content: "\f185"; /* Sun icon */
+}

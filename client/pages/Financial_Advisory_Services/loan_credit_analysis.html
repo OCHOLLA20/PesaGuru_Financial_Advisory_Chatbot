@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan & Credit Analysis - PesaGuru</title>
+    <link rel="stylesheet" href="../../assets/css/Financial_Advisory_Services/loan_credit_analysis.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="light-mode">
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header / Top Bar -->
+        <header class="top-bar">
+            <div class="logo-container">
+                <img src="../../assets/images/pesaguru-logo.png" alt="PesaGuru Logo" class="logo">
+            </div>
+            <div class="page-title">
+                <h1>Loan & Credit Analysis</h1>
+            </div>
+            <div class="top-bar-actions">
+                <button class="btn btn-back" id="backButton">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <button class="btn btn-refresh" id="refreshData">
+                    <i class="fas fa-sync-alt"></i> Refresh
+                </button>
+                <button class="btn btn-reports" id="viewReports">
+                    <i class="fas fa-file-alt"></i> View Reports
+                </button>
+                <div class="notification-icon">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </div>
+                <div class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                    <label class="switch">
+                        <input type="checkbox" id="themeToggle" title="Toggle dark/light mode">
+                        <span class="slider round"></span>
+                    </label>
+                    <i class="fas fa-sun"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Left Navigation Panel -->
+            <nav class="sidebar">
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <img src="../../assets/images/user-avatar.png" alt="User Avatar">
+                    </div>
+                    <div class="user-info">
+                        <h3>John Doe</h3>
+                        <p>Premium Member</p>
+                    </div>
+                </div>
+                
+                <div class="sidebar-category">
+                    <h3><i class="fas fa-chart-line"></i> Loan & Credit Management</h3>
+                    <ul>
+                        <li class="active"><a href="loan_credit_analysis.html"><i class="fas fa-chart-bar"></i> Loan & Credit Analysis</a></li>
+                        <li><a href="#"><i class="fas fa-money-bill-wave"></i> Personal & Business Loan Options</a></li>
+                        <li><a href="#"><i class="fas fa-chart-line"></i> Credit Score Assessment</a></li>
+                        <li><a href="#"><i class="fas fa-home"></i> Mortgage & Home Loan Advisory</a></li>
+                        <li><a href="#"><i class="fas fa-credit-card"></i> Credit Card Insights</a></li>
+                        <li><a href="#"><i class="fas fa-file-invoice-dollar"></i> Loan Repayment Strategies</a></li>
+                        <li><a href="#"><i class="fas fa-shield-alt"></i> Loan Fraud Protection</a></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-category">
+                    <h3><i class="fas fa-calculator"></i> Financial Tools & Calculators</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-calendar-alt"></i> Loan Repayment Calculator</a></li>
+                        <li><a href="#"><i class="fas fa-chart-pie"></i> Debt-to-Income Analyzer</a></li>
+                        <li><a href="#"><i class="fas fa-search"></i> Loan Comparison Tool</a></li>
+                        <li><a href="#"><i class="fas fa-brain"></i> AI Credit Score Tips</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Content Section -->
+            <div class="content">
+                <!-- AI Chatbot Quick Access -->
+                <div class="ai-assistant-widget">
+                    <button class="chat-toggle" id="toggleChatbot">
+                        <i class="fas fa-robot"></i> Ask PesaGuru AI
+                    </button>
+                    <div class="chatbot-preview" id="chatbotPreview">
+                        <p class="suggestion">Ask about: "How can I improve my credit score?"</p>
+                        <p class="suggestion">Ask about: "What's the best loan for my business?"</p>
+                    </div>
+                </div>
+
+                <!-- Introduction Section -->
+                <section class="content-section" id="introduction">
+                    <div class="section-header">
+                        <h2><i class="fas fa-book"></i> Introduction to Loan & Credit Analysis</h2>
+                    </div>
+                    <div class="section-body">
+                        <p class="intro-text">
+                            Understanding how loans and credit impact your financial health is essential for making informed decisions. 
+                            Our AI-powered analysis provides personalized insights to help you navigate borrowing options, 
+                            improve your credit score, and develop effective debt management strategies.
+                        </p>
+                        <div class="key-topics">
+                            <h3>Key Topics Covered:</h3>
+                            <div class="topics-grid">
+                                <div class="topic-card">
+                                    <i class="fas fa-check-circle"></i>
+                                    <h4>Loan Eligibility</h4>
+                                    <p>Learn about loan approval criteria and application processes</p>
+                                </div>
+                                <div class="topic-card">
+                                    <i class="fas fa-check-circle"></i>
+                                    <h4>Credit Score Factors</h4>
+                                    <p>Understand how your credit score is calculated and influenced</p>
+                                </div>
+                                <div class="topic-card">
+                                    <i class="fas fa-check-circle"></i>
+                                    <h4>Responsible Borrowing</h4>
+                                    <p>Best practices for managing debt responsibly</p>
+                                </div>
+                                <div class="topic-card">
+                                    <i class="fas fa-check-circle"></i>
+                                    <h4>Interest Rate Impact</h4>
+                                    <p>How interest rates affect your total repayment amount</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Loan Comparison Section -->
+                <section class="content-section" id="loanComparison">
+                    <div class="section-header">
+                        <h2><i class="fas fa-money-bill-wave"></i> Loan Comparison & Borrowing Options</h2>
+                        <button class="btn btn-outline" id="updateRates">
+                            <i class="fas fa-sync-alt"></i> Update Rates
+                        </button>
+                    </div>
+                    <div class="section-body">
+                        <div class="loan-categories">
+                            <div class="category-tabs">
+                                <button class="tab-btn active" data-category="personal">Personal Loans</button>
+                                <button class="tab-btn" data-category="business">Business Loans</button>
+                                <button class="tab-btn" data-category="mortgage">Mortgage Loans</button>
+                                <button class="tab-btn" data-category="education">Education Loans</button>
+                                <button class="tab-btn" data-category="emergency">Emergency Loans</button>
+                            </div>
+                            
+                            <div class="loan-table-container">
+                                <table class="loan-comparison-table" id="loanTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Lender</th>
+                                            <th>Interest Rate</th>
+                                            <th>Loan Term</th>
+                                            <th>Monthly Payment</th>
+                                            <th>Total Repayable</th>
+                                            <th>Eligibility</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>KCB Bank</td>
+                                            <td>13.5%</td>
+                                            <td>12-48 months</td>
+                                            <td>KES 12,350</td>
+                                            <td>KES 592,800</td>
+                                            <td>Good (680+)</td>
+                                            <td><button class="btn btn-sm btn-primary">Apply</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Equity Bank</td>
+                                            <td>14.0%</td>
+                                            <td>12-60 months</td>
+                                            <td>KES 12,500</td>
+                                            <td>KES 600,000</td>
+                                            <td>Fair (620+)</td>
+                                            <td><button class="btn btn-sm btn-primary">Apply</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Co-operative Bank</td>
+                                            <td>14.5%</td>
+                                            <td>12-72 months</td>
+                                            <td>KES 12,720</td>
+                                            <td>KES 610,560</td>
+                                            <td>Fair (600+)</td>
+                                            <td><button class="btn btn-sm btn-primary">Apply</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>NCBA Bank</td>
+                                            <td>13.0%</td>
+                                            <td>12-36 months</td>
+                                            <td>KES 12,200</td>
+                                            <td>KES 585,600</td>
+                                            <td>Good (650+)</td>
+                                            <td><button class="btn btn-sm btn-primary">Apply</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>M-Shwari</td>
+                                            <td>7.5% (monthly)</td>
+                                            <td>1 month</td>
+                                            <td>KES 5,375</td>
+                                            <td>KES 5,375</td>
+                                            <td>Any</td>
+                                            <td><button class="btn btn-sm btn-primary">Apply</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Credit Score Analysis Section -->
+                <section class="content-section" id="creditScore">
+                    <div class="section-header">
+                        <h2><i class="fas fa-chart-line"></i> Credit Score Analysis & Borrowing Power</h2>
+                    </div>
+                    <div class="section-body">
+                        <div class="credit-score-container">
+                            <div class="credit-score-overview">
+                                <div class="credit-score-card">
+                                    <h3>Your Credit Score</h3>
+                                    <div class="score-display">
+                                        <div class="score-circle">
+                                            <span class="score-value">680</span>
+                                        </div>
+                                        <div class="score-rating">
+                                            <span class="rating good">Good</span>
+                                            <span class="score-range">670-739</span>
+                                        </div>
+                                    </div>
+                                    <div class="score-updated">
+                                        <p>Last updated: March 5, 2025</p>
+                                        <button class="btn btn-sm btn-outline" id="refreshScore">
+                                            <i class="fas fa-sync-alt"></i> Refresh
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="borrowing-power-card">
+                                    <h3>Your Borrowing Power</h3>
+                                    <div class="borrowing-power-details">
+                                        <div class="borrowing-power-amount">
+                                            <span class="amount-label">Estimated Loan Amount:</span>
+                                            <span class="amount-value">KES 2,500,000</span>
+                                        </div>
+                                        <div class="dti-ratio">
+                                            <span class="dti-label">Debt-to-Income Ratio:</span>
+                                            <div class="progress-bar">
+                                                <div class="progress progress-38"></div>
+                                            </div>
+                                            <span class="dti-value">38% (Good)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="credit-score-factors">
+                                <h3>Factors Affecting Your Score</h3>
+                                <div class="factors-container">
+                                    <div class="factor">
+                                        <div class="factor-header">
+                                            <h4>Payment History</h4>
+                                            <span class="factor-impact high">High Impact</span>
+                                        </div>
+                                        <div class="factor-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress progress-90 good"></div>
+                                            </div>
+                                            <span class="factor-status">Excellent</span>
+                                        </div>
+                                        <p class="factor-description">You've made 35 on-time payments, with 1 late payment in the past 7 years.</p>
+                                    </div>
+                                    
+                                    <div class="factor">
+                                        <div class="factor-header">
+                                            <h4>Credit Utilization</h4>
+                                            <span class="factor-impact high">High Impact</span>
+                                        </div>
+                                        <div class="factor-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress progress-60 fair"></div>
+                                            </div>
+                                            <span class="factor-status">Good</span>
+                                        </div>
+                                        <p class="factor-description">You're using 32% of your available credit. Aim to keep this below 30%.</p>
+                                    </div>
+                                    
+                                    <div class="factor">
+                                        <div class="factor-header">
+                                            <h4>Credit Age</h4>
+                                            <span class="factor-impact medium">Medium Impact</span>
+                                        </div>
+                                        <div class="factor-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress progress-65 fair"></div>
+                                            </div>
+                                            <span class="factor-status">Good</span>
+                                        </div>
+                                        <p class="factor-description">Average account age is 3 years, 8 months. Longer credit history improves your score.</p>
+                                    </div>
+                                    
+                                    <div class="factor">
+                                        <div class="factor-header">
+                                            <h4>Credit Mix</h4>
+                                            <span class="factor-impact low">Low Impact</span>
+                                        </div>
+                                        <div class="factor-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress progress-55 fair"></div>
+                                            </div>
+                                            <span class="factor-status">Fair</span>
+                                        </div>
+                                        <p class="factor-description">You have 2 credit cards and 1 loan. A diverse mix of credit types can improve your score.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="improvement-tips">
+                                <h3><i class="fas fa-lightbulb"></i> AI-Powered Credit Improvement Tips</h3>
+                                <div class="tips-container">
+                                    <div class="tip-card">
+                                        <div class="tip-icon"><i class="fas fa-credit-card"></i></div>
+                                        <div class="tip-content">
+                                            <h4>Reduce Credit Card Balances</h4>
+                                            <p>Lower your credit utilization by paying down card balances to below 30% of your limit.</p>
+                                            <span class="impact-badge">+35 points potential</span>
+                                        </div>
+                                    </div>
+                                    <div class="tip-card">
+                                        <div class="tip-icon"><i class="fas fa-calendar-check"></i></div>
+                                        <div class="tip-content">
+                                            <h4>Set Up Automatic Payments</h4>
+                                            <p>Ensure you never miss a payment by setting up automatic monthly payments for all accounts.</p>
+                                            <span class="impact-badge">+45 points potential</span>
+                                        </div>
+                                    </div>
+                                    <div class="tip-card">
+                                        <div class="tip-icon"><i class="fas fa-university"></i></div>
+                                        <div class="tip-content">
+                                            <h4>Add Utility Payments to Your Credit Report</h4>
+                                            <p>Use services like Experian Boost to add your utility and phone payments to your credit report.</p>
+                                            <span class="impact-badge">+25 points potential</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Loan Repayment Strategy Section -->
+                <section class="content-section" id="repaymentStrategy">
+                    <div class="section-header">
+                        <h2><i class="fas fa-file-invoice-dollar"></i> Loan Repayment Strategy & Debt Reduction</h2>
+                    </div>
+                    <div class="section-body">
+                        <div class="debt-overview">
+                            <h3>Your Current Debt Snapshot</h3>
+                            <div class="debt-summary">
+                                <div class="summary-card">
+                                    <span class="summary-label">Total Debt</span>
+                                    <span class="summary-value">KES 1,250,000</span>
+                                </div>
+                                <div class="summary-card">
+                                    <span class="summary-label">Monthly Payments</span>
+                                    <span class="summary-value">KES 42,500</span>
+                                </div>
+                                <div class="summary-card">
+                                    <span class="summary-label">Avg. Interest Rate</span>
+                                    <span class="summary-value">14.2%</span>
+                                </div>
+                                <div class="summary-card">
+                                    <span class="summary-label">Debt-Free Date</span>
+                                    <span class="summary-value">Feb 2029</span>
+                                </div>
+                            </div>
+                            
+                            <div class="debt-breakdown">
+                                <table class="debt-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Debt Type</th>
+                                            <th>Balance</th>
+                                            <th>Interest Rate</th>
+                                            <th>Monthly Payment</th>
+                                            <th>Remaining Term</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Personal Loan (KCB)</td>
+                                            <td>KES 450,000</td>
+                                            <td>13.5%</td>
+                                            <td>KES 14,500</td>
+                                            <td>36 months</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Credit Card (Equity)</td>
+                                            <td>KES 85,000</td>
+                                            <td>19.5%</td>
+                                            <td>KES 8,000</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Car Loan (Co-op)</td>
+                                            <td>KES 715,000</td>
+                                            <td>12.8%</td>
+                                            <td>KES 20,000</td>
+                                            <td>42 months</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="repayment-strategies">
+                            <h3>Optimal Repayment Strategies</h3>
+                            <div class="strategy-tabs">
+                                <button class="strategy-tab active" data-strategy="snowball">Snowball Method</button>
+                                <button class="strategy-tab" data-strategy="avalanche">Avalanche Method</button>
+                                <button class="strategy-tab" data-strategy="consolidation">Debt Consolidation</button>
+                            </div>
+                            
+                            <div class="strategy-content active" id="snowball-strategy">
+                                <div class="strategy-info">
+                                    <h4><i class="fas fa-snowflake"></i> Snowball Method</h4>
+                                    <p>Pay off debts starting with the smallest balance first, regardless of interest rate. This creates psychological wins that keep you motivated.</p>
+                                    <div class="strategy-stats">
+                                        <div class="stat">
+                                            <span class="stat-label">Debt-Free In</span>
+                                            <span class="stat-value">47 months</span>
+                                        </div>
+                                        <div class="stat">
+                                            <span class="stat-label">Total Interest Paid</span>
+                                            <span class="stat-value">KES 352,400</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="payment-sequence">
+                                    <h5>Recommended Payment Sequence:</h5>
+                                    <ol class="sequence-list">
+                                        <li>Credit Card (Equity) - KES 85,000</li>
+                                        <li>Personal Loan (KCB) - KES 450,000</li>
+                                        <li>Car Loan (Co-op) - KES 715,000</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            
+                            <div class="strategy-content" id="avalanche-strategy">
+                                <div class="strategy-info">
+                                    <h4><i class="fas fa-mountain"></i> Avalanche Method</h4>
+                                    <p>Pay off debts starting with the highest interest rate first. This minimizes the total interest paid over time, saving you money.</p>
+                                    <div class="strategy-stats">
+                                        <div class="stat">
+                                            <span class="stat-label">Debt-Free In</span>
+                                            <span class="stat-value">45 months</span>
+                                        </div>
+                                        <div class="stat">
+                                            <span class="stat-label">Total Interest Paid</span>
+                                            <span class="stat-value">KES 328,600</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="payment-sequence">
+                                    <h5>Recommended Payment Sequence:</h5>
+                                    <ol class="sequence-list">
+                                        <li>Credit Card (Equity) - 19.5% interest</li>
+                                        <li>Personal Loan (KCB) - 13.5% interest</li>
+                                        <li>Car Loan (Co-op) - 12.8% interest</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            
+                            <div class="strategy-content" id="consolidation-strategy">
+                                <div class="strategy-info">
+                                    <h4><i class="fas fa-object-group"></i> Debt Consolidation</h4>
+                                    <p>Combine multiple loans into a single loan with a lower interest rate. This simplifies payments and may reduce your interest costs.</p>
+                                    <div class="strategy-stats">
+                                        <div class="stat">
+                                            <span class="stat-label">Potential New Rate</span>
+                                            <span class="stat-value">12.2%</span>
+                                        </div>
+                                        <div class="stat">
+                                            <span class="stat-label">New Monthly Payment</span>
+                                            <span class="stat-value">KES 38,500</span>
+                                        </div>
+                                        <div class="stat">
+                                            <span class="stat-label">Interest Savings</span>
+                                            <span class="stat-value">KES 85,700</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="consolidation-options">
+                                    <h5>Best Consolidation Options:</h5>
+                                    <div class="consolidation-cards">
+                                        <div class="consolidation-card">
+                                            <h6>KCB Debt Consolidation Loan</h6>
+                                            <p>Interest Rate: 12.2%</p>
+                                            <p>Term: 48 months</p>
+                                            <button class="btn btn-sm btn-primary">Check Eligibility</button>
+                                        </div>
+                                        <div class="consolidation-card">
+                                            <h6>Equity Bank Balance Transfer</h6>
+                                            <p>Interest Rate: 12.5%</p>
+                                            <p>Term: 60 months</p>
+                                            <button class="btn btn-sm btn-primary">Check Eligibility</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- AI Insights Section -->
+                <section class="content-section" id="aiInsights">
+                    <div class="section-header">
+                        <h2><i class="fas fa-robot"></i> AI-Powered Insights & Market Analysis</h2>
+                    </div>
+                    <div class="section-body">
+                        <div class="insights-container">
+                            <div class="market-trends">
+                                <h3>Loan Market Trends & Predictions</h3>
+                                <div class="trend-chart">
+                                    <!-- Chart placeholder - will be replaced with JS chart -->
+                                    <div class="chart-placeholder">
+                                        <img src="../../assets/images/interest-rate-chart.png" alt="Interest Rate Trends">
+                                    </div>
+                                </div>
+                                <div class="trend-analysis">
+                                    <div class="analysis-card">
+                                        <h4><i class="fas fa-chart-line"></i> Interest Rate Forecast</h4>
+                                        <p>The Central Bank of Kenya is expected to <strong>lower interest rates by 0.25%</strong> in the next quarter, potentially reducing borrowing costs.</p>
+                                    </div>
+                                    <div class="analysis-card">
+                                        <h4><i class="fas fa-hand-holding-usd"></i> Lending Market Changes</h4>
+                                        <p>Digital lenders are expanding loan offerings for small businesses, with <strong>more flexible terms</strong> becoming available.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="personalized-insights">
+                                <h3>Personalized Financial Insights</h3>
+                                <div class="insights-cards">
+                                    <div class="insight-card">
+                                        <div class="insight-icon"><i class="fas fa-lightbulb"></i></div>
+                                        <div class="insight-content">
+                                            <h4>Refinancing Opportunity</h4>
+                                            <p>Based on your car loan terms and current market rates, you could save <strong>KES 45,000</strong> by refinancing with NCBA's new auto loan program.</p>
+                                            <button class="btn btn-sm btn-outline">Explore Options</button>
+                                        </div>
+                                    </div>
+                                    <div class="insight-card">
+                                        <div class="insight-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                                        <div class="insight-content">
+                                            <h4>Credit Utilization Alert</h4>
+                                            <p>Your credit card balance has increased by 15% this month. Consider reducing usage to maintain your credit score improvements.</p>
+                                            <button class="btn btn-sm btn-outline">View Strategies</button>
+                                        </div>
+                                    </div>
+                                    <div class="insight-card">
+                                        <div class="insight-icon"><i class="fas fa-shield-alt"></i></div>
+                                        <div class="insight-content">
+                                            <h4>Fraud Protection Tip</h4>
+                                            <p>There's been an increase in loan scams targeting mobile users. Verify all lenders through the CBK portal before applying.</p>
+                                            <button class="btn btn-sm btn-outline">Learn More</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Custom Alerts Section -->
+                <section class="content-section" id="customAlerts">
+                    <div class="section-header">
+                        <h2><i class="fas fa-bell"></i> Custom Alerts & Notifications</h2>
+                    </div>
+                    <div class="section-body">
+                        <div class="alerts-container">
+                            <div class="alert-settings">
+                                <h3>Manage Your Custom Alerts</h3>
+                                <p>Stay updated on changes that affect your financial decisions. Customize what notifications you receive and how you receive them.</p>
+                                
+                                <div class="alert-preferences">
+                                    <form id="alertPreferences">
+                                        <div class="preference-group">
+                                            <h4>Credit Score Alerts</h4>
+                                            <div class="preference-item">
+                                                <div class="preference-check">
+                                                    <input type="checkbox" id="creditScoreChange" checked>
+                                                    <label for="creditScoreChange">Credit Score Changes</label>
+                                                </div>
+                                                <div class="notification-methods">
+                                                    <label><input type="checkbox" checked> Email</label>
+                                                    <label><input type="checkbox" checked> SMS</label>
+                                                    <label><input type="checkbox" checked> App</label>
+                                                </div>
+                                            </div>
+                                            <div class="preference-item">
+                                                <div class="preference-check">
+                                                    <input type="checkbox" id="creditFactorChange" checked>
+                                                    <label for="creditFactorChange">Credit Factor Changes</label>
+                                                </div>
+                                                <div class="notification-methods">
+                                                    <label><input type="checkbox" checked> Email</label>
+                                                    <label><input type="checkbox"> SMS</label>
+                                                    <label><input type="checkbox" checked> App</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="preference-group">
+                                            <h4>Interest Rate Alerts</h4>
+                                            <div class="preference-item">
+                                                <div class="preference-check">
+                                                    <input type="checkbox" id="cbkRateChange" checked>
+                                                    <label for="cbkRateChange">CBK Rate Changes</label>
+                                                </div>
+                                                <div class="notification-methods">
+                                                    <label><input type="checkbox" checked> Email</label>
+                                                    <label><input type="checkbox"> SMS</label>
+                                                    <label><input type="checkbox" checked> App</label>
+                                                </div>
+                                            </div>
+                                            <div class="preference-item">
+                                                <div class="preference-check">
+                                                    <input type="checkbox" id="loanRateDrops" checked>
+                                                    <label for="loanRateDrops">Loan Rate Drops</label>
+                                                </div>
+                                                <div class="notification-methods">
+                                                    <label><input type="checkbox" checked> Email</label>
+                                                    <label><input type="checkbox" checked> SMS</label>
+                                                    <label><input type="checkbox" checked> App</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="preference-group">
+                                            <h4>Payment Reminders</h4>
+                                            <div class="preference-item">
+                                                <div class="preference-check">
+                                                    <input type="checkbox" id="upcomingPayments" checked>
+                                                    <label for="upcomingPayments">Upcoming Loan Payments</label>
+                                                </div>
+                                                <div class="notification-methods">
+                                                    <label><input type="checkbox" checked> Email</label>
+                                                    <label><input type="checkbox" checked> SMS</label>
+                                                    <label><input type="checkbox" checked> App</label>
+                                                </div>
+                                            </div>
+                                            <div class="preference-item">
+                                                <div class="preference-check">
+                                                    <input type="checkbox" id="missedPayments" checked>
+                                                    <label for="missedPayments">Missed Payment Warnings</label>
+                                                </div>
+                                                <div class="notification-methods">
+                                                    <label><input type="checkbox" checked> Email</label>
+                                                    <label><input type="checkbox" checked> SMS</label>
+                                                    <label><input type="checkbox" checked> App</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="alert-actions">
+                                            <button type="submit" class="btn btn-primary">Save Preferences</button>
+                                            <button type="reset" class="btn btn-outline">Reset to Default</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            
+                            <div class="recent-alerts">
+                                <h3>Recent Notifications</h3>
+                                <div class="alerts-list">
+                                    <div class="alert-item">
+                                        <div class="alert-icon important"><i class="fas fa-exclamation-circle"></i></div>
+                                        <div class="alert-content">
+                                            <h4>Credit Score Change</h4>
+                                            <p>Your credit score increased by 15 points to 680.</p>
+                                            <span class="alert-time">2 days ago</span>
+                                        </div>
+                                    </div>
+                                    <div class="alert-item">
+                                        <div class="alert-icon"><i class="fas fa-percent"></i></div>
+                                        <div class="alert-content">
+                                            <h4>Interest Rate Update</h4>
+                                            <p>KCB has lowered personal loan rates by 0.5%.</p>
+                                            <span class="alert-time">1 week ago</span>
+                                        </div>
+                                    </div>
+                                    <div class="alert-item">
+                                        <div class="alert-icon"><i class="fas fa-calendar-alt"></i></div>
+                                        <div class="alert-content">
+                                            <h4>Payment Reminder</h4>
+                                            <p>Your car loan payment of KES 20,000 is due in 3 days.</p>
+                                            <span class="alert-time">1 week ago</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="../../assets/images/pesaguru-logo-white.png" alt="PesaGuru Logo">
+                    <p>Smart Financial Advisory for Kenyans</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Financial Services</h3>
+                        <ul>
+                            <li><a href="#">Investment Planning</a></li>
+                            <li><a href="#">Loan Analysis</a></li>
+                            <li><a href="#">Budgeting & Savings</a></li>
+                            <li><a href="#">Credit Management</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Resources</h3>
+                        <ul>
+                            <li><a href="#">Financial Education</a></li>
+                            <li><a href="#">Market Updates</a></li>
+                            <li><a href="#">Webinars & Forums</a></li>
+                            <li><a href="#">Calculators & Tools</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Company</h3>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 PesaGuru. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook" title="Visit our Facebook page"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter" title="Visit our Twitter page"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn" title="Visit our LinkedIn page"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Instagram" title="Visit our Instagram page"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Chatbot Dialog -->
+    <div class="chatbot-dialog" id="chatbotDialog">
+        <div class="chatbot-header">
+            <div class="chatbot-title">
+                <img src="../../assets/images/pesaguru-avatar.png" alt="PesaGuru AI" class="chatbot-avatar">
+                <h3>PesaGuru AI Assistant</h3>
+            </div>
+            <button class="close-btn" id="closeChatbot" title="Close chat"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="message bot">
+                <div class="message-content">
+                    <p>Hello! I'm your PesaGuru AI financial assistant. How can I help with your loan and credit questions today?</p>
+                </div>
+                <span class="message-time">12:30 PM</span>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="userMessage" placeholder="Type your question here...">
+            <button id="sendMessage" title="Send message"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/Financial_Advisory_Services/loan_credit_analysis.js"></script>
+</head>
+</html>

@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Preferences - PesaGuru</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #2e7d32;
+            --primary-dark: #205723;
+            --primary-light: #60ad5e;
+            --secondary-color: #ffca28;
+            --text-primary: #333;
+            --text-secondary: #666;
+            --bg-primary: #f9f9f9;
+            --bg-secondary: #ffffff;
+            --nav-width: 250px;
+            --nav-collapsed-width: 70px;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        body.dark-mode {
+            --bg-primary: #121212;
+            --bg-secondary: #1e1e1e;
+            --text-primary: #f5f5f5;
+            --text-secondary: #b0b0b0;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Navigation Styles */
+        .left-navigation {
+            width: var(--nav-width);
+            background-color: var(--bg-secondary);
+            box-shadow: var(--shadow);
+            height: 100vh;
+            position: fixed;
+            transition: var(--transition);
+            overflow-y: auto;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .left-navigation.collapsed {
+            width: var(--nav-collapsed-width);
+        }
+
+        .nav-header {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-header .logo {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .nav-header h2 {
+            color: var(--primary-color);
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        .collapse-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .nav-search {
+            padding: 1rem;
+            position: relative;
+        }
+
+        .nav-search input {
+            width: 100%;
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .nav-search i {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+
+        .nav-items {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .nav-section {
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .section-header i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .section-header span {
+            flex-grow: 1;
+        }
+
+        .section-items {
+            list-style: none;
+            padding-left: 2rem;
+        }
+
+        .section-items li {
+            padding: 0.5rem 0;
+        }
+
+        .section-items li a {
+            display: flex;
+            align-items: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .section-items li a:hover {
+            color: var(--primary-color);
+        }
+
+        .section-items li.active a {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .section-items li a i {
+            margin-right: 0.5rem;
+        }
+
+        .nav-footer {
+            padding: 1rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .logout-btn:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            color: var(--primary-color);
+        }
+
+        .logout-btn i {
+            margin-right: 0.5rem;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex-grow: 1;
+            margin-left: var(--nav-width);
+            transition: var(--transition);
+            padding: 1rem;
+        }
+
+        .main-content.expanded {
+            margin-left: var(--nav-collapsed-width);
+        }
+
+        /* Header Styles */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+        }
+
+        .page-title h1 {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .page-title h1 i {
+            margin-right: 0.5rem;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            padding: 0.5rem;
+            margin-left: 0.5rem;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .header-btn:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            color: var(--primary-color);
+        }
+
+        .header-btn.notifications {
+            position: relative;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: var(--secondary-color);
+            color: #000;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            margin-left: 1rem;
+        }
+
+        .user-profile img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+
+        /* Language Preferences Content Styles */
+        .content-container {
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-container h2 {
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 0.5rem;
+        }
+
+        .language-selection {
+            margin-bottom: 2rem;
+        }
+
+        .language-option {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .language-option:hover {
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .language-option.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(46, 125, 50, 0.05);
+        }
+
+        .language-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 1rem;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary-light);
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .language-details {
+            flex-grow: 1;
+        }
+
+        .language-name {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+        }
+
+        .language-native {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .language-selection-radio {
+            margin-left: 1rem;
+            transform: scale(1.2);
+        }
+
+        .notification-settings {
+            margin-bottom: 2rem;
+        }
+
+        .notification-settings h3 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .notification-option {
+            margin-bottom: 1rem;
+        }
+
+        .notification-option label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .notification-option select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .auto-detect-option {
+            display: flex;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+            margin-right: 1rem;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .primary-btn {
+            background-color: var(--primary-color);
+            color: white;
+            margin-left: 1rem;
+        }
+
+        .primary-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .secondary-btn {
+            background-color: #f0f0f0;
+            color: var(--text-primary);
+        }
+
+        .secondary-btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        .flag-icon {
+            width: 24px;
+            height: 16px;
+            display: inline-block;
+            background-size: cover;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+
+        .flag-en {
+            background-image: url('../../assets/images/flags/en.png');
+            /* Placeholder for actual path */
+        }
+
+        .flag-sw {
+            background-image: url('../../assets/images/flags/sw.png');
+            /* Placeholder for actual path */
+        }
+
+        .flag-fr {
+            background-image: url('../../assets/images/flags/fr.png');
+            /* Placeholder for actual path */
+        }
+
+        .preview-container {
+            margin-top: 2rem;
+            padding: 1rem;
+            border: 1px dashed #ddd;
+            border-radius: var(--border-radius);
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        .preview-container h3 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .preview-item {
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius);
+        }
+
+        .preview-label {
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .left-navigation {
+                width: var(--nav-collapsed-width);
+                transform: translateX(-100%);
+            }
+
+            .left-navigation.active {
+                transform: translateX(0);
+                width: var(--nav-width);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header-actions {
+                margin-top: 1rem;
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                margin: 0.5rem 0;
+            }
+
+            .primary-btn {
+                margin-left: 0;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1400px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Navigation -->
+        <nav class="left-navigation" id="leftNav">
+            <div class="nav-header">
+                <img src="../../assets/images/logo.png" alt="PesaGuru Logo" class="logo">
+                <h2>PesaGuru</h2>
+                <button class="collapse-btn" id="collapseNav" aria-label="Toggle Navigation Menu" title="Toggle Navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- Search Feature -->
+            <div class="nav-search">
+                <input type="text" placeholder="Search..." aria-label="Search navigation">
+                <i class="fas fa-search"></i>
+            </div>
+
+            <!-- Navigation Items -->
+            <div class="nav-items">
+                <!-- Chatbot Interaction -->
+                <div class="nav-section">
+                    <div class="section-header">
+                        <i class="fas fa-robot"></i>
+                        <span>Chatbot Interaction</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <ul class="section-items">
+                        <li><a href="../Chatbot Interaction/chatbot.html"><i class="fas fa-comment-dots"></i> Chat with AI Assistant</a></li>
+                        <li><a href="../Chatbot Interaction/saved_conversations.html"><i class="fas fa-scroll"></i> Saved Conversations</a></li>
+                    </ul>
+                </div>
+
+                <!-- Financial Advisory Services -->
+                <div class="nav-section">
+                    <div class="section-header">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Financial Advisory Services</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <ul class="section-items">
+                        <li><a href="../Financial_Advisory_Services/investment_planning.html">
+                            <i class="fas fa-chart-line"></i> Investment Planning
+                        </a></li>
+                        <li><a href="../Financial_Advisory_Services/budgeting_savings.html">
+                            <i class="fas fa-piggy-bank"></i> Budgeting & Savings
+                        </a></li>
+                        <li><a href="../Financial_Advisory_Services/loan_credit_analysis.html">
+                            <i class="fas fa-credit-card"></i> Loan & Credit Analysis
+                        </a></li>
+                    </ul>
+                </div>
+
+                <!-- Learning Resources -->
+                <div class="nav-section">
+                    <div class="section-header">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Learning Resources</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <ul class="section-items">
+                        <li><a href="../Learning_Resources/investment_strategies.html">
+                            <i class="fas fa-chart-pie"></i> Investment Strategies
+                        </a></li>
+                        <li><a href="../Learning_Resources/tax_compliance.html">
+                            <i class="fas fa-file-invoice"></i> Tax Compliance
+                        </a></li>
+                        <li><a href="../Learning_Resources/webinars_forums.html">
+                            <i class="fas fa-microphone"></i> Webinars & Forums
+                        </a></li>
+                    </ul>
+                </div>
+
+                <!-- User Profile & Settings -->
+                <div class="nav-section">
+                    <div class="section-header">
+                        <i class="fas fa-user-gear"></i>
+                        <span>User Profile & Settings</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <ul class="section-items">
+                        <li><a href="financial_goals.html">
+                            <i class="fas fa-bullseye"></i> Financial Goals
+                        </a></li>
+                        <li><a href="profile_overview.html">
+                            <i class="fas fa-user"></i> Profile Overview
+                        </a></li>
+                        <li><a href="security_settings.html">
+                            <i class="fas fa-lock"></i> Security Settings
+                        </a></li>
+                        <li><a href="notification_preferences.html">
+                            <i class="fas fa-bell"></i> Notification Preferences
+                        </a></li>
+                        <li class="active"><a href="language_preferences.html">
+                            <i class="fas fa-globe"></i> Language Preferences
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Logout Section -->
+            <div class="nav-footer">
+                <a href="../Authentication/logout.html" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout / Switch Account</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content" id="mainContent">
+            <!-- Header / Top Bar -->
+            <header class="header">
+                <div class="page-title">
+                    <h1><i class="fas fa-globe"></i> Language Preferences</h1>
+                </div>
+                <div class="header-actions">
+                    <div class="language-dropdown">
+                        <select id="quickLanguageSwitch" aria-label="Quick language switch">
+                            <option value="en">🇬🇧 English</option>
+                            <option value="sw">🇰🇪 Swahili</option>
+                            <option value="fr">🇫🇷 French</option>
+                        </select>
+                    </div>
+                    <button class="header-btn notifications" aria-label="Notifications" title="View Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <button class="header-btn settings" aria-label="Settings" title="Open Settings">
+                        <i class="fas fa-gear"></i>
+                    </button>
+                    <button class="header-btn theme-toggle" id="themeToggle" aria-label="Toggle Dark Mode" title="Toggle Dark Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <div class="user-profile">
+                        <img src="../../assets/images/user-avatar.png" alt="User Avatar">
+                        <span>Hello, User!</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Language Preferences Content -->
+            <div class="content-container">
+                <h2>Select Your Preferred Language</h2>
+                
+                <form id="languagePreferencesForm">
+                    <div class="language-selection">
+                        <div class="language-option selected" data-language="en">
+                            <div class="language-icon">
+                                <i class="fas fa-globe-americas"></i>
+                            </div>
+                            <div class="language-details">
+                                <span class="language-name">English (US)</span>
+                                <span class="language-native">English</span>
+                            </div>
+                            <input type="radio" name="language" value="en" class="language-selection-radio" checked aria-label="Select English language">
+                        </div>
+                        
+                        <div class="language-option" data-language="sw">
+                            <div class="language-icon">
+                                <i class="fas fa-globe-africa"></i>
+                            </div>
+                            <div class="language-details">
+                                <span class="language-name">Swahili</span>
+                                <span class="language-native">Kiswahili</span>
+                            </div>
+                            <input type="radio" name="language" value="sw" class="language-selection-radio" aria-label="Select Swahili language">
+                        </div>
+                        
+                        <div class="language-option" data-language="fr">
+                            <div class="language-icon">
+                                <i class="fas fa-globe-europe"></i>
+                            </div>
+                            <div class="language-details">
+                                <span class="language-name">French</span>
+                                <span class="language-native">Français</span>
+                            </div>
+                            <input type="radio" name="language" value="fr" class="language-selection-radio" aria-label="Select French language">
+                        </div>
+                        
+                        <div class="auto-detect-option">
+                            <label class="switch">
+                                <input type="checkbox" id="autoDetectLanguage" aria-label="Auto-detect device language">
+                                <span class="slider round"></span>
+                            </label>
+                            <span>Auto-detect device language</span>
+                        </div>
+                    </div>
+                    
+                    <div class="notification-settings">
+                        <h3>Notification Language Settings</h3>
+                        
+                        <div class="notification-option">
+                            <label for="emailLanguage">Email Notifications</label>
+                            <select id="emailLanguage" name="emailLanguage" aria-label="Select language for email notifications">
+                                <option value="default">Same as app language</option>
+                                <option value="en">English</option>
+                                <option value="sw">Swahili</option>
+                                <option value="fr">French</option>
+                            </select>
+                        </div>
+                        
+                        <div class="notification-option">
+                            <label for="smsLanguage">SMS Alerts</label>
+                            <select id="smsLanguage" name="smsLanguage" aria-label="Select language for SMS alerts">
+                                <option value="default">Same as app language</option>
+                                <option value="en">English</option>
+                                <option value="sw">Swahili</option>
+                                <option value="fr">French</option>
+                            </select>
+                        </div>
+                        
+                        <div class="notification-option">
+                            <label for="reportLanguage">Financial Reports</label>
+                            <select id="reportLanguage" name="reportLanguage" aria-label="Select language for financial reports">
+                                <option value="default">Same as app language</option>
+                                <option value="en">English</option>
+                                <option value="sw">Swahili</option>
+                                <option value="fr">French</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-container">
+                        <h3>Language Preview</h3>
+                        <div class="preview-item">
+                            <span class="preview-label">Savings Goal:</span> 
+                            <span id="previewSavings">Save for retirement</span>
+                        </div>
+                        <div class="preview-item">
+                            <span class="preview-label">Investment:</span> 
+                            <span id="previewInvestment">Stock Market</span>
+                        </div>
+                        <div class="preview-item">
+                            <span class="preview-label">Currency Format:</span> 
+                            <span id="previewCurrency">$1,000.00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button type="button" class="btn secondary-btn" id="resetButton" aria-label="Reset to default language">Reset to Default</button>
+                        <button type="submit" class="btn primary-btn" id="saveButton" aria-label="Save language preferences">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // DOM Elements
+        const collapseNavBtn = document.getElementById('collapseNav');
+        const leftNav = document.getElementById('leftNav');
+        const mainContent = document.getElementById('mainContent');
+        const themeToggle = document.getElementById('themeToggle');
+        const languageOptions = document.querySelectorAll('.language-option');
+        const languageForm = document.getElementById('languagePreferencesForm');
+        const quickLanguageSwitch = document.getElementById('quickLanguageSwitch');
+        const autoDetectLanguage = document.getElementById('autoDetectLanguage');
+        const resetButton = document.getElementById('resetButton');
+        const saveButton = document.getElementById('saveButton');
+        
+        // Language preview elements
+        const previewSavings = document.getElementById('previewSavings');
+        const previewInvestment = document.getElementById('previewInvestment');
+        const previewCurrency = document.getElementById('previewCurrency');
+        
+        // Toggle navigation collapse
+        collapseNavBtn.addEventListener('click', () => {
+            leftNav.classList.toggle('collapsed');
+            mainContent.classList.toggle('expanded');
+        });
+        
+        // Toggle dark mode
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            
+            // Update icon
+            themeToggle.querySelector('i').className = isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
+            
+            // Save preference to localStorage
+            localStorage.setItem('darkMode', isDarkMode);
+        });
+        
+        // Check if dark mode was previously enabled
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+            themeToggle.querySelector('i').className = 'fas fa-sun';
+        }
+        
+        // Language selection
+        languageOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Unselect all options
+                languageOptions.forEach(opt => {
+                    opt.classList.remove('selected');
+                    opt.querySelector('input').checked = false;
+                });
+                
+                // Select clicked option
+                option.classList.add('selected');
+                option.querySelector('input').checked = true;
+                
+                // Update preview based on selected language
+                updateLanguagePreview(option.dataset.language);
+                
+                // Update quick language switch dropdown
+                quickLanguageSwitch.value = option.dataset.language;
+            });
+        });
+        
+        // Quick language switch
+        quickLanguageSwitch.addEventListener('change', (e) => {
+            const selectedLanguage = e.target.value;
+            
+            // Update the main language selection
+            languageOptions.forEach(option => {
+                if (option.dataset.language === selectedLanguage) {
+                    option.click();
+                }
+            });
+        });
+        
+        // Auto-detect language toggle
+        autoDetectLanguage.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                // Simulate detecting browser language (normally would use navigator.language)
+                const browserLanguage = 'en'; // Default to English for demo
+                
+                // Set the detected language
+                languageOptions.forEach(option => {
+                    if (option.dataset.language === browserLanguage) {
+                        option.click();
+                    }
+                });
+                
+                // Disable manual selection
+                languageOptions.forEach(option => {
+                    option.classList.add('disabled');
+                    option.querySelector('input').disabled = true;
+                });
+                
+                // Disable quick switch
+                quickLanguageSwitch.disabled = true;
+            } else {
+                // Enable manual selection
+                languageOptions.forEach(option => {
+                    option.classList.remove('disabled');
+                    option.querySelector('input').disabled = false;
+                });
+                
+                // Enable quick switch
+                quickLanguageSwitch.disabled = false;
+            }
+        });
+        
+        // Reset to default language
+        resetButton.addEventListener('click', () => {
+            // Reset to English
+            languageOptions.forEach(option => {
+                if (option.dataset.language === 'en') {
+                    option.click();
+                }
+            });
+            
+            // Reset notification language settings
+            document.getElementById('emailLanguage').value = 'default';
+            document.getElementById('smsLanguage').value = 'default';
+            document.getElementById('reportLanguage').value = 'default';
+            
+            // Uncheck auto-detect
+            autoDetectLanguage.checked = false;
+            
+            // Trigger change event to enable manual selection
+            const event = new Event('change');
+            autoDetectLanguage.dispatchEvent(event);
+        });
+        
+        // Form submission
+        languageForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get selected language
+            const selectedLanguage = document.querySelector('input[name="language"]:checked').value;
+            
+            // Get notification language preferences
+            const emailLang = document.getElementById('emailLanguage').value;
+            const smsLang = document.getElementById('smsLanguage').value;
+            const reportLang = document.getElementById('reportLanguage').value;
+            
+            // Get auto-detect preference
+            const autoDetect = autoDetectLanguage.checked;
+            
+            // Create language preferences object
+            const languagePreferences = {
+                appLanguage: selectedLanguage,
+                emailLanguage: emailLang,
+                smsLanguage: smsLang,
+                reportLanguage: reportLang,
+                autoDetectLanguage: autoDetect
+            };
+            
+            // Save to localStorage (in a real app, would send to server)
+            localStorage.setItem('languagePreferences', JSON.stringify(languagePreferences));
+            
+            // Show success message
+            alert('Language preferences saved successfully!');
+        });
+        
+        // Update language preview based on selected language
+        function updateLanguagePreview(language) {
+            switch (language) {
+                case 'en':
+                    previewSavings.textContent = 'Save for retirement';
+                    previewInvestment.textContent = 'Stock Market';
+                    previewCurrency.textContent = '$1,000.00';
+                    break;
+                case 'sw':
+                    previewSavings.textContent = 'Hifadhi kwa ajili ya kustaafu';
+                    previewInvestment.textContent = 'Soko la Hisa';
+                    previewCurrency.textContent = 'KSh 1,000.00';
+                    break;
+                case 'fr':
+                    previewSavings.textContent = 'Épargner pour la retraite';
+                    previewInvestment.textContent = 'Marché Boursier';
+                    previewCurrency.textContent = '1 000,00 €';
+                    break;
+            }
+        }
+        
+        // Load saved language preferences
+        function loadLanguagePreferences() {
+            const savedPreferences = localStorage.getItem('languagePreferences');
+            
+            if (savedPreferences) {
+                const preferences = JSON.parse(savedPreferences);
+                
+                // Set app language
+                languageOptions.forEach(option => {
+                    if (option.dataset.language === preferences.appLanguage) {
+                        option.click();
+                    }
+                });
+                
+                // Set notification languages
+                document.getElementById('emailLanguage').value = preferences.emailLanguage;
+                document.getElementById('smsLanguage').value = preferences.smsLanguage;
+                document.getElementById('reportLanguage').value = preferences.reportLanguage;
+                
+                // Set auto-detect
+                autoDetectLanguage.checked = preferences.autoDetectLanguage;
+                
+                // Trigger change event for auto-detect
+                const event = new Event('change');
+                autoDetectLanguage.dispatchEvent(event);
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadLanguagePreferences();
+        });
+        
+        // Initialize section toggles
+        const sectionHeaders = document.querySelectorAll('.section-header');
+        sectionHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const section = header.parentElement;
+                const items = section.querySelector('.section-items');
+                
+                items.style.display = items.style.display === 'none' ? 'block' : 'none';
+                const icon = header.querySelector('.fa-chevron-down');
+                icon.classList.toggle('fa-chevron-up');
+            });
+        });
+    </script>
+</body>
+</html>

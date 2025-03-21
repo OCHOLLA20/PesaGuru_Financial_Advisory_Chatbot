@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Market Data | PesaGuru</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/Market_Data_and_Insights/live_market_data.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Move inline styles here */
+        .meter-progress.bullish {
+            width: 65%;
+        }
+    </style>
+</head>
+<body>
+    <!-- 1. Header / Top Bar -->
+    <header class="top-bar">
+        <div class="logo-container">
+            <img src="../../assets/images/logo.png" alt="PesaGuru Logo" class="logo">
+            <h1>Investment Planning Dashboard</h1>
+        </div>
+        
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" placeholder="Search for stocks, funds, or investment strategies..." class="search-bar">
+        </div>
+        
+        <div class="user-actions">
+            <div class="notifications">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">3</span>
+            </div>
+            
+            <div class="settings-dropdown">
+                <i class="fas fa-cog" title="Settings"></i>
+                <div class="dropdown-content">
+                    <a href="../User_Profile_Settings/profile.html">Profile Settings</a>
+                    <a href="../User_Profile_Settings/security.html">Security Settings</a>
+                    <a href="../User_Profile_Settings/notifications.html">Notification Preferences</a>
+                </div>
+            </div>
+            
+            <div class="dark-mode-toggle">
+                <i class="fas fa-moon" title="Toggle Dark Mode"></i>
+            </div>
+            
+            <div class="user-profile">
+                <img src="../../assets/images/user-avatar.png" alt="User Avatar" class="user-avatar">
+                <span class="user-name">Hello, <span id="username">User</span>!</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Page Title and Controls -->
+        <section class="page-header">
+            <h2>Live Market Data <i class="fas fa-chart-line"></i></h2>
+            <div class="page-controls">
+                <button id="refresh-data" class="btn-refresh">
+                    <i class="fas fa-sync-alt"></i> Auto-Refresh
+                </button>
+                <div class="view-toggle">
+                    <button class="btn-grid active" aria-label="Grid View">
+                        <i class="fas fa-th-large"></i>
+                    </button>
+                    <button class="btn-list" aria-label="List View">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+                <select id="currency-selector" class="currency-selector" aria-label="Select Currency">
+                    <option value="KES">KES (Kenya Shilling)</option>
+                    <option value="USD">USD (US Dollar)</option>
+                    <option value="EUR">EUR (Euro)</option>
+                    <option value="GBP">GBP (British Pound)</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Dashboard Layout -->
+        <div class="dashboard-grid">
+            <!-- 1. Stock Market Indexes -->
+            <section class="dashboard-card" id="stock-indexes">
+                <div class="card-header">
+                    <h3>Stock Market Indexes 📈</h3>
+                    <div class="card-actions">
+                        <button class="btn-expand" title="Expand Card"><i class="fas fa-expand-alt"></i></button>
+                        <button class="btn-refresh" title="Refresh Data"><i class="fas fa-sync-alt"></i></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <ul class="market-index-list">
+                        <li class="market-index-item">
+                            <div class="index-info">
+                                <span class="index-name">NSE 20 (Kenya)</span>
+                                <span class="index-value">1,873.45</span>
+                            </div>
+                            <div class="index-change positive">
+                                <span class="change-value">+15.32</span>
+                                <span class="change-percent">(+0.82%)</span>
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                        </li>
+                        <li class="market-index-item">
+                            <div class="index-info">
+                                <span class="index-name">S&P 500 (US)</span>
+                                <span class="index-value">4,897.12</span>
+                            </div>
+                            <div class="index-change negative">
+                                <span class="change-value">-12.75</span>
+                                <span class="change-percent">(-0.26%)</span>
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                        </li>
+                        <li class="market-index-item">
+                            <div class="index-info">
+                                <span class="index-name">FTSE 100 (UK)</span>
+                                <span class="index-value">7,632.58</span>
+                            </div>
+                            <div class="index-change positive">
+                                <span class="change-value">+42.37</span>
+                                <span class="change-percent">(+0.56%)</span>
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                        </li>
+                        <li class="market-index-item">
+                            <div class="index-info">
+                                <span class="index-name">Nikkei 225 (Japan)</span>
+                                <span class="index-value">38,734.21</span>
+                            </div>
+                            <div class="index-change positive">
+                                <span class="change-value">+145.23</span>
+                                <span class="change-percent">(+0.38%)</span>
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                        </li>
+                    </ul>
+                    <a href="#" class="view-all-link">View All Indexes</a>
+                </div>
+            </section>
+
+            <!-- 2. Forex Exchange Rates -->
+            <section class="dashboard-card" id="forex-rates">
+                <div class="card-header">
+                    <h3>Forex Exchange Rates 💱</h3>
+                    <div class="card-actions">
+                        <button class="btn-expand" title="Expand Card"><i class="fas fa-expand-alt"></i></button>
+                        <button class="btn-refresh" title="Refresh Data"><i class="fas fa-sync-alt"></i></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <ul class="forex-list">
+                        <li class="forex-item">
+                            <div class="forex-info">
+                                <span class="forex-pair">KES/USD</span>
+                                <span class="forex-value">128.75</span>
+                            </div>
+                            <div class="forex-change negative">
+                                <span class="change-value">-0.45</span>
+                                <span class="change-percent">(-0.35%)</span>
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                        </li>
+                        <li class="forex-item">
+                            <div class="forex-info">
+                                <span class="forex-pair">KES/EUR</span>
+                                <span class="forex-value">140.32</span>
+                            </div>
+                            <div class="forex-change positive">
+                                <span class="change-value">+0.78</span>
+                                <span class="change-percent">(+0.56%)</span>
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                        </li>
+                        <li class="forex-item">
+                            <div class="forex-info">
+                                <span class="forex-pair">KES/GBP</span>
+                                <span class="forex-value">165.93</span>
+                            </div>
+                            <div class="forex-change positive">
+                                <span class="change-value">+1.24</span>
+                                <span class="change-percent">(+0.75%)</span>
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                        </li>
+                        <li class="forex-item">
+                            <div class="forex-info">
+                                <span class="forex-pair">KES/JPY</span>
+                                <span class="forex-value">0.86</span>
+                            </div>
+                            <div class="forex-change negative">
+                                <span class="change-value">-0.01</span>
+                                <span class="change-percent">(-1.15%)</span>
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                        </li>
+                    </ul>
+                    <a href="#" class="view-all-link">View All Forex Rates</a>
+                </div>
+            </section>
+
+            <!-- 3. Cryptocurrency Prices -->
+            <section class="dashboard-card" id="crypto-prices">
+                <div class="card-header">
+                    <h3>Cryptocurrency Prices ₿</h3>
+                    <div class="card-actions">
+                        <button class="btn-expand" title="Expand Card"><i class="fas fa-expand-alt"></i></button>
+                        <button class="btn-refresh" title="Refresh Data"><i class="fas fa-sync-alt"></i></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="sentiment-indicator">
+                        <span class="sentiment-label">Market Sentiment:</span>
+                        <div class="sentiment-meter">
+                            <div class="meter-scale">
+                                <div class="meter-progress bullish"></div>
+                            </div>
+                            <span class="sentiment-value">Bullish (65%)</span>
+                        </div>
+                    </div>
+                    <ul class="crypto-list">
+                        <li class="crypto-item">
+                            <div class="crypto-info">
+                                <img src="../../assets/images/crypto/btc.png" alt="Bitcoin" class="crypto-icon">
+                                <span class="crypto-name">Bitcoin (BTC)</span>
+                                <span class="crypto-value">58,432.75 USD</span>
+                            </div>
+                            <div class="crypto-change positive">
+                                <span class="change-value">+1,245.32</span>
+                                <span class="change-percent">(+2.18%)</span>
+                                <div class="volume-indicator">Vol: 32.5B</div>
+                            </div>
+                        </li>
+                        <li class="crypto-item">
+                            <div class="crypto-info">
+                                <img src="../../assets/images/crypto/eth.png" alt="Ethereum" class="crypto-icon">
+                                <span class="crypto-name">Ethereum (ETH)</span>
+                                <span class="crypto-value">3,142.68 USD</span>
+                            </div>
+                            <div class="crypto-change positive">
+                                <span class="change-value">+87.45</span>
+                                <span class="change-percent">(+2.86%)</span>
+                                <div class="volume-indicator">Vol: 15.2B</div>
+                            </div>
+                        </li>
+                        <li class="crypto-item">
+                            <div class="crypto-info">
+                                <img src="../../assets/images/crypto/sol.png" alt="Solana" class="crypto-icon">
+                                <span class="crypto-name">Solana (SOL)</span>
+                                <span class="crypto-value">124.56 USD</span>
+                            </div>
+                            <div class="crypto-change negative">
+                                <span class="change-value">-3.78</span>
+                                <span class="change-percent">(-2.95%)</span>
+                                <div class="volume-indicator">Vol: 5.7B</div>
+                            </div>
+                        </li>
+                    </ul>
+                    <a href="#" class="view-all-link">View All Cryptocurrencies</a>
+                </div>
+            </section>
+
+            <!-- 4. Commodity Prices -->
+            <section class="dashboard-card" id="commodity-prices">
+                <div class="card-header">
+                    <h3>Commodity Prices 🛢️</h3>
+                    <div class="card-actions">
+                        <button class="btn-expand" title="Expand Card"><i class="fas fa-expand-alt"></i></button>
+                        <button class="btn-refresh" title="Refresh Data"><i class="fas fa-sync-alt"></i></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <ul class="commodity-list">
+                        <li class="commodity-item">
+                            <div class="commodity-info">
+                                <span class="commodity-name">Gold</span>
+                                <span class="commodity-value">2,045.32 USD/oz</span>
+                            </div>
+                            <div class="commodity-change positive">
+                                <span class="change-value">+12.45</span>
+                                <span class="change-percent">(+0.61%)</span>
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                        </li>
+                        <li class="commodity-item">
+                            <div class="commodity-info">
+                                <span class="commodity-name">Silver</span>
+                                <span class="commodity-value">25.87 USD/oz</span>
+                            </div>
+                            <div class="commodity-change positive">
+                                <span class="change-value">+0.32</span>
+                                <span class="change-percent">(+1.25%)</span>
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                        </li>
+                        <li class="commodity-item">
+                            <div class="commodity-info">
+                                <span class="commodity-name">Crude Oil (Brent)</span>
+                                <span class="commodity-value">84.76 USD/bbl</span>
+                            </div>
+                            <div class="commodity-change negative">
+                                <span class="change-value">-1.23</span>
+                                <span class="change-percent">(-1.43%)</span>
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                        </li>
+                        <li class="commodity-item">
+                            <div class="commodity-info">
+                                <span class="commodity-name">Coffee</span>
+                                <span class="commodity-value">178.45 USD/lb</span>
+                            </div>
+                            <div class="commodity-change positive">
+                                <span class="change-value">+5.67</span>
+                                <span class="change-percent">(+3.28%)</span>
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                        </li>
+                    </ul>
+                    <a href="#" class="view-all-link">View All Commodities</a>
+                </div>
+            </section>
+
+            <!-- 5. Bond & Treasury Yields -->
+            <section class="dashboard-card" id="bond-yields">
+                <div class="card-header">
+                    <h3>Bond & Treasury Yields 🏦</h3>
+                    <div class="card-actions">
+                        <button class="btn-expand" title="Expand Card"><i class="fas fa-expand-alt"></i></button>
+                        <button class="btn-refresh" title="Refresh Data"><i class="fas fa-sync-alt"></i></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <ul class="bond-list">
+                        <li class="bond-item">
+                            <div class="bond-info">
+                                <span class="bond-name">Kenya 91-day T-Bill</span>
+                                <span class="bond-value">9.75%</span>
+                            </div>
+                            <div class="bond-change positive">
+                                <span class="change-value">+0.15%</span>
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                        </li>
+                        <li class="bond-item">
+                            <div class="bond-info">
+                                <span class="bond-name">Kenya 182-day T-Bill</span>
+                                <span class="bond-value">10.23%</span>
+                            </div>
+                            <div class="bond-change positive">
+                                <span class="change-value">+0.08%</span>
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                        </li>
+                        <li class="bond-item">
+                            <div class="bond-info">
+                                <span class="bond-name">Kenya 364-day T-Bill</span>
+                                <span class="bond-value">10.98%</span>
+                            </div>
+                            <div class="bond-change negative">
+                                <span class="change-value">-0.12%</span>
+                                <i class="fas fa-arrow-down"></i>
+                            </div>
+                        </li>
+                        <li class="bond-item">
+                            <div class="bond-info">
+                                <span class="bond-name">US 10-Year Treasury</span>
+                                <span class="bond-value">4.32%</span>
+                            </div>
+                            <div class="bond-change positive">
+                                <span class="change-value">+0.05%</span>
+                                <i class="fas fa-arrow-up"></i>
+                            </div>
+                        </li>
+                    </ul>
+                    <a href="#" class="view-all-link">View All Bonds</a>
+                </div>
+            </section>
+
+            <!-- 6. Interactive Charts Section -->
+            <section class="dashboard-card full-width" id="interactive-charts">
+                <div class="card-header">
+                    <h3>Interactive Charts & Analytics 📊</h3>
+                    <div class="card-actions">
+                        <button class="btn-expand" title="Expand Card"><i class="fas fa-expand-alt"></i></button>
+                        <div class="chart-period-selector">
+                            <button class="period-btn active" data-period="1D">1D</button>
+                            <button class="period-btn" data-period="1W">1W</button>
+                            <button class="period-btn" data-period="1M">1M</button>
+                            <button class="period-btn" data-period="1Y">1Y</button>
+                            <button class="period-btn" data-period="ALL">ALL</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart-selector">
+                        <select id="chart-asset-selector" class="asset-selector" aria-label="Select Asset for Chart">
+                            <option value="NSE20">NSE 20 Index</option>
+                            <option value="BTCUSD">Bitcoin (BTC/USD)</option>
+                            <option value="KESUSD">KES/USD</option>
+                            <option value="GOLD">Gold</option>
+                        </select>
+                        <div class="chart-type-selector">
+                            <button class="chart-type-btn active" data-type="line" title="Line Chart">
+                                <i class="fas fa-chart-line"></i>
+                            </button>
+                            <button class="chart-type-btn" data-type="candlestick" title="Candlestick Chart">
+                                <i class="fas fa-chart-bar"></i>
+                            </button>
+                            <button class="chart-type-btn" data-type="area" title="Area Chart">
+                                <i class="fas fa-chart-area"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="chart-container" id="main-chart">
+                        <!-- Chart will be inserted here by JS -->
+                        <div class="chart-placeholder">
+                            <i class="fas fa-chart-line placeholder-icon"></i>
+                            <p>Loading chart data...</p>
+                        </div>
+                    </div>
+                    <div class="chart-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Open</span>
+                            <span class="stat-value" id="stat-open">4,872.45</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">High</span>
+                            <span class="stat-value" id="stat-high">4,915.78</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Low</span>
+                            <span class="stat-value" id="stat-low">4,852.33</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Close</span>
+                            <span class="stat-value" id="stat-close">4,897.12</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Volume</span>
+                            <span class="stat-value" id="stat-volume">1.45B</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. AI-Powered Market Insights -->
+            <section class="dashboard-card" id="ai-insights">
+                <div class="card-header">
+                    <h3>AI-Powered Market Insights 🤖</h3>
+                    <div class="card-actions">
+                        <button class="btn-expand" title="Expand Card"><i class="fas fa-expand-alt"></i></button>
+                        <button class="btn-refresh" title="Refresh Data"><i class="fas fa-sync-alt"></i></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="ai-recommendation">
+                        <div class="recommendation-header">
+                            <span class="recommendation-label">Top Investment Recommendation</span>
+                            <span class="recommendation-timestamp">Updated: March 8, 2025 10:45 AM</span>
+                        </div>
+                        <div class="recommendation-content">
+                            <div class="asset-recommendation">
+                                <img src="../../assets/images/stocks/apple.png" alt="Apple Inc." class="asset-icon">
+                                <div class="asset-details">
+                                    <span class="asset-name">Apple Inc. (AAPL)</span>
+                                    <span class="asset-price">189.85 USD</span>
+                                    <span class="recommendation-type buy">BUY</span>
+                                </div>
+                            </div>
+                            <p class="recommendation-reason">Strong quarterly earnings, upcoming product releases, and positive analyst ratings indicate potential for 12-15% growth in the next 3-6 months.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="volatility-alerts">
+                        <h4>Volatility Alerts</h4>
+                        <ul class="alert-list">
+                            <li class="alert-item">
+                                <span class="alert-asset">USD/JPY</span>
+                                <span class="alert-message">Experiencing high volatility due to upcoming Federal Reserve announcement.</span>
+                            </li>
+                            <li class="alert-item">
+                                <span class="alert-asset">Ethereum (ETH)</span>
+                                <span class="alert-message">Increased volatility expected with upcoming network upgrade.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="earnings-calendar">
+                        <h4>Upcoming Earnings Reports</h4>
+                        <ul class="earnings-list">
+                            <li class="earnings-item">
+                                <div class="earnings-date">Mar 10</div>
+                                <div class="earnings-company">
+                                    <span class="company-name">Nike Inc. (NKE)</span>
+                                    <span class="earnings-time">After Market Close</span>
+                                </div>
+                            </li>
+                            <li class="earnings-item">
+                                <div class="earnings-date">Mar 12</div>
+                                <div class="earnings-company">
+                                    <span class="company-name">Oracle Corp. (ORCL)</span>
+                                    <span class="earnings-time">Before Market Open</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. News & Economic Updates -->
+            <section class="dashboard-card" id="financial-news">
+                <div class="card-header">
+                    <h3>Financial News & Updates 📰</h3>
+                    <div class="card-actions">
+                        <button class="btn-expand" title="Expand Card"><i class="fas fa-expand-alt"></i></button>
+                        <button class="btn-refresh" title="Refresh Data"><i class="fas fa-sync-alt"></i></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="news-filter">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="stocks">Stocks</button>
+                        <button class="filter-btn" data-filter="forex">Forex</button>
+                        <button class="filter-btn" data-filter="crypto">Crypto</button>
+                        <button class="filter-btn" data-filter="economy">Economy</button>
+                    </div>
+                    
+                    <ul class="news-list">
+                        <li class="news-item breaking">
+                            <div class="news-badge">BREAKING</div>
+                            <div class="news-content">
+                                <h4 class="news-title">Central Bank of Kenya Maintains Key Interest Rate at 9.5%</h4>
+                                <p class="news-summary">The Monetary Policy Committee cited stable inflation and economic growth as factors in their decision.</p>
+                                <div class="news-meta">
+                                    <span class="news-source">Business Daily Africa</span>
+                                    <span class="news-time">35 minutes ago</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="news-item">
+                            <div class="news-content">
+                                <h4 class="news-title">Bitcoin Surges Past $58,000 as Institutional Adoption Grows</h4>
+                                <p class="news-summary">Major financial institutions announce new cryptocurrency investment products.</p>
+                                <div class="news-meta">
+                                    <span class="news-source">CoinDesk</span>
+                                    <span class="news-time">2 hours ago</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="news-item">
+                            <div class="news-content">
+                                <h4 class="news-title">Safaricom Shares Rally After Strong Quarterly Results</h4>
+                                <p class="news-summary">Kenya's largest telecom reports 15% increase in M-Pesa revenue, driving stock price higher.</p>
+                                <div class="news-meta">
+                                    <span class="news-source">Reuters</span>
+                                    <span class="news-time">3 hours ago</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="news-item">
+                            <div class="news-content">
+                                <h4 class="news-title">Oil Prices Dip on Increased US Inventory Reports</h4>
+                                <p class="news-summary">Crude oil futures decline as US reports higher-than-expected stockpiles.</p>
+                                <div class="news-meta">
+                                    <span class="news-source">Bloomberg</span>
+                                    <span class="news-time">5 hours ago</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <a href="#" class="view-all-link">View All News</a>
+                </div>
+            </section>
+
+            <!-- 9. Custom Alerts & Watchlist -->
+            <section class="dashboard-card" id="watchlist">
+                <div class="card-header">
+                    <h3>Your Watchlist 👀</h3>
+                    <div class="card-actions">
+                        <button class="btn-expand" title="Expand Card"><i class="fas fa-expand-alt"></i></button>
+                        <button class="btn-add" title="Add Asset to Watchlist"><i class="fas fa-plus"></i> Add Asset</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <ul class="watchlist-items">
+                        <li class="watchlist-item">
+                            <div class="watchlist-asset">
+                                <img src="../../assets/images/stocks/safaricom.png" alt="Safaricom" class="asset-icon">
+                                <div class="asset-details">
+                                    <span class="asset-name">Safaricom PLC</span>
+                                    <span class="asset-ticker">SCOM.NR</span>
+                                </div>
+                            </div>
+                            <div class="asset-price-info positive">
+                                <span class="current-price">25.45 KES</span>
+                                <span class="price-change">+0.75 (+3.03%)</span>
+                            </div>
+                            <div class="watchlist-actions">
+                                <button class="btn-alert" title="Set Alert"><i class="fas fa-bell"></i></button>
+                                <button class="btn-remove" title="Remove from Watchlist"><i class="fas fa-times"></i></button>
+                            </div>
+                        </li>
+                        <li class="watchlist-item">
+                            <div class="watchlist-asset">
+                                <img src="../../assets/images/crypto/eth.png" alt="Ethereum" class="asset-icon">
+                                <div class="asset-details">
+                                    <span class="asset-name">Ethereum</span>
+                                    <span class="asset-ticker">ETH/USD</span>
+                                </div>
+                            </div>
+                            <div class="asset-price-info positive">
+                                <span class="current-price">3,142.68 USD</span>
+                                <span class="price-change">+87.45 (+2.86%)</span>
+                            </div>
+                            <div class="watchlist-actions">
+                                <button class="btn-alert alert-active" title="Alert Set"><i class="fas fa-bell"></i></button>
+                                <button class="btn-remove" title="Remove from Watchlist"><i class="fas fa-times"></i></button>
+                            </div>
+                        </li>
+                        <li class="watchlist-item">
+                            <div class="watchlist-asset">
+                                <img src="../../assets/images/forex/eur-usd.png" alt="EUR/USD" class="asset-icon">
+                                <div class="asset-details">
+                                    <span class="asset-name">EUR/USD</span>
+                                    <span class="asset-ticker">Forex</span>
+                                </div>
+                            </div>
+                            <div class="asset-price-info negative">
+                                <span class="current-price">1.0856</span>
+                                <span class="price-change">-0.0023 (-0.21%)</span>
+                            </div>
+                            <div class="watchlist-actions">
+                                <button class="btn-alert" title="Set Alert"><i class="fas fa-bell"></i></button>
+                                <button class="btn-remove" title="Remove from Watchlist"><i class="fas fa-times"></i></button>
+                            </div>
+                        </li>
+                        <li class="watchlist-item">
+                            <div class="watchlist-asset">
+                                <img src="../../assets/images/stocks/kq.png" alt="Kenya Airways" class="asset-icon">
+                                <div class="asset-details">
+                                    <span class="asset-name">Kenya Airways</span>
+                                    <span class="asset-ticker">KQ.NR</span>
+                                </div>
+                            </div>
+                            <div class="asset-price-info negative">
+                                <span class="current-price">3.25 KES</span>
+                                <span class="price-change">-0.15 (-4.41%)</span>
+                            </div>
+                            <div class="watchlist-actions">
+                                <button class="btn-alert alert-active" title="Alert Set"><i class="fas fa-bell"></i></button>
+                                <button class="btn-remove" title="Remove from Watchlist"><i class="fas fa-times"></i></button>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    <div class="custom-alerts-section">
+                        <h4>Your Custom Alerts</h4>
+                        <ul class="alerts-list">
+                            <li class="alert-settings-item">
+                                <div class="alert-details">
+                                    <span class="alert-asset-name">Ethereum (ETH)</span>
+                                    <span class="alert-condition">Price rises above 3,200 USD</span>
+                                </div>
+                                <div class="alert-actions">
+                                    <button class="btn-edit-alert" title="Edit Alert"><i class="fas fa-pencil-alt"></i></button>
+                                    <button class="btn-delete-alert" title="Delete Alert"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </li>
+                            <li class="alert-settings-item">
+                                <div class="alert-details">
+                                    <span class="alert-asset-name">Kenya Airways (KQ)</span>
+                                    <span class="alert-condition">Price drops below 3.00 KES</span>
+                                </div>
+                                <div class="alert-actions">
+                                    <button class="btn-edit-alert" title="Edit Alert"><i class="fas fa-pencil-alt"></i></button>
+                                    <button class="btn-delete-alert" title="Delete Alert"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </li>
+                        </ul>
+                        <button class="btn-create-alert" title="Create New Alert"><i class="fas fa-plus"></i> Create New Alert</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Mobile Navigation Bar (for responsive design) -->
+    <nav class="mobile-nav">
+        <a href="../dashboard.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="./live_market_data.html" class="nav-item active">
+            <i class="fas fa-chart-line"></i>
+            <span>Markets</span>
+        </a>
+        <a href="../Financial_Advisory_Services/investment_planning.html" class="nav-item">
+            <i class="fas fa-money-bill-wave"></i>
+            <span>Invest</span>
+        </a>
+        <a href="../Learning_Resources/investment_strategies.html" class="nav-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Learn</span>
+        </a>
+        <a href="../User_Profile_Settings/profile.html" class="nav-item">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <!-- Modals and Popups -->
+    
+    <!-- Add to Watchlist Modal -->
+    <div class="modal" id="add-to-watchlist-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add to Watchlist</h3>
+                <button class="close-modal" title="Close Modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="search-container">
+                    <input type="text" placeholder="Search for assets..." class="search-input">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="asset-categories">
+                    <button class="category-btn active" data-category="stocks">Stocks</button>
+                    <button class="category-btn" data-category="forex">Forex</button>
+                    <button class="category-btn" data-category="crypto">Crypto</button>
+                    <button class="category-btn" data-category="commodities">Commodities</button>
+                </div>
+                <div class="search-results">
+                    <!-- Results will be populated by JS -->
+                    <div class="search-placeholder">
+                        <i class="fas fa-search"></i>
+                        <p>Search for assets to add to your watchlist</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" title="Cancel">Cancel</button>
+                <button class="btn-add-selected" disabled title="Add Selected Assets">Add Selected</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Set Alert Modal -->
+    <div class="modal" id="set-alert-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create Price Alert</h3>
+                <button class="close-modal" title="Close Modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert-asset-info">
+                    <img src="../../assets/images/stocks/safaricom.png" alt="Safaricom" class="asset-icon">
+                    <div class="asset-details">
+                        <span class="asset-name">Safaricom PLC (SCOM.NR)</span>
+                        <span class="current-price">Current Price: 25.45 KES</span>
+                    </div>
+                </div>
+                
+                <div class="alert-settings">
+                    <div class="alert-type-selection">
+                        <label>Alert Type:</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="price-above" name="alert-type" value="above" checked>
+                                <label for="price-above">Price rises above</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="price-below" name="alert-type" value="below">
+                                <label for="price-below">Price drops below</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="price-input-group">
+                        <label for="alert-price">Target Price:</label>
+                        <div class="input-with-currency">
+                            <input type="number" id="alert-price" value="26.00" step="0.01">
+                            <span class="currency-label">KES</span>
+                        </div>
+                    </div>
+                    
+                    <div class="notification-settings">
+                        <label>Notification Method:</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="notify-app" checked>
+                                <label for="notify-app">In-App Notification</label>
+                            </div>
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="notify-email" checked>
+                                <label for="notify-email">Email</label>
+                            </div>
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="notify-sms">
+                                <label for="notify-sms">SMS</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" title="Cancel">Cancel</button>
+                <button class="btn-create" title="Create Alert">Create Alert</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/Market_Data_and_Insights/live_market_data.js"></script>
+</body>
+</html>
