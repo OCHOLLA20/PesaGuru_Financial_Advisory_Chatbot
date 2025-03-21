@@ -1,1 +1,0 @@
-<?php // Market data controller ?> 
