@@ -1,9 +1,5 @@
 # PesaGuru - AI-Powered Financial Advisory for Kenya 
 
-# PesaGuru: AI-Powered Financial Advisory Chatbot
-
-![PesaGuru Logo](https://github.com/username/pesaguru/raw/main/assets/images/logo.png)
-
 ## 📊 Overview
 
 PesaGuru is an AI-powered chatbot designed to provide personalized financial advisory and investment planning services to Kenyan users. It aims to democratize financial advice through technology, making it accessible to low and middle-income consumers who traditionally have limited access to such services.
