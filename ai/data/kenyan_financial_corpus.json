@@ -1,12 +1,3 @@
-{
-    "metadata": {
-      "version": "1.0.0",
-      "last_updated": "2025-03-08",
-      "description": "Kenyan financial terminology and concepts corpus",
-      "source": "PesaGuru Financial Advisory Chatbot Project",
-      "maintainer": "AI Development Team",
-      "license": "Proprietary"
-    },
     "banking_terms": [
       {
         "term": "fixed deposit account",
