@@ -1,1 +1,1014 @@
-{ "terms": [] } 
+{
+    "metadata": {
+      "version": "1.0.0",
+      "last_updated": "2025-03-08",
+      "description": "Kenyan financial terminology and concepts corpus",
+      "source": "PesaGuru Financial Advisory Chatbot Project",
+      "maintainer": "AI Development Team",
+      "license": "Proprietary"
+    },
+    "banking_terms": [
+      {
+        "term": "fixed deposit account",
+        "swahili": "akaunti ya amana ya kudumu",
+        "definition": "An account where money is deposited for a fixed period with a guaranteed interest rate",
+        "example": "KCB offers 7% interest on 1-year fixed deposits",
+        "related_terms": ["term deposit", "time deposit"],
+        "entities": ["banking", "savings"]
+      },
+      {
+        "term": "savings account",
+        "swahili": "akaunti ya akiba",
+        "definition": "A bank account that earns interest but often limits withdrawals",
+        "example": "Open a savings account with Equity Bank with just KES 100",
+        "related_terms": ["interest-bearing account"],
+        "entities": ["banking", "savings"]
+      },
+      {
+        "term": "current account",
+        "swahili": "akaunti ya hivi sasa",
+        "definition": "A day-to-day bank account with no interest but unlimited transactions",
+        "example": "Business owners prefer current accounts for daily operations",
+        "related_terms": ["checking account", "transaction account"],
+        "entities": ["banking", "transaction"]
+      },
+      {
+        "term": "mobile banking",
+        "swahili": "benki ya simu",
+        "definition": "Banking services accessed through a mobile phone application",
+        "example": "Use Equity's EazzyBanking app to transfer money without visiting a branch",
+        "related_terms": ["digital banking", "internet banking"],
+        "entities": ["banking", "technology"]
+      },
+      {
+        "term": "agency banking",
+        "swahili": "benki ya wakala",
+        "definition": "Banking services offered through authorized third-party agents",
+        "example": "KCB Mtaani agents provide banking services in rural areas",
+        "related_terms": ["banking agent", "correspondent banking"],
+        "entities": ["banking", "financial inclusion"]
+      },
+      {
+        "term": "ATM",
+        "swahili": "mashine ya pesa",
+        "definition": "Automated Teller Machine for cash withdrawals and other banking services",
+        "example": "Most banks don't charge for ATM withdrawals from their own machines",
+        "related_terms": ["cash point", "cash machine"],
+        "entities": ["banking", "technology"]
+      },
+      {
+        "term": "standing order",
+        "swahili": "agizo la kudumu",
+        "definition": "Instruction to a bank to pay a fixed amount regularly to another account",
+        "example": "Set up a standing order to pay your monthly rent automatically",
+        "related_terms": ["recurring payment", "automatic payment"],
+        "entities": ["banking", "payment"]
+      },
+      {
+        "term": "dormant account",
+        "swahili": "akaunti isiyotumika",
+        "definition": "Bank account with no activity for an extended period (typically 6-12 months)",
+        "example": "Banks charge maintenance fees on dormant accounts",
+        "related_terms": ["inactive account"],
+        "entities": ["banking", "account management"]
+      },
+      {
+        "term": "ledger fee",
+        "swahili": "ada ya leja",
+        "definition": "Monthly fee charged by banks for maintaining an account",
+        "example": "Some banks waive ledger fees if you maintain a minimum balance",
+        "related_terms": ["maintenance fee", "account fee"],
+        "entities": ["banking", "fees"]
+      },
+      {
+        "term": "minimum balance",
+        "swahili": "salio la chini",
+        "definition": "The least amount of money required to maintain an account without penalties",
+        "example": "Maintain a minimum balance of KES 1,000 to avoid monthly charges",
+        "related_terms": ["required balance"],
+        "entities": ["banking", "account management"]
+      }
+    ],
+    "investment_terms": [
+      {
+        "term": "unit trust",
+        "swahili": "hazina ya umoja",
+        "definition": "A collective investment scheme that pools money from multiple investors",
+        "example": "CIC Unit Trust offers various investment options for Kenyans",
+        "related_terms": ["mutual fund", "collective investment"],
+        "entities": ["investment", "wealth management"]
+      },
+      {
+        "term": "Treasury bond",
+        "swahili": "hati ya hazina",
+        "definition": "Government security with a fixed interest rate paid semi-annually",
+        "example": "CBK offers Treasury bonds with maturities ranging from 1 to 30 years",
+        "related_terms": ["government securities", "fixed income"],
+        "entities": ["investment", "government"]
+      },
+      {
+        "term": "Treasury bill",
+        "swahili": "bili ya hazina",
+        "definition": "Short-term government debt security with maturities of 91, 182, or 364 days",
+        "example": "T-bills are sold at a discount and redeemed at face value at maturity",
+        "related_terms": ["T-bill", "government paper"],
+        "entities": ["investment", "government"]
+      },
+      {
+        "term": "dividend",
+        "swahili": "mgao wa faida",
+        "definition": "Payment made by a company to its shareholders from profits",
+        "example": "Safaricom paid a dividend of KES 1.40 per share in 2023",
+        "related_terms": ["payout", "shareholder return"],
+        "entities": ["investment", "stocks"]
+      },
+      {
+        "term": "capital gain",
+        "swahili": "faida ya mtaji",
+        "definition": "Profit from selling an asset at a higher price than purchased",
+        "example": "Selling NSE shares at a higher price results in capital gains",
+        "related_terms": ["investment profit", "appreciation"],
+        "entities": ["investment", "taxation"]
+      },
+      {
+        "term": "portfolio",
+        "swahili": "mkoba wa uwekezaji",
+        "definition": "Collection of financial investments like stocks, bonds, and cash",
+        "example": "A diversified portfolio helps spread investment risk",
+        "related_terms": ["investment portfolio", "asset collection"],
+        "entities": ["investment", "wealth management"]
+      },
+      {
+        "term": "asset allocation",
+        "swahili": "ugawaji wa mali",
+        "definition": "Strategy of dividing investments among different asset categories",
+        "example": "A conservative investor might use 70% bonds, 20% stocks, and 10% cash",
+        "related_terms": ["investment mix", "portfolio distribution"],
+        "entities": ["investment", "strategy"]
+      },
+      {
+        "term": "REIT",
+        "swahili": "hazina ya uwekezaji wa mali",
+        "definition": "Real Estate Investment Trust - company that owns income-producing real estate",
+        "example": "ILAM Fahari I-REIT is listed on the NSE",
+        "related_terms": ["real estate investment", "property trust"],
+        "entities": ["investment", "real estate"]
+      },
+      {
+        "term": "compound interest",
+        "swahili": "riba inayojizidisha",
+        "definition": "Interest calculated on initial principal and accumulated interest",
+        "example": "Compound interest helps long-term savings grow exponentially",
+        "related_terms": ["interest on interest", "compounding returns"],
+        "entities": ["investment", "finance fundamentals"]
+      },
+      {
+        "term": "diversification",
+        "swahili": "upanuzi wa uwekezaji",
+        "definition": "Strategy of spreading investments to reduce risk",
+        "example": "Diversify across stocks, bonds, and money market funds",
+        "related_terms": ["risk management", "asset spreading"],
+        "entities": ["investment", "strategy"]
+      }
+    ],
+    "stock_market": {
+      "nse_indices": [
+        {
+          "name": "NSE 20 Share Index",
+          "description": "Tracks performance of 20 blue-chip companies on the NSE",
+          "calculation": "Market capitalization weighted",
+          "baseline": "January 1966 = 100"
+        },
+        {
+          "name": "NSE All Share Index (NASI)",
+          "description": "Tracks performance of all stocks listed on the NSE",
+          "calculation": "Market capitalization weighted",
+          "baseline": "February 2008 = 100"
+        },
+        {
+          "name": "NSE 25 Share Index",
+          "description": "Tracks performance of 25 selected liquid stocks on the NSE",
+          "calculation": "Market capitalization weighted",
+          "baseline": "2013 = 100"
+        }
+      ],
+      "market_segments": [
+        {
+          "name": "Main Investment Market Segment (MIMS)",
+          "description": "Primary listing segment for established companies",
+          "requirements": "Minimum capitalization of KES 100 million, at least 25% shares offered to public"
+        },
+        {
+          "name": "Alternative Investment Market Segment (AIMS)",
+          "description": "For smaller companies with growth potential",
+          "requirements": "Minimum capitalization of KES 20 million, at least 20% shares offered to public"
+        },
+        {
+          "name": "Growth Enterprise Market Segment (GEMS)",
+          "description": "For small and medium enterprises (SMEs)",
+          "requirements": "No minimum capitalization, minimum 15% shares offered to public"
+        }
+      ],
+      "listed_companies": [
+        {
+          "name": "Safaricom PLC",
+          "ticker": "SCOM",
+          "sector": "Telecommunications",
+          "description": "Kenya's largest mobile network operator and M-Pesa provider",
+          "key_metrics": ["P/E ratio", "dividend yield", "market capitalization"]
+        },
+        {
+          "name": "Equity Group Holdings",
+          "ticker": "EQTY",
+          "sector": "Banking",
+          "description": "One of Kenya's largest banking groups",
+          "key_metrics": ["P/E ratio", "dividend yield", "market capitalization"]
+        },
+        {
+          "name": "KCB Group PLC",
+          "ticker": "KCB",
+          "sector": "Banking",
+          "description": "Kenya's largest bank by asset base",
+          "key_metrics": ["P/E ratio", "dividend yield", "market capitalization"]
+        },
+        {
+          "name": "East African Breweries PLC",
+          "ticker": "EABL",
+          "sector": "Manufacturing & Allied",
+          "description": "Leading alcoholic beverage company in East Africa",
+          "key_metrics": ["P/E ratio", "dividend yield", "market capitalization"]
+        },
+        {
+          "name": "BAT Kenya PLC",
+          "ticker": "BAT",
+          "sector": "Manufacturing & Allied",
+          "description": "Cigarette and tobacco products manufacturer",
+          "key_metrics": ["P/E ratio", "dividend yield", "market capitalization"]
+        }
+      ],
+      "market_terminology": [
+        {
+          "term": "IPO",
+          "swahili": "toleo la awali kwa umma",
+          "definition": "Initial Public Offering - when a company first sells shares to the public",
+          "example": "Safaricom's IPO in 2008 was oversubscribed by 532%"
+        },
+        {
+          "term": "bull market",
+          "swahili": "soko la kupanda",
+          "definition": "Market period characterized by rising share prices",
+          "example": "The NSE experienced a bull market following the 2023 elections"
+        },
+        {
+          "term": "bear market",
+          "swahili": "soko la kushuka",
+          "definition": "Market period characterized by falling share prices",
+          "example": "The 2008 global financial crisis triggered a bear market"
+        },
+        {
+          "term": "market capitalization",
+          "swahili": "thamani ya kampuni sokoni",
+          "definition": "Total value of a company's outstanding shares",
+          "example": "Safaricom has the largest market cap on the NSE"
+        },
+        {
+          "term": "dividend yield",
+          "swahili": "kipato cha mgao",
+          "definition": "Annual dividend payment as a percentage of share price",
+          "example": "Some NSE stocks offer dividend yields above 7%"
+        },
+        {
+          "term": "stockbroker",
+          "swahili": "dalali wa hisa",
+          "definition": "Licensed professional who buys and sells stocks on behalf of clients",
+          "example": "You need a stockbroker to trade shares on the NSE"
+        },
+        {
+          "term": "CDS account",
+          "swahili": "akaunti ya CDS",
+          "definition": "Central Depository System account for holding electronic shares",
+          "example": "Open a CDS account through your stockbroker to buy NSE shares"
+        }
+      ]
+    },
+    "mobile_money": {
+      "services": [
+        {
+          "name": "M-Pesa",
+          "provider": "Safaricom",
+          "description": "Leading mobile money transfer service in Kenya",
+          "launch_year": 2007,
+          "common_terms": [
+            {
+              "term": "Lipa na M-Pesa",
+              "definition": "Pay with M-Pesa, used for merchant payments",
+              "example": "Most shops display a Lipa na M-Pesa till number"
+            },
+            {
+              "term": "Fuliza",
+              "definition": "M-Pesa overdraft facility",
+              "example": "When you lack sufficient funds, Fuliza covers the difference"
+            },
+            {
+              "term": "M-Shwari",
+              "definition": "Savings and loan service offered through M-Pesa",
+              "example": "Save money and get loans through M-Shwari"
+            },
+            {
+              "term": "KCB M-Pesa",
+              "definition": "Banking service that offers loans and savings through M-Pesa",
+              "example": "KCB M-Pesa offers higher loan limits than M-Shwari"
+            },
+            {
+              "term": "M-Pesa Global",
+              "definition": "International money transfer service",
+              "example": "Send money to friends abroad using M-Pesa Global"
+            }
+          ]
+        },
+        {
+          "name": "T-Kash",
+          "provider": "Telkom Kenya",
+          "description": "Mobile money service by Telkom Kenya",
+          "launch_year": 2018
+        },
+        {
+          "name": "Airtel Money",
+          "provider": "Airtel Kenya",
+          "description": "Mobile money service by Airtel",
+          "launch_year": 2011
+        }
+      ],
+      "transaction_types": [
+        {
+          "type": "Send Money",
+          "swahili": "Tuma Pesa",
+          "description": "Transfer money to another mobile money user"
+        },
+        {
+          "type": "Withdraw Cash",
+          "swahili": "Toa Pesa",
+          "description": "Get physical cash from an agent"
+        },
+        {
+          "type": "Pay Bill",
+          "swahili": "Lipa Bill",
+          "description": "Pay for services using a business number"
+        },
+        {
+          "type": "Buy Goods and Services",
+          "swahili": "Nunua Bidhaa na Huduma",
+          "description": "Pay merchants using till numbers"
+        },
+        {
+          "type": "Deposit",
+          "swahili": "Weka Pesa",
+          "description": "Add money to your mobile money account through an agent"
+        }
+      ],
+      "common_charges": [
+        {
+          "transaction": "Send to registered user",
+          "charge_range": "KES 0-105 depending on amount",
+          "notes": "Sending KES 100 or less is free"
+        },
+        {
+          "transaction": "Send to unregistered user",
+          "charge_range": "KES 45-309 depending on amount",
+          "notes": "Recipient pays withdrawal fee"
+        },
+        {
+          "transaction": "Withdrawal at agent",
+          "charge_range": "KES 10-300 depending on amount",
+          "notes": "Higher amounts have higher fees"
+        },
+        {
+          "transaction": "Pay Bill",
+          "charge_range": "KES 0-44 depending on amount",
+          "notes": "Many utility payments are free"
+        },
+        {
+          "transaction": "Buy Goods",
+          "charge_range": "Free for customer",
+          "notes": "Merchant pays a commission"
+        }
+      ]
+    },
+    "loan_credit": {
+      "loan_types": [
+        {
+          "type": "Personal Loan",
+          "swahili": "Mkopo wa Kibinafsi",
+          "description": "Unsecured loan for personal use",
+          "common_providers": ["KCB", "Equity Bank", "Co-operative Bank"],
+          "interest_rate_range": "13% - 18% per annum",
+          "typical_terms": "12-60 months"
+        },
+        {
+          "type": "Mobile Loan",
+          "swahili": "Mkopo wa Simu",
+          "description": "Short-term loans accessible via mobile phone",
+          "common_providers": ["M-Shwari", "KCB M-Pesa", "Tala", "Branch"],
+          "interest_rate_range": "7.5% - 10% monthly",
+          "typical_terms": "1-30 days"
+        },
+        {
+          "type": "Mortgage",
+          "swahili": "Mkopo wa Nyumba",
+          "description": "Long-term loan for buying property",
+          "common_providers": ["KCB", "HF Group", "Stanbic", "Absa"],
+          "interest_rate_range": "11.5% - 15% per annum",
+          "typical_terms": "5-25 years"
+        },
+        {
+          "type": "Business Loan",
+          "swahili": "Mkopo wa Biashara",
+          "description": "Loan for business operations or expansion",
+          "common_providers": ["Equity Bank", "KCB", "Co-operative Bank", "DTB"],
+          "interest_rate_range": "14% - 18% per annum",
+          "typical_terms": "1-7 years"
+        },
+        {
+          "type": "Asset Finance",
+          "swahili": "Ufadhili wa Mali",
+          "description": "Loan for purchasing specific assets like vehicles",
+          "common_providers": ["NIC Bank", "Commercial Bank of Africa", "I&M Bank"],
+          "interest_rate_range": "14% - 16% per annum",
+          "typical_terms": "1-5 years"
+        },
+        {
+          "type": "Logbook Loan",
+          "swahili": "Mkopo wa Logbook",
+          "description": "Loan secured against a vehicle's logbook",
+          "common_providers": ["Mwananchi Credit", "Platinum Credit", "Sidian Bank"],
+          "interest_rate_range": "1.5% - 3% monthly",
+          "typical_terms": "6-36 months"
+        }
+      ],
+      "credit_terms": [
+        {
+          "term": "CRB",
+          "full_form": "Credit Reference Bureau",
+          "swahili": "Shirika la Kumbukumbu za Mikopo",
+          "definition": "Organizations that collect and maintain credit information",
+          "examples": ["TransUnion", "Metropol", "Creditinfo"]
+        },
+        {
+          "term": "Credit Score",
+          "swahili": "Alama ya Mkopo",
+          "definition": "Numerical expression of creditworthiness based on credit history",
+          "example": "A high credit score improves your chances of loan approval"
+        },
+        {
+          "term": "Collateral",
+          "swahili": "Dhamana",
+          "definition": "Assets pledged as security for a loan",
+          "example": "Property title deeds often serve as collateral for large loans"
+        },
+        {
+          "term": "Guarantor",
+          "swahili": "Mdhamini",
+          "definition": "Person who guarantees to pay a borrower's debt if they default",
+          "example": "Some loans require a guarantor with steady income"
+        },
+        {
+          "term": "Principal",
+          "swahili": "Mtaji",
+          "definition": "Original loan amount without interest",
+          "example": "Your monthly payment covers both principal and interest"
+        },
+        {
+          "term": "Grace Period",
+          "swahili": "Kipindi cha Subira",
+          "definition": "Period after loan disbursement before repayments begin",
+          "example": "Student loans often have a grace period until after graduation"
+        },
+        {
+          "term": "Loan Restructuring",
+          "swahili": "Kupanga Upya Mkopo",
+          "definition": "Modifying loan terms to make repayment more manageable",
+          "example": "Banks may offer restructuring to struggling borrowers"
+        },
+        {
+          "term": "Default",
+          "swahili": "Kutolipa Mkopo",
+          "definition": "Failure to meet loan repayment obligations",
+          "example": "Loan default leads to penalties and negative CRB listing"
+        }
+      ]
+    },
+    "macroeconomic_indicators": {
+      "inflation": {
+        "definition": "Rate at which prices increase over time",
+        "swahili": "mfumuko wa bei",
+        "reporting_authority": "Kenya National Bureau of Statistics",
+        "measurement": "Consumer Price Index (CPI)",
+        "impact": "Affects purchasing power, interest rates, and investment returns",
+        "recent_trends": "Averaged 5-8% in recent years"
+      },
+      "gdp": {
+        "definition": "Gross Domestic Product - total value of goods and services produced",
+        "swahili": "pato la taifa",
+        "reporting_authority": "Kenya National Bureau of Statistics",
+        "frequency": "Quarterly",
+        "calculation_methods": ["Production approach", "Expenditure approach", "Income approach"],
+        "sectors": ["Agriculture", "Manufacturing", "Services", "Real Estate", "Financial Services"]
+      },
+      "exchange_rates": {
+        "definition": "Value of Kenyan Shilling relative to foreign currencies",
+        "swahili": "viwango vya ubadilishaji fedha",
+        "reporting_authority": "Central Bank of Kenya",
+        "frequency": "Daily",
+        "key_pairs": ["KES/USD", "KES/EUR", "KES/GBP", "KES/JPY"]
+      },
+      "interest_rates": [
+        {
+          "name": "Central Bank Rate (CBR)",
+          "swahili": "kiwango cha benki kuu",
+          "definition": "Key policy rate set by Central Bank of Kenya",
+          "impact": "Influences commercial bank lending rates",
+          "frequency": "Reviewed bi-monthly by Monetary Policy Committee"
+        },
+        {
+          "name": "91-day T-bill rate",
+          "definition": "Rate for 3-month government securities",
+          "impact": "Benchmark for short-term interest rates",
+          "frequency": "Auctioned weekly"
+        },
+        {
+          "name": "Kenya Banks Reference Rate (KBRR)",
+          "definition": "Reference rate for pricing banking products",
+          "impact": "Helps standardize loan pricing across banks",
+          "calculation": "Based on CBR and 91-day T-bill averages"
+        }
+      ],
+      "balance_of_payments": {
+        "definition": "Record of all economic transactions between Kenya and the world",
+        "components": ["Current Account", "Capital Account", "Financial Account"],
+        "key_metrics": ["Trade Balance", "Foreign Direct Investment", "Remittances"]
+      },
+      "public_debt": {
+        "definition": "Total amount owed by the Kenyan government",
+        "types": ["Domestic Debt", "External Debt"],
+        "measurement": "As percentage of GDP",
+        "reporting_authority": "National Treasury"
+      }
+    },
+    "taxation": {
+      "income_tax": {
+        "individual": [
+          {
+            "term": "PAYE",
+            "full_form": "Pay As You Earn",
+            "definition": "Income tax deducted from employment income",
+            "current_rates": "10% - 30% progressive tax bands",
+            "tax_bands": [
+              "Up to KES 24,000: 10%",
+              "KES 24,001 - 32,333: 25%",
+              "Above KES 32,333: 30%"
+            ],
+            "personal_relief": "KES 2,400 per month"
+          },
+          {
+            "term": "Rental Income Tax",
+            "definition": "Tax on income from property rental",
+            "rate": "10% of gross rental income for properties below KES 15 million annually"
+          }
+        ],
+        "corporate": [
+          {
+            "term": "Corporate Tax",
+            "definition": "Tax on company profits",
+            "current_rate": "30% for resident companies, 37.5% for non-resident"
+          },
+          {
+            "term": "Withholding Tax",
+            "definition": "Tax deducted at source from specified payments",
+            "rates": {
+              "Dividends": "5% for residents, 15% for non-residents",
+              "Interest": "15% for residents, 15% for non-residents",
+              "Management fees": "5% for residents, 20% for non-residents"
+            }
+          }
+        ]
+      },
+      "consumption_taxes": [
+        {
+          "name": "VAT",
+          "full_form": "Value Added Tax",
+          "swahili": "Ushuru wa Thamani Iliyoongezwa",
+          "current_rate": "16%",
+          "exemptions": ["Basic food items", "Medical supplies", "Financial services"],
+          "zero_rated": ["Exports", "Agricultural inputs", "Books and newspapers"]
+        },
+        {
+          "name": "Excise Duty",
+          "swahili": "Ushuru wa Bidhaa",
+          "definition": "Tax imposed on specific goods manufactured or imported",
+          "affected_items": ["Alcohol", "Tobacco", "Fuel", "Mobile money transfers", "Bank charges"]
+        }
+      ],
+      "other_taxes": [
+        {
+          "name": "Capital Gains Tax",
+          "definition": "Tax on profit from sale of property or investment",
+          "current_rate": "5% on net gain"
+        },
+        {
+          "name": "Stamp Duty",
+          "definition": "Tax on legal documents and transactions",
+          "rates": {
+            "Urban property": "4% of property value",
+            "Rural property": "2% of property value",
+            "Shares": "1% of transaction value"
+          }
+        },
+        {
+          "name": "Digital Service Tax",
+          "definition": "Tax on income from digital marketplace services",
+          "current_rate": "1.5% of gross transaction value"
+        }
+      ],
+      "filing_terms": [
+        {
+          "term": "iTax",
+          "definition": "KRA's online tax filing system",
+          "example": "File your tax returns through iTax by June 30th"
+        },
+        {
+          "term": "PIN",
+          "full_form": "Personal Identification Number",
+          "definition": "Unique tax identification number issued by KRA",
+          "example": "You need a KRA PIN to file tax returns and for major transactions"
+        },
+        {
+          "term": "Tax Return",
+          "swahili": "Marejesho ya Ushuru",
+          "definition": "Annual declaration of income, expenses, and tax liability",
+          "filing_deadline": "June 30th for individuals"
+        }
+      ]
+    },
+    "insurance_retirement": {
+      "insurance_types": [
+        {
+          "type": "Health Insurance",
+          "swahili": "Bima ya Afya",
+          "key_providers": ["NHIF", "AAR", "Jubilee", "Britam"],
+          "concepts": ["premium", "claim", "coverage", "pre-existing conditions"],
+          "mandatory": {
+            "name": "NHIF",
+            "full_form": "National Hospital Insurance Fund",
+            "contribution_rates": "KES 150-1,700 based on income",
+            "benefits": "Inpatient coverage, surgeries, maternity care"
+          }
+        },
+        {
+          "type": "Life Insurance",
+          "swahili": "Bima ya Maisha",
+          "key_providers": ["Britam", "ICEA Lion", "CIC"],
+          "concepts": ["sum assured", "beneficiary", "policy term", "premium"],
+          "product_types": ["Term life", "Whole life", "Endowment", "Unit-linked"]
+        },
+        {
+          "type": "Motor Insurance",
+          "swahili": "Bima ya Gari",
+          "key_providers": ["APA", "Heritage", "Jubilee", "Madison"],
+          "concepts": ["third party", "comprehensive", "excess", "no-claims bonus"],
+          "coverage_types": [
+            "Third Party Only (mandatory)",
+            "Third Party Fire & Theft",
+            "Comprehensive"
+          ]
+        },
+        {
+          "type": "Property Insurance",
+          "swahili": "Bima ya Mali",
+          "key_providers": ["AIG Kenya", "CIC", "UAP"],
+          "concepts": ["indemnity", "reinstatement", "exclusions"],
+          "coverage_areas": ["Fire", "Burglary", "Natural disasters", "Liability"]
+        },
+        {
+          "type": "Micro-Insurance",
+          "swahili": "Bima Ndogo",
+          "key_providers": ["BIMA", "MicroEnsure", "Britam"],
+          "features": "Low premiums, simple claims process, limited coverage",
+          "example_products": ["Crop insurance", "Hospital cash", "Funeral cover"]
+        }
+      ],
+      "retirement_schemes": [
+        {
+          "name": "NSSF",
+          "full_form": "National Social Security Fund",
+          "swahili": "Hazina ya Hifadhi ya Jamii",
+          "type": "Mandatory retirement scheme",
+          "contribution_rate": "6% of pensionable wages (equally split between employer and employee)",
+          "maximum_contribution": "KES 2,160 per month (KES 1,080 employee, KES 1,080 employer)",
+          "benefits": "Lump sum payment at retirement (age 60)"
+        },
+        {
+          "name": "Occupational Pension Schemes",
+          "swahili": "Mipango ya Pensheni ya Kazini",
+          "type": "Employer-sponsored retirement schemes",
+          "examples": ["KenGen Staff Retirement Benefits Scheme", "Kenya Power Pension Fund"],
+          "structure_types": ["Defined Benefit", "Defined Contribution", "Hybrid"]
+        },
+        {
+          "name": "Personal Pension Plans",
+          "swahili": "Mipango ya Kibinafsi ya Uzeeni",
+          "examples": ["Zimele Personal Pension", "Britam Individual Pension"],
+          "tax_benefits": "Tax deductible contributions up to KES 20,000 monthly",
+          "access": "Accessible from age 50, with 1/3 tax-free lump sum"
+        },
+        {
+          "name": "Income Drawdown",
+          "definition": "Option to draw regular income from pension fund after retirement",
+          "advantage": "Keeps funds invested while providing regular income",
+          "minimum_withdrawal": "Minimum 4% of fund value annually"
+        }
+      ],
+      "insurance_concepts": [
+        {
+          "term": "Premium",
+          "swahili": "Kiasi cha Bima",
+          "definition": "Regular payment made to maintain insurance coverage",
+          "example": "Monthly health insurance premium of KES 2,500"
+        },
+        {
+          "term": "Claim",
+          "swahili": "Dai",
+          "definition": "Request for payment from insurance after a covered event",
+          "example": "File a claim after a car accident"
+        },
+        {
+          "term": "Underwriting",
+          "swahili": "Utathmini wa Hatari",
+          "definition": "Process of assessing risk to determine premium",
+          "example": "Medical underwriting may require a health check"
+        },
+        {
+          "term": "Exclusion",
+          "swahili": "Utenguaji",
+          "definition": "Specific condition or circumstance not covered by insurance",
+          "example": "Pre-existing conditions are often excluded in new policies"
+        }
+      ]
+    },
+    "financial_regulations": [
+      {
+        "name": "Banking Act",
+        "regulator": "Central Bank of Kenya (CBK)",
+        "purpose": "Regulates banking and financial institutions",
+        "key_provisions": [
+          "Minimum capital requirements",
+          "Licensing requirements",
+          "Corporate governance standards",
+          "Reporting obligations"
+        ]
+      },
+      {
+        "name": "Capital Markets Act",
+        "regulator": "Capital Markets Authority (CMA)",
+        "purpose": "Regulates capital markets and securities industry",
+        "key_provisions": [
+          "Securities issuance and trading",
+          "Investor protection",
+          "Market intermediary licensing",
+          "Disclosure requirements"
+        ]
+      },
+      {
+        "name": "Insurance Act",
+        "regulator": "Insurance Regulatory Authority (IRA)",
+        "purpose": "Regulates insurance business and intermediaries",
+        "key_provisions": [
+          "Insurer registration and licensing",
+          "Solvency requirements",
+          "Market conduct rules",
+          "Claims settlement guidelines"
+        ]
+      },
+      {
+        "name": "Retirement Benefits Act",
+        "regulator": "Retirement Benefits Authority (RBA)",
+        "purpose": "Regulates retirement benefits industry",
+        "key_provisions": [
+          "Registration of schemes",
+          "Investment guidelines",
+          "Trustees' responsibilities",
+          "Member protection"
+        ]
+      },
+      {
+        "name": "SACCO Societies Act",
+        "regulator": "SACCO Societies Regulatory Authority (SASRA)",
+        "purpose": "Regulates deposit-taking SACCOs",
+        "key_provisions": [
+          "Licensing of deposit-taking SACCOs",
+          "Capital adequacy requirements",
+          "Liquidity management",
+          "Governance standards"
+        ]
+      },
+      {
+        "name": "Proceeds of Crime and Anti-Money Laundering Act",
+        "regulator": "Financial Reporting Centre (FRC)",
+        "purpose": "Prevents money laundering and terrorist financing",
+        "key_provisions": [
+          "Customer due diligence",
+          "Suspicious transaction reporting",
+          "Record keeping requirements",
+          "Penalties for non-compliance"
+        ]
+      },
+      {
+        "name": "Data Protection Act, 2019",
+        "regulator": "Office of the Data Protection Commissioner",
+        "purpose": "Protects personal data including financial information",
+        "key_provisions": [
+          "Lawful processing of data",
+          "Data subject rights",
+          "Consent requirements",
+          "Data breach notification"
+        ]
+      }
+    ],
+    "common_financial_phrases": [
+      {
+        "phrase": "Niko na shida ya pesa",
+        "english": "I have financial problems",
+        "context": "Financial distress"
+      },
+      {
+        "phrase": "Nataka kuwekeza pesa yangu",
+        "english": "I want to invest my money",
+        "context": "Investment inquiry"
+      },
+      {
+        "phrase": "Bei ya unga imepanda sana",
+        "english": "The price of flour has increased a lot",
+        "context": "Inflation discussion"
+      },
+      {
+        "phrase": "Nimekuwa blacklisted na CRB",
+        "english": "I have been blacklisted by CRB",
+        "context": "Credit issues"
+      },
+      {
+        "phrase": "Nataka kujitayarisha kwa uzeeni",
+        "english": "I want to prepare for retirement",
+        "context": "Retirement planning"
+      },
+      {
+        "phrase": "Naweza kupata mkopo wa biashara?",
+        "english": "Can I get a business loan?",
+        "context": "Business financing"
+      },
+      {
+        "phrase": "Namna gani naweza kuokoa pesa?",
+        "english": "How can I save money?",
+        "context": "Savings advice"
+      },
+      {
+        "phrase": "Nataka kufungua akaunti ya benki",
+        "english": "I want to open a bank account",
+        "context": "Banking services"
+      },
+      {
+        "phrase": "Riba ya mkopo huu ni ngapi?",
+        "english": "What is the interest rate for this loan?",
+        "context": "Loan inquiry"
+      },
+      {
+        "phrase": "Gharama ya bima ya afya ni ngapi?",
+        "english": "How much does health insurance cost?",
+        "context": "Insurance inquiry"
+      },
+      {
+        "phrase": "Nifanye nini ili kuweka akiba?",
+        "english": "What should I do to save?",
+        "context": "Financial planning"
+      },
+      {
+        "phrase": "Nitanunuaje hisa za NSE?",
+        "english": "How do I buy NSE shares?",
+        "context": "Stock market investment"
+      },
+      {
+        "phrase": "Bima ya gari bora ni ipi?",
+        "english": "Which is the best car insurance?",
+        "context": "Insurance comparison"
+      },
+      {
+        "phrase": "Nataka kulipa mkopo wangu haraka",
+        "english": "I want to pay off my loan quickly",
+        "context": "Debt management"
+      },
+      {
+        "phrase": "Mnaweza kunielekezaje masuala ya urithi?",
+        "english": "Can you guide me on inheritance matters?",
+        "context": "Estate planning"
+      }
+    ],
+    "financial_literacy_concepts": [
+      {
+        "concept": "Budgeting",
+        "swahili": "Utengenezaji Bajeti",
+        "definition": "Planning how to spend and save money over a specific period",
+        "key_components": ["Income tracking", "Expense categorization", "Saving allocation"],
+        "importance": "Foundation of financial planning and avoiding debt"
+      },
+      {
+        "concept": "Emergency Fund",
+        "swahili": "Akiba ya Dharura",
+        "definition": "Money set aside for unexpected expenses or financial hardships",
+        "recommended_size": "3-6 months of living expenses",
+        "importance": "Provides financial security and reduces reliance on debt"
+      },
+      {
+        "concept": "Debt Management",
+        "swahili": "Usimamizi wa Madeni",
+        "definition": "Strategies to handle loans and debts effectively",
+        "key_strategies": ["Prioritizing high-interest debt", "Consolidation", "Refinancing"],
+        "importance": "Reduces financial stress and interest payments"
+      },
+      {
+        "concept": "Risk Management",
+        "swahili": "Usimamizi wa Hatari",
+        "definition": "Protecting against financial losses through insurance and diversification",
+        "components": ["Adequate insurance", "Investment diversification", "Emergency planning"],
+        "importance": "Shields from catastrophic financial loss"
+      },
+      {
+        "concept": "Inflation Awareness",
+        "swahili": "Ufahamu wa Mfumuko wa Bei",
+        "definition": "Understanding how rising prices affect purchasing power",
+        "key_insight": "Money loses value over time if not invested above inflation rate",
+        "importance": "Critical for long-term financial planning"
+      }
+    ],
+    "personal_finance": {
+      "life_stages": [
+        {
+          "stage": "Young Adult (18-25)",
+          "financial_priorities": ["Education funding", "Building credit", "Starting savings habits"],
+          "key_challenges": ["Student loans", "Low income", "Limited financial knowledge"],
+          "recommended_products": ["Student savings account", "Education insurance", "Starter credit card"]
+        },
+        {
+          "stage": "Career Building (26-35)",
+          "financial_priorities": ["Emergency fund", "Retirement contributions", "Debt reduction"],
+          "key_challenges": ["Housing costs", "Career instability", "Family formation expenses"],
+          "recommended_products": ["Retirement plans", "Mortgage products", "Life insurance"]
+        },
+        {
+          "stage": "Mid-life (36-50)",
+          "financial_priorities": ["Education funding for children", "Accelerated retirement saving", "Investment growth"],
+          "key_challenges": ["Multiple financial responsibilities", "Healthcare costs", "Aging parents"],
+          "recommended_products": ["Education savings plans", "Comprehensive insurance", "Investment diversification"]
+        },
+        {
+          "stage": "Pre-retirement (51-60)",
+          "financial_priorities": ["Maximizing retirement contributions", "Debt elimination", "Healthcare planning"],
+          "key_challenges": ["Catching up on savings", "Career transitions", "Health issues"],
+          "recommended_products": ["Retirement income strategies", "Long-term care planning", "Estate planning"]
+        },
+        {
+          "stage": "Retirement (60+)",
+          "financial_priorities": ["Income generation", "Asset preservation", "Legacy planning"],
+          "key_challenges": ["Longevity risk", "Healthcare costs", "Market volatility"],
+          "recommended_products": ["Income drawdown", "Annuities", "Estate planning services"]
+        }
+      ],
+      "financial_goals": [
+        {
+          "goal": "Home Ownership",
+          "swahili": "Umiliki wa Nyumba",
+          "typical_timeframe": "Medium to long-term (5-15 years)",
+          "saving_strategies": ["Dedicated savings account", "Government schemes", "Mortgage pre-qualification"],
+          "common_challenges": ["Down payment requirements", "Property price inflation", "Hidden costs"]
+        },
+        {
+          "goal": "Education Funding",
+          "swahili": "Ufadhili wa Elimu",
+          "typical_timeframe": "Long-term (10-20 years)",
+          "saving_strategies": ["Education insurance policies", "Unit trusts", "Regular savings"],
+          "common_challenges": ["Rising education costs", "Unknown future education needs", "Balancing with retirement"]
+        },
+        {
+          "goal": "Comfortable Retirement",
+          "swahili": "Kustaafu kwa Starehe",
+          "typical_timeframe": "Long-term (20-40 years)",
+          "saving_strategies": ["Pension schemes", "Investment diversification", "Increasing contributions with age"],
+          "common_challenges": ["Longevity risk", "Inflation", "Healthcare costs"]
+        },
+        {
+          "goal": "Starting a Business",
+          "swahili": "Kuanza Biashara",
+          "typical_timeframe": "Short to medium-term (1-5 years)",
+          "saving_strategies": ["Dedicated business fund", "Small startups while employed", "Partnership funding"],
+          "common_challenges": ["Startup capital", "Cash flow management", "Business viability"]
+        }
+      ]
+    }
+  }
