@@ -1,13 +1,4 @@
 <?php
-/**
- * UserModel.php
- * 
- * User data model for PesaGuru Financial Advisory Chatbot
- * Handles user authentication, profile management, and related operations
- * 
- * @package PesaGuru
- * @subpackage Models
- */
 
 namespace PesaGuru\Models;
 
