@@ -1,0 +1,1 @@
+<?php // Regulatory compliance checker ?> 
