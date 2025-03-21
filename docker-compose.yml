@@ -1,1 +1,107 @@
-version: '3' 
+version: '3.8'
+
+services:
+  # Web Server (PHP/Apache)
+  web:
+    build:
+      context: ./docker/web
+      dockerfile: Dockerfile
+    container_name: pesaguru-web
+    restart: unless-stopped
+    depends_on:
+      - db
+      - ai
+    volumes:
+      - ./:/var/www/html
+      - ./docker/web/php.ini:/usr/local/etc/php/php.ini
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=pesaguru
+      - DB_USERNAME=pesaguru_user
+      - DB_PASSWORD=pesaguru_password
+      - AI_SERVICE_URL=http://ai:8000
+    networks:
+      - pesaguru-network
+
+  # Database Server (MySQL)
+  db:
+    build:
+      context: ./docker/db
+      dockerfile: Dockerfile
+    container_name: pesaguru-db
+    restart: unless-stopped
+    volumes:
+      - pesaguru-db-data:/var/lib/mysql
+      - ./docker/db/my-custom.cnf:/etc/mysql/conf.d/my-custom.cnf
+      - ./docker/db/init:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=secure_root_password
+      - MYSQL_DATABASE=pesaguru_db
+      - MYSQL_USER=pesaguru_user
+      - MYSQL_PASSWORD=secure_user_password
+    ports:
+      - "3307:3306"
+    networks:
+      - pesaguru-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "pesaguru_user", "--password=pesaguru_password"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+  # AI Service (Python)
+  ai:
+    build:
+      context: ./docker/ai
+      dockerfile: Dockerfile
+    container_name: pesaguru-ai
+    restart: unless-stopped
+    volumes:
+      - ./docker/ai/src:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=pesaguru
+      - DB_USERNAME=pesaguru_user
+      - DB_PASSWORD=pesaguru_password
+    depends_on:
+      - db
+    networks:
+      - pesaguru-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+  # PHPMyAdmin (optional)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pesaguru-phpmyadmin
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+      - MYSQL_ROOT_PASSWORD=root_password
+    depends_on:
+      - db
+    networks:
+      - pesaguru-network
+
+networks:
+  pesaguru-network:
+    driver: bridge
+
+volumes:
+  pesaguru-db-data:
+    driver: local
