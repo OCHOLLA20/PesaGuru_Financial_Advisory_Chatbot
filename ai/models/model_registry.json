@@ -1,1 +1,452 @@
-{ "models": [] } 
+{
+  "version": "1.0.0",
+  "last_updated": "2025-03-21",
+  "models": {
+    "intent_classifier": {
+      "id": "intent-classifier-v1",
+      "type": "classification",
+      "framework": "transformers",
+      "base_model": "bert-base-uncased",
+      "fine_tuned": true,
+      "version": "1.2.0",
+      "description": "Classifies user intents for financial queries",
+      "accuracy": 0.92,
+      "training_data": "data/intent_training_data.csv",
+      "classes": [
+        "investment_advice", 
+        "loan_comparison", 
+        "risk_assessment", 
+        "market_trends", 
+        "budgeting_savings", 
+        "stocks_inquiry", 
+        "retirement_planning", 
+        "tax_information", 
+        "financial_education"
+      ],
+      "languages": ["english", "swahili"],
+      "file_path": "models/intent_classifier.pkl",
+      "metrics": {
+        "precision": 0.91,
+        "recall": 0.89,
+        "f1_score": 0.90
+      },
+      "deployment": {
+        "endpoint": "/api/intent",
+        "batch_size": 16,
+        "timeout_ms": 500
+      }
+    },
+    "entity_extractor": {
+      "id": "financial-entity-extractor-v1",
+      "type": "ner",
+      "framework": "spacy",
+      "base_model": "en_core_web_lg",
+      "fine_tuned": true,
+      "version": "1.1.5",
+      "description": "Extracts financial entities from user queries",
+      "accuracy": 0.88,
+      "training_data": "data/financial_ner_training.json",
+      "entities": [
+        "STOCK_SYMBOL", 
+        "COMPANY_NAME", 
+        "MONETARY_VALUE", 
+        "PERCENTAGE", 
+        "TIME_PERIOD", 
+        "FINANCIAL_INSTRUMENT", 
+        "SECTOR"
+      ],
+      "languages": ["english"],
+      "file_path": "models/entity_extractor.pkl",
+      "metrics": {
+        "precision": 0.87,
+        "recall": 0.85,
+        "f1_score": 0.86
+      },
+      "deployment": {
+        "endpoint": "/api/entities",
+        "batch_size": 16,
+        "timeout_ms": 300
+      }
+    },
+    "swahili_entity_extractor": {
+      "id": "swahili-financial-entity-extractor-v1",
+      "type": "ner",
+      "framework": "spacy",
+      "base_model": "custom_swahili_model",
+      "fine_tuned": true,
+      "version": "1.0.2",
+      "description": "Extracts financial entities from Swahili user queries",
+      "accuracy": 0.82,
+      "training_data": "data/swahili_corpus.json",
+      "entities": [
+        "STOCK_SYMBOL", 
+        "COMPANY_NAME", 
+        "MONETARY_VALUE", 
+        "PERCENTAGE", 
+        "TIME_PERIOD", 
+        "FINANCIAL_INSTRUMENT", 
+        "SECTOR"
+      ],
+      "languages": ["swahili"],
+      "file_path": "models/swahili_entity_extractor.pkl",
+      "metrics": {
+        "precision": 0.80,
+        "recall": 0.78,
+        "f1_score": 0.79
+      },
+      "deployment": {
+        "endpoint": "/api/entities/swahili",
+        "batch_size": 16,
+        "timeout_ms": 350
+      }
+    },
+    "financial_bert": {
+      "id": "financial-bert-v1",
+      "type": "language_model",
+      "framework": "transformers",
+      "base_model": "bert-base-uncased",
+      "fine_tuned": true,
+      "version": "1.3.1",
+      "description": "Domain-specific BERT model for financial text understanding",
+      "accuracy": 0.91,
+      "training_data": "data/kenyan_financial_corpus.json",
+      "languages": ["english"],
+      "file_path": "models/financial_bert.pt",
+      "metrics": {
+        "perplexity": 3.75,
+        "accuracy": 0.91
+      },
+      "deployment": {
+        "endpoint": "/api/financial-bert",
+        "batch_size": 8,
+        "timeout_ms": 800
+      }
+    },
+    "sentiment_analyzer": {
+      "id": "sentiment-analyzer-v1",
+      "type": "classification",
+      "framework": "transformers",
+      "base_model": "roberta-base",
+      "fine_tuned": true,
+      "version": "1.1.0",
+      "description": "Analyzes sentiment in financial contexts and market news",
+      "accuracy": 0.89,
+      "training_data": "data/sentiment_training_data.csv",
+      "classes": ["positive", "neutral", "negative"],
+      "languages": ["english"],
+      "file_path": "models/sentiment_model.pkl",
+      "metrics": {
+        "precision": 0.88,
+        "recall": 0.87,
+        "f1_score": 0.87
+      },
+      "deployment": {
+        "endpoint": "/api/sentiment",
+        "batch_size": 24,
+        "timeout_ms": 400
+      }
+    },
+    "risk_profiler": {
+      "id": "risk-profiler-v2",
+      "type": "classification",
+      "framework": "scikit-learn",
+      "algorithm": "random_forest",
+      "version": "2.0.1",
+      "description": "Determines user risk tolerance from questionnaire responses",
+      "accuracy": 0.87,
+      "training_data": "data/risk_profile_training.csv",
+      "classes": ["conservative", "moderate", "aggressive"],
+      "languages": ["english", "swahili"],
+      "features": [
+        "age", 
+        "income", 
+        "investment_horizon", 
+        "investment_experience", 
+        "emergency_fund_status", 
+        "debt_level", 
+        "financial_goals"
+      ],
+      "file_path": "models/risk_profiler.pkl",
+      "metrics": {
+        "precision": 0.86,
+        "recall": 0.85,
+        "f1_score": 0.85
+      },
+      "deployment": {
+        "endpoint": "/api/risk-profile",
+        "batch_size": 32,
+        "timeout_ms": 300
+      }
+    },
+    "investment_recommender": {
+      "id": "investment-recommender-v1",
+      "type": "recommendation",
+      "framework": "tensorflow",
+      "algorithm": "neural_collaborative_filtering",
+      "version": "1.2.3",
+      "description": "Recommends investment products based on user profile and preferences",
+      "accuracy": 0.84,
+      "training_data": "data/investment_recommendations_training.csv",
+      "features": [
+        "risk_profile", 
+        "investment_horizon", 
+        "financial_goals", 
+        "prior_investments", 
+        "available_capital", 
+        "sector_preferences"
+      ],
+      "file_path": "models/recommendation_model.pkl",
+      "metrics": {
+        "precision@5": 0.82,
+        "recall@5": 0.79,
+        "ndcg@5": 0.81
+      },
+      "deployment": {
+        "endpoint": "/api/recommendations",
+        "batch_size": 16,
+        "timeout_ms": 600
+      }
+    },
+    "stock_market_predictor": {
+      "id": "nse-stock-predictor-v1",
+      "type": "regression",
+      "framework": "pytorch",
+      "algorithm": "lstm",
+      "version": "1.0.0",
+      "description": "Predicts NSE stock trends using historical data",
+      "accuracy": 0.76,
+      "training_data": "data/nse_stock_data_2015_2024.csv",
+      "features": [
+        "historical_prices", 
+        "trading_volume", 
+        "market_indices", 
+        "sector_performance", 
+        "macroeconomic_indicators"
+      ],
+      "file_path": "models/market_predictor.pt",
+      "metrics": {
+        "mse": 0.0025,
+        "mae": 0.0342,
+        "r2": 0.71
+      },
+      "deployment": {
+        "endpoint": "/api/market-prediction",
+        "batch_size": 1,
+        "timeout_ms": 800
+      }
+    },
+    "loan_analyzer": {
+      "id": "loan-analyzer-v1",
+      "type": "ranking",
+      "framework": "lightgbm",
+      "version": "1.1.0",
+      "description": "Ranks loan options based on user's financial situation and preferences",
+      "accuracy": 0.88,
+      "training_data": "data/kenyan_loan_options.csv",
+      "features": [
+        "interest_rate", 
+        "loan_term", 
+        "processing_fees", 
+        "early_repayment_penalties", 
+        "user_income", 
+        "user_debt_ratio", 
+        "loan_purpose", 
+        "credit_score"
+      ],
+      "file_path": "models/loan_analyzer.pkl",
+      "metrics": {
+        "ndcg": 0.87,
+        "precision@3": 0.85,
+        "recall@3": 0.83
+      },
+      "deployment": {
+        "endpoint": "/api/loan-comparison",
+        "batch_size": 8,
+        "timeout_ms": 500
+      }
+    },
+    "context_manager": {
+      "id": "conversation-context-v1",
+      "type": "sequence",
+      "framework": "transformers",
+      "base_model": "gpt-3.5-turbo",
+      "fine_tuned": true,
+      "version": "1.0.5",
+      "description": "Manages conversation context and ensures coherent dialogue",
+      "accuracy": 0.92,
+      "training_data": "data/financial_conversations.json",
+      "languages": ["english", "swahili"],
+      "file_path": "models/conversation_manager.pt",
+      "metrics": {
+        "coherence_score": 0.91,
+        "context_retention": 0.88,
+        "response_relevance": 0.90
+      },
+      "deployment": {
+        "endpoint": "/api/context-manager",
+        "batch_size": 1,
+        "timeout_ms": 700
+      }
+    },
+    "financial_education_recommender": {
+      "id": "financial-education-recommender-v1",
+      "type": "recommendation",
+      "framework": "scikit-learn",
+      "algorithm": "gradient_boosting",
+      "version": "1.0.2",
+      "description": "Recommends financial education content based on user knowledge level and interests",
+      "accuracy": 0.85,
+      "training_data": "data/financial_education_content.csv",
+      "features": [
+        "financial_literacy_level", 
+        "topics_of_interest", 
+        "learning_style_preference", 
+        "prior_knowledge", 
+        "time_availability"
+      ],
+      "file_path": "models/education_recommender.pkl",
+      "metrics": {
+        "precision@5": 0.84,
+        "recall@5": 0.82,
+        "ndcg@5": 0.83
+      },
+      "deployment": {
+        "endpoint": "/api/education-content",
+        "batch_size": 24,
+        "timeout_ms": 400
+      }
+    },
+    "budget_optimizer": {
+      "id": "budget-optimizer-v1",
+      "type": "optimization",
+      "framework": "custom",
+      "algorithm": "mixed_integer_programming",
+      "version": "1.0.1",
+      "description": "Optimizes user budgets based on financial goals and constraints",
+      "accuracy": 0.90,
+      "training_data": "data/kenyan_household_expenses.csv",
+      "features": [
+        "income", 
+        "fixed_expenses", 
+        "variable_expenses", 
+        "savings_goals", 
+        "debt_repayment_priorities", 
+        "financial_goals"
+      ],
+      "file_path": "models/budget_optimizer.pkl",
+      "metrics": {
+        "optimization_accuracy": 0.90,
+        "user_satisfaction": 0.88
+      },
+      "deployment": {
+        "endpoint": "/api/budget-optimization",
+        "batch_size": 1,
+        "timeout_ms": 800
+      }
+    },
+    "language_detector": {
+      "id": "language-detector-v1",
+      "type": "classification",
+      "framework": "fasttext",
+      "version": "1.0.0",
+      "description": "Detects whether input is in English or Swahili for appropriate processing",
+      "accuracy": 0.98,
+      "training_data": "data/multilingual_text_samples.csv",
+      "classes": ["english", "swahili", "mixed"],
+      "file_path": "models/language_detector.bin",
+      "metrics": {
+        "precision": 0.98,
+        "recall": 0.97,
+        "f1_score": 0.97
+      },
+      "deployment": {
+        "endpoint": "/api/language-detection",
+        "batch_size": 32,
+        "timeout_ms": 100
+      }
+    }
+  },
+  "pipelines": {
+    "financial_advisor": {
+      "description": "Main pipeline for financial advisory queries",
+      "version": "1.1.0",
+      "components": [
+        {"name": "language_detector", "order": 1},
+        {"name": "intent_classifier", "order": 2},
+        {"name": "entity_extractor", "order": 3, "condition": "language == 'english'"},
+        {"name": "swahili_entity_extractor", "order": 3, "condition": "language == 'swahili'"},
+        {"name": "financial_bert", "order": 4},
+        {"name": "context_manager", "order": 5}
+      ]
+    },
+    "investment_recommendation": {
+      "description": "Pipeline for investment recommendations",
+      "version": "1.0.1",
+      "components": [
+        {"name": "risk_profiler", "order": 1},
+        {"name": "stock_market_predictor", "order": 2},
+        {"name": "sentiment_analyzer", "order": 3},
+        {"name": "investment_recommender", "order": 4}
+      ]
+    },
+    "loan_comparison": {
+      "description": "Pipeline for loan option comparison",
+      "version": "1.0.0",
+      "components": [
+        {"name": "entity_extractor", "order": 1},
+        {"name": "loan_analyzer", "order": 2}
+      ]
+    },
+    "financial_education": {
+      "description": "Pipeline for financial education content",
+      "version": "1.0.0",
+      "components": [
+        {"name": "intent_classifier", "order": 1},
+        {"name": "financial_education_recommender", "order": 2}
+      ]
+    },
+    "budget_planning": {
+      "description": "Pipeline for budget optimization",
+      "version": "1.0.0",
+      "components": [
+        {"name": "entity_extractor", "order": 1},
+        {"name": "budget_optimizer", "order": 2}
+      ]
+    }
+  },
+  "monitoring": {
+    "drift_detection": {
+      "enabled": true,
+      "metrics": ["accuracy", "f1_score"],
+      "threshold": 0.05,
+      "check_frequency": "daily"
+    },
+    "performance_tracking": {
+      "enabled": true,
+      "metrics": ["latency", "throughput", "error_rate"],
+      "alert_threshold": {
+        "latency_ms": 1000,
+        "error_rate": 0.02
+      }
+    },
+    "feedback_collection": {
+      "enabled": true,
+      "methods": ["explicit_rating", "conversation_analysis"],
+      "retraining_threshold": {
+        "negative_feedback_ratio": 0.15,
+        "sample_size_minimum": 500
+      }
+    }
+  },
+  "retraining_schedule": {
+    "intent_classifier": "quarterly",
+    "entity_extractor": "quarterly",
+    "sentiment_analyzer": "monthly",
+    "risk_profiler": "semi-annually",
+    "investment_recommender": "monthly",
+    "stock_market_predictor": "weekly",
+    "loan_analyzer": "monthly",
+    "financial_education_recommender": "quarterly",
+    "budget_optimizer": "quarterly"
+  }
+}
