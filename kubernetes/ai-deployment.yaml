@@ -1,1 +1,173 @@
-apiVersion: apps/v1 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pesaguru-ai
+  namespace: pesaguru
+  labels:
+    app: pesaguru
+    component: ai
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: pesaguru
+      component: ai
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: pesaguru
+        component: ai
+    spec:
+      containers:
+      - name: ai-service
+        image: pesaguru/ai-service:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1"
+          limits:
+            memory: "4Gi"
+            cpu: "2"
+        ports:
+        - containerPort: 8000
+          name: ai-api
+        env:
+        - name: MODEL_PATH
+          value: "/app/models"
+        - name: LOG_LEVEL
+          value: "info"
+        - name: ENABLE_SWAHILI
+          value: "true"
+        - name: ENABLE_ENGLISH
+          value: "true"
+        - name: NSE_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: pesaguru-api-keys
+              key: nse-api-key
+        - name: CBK_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: pesaguru-api-keys
+              key: cbk-api-key
+        - name: MPESA_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: pesaguru-api-keys
+              key: mpesa-api-key
+        - name: RAPID_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: pesaguru-api-keys
+              key: rapid-api-key
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: pesaguru-api-keys
+              key: openai-api-key
+        - name: REDIS_HOST
+          value: "pesaguru-redis"
+        - name: REDIS_PORT
+          value: "6379"
+        - name: DB_HOST
+          value: "pesaguru-db"
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_NAME
+          value: "pesaguru"
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: pesaguru-db-credentials
+              key: username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: pesaguru-db-credentials
+              key: password
+        volumeMounts:
+        - name: models-volume
+          mountPath: /app/models
+        - name: cache-volume
+          mountPath: /app/cache
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 60
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 5
+      volumes:
+      - name: models-volume
+        persistentVolumeClaim:
+          claimName: pesaguru-models-pvc
+      - name: cache-volume
+        emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pesaguru-ai
+  namespace: pesaguru
+  labels:
+    app: pesaguru
+    component: ai
+spec:
+  selector:
+    app: pesaguru
+    component: ai
+  ports:
+  - port: 8000
+    targetPort: ai-api
+    name: http
+  type: ClusterIP
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: pesaguru-ai-hpa
+  namespace: pesaguru
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: pesaguru-ai
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pesaguru-models-pvc
+  namespace: pesaguru
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: standard
