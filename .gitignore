@@ -1,0 +1,17 @@
+# XAMPP specific 
+/xampp/ 
+# Environment files 
+.env 
+.env.local 
+# Dependency directories 
+/vendor/ 
+/node_modules/ 
+# Logs and databases 
+*.log 
+*.sql 
+# OS generated files 
+.DS_Store 
+Thumbs.db 
+# IDE folders 
+.idea/ 
+.vscode/ 

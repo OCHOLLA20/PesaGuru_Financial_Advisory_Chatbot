@@ -1,0 +1,1 @@
+<?php // Risk assessment controller ?> 

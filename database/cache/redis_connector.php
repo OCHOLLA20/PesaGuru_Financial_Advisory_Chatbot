@@ -1,0 +1,1 @@
+<?php // Redis cache connection ?> 

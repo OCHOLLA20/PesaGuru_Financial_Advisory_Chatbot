@@ -1,1 +1,1 @@
-"# PesaGuru Financial Advisory Chatbot" 
+# PesaGuru - AI-Powered Financial Advisory for Kenya 

@@ -1,0 +1,1 @@
+<?php // Chatbot response caching ?> 
