@@ -1,1 +1,576 @@
-{ "terms": [] } 
+{
+    "financial_terms": [
+      {
+        "english": "investment",
+        "swahili": "uwekezaji",
+        "context": "Uwekezaji wa hisa za kampuni"
+      },
+      {
+        "english": "savings",
+        "swahili": "akiba",
+        "context": "Kuweka akiba kwa ajili ya siku za usoni"
+      },
+      {
+        "english": "loan",
+        "swahili": "mkopo",
+        "context": "Kupata mkopo kutoka benki"
+      },
+      {
+        "english": "interest rate",
+        "swahili": "kiwango cha riba",
+        "context": "Kiwango cha riba kwa mkopo wa nyumba"
+      },
+      {
+        "english": "budget",
+        "swahili": "bajeti",
+        "context": "Kupanga bajeti ya matumizi ya kila mwezi"
+      },
+      {
+        "english": "stock market",
+        "swahili": "soko la hisa",
+        "context": "Kuwekeza katika soko la hisa la Nairobi"
+      },
+      {
+        "english": "insurance",
+        "swahili": "bima",
+        "context": "Kununua bima ya maisha"
+      },
+      {
+        "english": "retirement",
+        "swahili": "kustaafu",
+        "context": "Kupanga fedha za kustaafu"
+      },
+      {
+        "english": "financial planning",
+        "swahili": "upangaji wa kifedha",
+        "context": "Upangaji wa kifedha kwa familia yako"
+      },
+      {
+        "english": "tax",
+        "swahili": "kodi",
+        "context": "Kulipa kodi kwa serikali"
+      },
+      {
+        "english": "debt",
+        "swahili": "deni",
+        "context": "Kulipa deni la mkopo"
+      },
+      {
+        "english": "profit",
+        "swahili": "faida",
+        "context": "Kupata faida kutoka kwa biashara"
+      },
+      {
+        "english": "loss",
+        "swahili": "hasara",
+        "context": "Kupata hasara katika uwekezaji"
+      },
+      {
+        "english": "bank",
+        "swahili": "benki",
+        "context": "Kuweka pesa katika benki"
+      },
+      {
+        "english": "mobile money",
+        "swahili": "pesa za simu",
+        "context": "Kutumia M-Pesa kwa malipo"
+      },
+      {
+        "english": "exchange rate",
+        "swahili": "kiwango cha ubadilishaji",
+        "context": "Kiwango cha ubadilishaji wa dola"
+      },
+      {
+        "english": "dividend",
+        "swahili": "mgao wa faida",
+        "context": "Kampuni inalipa mgao wa faida kwa wawekezaji"
+      },
+      {
+        "english": "mortgage",
+        "swahili": "mkopo wa nyumba",
+        "context": "Kupata mkopo wa nyumba kutoka benki"
+      },
+      {
+        "english": "inflation",
+        "swahili": "mfumuko wa bei",
+        "context": "Mfumuko wa bei unaathiri thamani ya pesa"
+      },
+      {
+        "english": "financial literacy",
+        "swahili": "ujuzi wa kifedha",
+        "context": "Kuongeza ujuzi wa kifedha"
+      }
+    ],
+    "intents": [
+      {
+        "intent": "akiba_maelezo",
+        "english_equivalent": "savings_info",
+        "training_phrases": [
+          "Ni namna gani naweza kuweka akiba?",
+          "Nisaidie kuelewa jinsi ya kuweka akiba",
+          "Nataka kujua kuhusu akiba",
+          "Ni akiba gani nzuri Kenya?",
+          "Nifunze kuweka akiba",
+          "Akiba bora ni ipi?",
+          "Namna ya kuanza kuweka akiba",
+          "Nawezaje kuweka akiba kwa ajili ya mtoto wangu?",
+          "Akiba ya dharura ni nini?",
+          "Nipe maelezo kuhusu akiba"
+        ],
+        "responses": [
+          "Kuweka akiba ni hatua muhimu ya kifedha. Unaweza kuanza kwa kuweka kiasi kidogo kila mwezi kwenye akaunti ya akiba. PesaGuru inaweza kukusaidia kupanga mikakati ya akiba kulingana na malengo yako.",
+          "Kuna njia nyingi za kuweka akiba nchini Kenya. Unaweza kutumia akaunti ya akiba kwenye benki, M-Shwari, au kujiunga na SACCO. Ni muhimu kuweka kiasi cha fedha kando kila mara unapopokea mishahara."
+        ]
+      },
+      {
+        "intent": "uwekezaji_maelezo",
+        "english_equivalent": "investment_info",
+        "training_phrases": [
+          "Nawezaje kuwekeza pesa zangu?",
+          "Nipe taarifa kuhusu uwekezaji Kenya",
+          "Ni uwekezaji gani ulio bora Kenya?",
+          "Nataka kuwekeza, nianze wapi?",
+          "Nifundishe kuhusu uwekezaji wa hisa",
+          "Uwekezaji wa ardhi Kenya",
+          "Namna ya kuwekeza kwenye soko la hisa la Nairobi",
+          "Gharama ya kuanza kuwekeza Kenya ni kiasi gani?",
+          "Ni hatari gani zilizopo kwenye uwekezaji?",
+          "Tofauti kati ya uwekezaji na akiba ni nini?"
+        ],
+        "responses": [
+          "Kuwekeza ni njia nzuri ya kukuza utajiri. Kenya, unaweza kuwekeza kwenye hisa za NSE, hatifungani za serikali, ardhi, biashara ndogo, au fedha za pamoja. PesaGuru inaweza kukusaidia kupata uwekezaji unaofaa kulingana na malengo yako na uvumilivu wa hatari.",
+          "Kwa kuanza kuwekeza nchini Kenya, unaweza kufikiria chaguo kama vile hisa za kampuni zilizoorodheshwa kwenye Soko la Hisa la Nairobi (NSE), hatifungani za serikali, fedha za pamoja, au mali isiyohamishika. Kila moja ina faida na hatari zake."
+        ]
+      },
+      {
+        "intent": "mkopo_maelezo",
+        "english_equivalent": "loan_info",
+        "training_phrases": [
+          "Nawezaje kupata mkopo?",
+          "Nisaidie kuchagua mkopo mzuri",
+          "Masharti ya kupata mkopo Kenya",
+          "Riba ya mikopo Kenya ni kiasi gani?",
+          "Nipe taarifa kuhusu mikopo ya M-Shwari",
+          "Tofauti kati ya Fuliza na KCB-M-Pesa",
+          "Nawezaje kupata mkopo wa biashara?",
+          "Kitu gani kinahitajika kupata mkopo wa nyumba?",
+          "Mikopo isiyo na riba Kenya",
+          "Nawezaje kupunguza gharama za mkopo?"
+        ],
+        "responses": [
+          "Kupata mkopo nchini Kenya unaweza kufanya kupitia benki, SACCO, au huduma za mikopo ya simu kama M-Shwari, KCB-M-Pesa, na Fuliza. Kila aina ya mkopo ina masharti na viwango tofauti vya riba. Ni muhimu kulinganisha chaguo mbalimbali kabla ya kuchagua.",
+          "Kuna aina nyingi za mikopo inayopatikana Kenya. Mikopo ya benki mara nyingi ina riba ya chini lakini inahitaji dhamana. Mikopo ya simu kama M-Shwari ni rahisi kupata lakini ina riba ya juu. PesaGuru inaweza kukusaidia kulinganisha chaguo za mikopo kulingana na mahitaji yako."
+        ]
+      },
+      {
+        "intent": "bajeti_usaidizi",
+        "english_equivalent": "budget_help",
+        "training_phrases": [
+          "Namna ya kupanga bajeti",
+          "Nisaidie kuunda bajeti ya kila mwezi",
+          "Jinsi ya kudhibiti matumizi",
+          "Nawezaje kupanga pesa zangu?",
+          "Mfano wa bajeti ya familia Kenya",
+          "Namna ya kupanga bajeti kwa mshahara mdogo",
+          "Shida za kupanga bajeti",
+          "Programu bora za kupanga bajeti Kenya",
+          "Bajeti ya dharura",
+          "Kupanga fedha kwa urahisi"
+        ],
+        "responses": [
+          "Kupanga bajeti kunaanza na kufuatilia mapato na matumizi yako. Andika kila mapato na matumizi, kisha gawa matumizi katika vikundi (kama vile kodi, chakula, usafiri, nk). Weka malengo ya kutumia kiasi fulani kwa kila kikundi na ufuatilie maendeleo yako. PesaGuru inaweza kukusaidia kutengeneza na kufuatilia bajeti yako.",
+          "Kupanga bajeti nzuri inahitaji kuelewa mapato na matumizi yako. Tumia kanuni ya 50/30/20: 50% kwa mahitaji muhimu, 30% kwa matakwa, na 20% kwa akiba na kulipa madeni. Rekodi matumizi yako kwa wiki chache ili kupata picha halisi ya tabia zako za kifedha."
+        ]
+      },
+      {
+        "intent": "bima_ushauri",
+        "english_equivalent": "insurance_advice",
+        "training_phrases": [
+          "Bima gani nahitaji?",
+          "Taarifa kuhusu bima ya afya Kenya",
+          "Je, NHIF inatosha?",
+          "Gharama ya bima ya maisha",
+          "Tofauti kati ya bima ya afya na NHIF",
+          "Kampuni bora za bima Kenya",
+          "Bima ya gari bei nafuu",
+          "Namna ya kuchagua bima nzuri",
+          "Manufaa ya bima ya elimu",
+          "Mipango ya bima ya uzeeni"
+        ],
+        "responses": [
+          "Bima ni muhimu kwa ulinzi wa kifedha. Kenya, angalau unapaswa kuwa na NHIF kwa huduma za afya. Kulingana na hali yako, unaweza pia kuhitaji bima ya afya ya ziada, bima ya maisha, bima ya gari, au bima ya mali. PesaGuru inaweza kukusaidia kuamua bima zipi zinazofaa hali yako.",
+          "Kuchagua bima sahihi hutegemea mahitaji yako binafsi. NHIF ni muhimu kwa Wakenya wote kwa huduma za msingi za afya. Kwa ulinzi zaidi, zingatia bima ya afya ya ziada, bima ya maisha (hasa ukiwa na watoto), na bima ya mali kwa nyumba au biashara."
+        ]
+      },
+      {
+        "intent": "kustaafu_mpango",
+        "english_equivalent": "retirement_planning",
+        "training_phrases": [
+          "Namna ya kupanga kustaafu",
+          "NSSF pekee inatosha kwa kustaafu?",
+          "Mpango bora wa uzeeni Kenya",
+          "Kiasi gani nahitaji kwa kustaafu?",
+          "Uwekezaji wa kustaafu Kenya",
+          "Jinsi ya kujiandaa kwa kustaafu mapema",
+          "Njia za kuhakikisha usalama wa kifedha uzeeni",
+          "Tofauti kati ya NSSF na pensheni binafsi",
+          "Mapato ya kustaafu yanayofaa",
+          "Nitahitaji kiasi gani nikiwa na umri wa miaka 60?"
+        ],
+        "responses": [
+          "Kupanga kustaafu kunahitaji kuanza mapema. Hakikisha umejiandikisha NSSF, lakini pia zingatia kuwa na mpango wa ziada kama vile pensheni binafsi au uwekezaji maalum wa kustaafu. Lengo ni kuwa na mapato yanayotoka kwenye vyanzo mbalimbali wakati wa kustaafu. PesaGuru inaweza kukusaidia kukadiria mahitaji yako ya kustaafu na kutengeneza mpango.",
+          "NSSF pekee haitoshi kwa maisha mazuri ya kustaafu. Kwa kuongeza NSSF, zingatia kuwekeza katika mipango ya pensheni ya kibinafsi, fedha za pamoja, hisa, au mali isiyohamishika inayozalisha mapato. Ni muhimu kuanza mapema na kuweka kiasi cha kutosha kando kila mwezi."
+        ]
+      },
+      {
+        "intent": "kodi_maswali",
+        "english_equivalent": "tax_questions",
+        "training_phrases": [
+          "Jinsi ya kukokotoa kodi Kenya",
+          "KRA inatoza kodi kiasi gani?",
+          "Namna ya kupunguza kodi halali",
+          "Msamaha wa kodi Kenya",
+          "Ratiba ya kodi ya mapato Kenya",
+          "Nahitaji kulipa kodi kwa biashara ndogo?",
+          "Kodi ya mtaji Kenya",
+          "Njia za kuwasilisha ritani za kodi",
+          "Tofauti kati ya PAYE na VAT",
+          "Adhabu za kutotimiza masharti ya kodi"
+        ],
+        "responses": [
+          "Mfumo wa kodi Kenya unajumuisha Kodi ya Mapato ya Kibinafsi (PAYE), Kodi ya Ongezeko la Thamani (VAT), Kodi ya Mapato ya Kampuni, na kodi nyinginezo. Kodi ya mapato ya kibinafsi inakokotolewa kwa viwango vinavyopanda, kuanzia 10% hadi 30%. PesaGuru inaweza kukusaidia kuelewa wajibu wako wa kodi na kukokotoa kodi unayopaswa kulipa.",
+          "Kulipa kodi ni wajibu wa kisheria nchini Kenya. Unaweza kupunguza mzigo wa kodi kwa kutumia msamaha unaoruhusiwa kama vile michango ya NSSF, NHIF, na bima ya maisha. Hakikisha unatunza kumbukumbu nzuri na uwasilishe ritani zako kwa wakati ili kuepuka adhabu."
+        ]
+      },
+      {
+        "intent": "malipo_simu",
+        "english_equivalent": "mobile_money",
+        "training_phrases": [
+          "Namna ya kutumia M-Pesa",
+          "Tofauti kati ya M-Pesa na Airtel Money",
+          "Gharama za kutuma pesa kwa M-Pesa",
+          "Nawezaje kufungua akaunti ya M-Pesa?",
+          "Kiwango cha juu cha kutuma M-Pesa",
+          "Huduma za kifedha za M-Pesa",
+          "Tahadhari za usalama wa M-Pesa",
+          "Jinsi ya kutumia M-Shwari",
+          "Mikopo ya simu Kenya",
+          "Usalama wa pesa za simu"
+        ],
+        "responses": [
+          "M-Pesa ni huduma ya malipo ya simu iliyo maarufu Kenya. Kutumia M-Pesa, piga *334# au tumia programu ya M-Pesa. Unaweza kutuma pesa, kulipa bili, kuweka akiba, kupata mikopo, na kufanya miamala mingine ya kifedha. PesaGuru inaweza kukusaidia kutumia huduma za M-Pesa kwa ufanisi.",
+          "Huduma za pesa za simu Kenya zinajumuisha M-Pesa, Airtel Money, na T-Kash. M-Pesa ndio huduma inayotumika zaidi ikiwa na huduma nyingi kama M-Shwari (akiba na mikopo), KCB-M-Pesa (mikopo), na Fuliza (huduma ya overdraft). Kumbuka kulinda PIN yako na kuwa makini na ulaghai wa simu."
+        ]
+      },
+      {
+        "intent": "madeni_usimamizi",
+        "english_equivalent": "debt_management",
+        "training_phrases": [
+          "Jinsi ya kulipa madeni",
+          "Namna ya kupunguza madeni",
+          "Madeni yananilemea, nifanye nini?",
+          "Mikakati ya kulipa madeni haraka",
+          "Nimekwama na madeni ya mikopo ya simu",
+          "CRB Blacklist nitoke aje?",
+          "Utaratibu wa kulipa madeni mengi",
+          "Namna ya kuepuka madeni",
+          "Madeni ya kadi za mkopo nisimamie vipi?",
+          "Madeni ya elimu yanamaliza miaka mingapi?"
+        ],
+        "responses": [
+          "Kulipa madeni kunahitaji mpango madhubuti. Kwanza, orodhesha madeni yako yote pamoja na viwango vya riba. Zingatia kulipa madeni yenye riba ya juu kwanza (njia ya avalanche) au kuanza na madeni madogo (njia ya snowball). Tengeneza bajeti inayohimiza kulipa madeni na epuka kukopa zaidi. PesaGuru inaweza kukusaidia kuunda mpango wa kulipa madeni.",
+          "Usimamizi wa madeni unaanza kwa kuelewa ni madeni gani uliyonayo. Jaribu kufanya malipo zaidi ya kiwango cha chini kinachohitajika. Zingatia kuzungumza na wakopeshaji kuhusu masharti mazuri zaidi. Ikiwa madeni ni mengi sana, tafuta ushauri wa kitaalamu kutoka kwa mshauri wa kifedha."
+        ]
+      },
+      {
+        "intent": "faida_hasara_biashara",
+        "english_equivalent": "business_profit_loss",
+        "training_phrases": [
+          "Jinsi ya kukokotoa faida ya biashara",
+          "Namna ya kupunguza hasara biashara",
+          "Tofauti kati ya mapato na faida",
+          "Utunzaji wa kumbukumbu za biashara",
+          "Faida ghafi vs faida halisi",
+          "Viashiria vya biashara inayofanya vizuri",
+          "Jinsi ya kuongeza faida biashara ndogo",
+          "Hasara ya biashara inatokana na nini?",
+          "Kutathmini utendaji wa biashara",
+          "Kukokotoa mwenendo wa biashara"
+        ],
+        "responses": [
+          "Kukokotoa faida ya biashara, toa gharama zote za biashara kutoka kwenye mapato. Gharama zinajumuisha malighafi, kodi ya pango, mishahara, bili, usafirishaji, na kadhalika. Kufuatilia faida na hasara ni muhimu kwa kupima afya ya biashara yako. PesaGuru inaweza kukusaidia kutengeneza taarifa ya mapato na matumizi ya biashara yako.",
+          "Kupunguza hasara katika biashara kunahitaji kufuatilia gharama, kupunguza matumizi yasiyo ya lazima, na kuboresha ufanisi. Hakikisha unatunza kumbukumbu nzuri za kifedha, kupanga bajeti, na kuwa na mpango wa biashara. Kagua biashara yako mara kwa mara na ufanye marekebisho yanayohitajika."
+        ]
+      },
+      {
+        "intent": "fedha_za_elimu",
+        "english_equivalent": "education_finances",
+        "training_phrases": [
+          "Jinsi ya kuweka akiba kwa ajili ya elimu ya watoto",
+          "Gharama ya masomo ya chuo kikuu Kenya",
+          "Namna ya kupata mkopo wa elimu",
+          "HELB inatoa mikopo kiasi gani?",
+          "Masharti ya kupata mkopo wa HELB",
+          "Mipango ya kuweka akiba ya elimu Kenya",
+          "Uwekezaji bora kwa ajili ya elimu ya mtoto",
+          "Namna ya kulipa mkopo wa HELB",
+          "Njia za kupunguza gharama za elimu",
+          "Akiba ya elimu ya watoto ianze lini?"
+        ],
+        "responses": [
+          "Kuweka akiba kwa ajili ya elimu ya watoto ni muhimu kuanzia mapema. Zingatia kufungua akaunti maalum ya akiba ya elimu, kuwekeza katika hati fungani za serikali, au fedha za pamoja. Kwa elimu ya juu, wanafunzi wanaweza pia kutuma maombi ya mikopo kutoka HELB. PesaGuru inaweza kukusaidia kupanga fedha za elimu ya watoto wako.",
+          "Gharama za elimu ya juu Kenya zinazidi kuongezeka. Mpango mzuri ni kuanza kuweka akiba mapema, angalau mtoto anapozaliwa. Zingatia mipango ya uwekezaji kama vile endowment policies, trust funds, au akaunti maalum za akiba ya elimu. HELB pia inatoa mikopo kwa wanafunzi wanaostahiki."
+        ]
+      }
+    ],
+    "common_phrases": [
+      {
+        "category": "greetings",
+        "phrases": [
+          {
+            "english": "Hello",
+            "swahili": "Hujambo"
+          },
+          {
+            "english": "Good morning",
+            "swahili": "Habari ya asubuhi"
+          },
+          {
+            "english": "Good afternoon",
+            "swahili": "Habari ya mchana"
+          },
+          {
+            "english": "Good evening",
+            "swahili": "Habari ya jioni"
+          },
+          {
+            "english": "How are you?",
+            "swahili": "Habari yako?"
+          },
+          {
+            "english": "Welcome",
+            "swahili": "Karibu"
+          }
+        ]
+      },
+      {
+        "category": "farewells",
+        "phrases": [
+          {
+            "english": "Goodbye",
+            "swahili": "Kwaheri"
+          },
+          {
+            "english": "See you later",
+            "swahili": "Tutaonana baadaye"
+          },
+          {
+            "english": "Thank you",
+            "swahili": "Asante"
+          },
+          {
+            "english": "Thank you very much",
+            "swahili": "Asante sana"
+          },
+          {
+            "english": "You're welcome",
+            "swahili": "Karibu"
+          }
+        ]
+      },
+      {
+        "category": "confirmation",
+        "phrases": [
+          {
+            "english": "Yes",
+            "swahili": "Ndiyo"
+          },
+          {
+            "english": "No",
+            "swahili": "Hapana"
+          },
+          {
+            "english": "I agree",
+            "swahili": "Nakubali"
+          },
+          {
+            "english": "I don't agree",
+            "swahili": "Sikubali"
+          },
+          {
+            "english": "I understand",
+            "swahili": "Naelewa"
+          },
+          {
+            "english": "I don't understand",
+            "swahili": "Sielewi"
+          }
+        ]
+      },
+      {
+        "category": "clarification",
+        "phrases": [
+          {
+            "english": "Can you explain?",
+            "swahili": "Unaweza kueleza?"
+          },
+          {
+            "english": "Please repeat",
+            "swahili": "Tafadhali rudia"
+          },
+          {
+            "english": "I need more information",
+            "swahili": "Nahitaji maelezo zaidi"
+          },
+          {
+            "english": "What does that mean?",
+            "swahili": "Hiyo inamaanisha nini?"
+          },
+          {
+            "english": "How does it work?",
+            "swahili": "Inafanya kazi vipi?"
+          }
+        ]
+      },
+      {
+        "category": "financial_questions",
+        "phrases": [
+          {
+            "english": "How much does it cost?",
+            "swahili": "Inagharimu kiasi gani?"
+          },
+          {
+            "english": "What is the interest rate?",
+            "swahili": "Kiwango cha riba ni kiasi gani?"
+          },
+          {
+            "english": "Is there a fee?",
+            "swahili": "Kuna ada yoyote?"
+          },
+          {
+            "english": "What are the requirements?",
+            "swahili": "Mahitaji ni yapi?"
+          },
+          {
+            "english": "How long does it take?",
+            "swahili": "Inachukua muda gani?"
+          },
+          {
+            "english": "What are the risks?",
+            "swahili": "Hatari ni zipi?"
+          }
+        ]
+      }
+    ],
+    "sheng_slang": [
+      {
+        "sheng": "Mulla",
+        "standard_swahili": "Pesa",
+        "english": "Money"
+      },
+      {
+        "sheng": "Kula",
+        "financial_context": "kuwekeza",
+        "english": "to invest (literally: to eat)"
+      },
+      {
+        "sheng": "Kusoma investment",
+        "standard_swahili": "Kujifunza kuhusu uwekezaji",
+        "english": "To learn about investment"
+      },
+      {
+        "sheng": "Kukula namba",
+        "standard_swahili": "Kupata faida",
+        "english": "To make profit (literally: to eat numbers)"
+      },
+      {
+        "sheng": "Kuomoka",
+        "standard_swahili": "Kufanikiwa kifedha",
+        "english": "To become financially successful"
+      },
+      {
+        "sheng": "Kuiva",
+        "standard_swahili": "Kupata pesa nyingi",
+        "english": "To be rich (literally: to ripen)"
+      },
+      {
+        "sheng": "Niko broke",
+        "standard_swahili": "Sina pesa",
+        "english": "I'm broke"
+      },
+      {
+        "sheng": "Niko liquid",
+        "standard_swahili": "Nina pesa taslimu",
+        "english": "I have cash/I'm liquid"
+      },
+      {
+        "sheng": "Kuchanua",
+        "standard_swahili": "Kupata pesa ghafla",
+        "english": "To suddenly get money"
+      },
+      {
+        "sheng": "Hizo ni mbao",
+        "standard_swahili": "Hizo ni shilingi ishirini",
+        "english": "That's 20 shillings"
+      }
+    ],
+    "regional_dialects": [
+      {
+        "region": "Coastal (Pwani)",
+        "examples": [
+          {
+            "dialect": "Nipatie maelez kuhusu mikopo ya pesa za simu",
+            "standard_swahili": "Nipe maelezo kuhusu mikopo ya pesa za simu",
+            "english": "Give me information about mobile loans"
+          },
+          {
+            "dialect": "Ntakuwekeza wapi pesa zangu?",
+            "standard_swahili": "Nitawekeza wapi pesa zangu?",
+            "english": "Where should I invest my money?"
+          }
+        ]
+      },
+      {
+        "region": "Western Kenya",
+        "examples": [
+          {
+            "dialect": "Endeleya kunielezea kuhusu akiba",
+            "standard_swahili": "Endelea kunielezea kuhusu akiba",
+            "english": "Continue explaining to me about savings"
+          },
+          {
+            "dialect": "Sina chochote cha kuekeza",
+            "standard_swahili": "Sina chochote cha kuwekeza",
+            "english": "I don't have anything to invest"
+          }
+        ]
+      }
+    ],
+    "code_switching": [
+      {
+        "mixed": "Nataka kufanya investment ya stocks",
+        "standard_swahili": "Nataka kuwekeza kwenye hisa",
+        "english": "I want to invest in stocks"
+      },
+      {
+        "mixed": "Ni loan gani iko na low interest?",
+        "standard_swahili": "Ni mkopo gani wenye riba ndogo?",
+        "english": "Which loan has low interest?"
+      },
+      {
+        "mixed": "Budget yangu haitoshi kununua ile plot",
+        "standard_swahili": "Bajeti yangu haitoshi kununua kile kiwanja",
+        "english": "My budget is not enough to buy that plot"
+      },
+      {
+        "mixed": "Nilitumia M-Pesa kutransfer pesa",
+        "standard_swahili": "Nilitumia M-Pesa kutuma pesa",
+        "english": "I used M-Pesa to transfer money"
+      },
+      {
+        "mixed": "Insurance cover yangu inaexpire next month",
+        "standard_swahili": "Bima yangu inaisha mwezi ujao",
+        "english": "My insurance cover expires next month"
+      }
+    ]
+  }
