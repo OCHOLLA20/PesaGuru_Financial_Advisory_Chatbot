@@ -1,0 +1,145 @@
+source,indicator_id,indicator_name,date,value,units,frequency,region,country_code,retrieval_date
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2023-01-01,27720709000000.0,,Annual,United States,US,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2022-01-01,26006893000000.0,,Annual,United States,US,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2021-01-01,23681171000000.0,,Annual,United States,US,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2020-01-01,21354105000000.0,,Annual,United States,US,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2023-01-01,3380854520809.54,,Annual,United Kingdom,GB,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2022-01-01,3114042471144.39,,Annual,United Kingdom,GB,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2021-01-01,3143323050707.26,,Annual,United Kingdom,GB,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2020-01-01,2696778386607.65,,Annual,United Kingdom,GB,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2023-01-01,4525703903627.53,,Annual,Germany,DE,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2022-01-01,4163596357879.39,,Annual,Germany,DE,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2021-01-01,4348297440387.53,,Annual,Germany,DE,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2020-01-01,3940142541354.1,,Annual,Germany,DE,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2023-01-01,3051831611384.76,,Annual,France,FR,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2022-01-01,2796302210398.84,,Annual,France,FR,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2021-01-01,2966433692008.09,,Annual,France,FR,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2020-01-01,2647926055110.05,,Annual,France,FR,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2023-01-01,4204494802431.55,,Annual,Japan,JP,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2022-01-01,4256410760723.75,,Annual,Japan,JP,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2021-01-01,5034620784584.98,,Annual,Japan,JP,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2020-01-01,5055587093501.59,,Annual,Japan,JP,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2023-01-01,17794783039552.0,,Annual,China,CN,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2022-01-01,17881782683707.3,,Annual,China,CN,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2021-01-01,17820459508852.2,,Annual,China,CN,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2020-01-01,14687744162801.0,,Annual,China,CN,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2023-01-01,3567551674623.01,,Annual,India,IN,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2022-01-01,3353470496886.33,,Annual,India,IN,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2021-01-01,3167270623260.47,,Annual,India,IN,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2020-01-01,2674851578587.27,,Annual,India,IN,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2023-01-01,2173665655937.27,,Annual,Brazil,BR,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2022-01-01,1951923942083.32,,Annual,Brazil,BR,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2021-01-01,1670647399034.67,,Annual,Brazil,BR,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2020-01-01,1476107231194.11,,Annual,Brazil,BR,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2023-01-01,108038588970.595,,Annual,Kenya,KE,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2022-01-01,114448978152.637,,Annual,Kenya,KE,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2021-01-01,109703658904.994,,Annual,Kenya,KE,2025-03-15
+World Bank,NY.GDP.MKTP.CD,GDP (current US$),2020-01-01,100657505750.545,,Annual,Kenya,KE,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2023-01-01,82769.4122114216,,Annual,United States,US,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2022-01-01,78035.1753604212,,Annual,United States,US,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2021-01-01,71318.3073592183,,Annual,United States,US,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2020-01-01,64411.3731779373,,Annual,United States,US,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2023-01-01,49463.8554617343,,Annual,United Kingdom,GB,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2022-01-01,45935.9276473925,,Annual,United Kingdom,GB,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2021-01-01,46896.8662432834,,Annual,United Kingdom,GB,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2020-01-01,40201.6812422928,,Annual,United Kingdom,GB,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2023-01-01,54343.2265084958,,Annual,Germany,DE,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2022-01-01,49686.1154582583,,Annual,Germany,DE,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2021-01-01,52265.6541620571,,Annual,Germany,DE,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2020-01-01,47379.765194548,,Annual,Germany,DE,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2023-01-01,44690.9345395117,,Annual,France,FR,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2022-01-01,41082.8119320747,,Annual,France,FR,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2021-01-01,43725.0999521245,,Annual,France,FR,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2020-01-01,39169.8606000707,,Annual,France,FR,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2023-01-01,33766.5268253808,,Annual,Japan,JP,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2022-01-01,34017.2718075024,,Annual,Japan,JP,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2021-01-01,40058.5373276179,,Annual,Japan,JP,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2020-01-01,40040.7655055923,,Annual,Japan,JP,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2023-01-01,12614.0617416421,,Annual,China,CN,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2022-01-01,12662.5826712038,,Annual,China,CN,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2021-01-01,12617.5051041181,,Annual,China,CN,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2020-01-01,10408.7195541075,,Annual,China,CN,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2023-01-01,2480.79208721621,,Annual,India,IN,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2022-01-01,2352.61392452078,,Annual,India,IN,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2021-01-01,2239.61384367482,,Annual,India,IN,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2020-01-01,1907.04251637669,,Annual,India,IN,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2023-01-01,10294.866680778,,Annual,Brazil,BR,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2022-01-01,9281.33334441234,,Annual,Brazil,BR,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2021-01-01,7972.53665048385,,Annual,Brazil,BR,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2020-01-01,7074.19378281866,,Annual,Brazil,BR,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2023-01-01,1952.30457929636,,Annual,Kenya,KE,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2022-01-01,2109.56288513137,,Annual,Kenya,KE,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2021-01-01,2061.35622089594,,Annual,Kenya,KE,2025-03-15
+World Bank,NY.GDP.PCAP.CD,GDP per capita (current US$),2020-01-01,1927.66459027849,,Annual,Kenya,KE,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2023-01-01,4.11633838374488,,Annual,United States,US,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2022-01-01,8.00279982052121,,Annual,United States,US,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2021-01-01,4.69785886363742,,Annual,United States,US,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2020-01-01,1.23358439630629,,Annual,United States,US,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2023-01-01,6.79396706793963,,Annual,United Kingdom,GB,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2022-01-01,7.92204883147902,,Annual,United Kingdom,GB,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2021-01-01,2.51837109614213,,Annual,United Kingdom,GB,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2020-01-01,0.989486703772491,,Annual,United Kingdom,GB,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2023-01-01,5.94643667725823,,Annual,Germany,DE,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2022-01-01,6.87257438551097,,Annual,Germany,DE,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2021-01-01,3.06666666666673,,Annual,Germany,DE,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2020-01-01,0.144877925813982,,Annual,Germany,DE,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2023-01-01,4.87835726508441,,Annual,France,FR,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2022-01-01,5.22236748369735,,Annual,France,FR,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2021-01-01,1.64233141038385,,Annual,France,FR,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2020-01-01,0.476498852725066,,Annual,France,FR,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2023-01-01,3.26813365933163,,Annual,Japan,JP,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2022-01-01,2.49770278172255,,Annual,Japan,JP,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2021-01-01,-0.233352779398264,,Annual,Japan,JP,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2020-01-01,-0.024995834027731,,Annual,Japan,JP,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2023-01-01,0.234836828893051,,Annual,China,CN,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2022-01-01,1.97357555739051,,Annual,China,CN,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2021-01-01,0.981015135544882,,Annual,China,CN,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2020-01-01,2.41942189457782,,Annual,China,CN,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2023-01-01,5.64914318907925,,Annual,India,IN,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2022-01-01,6.69903414079852,,Annual,India,IN,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2021-01-01,5.13140747176369,,Annual,India,IN,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2020-01-01,6.62343677628535,,Annual,India,IN,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2023-01-01,4.59356282283204,,Annual,Brazil,BR,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2022-01-01,9.28010608956873,,Annual,Brazil,BR,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2021-01-01,8.30165975585673,,Annual,Brazil,BR,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2020-01-01,3.21176803803376,,Annual,Brazil,BR,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2023-01-01,7.67139634029402,,Annual,Kenya,KE,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2022-01-01,7.65986268272224,,Annual,Kenya,KE,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2021-01-01,6.10793603659176,,Annual,Kenya,KE,2025-03-15
+World Bank,FP.CPI.TOTL.ZG,"Inflation, consumer prices (annual %)",2020-01-01,5.40516207933392,,Annual,Kenya,KE,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2023-01-01,3.638,,Annual,United States,US,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2022-01-01,3.65,,Annual,United States,US,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2021-01-01,5.349,,Annual,United States,US,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2020-01-01,8.055,,Annual,United States,US,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2023-01-01,3.984,,Annual,United Kingdom,GB,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2022-01-01,3.73,,Annual,United Kingdom,GB,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2021-01-01,4.826,,Annual,United Kingdom,GB,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2020-01-01,4.472,,Annual,United Kingdom,GB,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2023-01-01,3.068,,Annual,Germany,DE,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2022-01-01,3.12,,Annual,Germany,DE,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2021-01-01,3.594,,Annual,Germany,DE,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2020-01-01,3.881,,Annual,Germany,DE,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2023-01-01,7.335,,Annual,France,FR,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2022-01-01,7.308,,Annual,France,FR,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2021-01-01,7.874,,Annual,France,FR,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2020-01-01,8.009,,Annual,France,FR,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2023-01-01,2.6,,Annual,Japan,JP,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2022-01-01,2.6,,Annual,Japan,JP,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2021-01-01,2.828,,Annual,Japan,JP,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2020-01-01,2.809,,Annual,Japan,JP,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2023-01-01,4.67,,Annual,China,CN,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2022-01-01,4.98,,Annual,China,CN,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2021-01-01,4.55,,Annual,China,CN,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2020-01-01,5.0,,Annual,China,CN,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2023-01-01,4.172,,Annual,India,IN,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2022-01-01,4.822,,Annual,India,IN,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2021-01-01,6.38,,Annual,India,IN,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2020-01-01,7.859,,Annual,India,IN,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2023-01-01,7.947,,Annual,Brazil,BR,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2022-01-01,9.231,,Annual,Brazil,BR,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2021-01-01,13.158,,Annual,Brazil,BR,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2020-01-01,13.697,,Annual,Brazil,BR,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2023-01-01,5.567,,Annual,Kenya,KE,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2022-01-01,5.707,,Annual,Kenya,KE,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2021-01-01,5.693,,Annual,Kenya,KE,2025-03-15
+World Bank,SL.UEM.TOTL.ZS,"Unemployment, total (% of total labor force) (modeled ILO estimate)",2020-01-01,5.619,,Annual,Kenya,KE,2025-03-15
