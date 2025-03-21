@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PesaGuru - Check Reports</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/Financial_Advisory_Services/budgeting_savings.css">
+    <link rel="stylesheet" href="../../assets/css/Financial_Advisory_Services/reports.css">
+    <style>
+        /* Report-specific styles */
+        .report-filters {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .report-filters .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .report-filters select, 
+        .report-filters input[type="date"],
+        .report-filters input[type="text"] {
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            background-color: #f9f9f9;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .report-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .summary-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .summary-card h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 16px;
+        }
+        
+        .summary-card .value {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .summary-card .trend {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .chart-container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .chart-tabs {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chart-tab {
+            padding: 8px 15px;
+            border-radius: 6px;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .chart-tab.active {
+            background-color: #4361ee;
+            color: white;
+        }
+        
+        .report-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-bottom: 20px;
+        }
+        
+        .report-table th {
+            text-align: left;
+            padding: 15px;
+            background-color: #f9f9f9;
+            color: #555;
+            font-weight: 600;
+        }
+        
+        .report-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .report-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .report-table tbody tr:hover {
+            background-color: #f0f7ff;
+        }
+        
+        .export-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #4361ee;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+        
+        .export-btn:hover {
+            background-color: #3a56d4;
+        }
+
+        .category-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .category-food {
+            background-color: #e6f7ff;
+            color: #0099ff;
+        }
+        
+        .category-transport {
+            background-color: #fff3e6;
+            color: #ff9933;
+        }
+        
+        .category-utilities {
+            background-color: #e6ffe6;
+            color: #33cc33;
+        }
+        
+        .category-education {
+            background-color: #f0e6ff;
+            color: #9966ff;
+        }
+        
+        .category-entertainment {
+            background-color: #ffe6f0;
+            color: #ff3399;
+        }
+        
+        .date-range {
+            display: none;
+        }
+        
+        .section-header-search {
+            margin-top: 30px;
+        }
+        
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .pagination-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .report-filters {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .chart-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <div class="logo-icon"><i class="fas fa-dollar-sign"></i></div>
+                    <h1 class="logo-text">PesaGuru</h1>
+                </div>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <ul class="menu-items">
+                    <li class="menu-item">
+                        <a href="../../index.html"><i class="fas fa-home"></i>Dashboard</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="../../pages/Financial_Advisory_Services/add_expense.html">
+                            <i class="fas fa-plus"></i> Add Expense ➕
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="../../pages/Financial_Advisory_Services/Set_a_Savings_Goal.html">
+                            <i class="fas fa-trophy"></i> Set a Savings Goal 🏆
+                        </a>
+                    </li>
+                    <li class="menu-item active">
+                        <a href="../../pages/Financial_Advisory_Services/Check_Reports.html">
+                            <i class="fas fa-file-alt"></i> Check Reports 📑
+                        </a>
+                    </li>                    
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <ul class="menu-items">
+                    <li class="menu-item">
+                        <a href="#"><i class="fas fa-question-circle"></i>Help</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#"><i class="fas fa-envelope"></i>Message</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#"><i class="fas fa-cog"></i>Settings</a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <h1>Check Reports</h1>
+                    <p class="greeting">Good morning, Hailey Patrick!</p>
+                </div>
+                <div class="header-right">
+                    <div class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search transactions, reports...">
+                    </div>
+                    <div class="header-actions">
+                        <button class="currency-toggle">KES <i class="fas fa-chevron-down"></i></button>
+                        <button class="theme-toggle" title="Toggle dark mode">
+                            <i class="fas fa-moon"></i>
+                            <span class="sr-only">Toggle dark mode</span>
+                        </button>
+                        <button class="notification-btn"><i class="fas fa-bell"></i><span class="notification-badge">3</span></button>
+                        <div class="user-profile">
+                            <img src="https://storage.googleapis.com/a1aa/image/0U7xzC3_YA8vvhRz7YZBOcGa8zL2Ythwhf2wE3wxzV8.jpg" alt="User profile">
+                            <span>Hailey Patrick</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Reports Content -->
+            <div class="dashboard-content">
+                <section class="section">
+                    <div class="section-header">
+                        <h2>Financial Reports</h2>
+                        <button class="export-btn">
+                            <i class="fas fa-download"></i> Export Reports
+                        </button>
+                    </div>
+                    
+                    <!-- Report Filters -->
+                    <div class="report-filters">
+                        <div class="filter-group">
+                            <label for="report-type">Report Type:</label>
+                            <select id="report-type">
+                                <option value="expense">Expense Analysis</option>
+                                <option value="income">Income Analysis</option>
+                                <option value="savings">Savings Progress</option>
+                                <option value="budget">Budget Performance</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="time-period">Time Period:</label>
+                            <select id="time-period">
+                                <option value="last-month">Last Month</option>
+                                <option value="last-quarter">Last Quarter</option>
+                                <option value="last-year">Last Year</option>
+                                <option value="custom">Custom Range</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group date-range">
+                            <label for="date-from">From:</label>
+                            <input type="date" id="date-from">
+                            <label for="date-to">To:</label>
+                            <input type="date" id="date-to">
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="category-filter">Category:</label>
+                            <select id="category-filter">
+                                <option value="all">All Categories</option>
+                                <option value="food">Food & Groceries</option>
+                                <option value="transport">Transportation</option>
+                                <option value="utilities">Utilities</option>
+                                <option value="education">Education</option>
+                                <option value="entertainment">Entertainment</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Report Summary -->
+                    <div class="report-summary">
+                        <div class="summary-card">
+                            <h3>Total Expenses</h3>
+                            <p class="value">KES 35,842</p>
+                            <p class="trend negative">
+                                <i class="fas fa-arrow-up"></i> 12% vs previous period
+                            </p>
+                        </div>
+                        
+                        <div class="summary-card">
+                            <h3>Total Income</h3>
+                            <p class="value">KES 52,600</p>
+                            <p class="trend positive">
+                                <i class="fas fa-arrow-up"></i> 8% vs previous period
+                            </p>
+                        </div>
+                        
+                        <div class="summary-card">
+                            <h3>Savings</h3>
+                            <p class="value">KES 16,758</p>
+                            <p class="trend positive">
+                                <i class="fas fa-arrow-up"></i> 5% vs previous period
+                            </p>
+                        </div>
+                        
+                        <div class="summary-card">
+                            <h3>Budget Utilization</h3>
+                            <p class="value">83%</p>
+                            <p class="trend negative">
+                                <i class="fas fa-arrow-up"></i> 7% vs previous period
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Charts Section -->
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>Expense Breakdown by Category</h3>
+                            <div class="chart-tabs">
+                                <div class="chart-tab active">Pie Chart</div>
+                                <div class="chart-tab">Bar Chart</div>
+                                <div class="chart-tab">Line Chart</div>
+                            </div>
+                        </div>
+                        <div class="chart-body">
+                            <canvas id="expenseChart" height="300"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>Monthly Expense Trend</h3>
+                            <div class="chart-tabs">
+                                <div class="chart-tab">Pie Chart</div>
+                                <div class="chart-tab">Bar Chart</div>
+                                <div class="chart-tab active">Line Chart</div>
+                            </div>
+                        </div>
+                        <div class="chart-body">
+                            <canvas id="trendChart" height="300"></canvas>
+                        </div>
+                    </div>
+                    
+                    <!-- Transaction Table -->
+                    <div class="section-header section-header-search">
+                        <h3>Detailed Transactions</h3>
+                        <div class="filter-group">
+                            <input type="text" placeholder="Search transactions..." id="transaction-search">
+                        </div>
+                    </div>
+                    
+                    <div class="payouts-table-container">
+                        <table class="report-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Category</th>
+                                    <th>Amount</th>
+                                    <th>Payment Method</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>May 12, 2024</td>
+                                    <td>Supermarket Groceries</td>
+                                    <td><span class="category-badge category-food">Food</span></td>
+                                    <td>KES 2,450</td>
+                                    <td>Credit Card</td>
+                                    <td>
+                                        <button class="btn-icon" title="View transaction options" aria-label="View transaction options">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>May 10, 2024</td>
+                                    <td>Uber Ride</td>
+                                    <td><span class="category-badge category-transport">Transport</span></td>
+                                    <td>KES 750</td>
+                                    <td>Mobile Payment</td>
+                                    <td>
+                                        <button class="btn-icon" title="View transaction options" aria-label="View transaction options">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>May 8, 2024</td>
+                                    <td>Electricity Bill</td>
+                                    <td><span class="category-badge category-utilities">Utilities</span></td>
+                                    <td>KES 3,850</td>
+                                    <td>Bank Transfer</td>
+                                    <td>
+                                        <button class="btn-icon" title="View transaction options" aria-label="View transaction options">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>May 5, 2024</td>
+                                    <td>Online Course Subscription</td>
+                                    <td><span class="category-badge category-education">Education</span></td>
+                                    <td>KES 1,200</td>
+                                    <td>Credit Card</td>
+                                    <td>
+                                        <button class="btn-icon" title="View transaction options" aria-label="View transaction options">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>May 3, 2024</td>
+                                    <td>Movie Tickets</td>
+                                    <td><span class="category-badge category-entertainment">Entertainment</span></td>
+                                    <td>KES 900</td>
+                                    <td>Mobile Payment</td>
+                                    <td>
+                                        <button class="btn-icon" title="View transaction options" aria-label="View transaction options">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>May 1, 2024</td>
+                                    <td>Restaurant Dinner</td>
+                                    <td><span class="category-badge category-food">Food</span></td>
+                                    <td>KES 3,200</td>
+                                    <td>Credit Card</td>
+                                    <td>
+                                        <button class="btn-icon" title="View transaction options" aria-label="View transaction options">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>April 29, 2024</td>
+                                    <td>Taxi Fare</td>
+                                    <td><span class="category-badge category-transport">Transport</span></td>
+                                    <td>KES 550</td>
+                                    <td>Cash</td>
+                                    <td>
+                                        <button class="btn-icon" title="View transaction options" aria-label="View transaction options">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>April 27, 2024</td>
+                                    <td>Internet Bill</td>
+                                    <td><span class="category-badge category-utilities">Utilities</span></td>
+                                    <td>KES 2,500</td>
+                                    <td>Bank Transfer</td>
+                                    <td>
+                                        <button class="btn-icon" title="View transaction options" aria-label="View transaction options">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="pagination-container">
+                        <div class="pagination-buttons">
+                            <button class="btn-outline" disabled aria-label="Previous page"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-outline active" aria-label="Page 1">1</button>
+                            <button class="btn-outline" aria-label="Page 2">2</button>
+                            <button class="btn-outline" aria-label="Page 3">3</button>
+                            <button class="btn-outline" aria-label="Next page"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Chatbot Widget -->
+            <div class="chatbot-widget">
+                <button class="chatbot-toggle" title="Open chat assistant" aria-label="Open chat assistant">
+                    <i class="fas fa-robot"></i>
+                    <span class="sr-only">Chat with PesaGuru Assistant</span>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script>
+        // Initialize charts when document is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Expense Breakdown Chart
+            const expenseCtx = document.getElementById('expenseChart').getContext('2d');
+            const expenseChart = new Chart(expenseCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Food & Groceries', 'Transportation', 'Utilities', 'Education', 'Entertainment', 'Others'],
+                    datasets: [{
+                        data: [5650, 1300, 6350, 1200, 900, 4200],
+                        backgroundColor: [
+                            '#0099ff',
+                            '#ff9933',
+                            '#33cc33',
+                            '#9966ff',
+                            '#ff3399',
+                            '#999999'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((value / total) * 100);
+                                    return `${label}: KES ${value} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Monthly Trend Chart
+            const trendCtx = document.getElementById('trendChart').getContext('2d');
+            const trendChart = new Chart(trendCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                    datasets: [{
+                        label: 'Expenses',
+                        data: [32500, 29800, 31200, 34500, 32000, 35842],
+                        borderColor: '#4361ee',
+                        backgroundColor: 'rgba(67, 97, 238, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    },
+                    {
+                        label: 'Income',
+                        data: [45000, 48000, 47500, 49000, 48500, 52600],
+                        borderColor: '#32CD32',
+                        backgroundColor: 'rgba(50, 205, 50, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.dataset.label || '';
+                                    const value = context.raw || 0;
+                                    return `${label}: KES ${value}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Chart tab switching
+            const chartTabs = document.querySelectorAll('.chart-tab');
+            chartTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Get all siblings
+                    const siblings = Array.from(this.parentElement.children);
+                    // Remove active class from all tabs
+                    siblings.forEach(sib => sib.classList.remove('active'));
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Get the chart context based on the parent container
+                    const chartContainer = this.closest('.chart-container');
+                    const chartCanvas = chartContainer.querySelector('canvas');
+                    
+                    // Get the chart instance
+                    const chartInstance = Chart.getChart(chartCanvas);
+                    
+                    // Update chart type based on tab text
+                    if (this.textContent === 'Pie Chart') {
+                        chartInstance.config.type = 'pie';
+                    } else if (this.textContent === 'Bar Chart') {
+                        chartInstance.config.type = 'bar';
+                    } else if (this.textContent === 'Line Chart') {
+                        chartInstance.config.type = 'line';
+                    }
+                    
+                    // Update chart
+                    chartInstance.update();
+                });
+            });
+            
+            // Show/hide date range based on time period selection
+            const timePeriod = document.getElementById('time-period');
+            const dateRange = document.querySelector('.date-range');
+            
+            timePeriod.addEventListener('change', function() {
+                if (this.value === 'custom') {
+                    dateRange.style.display = 'flex';
+                } else {
+                    dateRange.style.display = 'none';
+                }
+            });
+            
+            // Transaction search functionality
+            const transactionSearch = document.getElementById('transaction-search');
+            const tableRows = document.querySelectorAll('.report-table tbody tr');
+            
+            transactionSearch.addEventListener('keyup', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                tableRows.forEach(row => {
+                    const text = row.textContent.toLowerCase();
+                    if (text.includes(searchTerm)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

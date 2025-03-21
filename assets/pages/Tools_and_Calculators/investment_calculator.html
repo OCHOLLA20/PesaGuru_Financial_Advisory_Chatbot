@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Calculator - PesaGuru</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --secondary-color: #64748b;
+            --accent-color: #8b5cf6;
+            --text-color: #1e293b;
+            --text-light: #64748b;
+            --card-bg: #ffffff;
+            --bg-color: #f1f5f9;
+            --border-color: #e2e8f0;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --info-color: #0ea5e9;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #3b82f6;
+            --primary-hover: #60a5fa;
+            --secondary-color: #94a3b8;
+            --accent-color: #a78bfa;
+            --text-color: #e2e8f0;
+            --text-light: #94a3b8;
+            --card-bg: #1e293b;
+            --bg-color: #0f172a;
+            --border-color: #334155;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --success-color: #34d399;
+            --warning-color: #fbbf24;
+            --danger-color: #f87171;
+            --info-color: #38bdf8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Top Bar Styles */
+        .nav-top-bar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px var(--shadow-color);
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 18px;
+            color: var(--primary-color);
+        }
+
+        .logo i {
+            font-size: 20px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+            padding-right: 15px;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: 10px;
+            border: 2px solid var(--border-color);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background-color: transparent;
+            color: var(--text-color);
+            cursor: pointer;
+            position: relative;
+            transition: background-color 0.2s ease;
+        }
+
+        .action-btn:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: var(--danger-color);
+            color: white;
+            font-size: 10px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            margin-top: 60px;
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 20px;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        /* Card Styles */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 2px 4px var(--shadow-color);
+            margin-bottom: 20px;
+            padding: 20px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 6px var(--shadow-color);
+        }
+
+        .card-header {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-header i {
+            color: var(--primary-color);
+        }
+
+        /* Form Styles */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            transition: border-color 0.2s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .currency-input,
+        .contribution-input,
+        .duration-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .currency-select,
+        .contribution-frequency,
+        .duration-unit {
+            width: auto;
+            min-width: 80px;
+        }
+
+        .currency-amount {
+            flex-grow: 1;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--text-light);
+        }
+
+        .btn-accent {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .btn-accent:hover {
+            opacity: 0.9;
+        }
+
+        .primary-button {
+            flex-grow: 1;
+        }
+
+        /* Tabs Styles */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .tab:hover {
+            color: var(--primary-color);
+        }
+
+        .tab.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Results Styles */
+        .results-summary {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .summary-card {
+            flex: 1;
+            min-width: 200px;
+            background-color: var(--bg-color);
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .summary-label {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+
+        .summary-value {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .chart-container {
+            height: 250px;
+            background-color: var(--bg-color);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chart-smaller {
+            height: 180px;
+        }
+
+        .chart-placeholder {
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        .chart-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .responsive-flex {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .flex-item {
+            flex: 1;
+            min-width: 0;
+        }
+
+        /* Table Styles */
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .results-table th,
+        .results-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .results-table th {
+            font-weight: 600;
+            background-color: var(--bg-color);
+        }
+
+        .results-table tbody tr:hover {
+            background-color: var(--bg-color);
+        }
+
+        .section-heading {
+            margin: 20px 0 15px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .export-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        /* Strategy Options Styles */
+        .strategy-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .strategy-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background-color: var(--bg-color);
+            border-radius: 5px;
+        }
+
+        .strategy-label {
+            font-size: 13px;
+        }
+
+        /* Scenario Parameters Styles */
+        .scenario-parameters {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .scenario-parameters label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 13px;
+        }
+
+        .update-button {
+            margin-top: 10px;
+        }
+
+        /* Heatmap Styles */
+        .heatmap-container {
+            display: flex;
+            gap: 2px;
+            margin: 15px 0;
+        }
+
+        .heatmap-cell {
+            flex: 1;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            color: white;
+            font-size: 13px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .risk-low {
+            background-color: #10b981;
+        }
+
+        .risk-medium {
+            background-color: #f59e0b;
+        }
+
+        .risk-high {
+            background-color: #ef4444;
+        }
+
+        /* Feature List Styles */
+        .features-list {
+            list-style-type: none;
+            margin: 15px 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .feature-icon {
+            color: var(--success-color);
+            font-size: 16px;
+            margin-top: 2px;
+        }
+
+        /* Alert Styles */
+        .alert-primary,
+        .alert-secondary,
+        .alert-accent {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .alert-primary {
+            background-color: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .alert-secondary {
+            background-color: rgba(100, 116, 139, 0.1);
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .alert-accent {
+            background-color: rgba(139, 92, 246, 0.1);
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .alert-icon {
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        .icon-primary {
+            color: var(--primary-color);
+        }
+
+        .icon-secondary {
+            color: var(--secondary-color);
+        }
+
+        .icon-accent {
+            color: var(--accent-color);
+        }
+
+        .alert-title {
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        .alert-content {
+            margin-top: 5px;
+            color: var(--text-color);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .responsive-flex {
+                flex-direction: column;
+            }
+
+            .tabs {
+                flex-wrap: wrap;
+            }
+
+            .tab {
+                flex-grow: 1;
+                text-align: center;
+                padding: 8px 10px;
+                font-size: 13px;
+            }
+
+            .results-table {
+                font-size: 12px;
+            }
+
+            .scenario-parameters {
+                grid-template-columns: 1fr;
+            }
+
+            .heatmap-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Top Navigation Bar -->
+        <div class="nav-top-bar">
+            <div class="logo">
+                <i class="fas fa-wallet"></i>
+                <span>PesaGuru</span>
+            </div>
+            <div class="user-profile">
+                <img src="../../assets/images/profile-placeholder.png" alt="User Profile" class="user-avatar">
+                <span>Hello, <strong>User</strong>!</span>
+            </div>
+            <div class="action-buttons">
+                <button class="action-btn" title="Search">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="action-btn" title="Notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                <button class="action-btn" title="Settings">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h1 class="header-title">Investment Calculator</h1>
+            </div>
+
+            <!-- Investment Growth Calculator -->
+            <div class="card">
+                <h2 class="card-header">
+                    <i class="fas fa-chart-line"></i>
+                    Investment Growth Calculator
+                </h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Initial Investment</label>
+                        <div class="currency-input">
+                            <select class="form-control currency-select" aria-label="Currency" id="currency">
+                                <option>KES</option>
+                                <option>USD</option>
+                                <option>EUR</option>
+                                <option>GBP</option>
+                            </select>
+                            <input type="number" class="form-control currency-amount" placeholder="Amount" value="10000" id="initialInvestment">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Contribution</label>
+                        <div class="contribution-input">
+                            <input type="number" class="form-control" placeholder="Amount" value="500" id="contributionAmount">
+                            <select class="form-control contribution-frequency" aria-label="Contribution Frequency" id="contributionFrequency">
+                                <option>Monthly</option>
+                                <option>Quarterly</option>
+                                <option>Annually</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="returnRate" class="form-label">Expected Return Rate (%)</label>
+                        <input type="number" id="returnRate" class="form-control" step="0.1" value="8.5" title="Enter expected return rate in percentage" placeholder="e.g., 8.5">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="investmentDuration" class="form-label">Investment Duration</label>
+                        <div class="duration-input">
+                            <input type="number" id="investmentDuration" class="form-control" value="10" title="Enter investment duration" placeholder="e.g., 10">
+                            <select id="durationUnit" class="form-control duration-unit" aria-label="Select duration unit" title="Select duration unit">
+                                <option>Years</option>
+                                <option>Months</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="compoundingFrequency" class="form-label">Compounding Frequency</label>
+                        <select id="compoundingFrequency" class="form-control" aria-label="Select compounding frequency" title="Select compounding frequency">
+                            <option>Daily</option>
+                            <option selected>Monthly</option>
+                            <option>Quarterly</option>
+                            <option>Semi-Annually</option>
+                            <option>Annually</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="inflationRate" class="form-label">Inflation Rate (%)</label>
+                        <input type="number" id="inflationRate" class="form-control" step="0.1" value="2.5" title="Enter inflation rate in percentage" placeholder="e.g., 2.5">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="taxRate" class="form-label">Tax Rate (%)</label>
+                        <input type="number" id="taxRate" class="form-control" step="0.1" value="15" title="Enter tax rate in percentage" placeholder="e.g., 15">
+                    </div>
+
+                    <div class="form-group action-buttons">
+                        <button class="btn btn-primary primary-button" id="calculateBtn">
+                            <i class="fas fa-calculator"></i> Calculate
+                        </button>
+                        <button class="btn btn-secondary" id="resetBtn">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Tabs -->
+            <div class="card">
+                <div class="tabs">
+                    <div class="tab active" data-tab="projections">Projections</div>
+                    <div class="tab" data-tab="comparison">Strategy Comparison</div>
+                    <div class="tab" data-tab="portfolio">Portfolio Diversification</div>
+                    <div class="tab" data-tab="scenarios">Scenario Analysis</div>
+                </div>
+
+                <!-- Projections Tab -->
+                <div class="tab-content active" id="projections">
+                    <div class="responsive-flex">
+                        <div class="flex-item">
+                            <div class="results-summary">
+                                <div class="summary-card">
+                                    <span class="summary-label">Future Value</span>
+                                    <span class="summary-value" id="futureValue">KES 198,576</span>
+                                    <span class="summary-label">After <span id="yearsLabel">10</span> Years</span>
+                                </div>
+                                <div class="summary-card">
+                                    <span class="summary-label">Total Contributions</span>
+                                    <span class="summary-value" id="totalContributions">KES 70,000</span>
+                                    <span class="summary-label">Principal + Deposits</span>
+                                </div>
+                                <div class="summary-card">
+                                    <span class="summary-label">Investment Gain</span>
+                                    <span class="summary-value" id="investmentGain">KES 128,576</span>
+                                    <span class="summary-label">Return on Investment</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-item">
+                            <div class="chart-container">
+                                <div class="chart-placeholder">
+                                    <p><i class="fas fa-chart-line chart-icon"></i> Investment Growth Chart</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="section-heading">Year-by-Year Breakdown</h3>
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>Year</th>
+                                <th>Starting Balance</th>
+                                <th>Annual Contribution</th>
+                                <th>Interest Earned</th>
+                                <th>Ending Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody id="yearBreakdown">
+                            <!-- This will be filled by JavaScript -->
+                        </tbody>
+                    </table>
+
+                    <div class="export-options">
+                        <button class="btn btn-accent" id="exportPdfBtn">
+                            <i class="fas fa-file-pdf"></i> Export as PDF
+                        </button>
+                        <button class="btn btn-secondary" id="exportExcelBtn">
+                            <i class="fas fa-file-excel"></i> Export as Excel
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Strategy Comparison Tab -->
+                <div class="tab-content" id="comparison">
+                    <div class="responsive-flex">
+                        <div class="flex-item">
+                            <h3 class="section-heading">Investment Strategy Comparison</h3>
+                            <p>Compare different investment approaches based on your risk tolerance and goals:</p>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Select Strategies to Compare</label>
+                                <div class="strategy-options">
+                                    <div class="strategy-option">
+                                        <input type="checkbox" id="stocks" checked title="Include stocks in comparison">
+                                        <label for="stocks" class="strategy-label">Stocks (8-10%)</label>
+                                    </div>
+                                    <div class="strategy-option">
+                                        <input type="checkbox" id="bonds" checked title="Include bonds in comparison">
+                                        <label for="bonds" class="strategy-label">Bonds (3-5%)</label>
+                                    </div>
+                                    <div class="strategy-option">
+                                        <input type="checkbox" id="realestate" checked title="Include real estate in comparison">
+                                        <label for="realestate" class="strategy-label">Real Estate (6-8%)</label>
+                                    </div>
+                                    <div class="strategy-option">
+                                        <input type="checkbox" id="cash" title="Include cash in comparison">
+                                        <label for="cash" class="strategy-label">Cash (1-2%)</label>
+                                    </div>
+                                    <div class="strategy-option">
+                                        <input type="checkbox" id="crypto" title="Include crypto in comparison">
+                                        <label for="crypto" class="strategy-label">Crypto (High Volatility)</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-item">
+                            <div class="chart-container">
+                                <div class="chart-placeholder">
+                                    <p><i class="fas fa-chart-bar chart-icon"></i> Strategy Comparison Chart</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="section-heading">Risk-Adjusted Returns</h3>
+                    <div class="heatmap-container">
+                        <div class="heatmap-cell risk-low">
+                            <span>Bonds<br>Low Risk</span>
+                        </div>
+                        <div class="heatmap-cell risk-medium">
+                            <span>Mixed<br>Medium Risk</span>
+                        </div>
+                        <div class="heatmap-cell risk-medium">
+                            <span>Real Estate<br>Medium Risk</span>
+                        </div>
+                        <div class="heatmap-cell risk-high">
+                            <span>Stocks<br>High Risk</span>
+                        </div>
+                        <div class="heatmap-cell risk-high">
+                            <span>Crypto<br>High Risk</span>
+                        </div>
+                    </div>
+                    
+                    <table class="results-table section-heading">
+                        <thead>
+                            <tr>
+                                <th>Strategy</th>
+                                <th>Expected Return</th>
+                                <th>Risk Level</th>
+                                <th>10-Year Projection</th>
+                                <th>Best For</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Conservative (80% Bonds, 20% Stocks)</td>
+                                <td>4-5%</td>
+                                <td>Low</td>
+                                <td>KES 114,520</td>
+                                <td>Near-retirement, Low risk tolerance</td>
+                            </tr>
+                            <tr>
+                                <td>Balanced (50% Stocks, 40% Bonds, 10% RE)</td>
+                                <td>6-7%</td>
+                                <td>Medium</td>
+                                <td>KES 149,380</td>
+                                <td>Mid-career, Moderate risk tolerance</td>
+                            </tr>
+                            <tr>
+                                <td>Growth (70% Stocks, 20% Bonds, 10% RE)</td>
+                                <td>8-9%</td>
+                                <td>Medium-High</td>
+                                <td>KES 198,576</td>
+                                <td>Early career, Higher risk tolerance</td>
+                            </tr>
+                            <tr>
+                                <td>Aggressive (90% Stocks, 10% Crypto)</td>
+                                <td>10-12%</td>
+                                <td>High</td>
+                                <td>KES 236,650</td>
+                                <td>Long time horizon, High risk tolerance</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Portfolio Diversification Tab -->
+                <div class="tab-content" id="portfolio">
+                    <div class="responsive-flex">
+                        <div class="flex-item">
+                            <h3 class="section-heading">Recommended Portfolio Allocation</h3>
+                            <p>Based on your inputs and risk profile, here's a suggested asset allocation:</p>
+                            
+                            <div class="chart-container">
+                                <div class="chart-placeholder">
+                                    <p><i class="fas fa-chart-pie chart-icon"></i> Portfolio Allocation Chart</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-item">
+                            <h3 class="section-heading">AI-Powered Insights</h3>
+                            <div class="alert-secondary">
+                                <p><i class="fas fa-robot alert-icon icon-secondary"></i> <strong class="alert-title">PesaGuru AI Recommends:</strong></p>
+                                <p class="alert-content">Based on your age and goals, a growth-oriented portfolio is suitable. Consider increasing your stock allocation by 10% and adding exposure to international markets for better diversification.</p>
+                            </div>
+                            
+                            <h4 class="section-heading">Alternative Investment Vehicles</h4>
+                            <ul class="features-list">
+                                <li class="feature-item"><i class="fas fa-check-circle feature-icon"></i> <strong>Index ETFs</strong> - Low-cost way to gain broad market exposure</li>
+                                <li class="feature-item"><i class="fas fa-check-circle feature-icon"></i> <strong>REITs</strong> - Real estate exposure without direct property ownership</li>
+                                <li class="feature-item"><i class="fas fa-check-circle feature-icon"></i> <strong>Balanced Mutual Funds</strong> - Professional management with built-in diversification</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="section-heading">
+                        <h3 class="section-heading">Passive vs. Active Investment Approaches</h3>
+                        <table class="results-table">
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>Passive Investing</th>
+                                    <th>Active Investing</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Management Style</td>
+                                    <td>Track market index</td>
+                                    <td>Beat market returns</td>
+                                </tr>
+                                <tr>
+                                    <td>Cost</td>
+                                    <td>Lower fees (0.1-0.5%)</td>
+                                    <td>Higher fees (1-2%+)</td>
+                                </tr>
+                                <tr>
+                                    <td>Time Commitment</td>
+                                    <td>Minimal</td>
+                                    <td>Significant</td>
+                                </tr>
+                                <tr>
+                                    <td>Tax Efficiency</td>
+                                    <td>Higher</td>
+                                    <td>Lower</td>
+                                </tr>
+                                <tr>
+                                    <td>Performance</td>
+                                    <td>Market returns</td>
+                                    <td>Variable (often underperforms)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Scenario Analysis Tab -->
+                <div class="tab-content" id="scenarios">
+                    <h3 class="section-heading">What-If Scenario Analysis</h3>
+                    <p>Adjust parameters to see how different scenarios affect your investment outcomes:</p>
+                    
+                    <div class="responsive-flex">
+                        <div class="flex-item">
+                            <div class="form-group">
+                                <label class="form-label">Compare Scenarios</label>
+                                <select class="form-control" aria-label="Scenario Type Selection" id="scenarioType">
+                                    <option>Increase Monthly Contribution</option>
+                                    <option>Earlier vs. Later Start</option>
+                                    <option>Different Return Rates</option>
+                                    <option>Compounding Frequency</option>
+                                    <option>Lump Sum vs. Dollar-Cost Averaging</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Scenario Parameters</label>
+                                <div class="scenario-parameters">
+                                    <div>
+                                        <label for="scenario-a">Scenario A</label>
+                                        <input type="text" id="scenario-a" class="form-control" value="KES 500/month" title="Scenario A value">
+                                    </div>
+                                    <div>
+                                        <label for="scenario-b">Scenario B</label>
+                                        <input type="text" id="scenario-b" class="form-control" value="KES 1,000/month" title="Scenario B value">
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary update-button" id="updateScenarioBtn">
+                                <i class="fas fa-sync-alt"></i> Update Comparison
+                            </button>
+                        </div>
+                        <div class="flex-item">
+                            <div class="chart-container">
+                                <div class="chart-placeholder">
+                                    <p><i class="fas fa-chart-line chart-icon"></i> Scenario Comparison Chart</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="section-heading">Scenario Comparison Results</h3>
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Scenario A (KES 500/month)</th>
+                                <th>Scenario B (KES 1,000/month)</th>
+                                <th>Difference</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Final Balance (10 years)</td>
+                                <td>KES 198,576</td>
+                                <td>KES 338,754</td>
+                                <td>+KES 140,178 (70.6%)</td>
+                            </tr>
+                            <tr>
+                                <td>Total Contributions</td>
+                                <td>KES 70,000</td>
+                                <td>KES 130,000</td>
+                                <td>+KES 60,000</td>
+                            </tr>
+                            <tr>
+                                <td>Total Interest Earned</td>
+                                <td>KES 128,576</td>
+                                <td>KES 208,754</td>
+                                <td>+KES 80,178</td>
+                            </tr>
+                            <tr>
+                                <td>Time to Reach KES 500,000</td>
+                                <td>16 years, 4 months</td>
+                                <td>13 years, 1 month</td>
+                                <td>-3 years, 3 months</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="alert-primary">
+                        <p><i class="fas fa-lightbulb alert-icon icon-primary"></i> <strong class="alert-title">Key Insight:</strong></p>
+                        <p class="alert-content">Doubling your monthly contribution from KES 500 to KES 1,000 increases your final balance by 70.6%, not just 50%. This demonstrates the power of compound interest over time. You'll also reach your financial goals over 3 years earlier.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inflation & Tax Impact -->
+            <div class="card">
+                <h2 class="card-header">
+                    <i class="fas fa-percentage"></i>
+                    Inflation & Tax Impact Analysis
+                </h2>
+                
+                <div class="responsive-flex">
+                    <div class="flex-item">
+                        <h3 class="section-heading">Inflation-Adjusted Returns</h3>
+                        <div class="chart-container chart-smaller">
+                            <div class="chart-placeholder">
+                                <p><i class="fas fa-chart-area chart-icon"></i> Inflation Impact Chart</p>
+                            </div>
+                        </div>
+                        <div class="results-summary">
+                            <div class="summary-card">
+                                <span class="summary-label">Nominal Value</span>
+                                <span class="summary-value" id="nominalValue">KES 198,576</span>
+                            </div>
+                            <div class="summary-card">
+                                <span class="summary-label">Real Value</span>
+                                <span class="summary-value" id="realValue">KES 155,219</span>
+                                <span class="summary-label">After <span id="inflationRateLabel">2.5</span>% inflation</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-item">
+                        <h3 class="section-heading">Tax Implications</h3>
+                        <div class="chart-container chart-smaller">
+                            <div class="chart-placeholder">
+                                <p><i class="fas fa-chart-pie chart-icon"></i> Tax Impact Chart</p>
+                            </div>
+                        </div>
+                        <div class="results-summary">
+                            <div class="summary-card">
+                                <span class="summary-label">Pre-Tax Gains</span>
+                                <span class="summary-value" id="preTaxGains">KES 128,576</span>
+                            </div>
+                            <div class="summary-card">
+                                <span class="summary-label">Est. Tax Amount</span>
+                                <span class="summary-value" id="taxAmount">KES 19,286</span>
+                                <span class="summary-label">At <span id="taxRateLabel">15</span>% tax rate</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="alert-accent">
+                    <p><i class="fas fa-info-circle alert-icon icon-accent"></i> <strong class="alert-title">Tax & Inflation Note:</strong></p>
+                    <p class="alert-content">The calculator provides estimates based on current tax and inflation rates. Actual taxes may vary based on your specific tax situation and local regulations. Consider consulting with a tax professional for personalized advice.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Tab switching functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                document.querySelectorAll('.tab').forEach(t => {
+                    t.classList.remove('active');
+                });
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Hide all tab content
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Show corresponding tab content
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Dark mode toggle function
+        function toggleDarkMode(icon, text) {
+            const isDarkMode = document.body.getAttribute('data-theme') === 'dark';
+            
+            // Toggle theme
+            if (isDarkMode) {
+                document.body.removeAttribute('data-theme');
+                
+                // Update all theme toggles
+                document.querySelectorAll('.theme-toggle i, #nav-theme-toggle i').forEach(icon => {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                });
+                
+                // Update text if provided
+                if (text) {
+                    text.textContent = 'Dark Mode';
+                }
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                
+                // Update all theme toggles
+                document.querySelectorAll('.theme-toggle i, #nav-theme-toggle i').forEach(icon => {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                });
+                
+                // Update text if provided
+                if (text) {
+                    text.textContent = 'Light Mode';
+                }
+            }
+        }
+
+        // Add event listeners for theme toggles
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+        const themeText = themeToggle.querySelector('span');
+        
+        themeToggle.addEventListener('click', () => {
+            toggleDarkMode(themeIcon, themeText);
+        });
+        
+        const navThemeToggle = document.getElementById('nav-theme-toggle');
+        navThemeToggle.addEventListener('click', () => {
+            toggleDarkMode(themeIcon, themeText);
+        });
+
+        // Investment Calculator Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get form elements
+            const initialInvestment = document.getElementById('initialInvestment');
+            const contributionAmount = document.getElementById('contributionAmount');
+            const contributionFrequency = document.getElementById('contributionFrequency');
+            const returnRate = document.getElementById('returnRate');
+            const investmentDuration = document.getElementById('investmentDuration');
+            const durationUnit = document.getElementById('durationUnit');
+            const compoundingFrequency = document.getElementById('compoundingFrequency');
+            const inflationRate = document.getElementById('inflationRate');
+            const taxRate = document.getElementById('taxRate');
+            const calculateBtn = document.getElementById('calculateBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            
+            // Get results elements
+            const futureValue = document.getElementById('futureValue');
+            const totalContributions = document.getElementById('totalContributions');
+            const investmentGain = document.getElementById('investmentGain');
+            const yearsLabel = document.getElementById('yearsLabel');
+            const yearBreakdown = document.getElementById('yearBreakdown');
+            const nominalValue = document.getElementById('nominalValue');
+            const realValue = document.getElementById('realValue');
+            const inflationRateLabel = document.getElementById('inflationRateLabel');
+            const preTaxGains = document.getElementById('preTaxGains');
+            const taxAmount = document.getElementById('taxAmount');
+            const taxRateLabel = document.getElementById('taxRateLabel');
+            
+            // Calculate button click handler
+            calculateBtn.addEventListener('click', function() {
+                calculateInvestment();
+            });
+            
+            // Reset button click handler
+            resetBtn.addEventListener('click', function() {
+                resetCalculator();
+            });
+            
+            // Example Scenario update button
+            const updateScenarioBtn = document.getElementById('updateScenarioBtn');
+            updateScenarioBtn.addEventListener('click', function() {
+                // This would update the scenario comparison based on user inputs
+                alert('Scenario comparison updated! (This would recalculate with real data)');
+            });
+            
+            // Export buttons
+            const exportPdfBtn = document.getElementById('exportPdfBtn');
+            const exportExcelBtn = document.getElementById('exportExcelBtn');
+            
+            exportPdfBtn.addEventListener('click', function() {
+                alert('Exporting as PDF... (This would generate a PDF in a real implementation)');
+            });
+            
+            exportExcelBtn.addEventListener('click', function() {
+                alert('Exporting as Excel... (This would generate an Excel file in a real implementation)');
+            });
+            
+            // Function to calculate investment returns
+            function calculateInvestment() {
+                // Get input values
+                const initial = parseFloat(initialInvestment.value) || 0;
+                const contribution = parseFloat(contributionAmount.value) || 0;
+                const rate = parseFloat(returnRate.value) || 0;
+                const duration = parseFloat(investmentDuration.value) || 0;
+                const inflation = parseFloat(inflationRate.value) || 0;
+                const tax = parseFloat(taxRate.value) || 0;
+                
+                // Convert rate to decimal
+                const rateDecimal = rate / 100;
+                const inflationDecimal = inflation / 100;
+                const taxDecimal = tax / 100;
+                
+                // Number of contributions per year based on frequency
+                let contributionsPerYear = 12; // Default to monthly
+                if (contributionFrequency.value === 'Quarterly') {
+                    contributionsPerYear = 4;
+                } else if (contributionFrequency.value === 'Annually') {
+                    contributionsPerYear = 1;
+                }
+                
+                // Number of compounds per year based on frequency
+                let compoundsPerYear = 12; // Default to monthly
+                if (compoundingFrequency.value === 'Daily') {
+                    compoundsPerYear = 365;
+                } else if (compoundingFrequency.value === 'Quarterly') {
+                    compoundsPerYear = 4;
+                } else if (compoundingFrequency.value === 'Semi-Annually') {
+                    compoundsPerYear = 2;
+                } else if (compoundingFrequency.value === 'Annually') {
+                    compoundsPerYear = 1;
+                }
+                
+                // Calculate future value
+                let years = duration;
+                if (durationUnit.value === 'Months') {
+                    years = duration / 12;
+                }
+                
+                // Calculate future value
+                let balance = initial;
+                const totalContributionAmount = initial + (contribution * contributionsPerYear * years);
+                
+                // Generate year-by-year breakdown
+                let yearlyData = [];
+                let yearlyBalance = initial;
+                
+                for (let year = 1; year <= years; year++) {
+                    const startBalance = yearlyBalance;
+                    const yearlyContribution = contribution * contributionsPerYear;
+                    
+                    // Calculate interest with compound interest formula
+                    const interestEarned = (startBalance + yearlyContribution / 2) * (Math.pow(1 + rateDecimal / compoundsPerYear, compoundsPerYear) - 1);
+                    
+                    yearlyBalance = startBalance + yearlyContribution + interestEarned;
+                    
+                    yearlyData.push({
+                        year: year,
+                        startBalance: startBalance,
+                        contribution: yearlyContribution,
+                        interest: interestEarned,
+                        endBalance: yearlyBalance
+                    });
+                }
+                
+                // Final future value
+                const finalValue = yearlyData[yearlyData.length - 1].endBalance;
+                const investmentGainValue = finalValue - totalContributionAmount;
+                
+                // Calculate inflation-adjusted value
+                const realValueAmount = finalValue / Math.pow(1 + inflationDecimal, years);
+                
+                // Calculate tax on gains
+                const taxAmountValue = investmentGainValue * taxDecimal;
+                
+                // Format currency
+                const currencyType = document.getElementById('currency').value;
+                
+                // Update UI with results
+                futureValue.textContent = formatCurrency(finalValue, currencyType);
+                totalContributions.textContent = formatCurrency(totalContributionAmount, currencyType);
+                investmentGain.textContent = formatCurrency(investmentGainValue, currencyType);
+                yearsLabel.textContent = Math.round(years);
+                
+                // Update inflation and tax sections
+                nominalValue.textContent = formatCurrency(finalValue, currencyType);
+                realValue.textContent = formatCurrency(realValueAmount, currencyType);
+                inflationRateLabel.textContent = inflation;
+                
+                preTaxGains.textContent = formatCurrency(investmentGainValue, currencyType);
+                taxAmount.textContent = formatCurrency(taxAmountValue, currencyType);
+                taxRateLabel.textContent = tax;
+                
+                // Generate year-by-year table
+                yearBreakdown.innerHTML = '';
+                for (let i = 0; i < Math.min(5, yearlyData.length); i++) {
+                    const data = yearlyData[i];
+                    const row = document.createElement('tr');
+                    
+                    row.innerHTML = `
+                        <td>${data.year}</td>
+                        <td>${formatCurrency(data.startBalance, currencyType)}</td>
+                        <td>${formatCurrency(data.contribution, currencyType)}</td>
+                        <td>${formatCurrency(data.interest, currencyType)}</td>
+                        <td>${formatCurrency(data.endBalance, currencyType)}</td>
+                    `;
+                    
+                    yearBreakdown.appendChild(row);
+                }
+                
+                // Add ellipsis row if there are more than 5 years
+                if (yearlyData.length > 5) {
+                    const ellipsisRow = document.createElement('tr');
+                    ellipsisRow.innerHTML = `
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                        <td>...</td>
+                    `;
+                    yearBreakdown.appendChild(ellipsisRow);
+                }
+                
+                // If there are more years, show the final year
+                if (yearlyData.length > 6) {
+                    const finalYearData = yearlyData[yearlyData.length - 1];
+                    const finalRow = document.createElement('tr');
+                    
+                    finalRow.innerHTML = `
+                        <td>${finalYearData.year}</td>
+                        <td>${formatCurrency(finalYearData.startBalance, currencyType)}</td>
+                        <td>${formatCurrency(finalYearData.contribution, currencyType)}</td>
+                        <td>${formatCurrency(finalYearData.interest, currencyType)}</td>
+                        <td>${formatCurrency(finalYearData.endBalance, currencyType)}</td>
+                    `;
+                    
+                    yearBreakdown.appendChild(finalRow);
+                }
+            }
+            
+            // Function to reset calculator
+            function resetCalculator() {
+                initialInvestment.value = '10000';
+                contributionAmount.value = '500';
+                contributionFrequency.selectedIndex = 0; // Monthly
+                returnRate.value = '8.5';
+                investmentDuration.value = '10';
+                durationUnit.selectedIndex = 0; // Years
+                compoundingFrequency.selectedIndex = 1; // Monthly
+                inflationRate.value = '2.5';
+                taxRate.value = '15';
+                
+                // Reset results
+                futureValue.textContent = 'KES 0';
+                totalContributions.textContent = 'KES 0';
+                investmentGain.textContent = 'KES 0';
+                yearBreakdown.innerHTML = '';
+                nominalValue.textContent = 'KES 0';
+                realValue.textContent = 'KES 0';
+                preTaxGains.textContent = 'KES 0';
+                taxAmount.textContent = 'KES 0';
+            }
+            
+            // Helper function to format currency
+            function formatCurrency(amount, currency = 'KES') {
+                return `${currency} ${amount.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
+            }
+            
+            // Initialize the calculator
+            calculateInvestment();
+        });
+
+    </script>
+</body>
+</html>

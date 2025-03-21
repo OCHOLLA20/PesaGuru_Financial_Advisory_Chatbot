@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PesaGuru AI Financial Advisor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="../../assets/css/Chatbot_Interaction/chatbot.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- App Header -->
+        <header class="app-header">
+            <div class="header-left">
+                <button id="menuToggle" class="menu-toggle" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="logo">
+                    <img src="../../assets/images/logo.png" alt="PesaGuru Logo">
+                    <h1>PesaGuru</h1>
+                </div>
+            </div>
+            <div class="header-tabs">
+                <button class="tab-btn active" data-tab="chat">
+                    <i class="fas fa-comment-dots"></i>
+                    <span>Chat</span>
+                </button>
+                <button class="tab-btn" data-tab="tools">
+                    <i class="fas fa-calculator"></i>
+                    <span>Tools</span>
+                </button>
+                <button class="tab-btn" data-tab="insights">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Insights</span>
+                </button>
+                <button class="tab-btn" data-tab="learn">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Learn</span>
+                </button>
+            </div>
+            <div class="header-right">
+                <button id="searchBtn" class="header-action" aria-label="Search">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button id="notificationsBtn" class="header-action" aria-label="Notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                <div class="user-profile" id="profileDropdown">
+                    <img src="../../assets/images/user_avatar.png" alt="User Avatar">
+                    <span class="user-name" id="username">Loading...</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Side Navigation (Hidden by default on mobile) -->
+            <nav class="side-nav" id="sideNav">
+                <div class="nav-section">
+                    <h3>Financial Services</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chart-pie"></i> Investment Planning</a></li>
+                        <li><a href="#"><i class="fas fa-piggy-bank"></i> Budgeting & Savings</a></li>
+                        <li><a href="#"><i class="fas fa-hand-holding-usd"></i> Loan Analysis</a></li>
+                        <li><a href="#"><i class="fas fa-file-invoice"></i> Tax Planning</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <h3>Market Data</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-exchange-alt"></i> NSE Stocks</a></li>
+                        <li><a href="#"><i class="fas fa-dollar-sign"></i> Forex Rates</a></li>
+                        <li><a href="#"><i class="fas fa-coins"></i> Crypto Trends</a></li>
+                        <li><a href="#"><i class="fas fa-percentage"></i> Interest Rates</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <h3>Learning Resources</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-book"></i> Financial Literacy</a></li>
+                        <li><a href="#"><i class="fas fa-video"></i> Video Tutorials</a></li>
+                        <li><a href="#"><i class="fas fa-calendar-alt"></i> Webinars & Events</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <h3>Account</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-user-cog"></i> Profile Settings</a></li>
+                        <li><a href="#"><i class="fas fa-cog"></i> Preferences</a></li>
+                        <li><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Tab Content Container -->
+            <div class="tab-content">
+                <!-- Chat Tab (Active by default) -->
+                <div class="tab-pane active" id="chatTab">
+                    <div class="chat-container">
+                        <!-- Context Panel (Collapsible) -->
+                        <div class="context-panel" id="contextPanel">
+                            <div class="context-header">
+                                <h3>Financial Overview</h3>
+                                <button class="collapse-btn" id="collapseContextBtn" aria-label="Collapse Section">
+                                    <i class="fas fa-chevron-up"></i>
+                                </button>                                
+                            </div>
+                            <div class="context-body">
+                                <div class="metric-card">
+                                    <div class="metric-header">
+                                        <i class="fas fa-wallet"></i>
+                                        <span>Monthly Budget</span>
+                                    </div>
+                                    <div class="metric-value">KES 125,000</div>
+                                    <div class="metric-info">
+                                        <div class="progress-bar">
+                                            <div class="progress progress-65"></div>
+                                        </div>
+                                        <span>65% Used (10 days left)</span>
+                                    </div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-header">
+                                        <i class="fas fa-chart-line"></i>
+                                        <span>Investments</span>
+                                    </div>
+                                    <div class="metric-value">KES 2.45M</div>
+                                    <div class="metric-info">
+                                        <span class="positive"><i class="fas fa-arrow-up"></i> 12.5% YTD</span>
+                                    </div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-header">
+                                        <i class="fas fa-piggy-bank"></i>
+                                        <span>Savings Goal</span>
+                                    </div>
+                                    <div class="metric-value">KES 1.2M / 2M</div>
+                                    <div class="metric-info">
+                                        <div class="progress-bar">
+                                            <div class="progress progress-60"></div>
+                                        </div>
+                                        <span>Emergency Fund (60%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat History -->
+                        <div class="chat-history" id="chatHistory">
+                            <!-- Welcome Message -->
+                            <div class="chat-message bot">
+                                <div class="message-avatar">
+                                    <img src="../../assets/images/bot-avatar.png" alt="PesaGuru Bot">
+                                </div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        <p>Hello Sharon! I'm your PesaGuru AI Financial Assistant. How can I help with your finances today?</p>
+                                    </div>
+                                    <div class="message-time">10:00 AM</div>
+                                </div>
+                            </div>
+
+                            <!-- Bot Message with Card -->
+                            <div class="chat-message bot">
+                                <div class="message-avatar">
+                                    <img src="../../assets/images/bot-avatar.png" alt="PesaGuru Bot">
+                                </div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        <p>Here's a quick overview of your finances:</p>
+                                        <div class="info-card">
+                                            <div class="card-header">
+                                                <i class="fas fa-chart-pie"></i>
+                                                <span>Financial Snapshot</span>
+                                                <div class="card-actions">
+                                                    <button class="card-action" title="Pin"><i class="fas fa-thumbtack"></i></button>
+                                                    <button class="card-action" title="Expand"><i class="fas fa-expand"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="finance-metric">
+                                                    <span class="metric-label">Total Savings</span>
+                                                    <span class="metric-value">KES 528,000</span>
+                                                    <span class="metric-trend positive"><i class="fas fa-arrow-up"></i> 8%</span>
+                                                </div>
+                                                <div class="finance-metric">
+                                                    <span class="metric-label">Monthly Income</span>
+                                                    <span class="metric-value">KES 180,000</span>
+                                                </div>
+                                                <div class="finance-metric">
+                                                    <span class="metric-label">Monthly Expenses</span>
+                                                    <span class="metric-value">KES 125,000</span>
+                                                    <span class="metric-trend negative"><i class="fas fa-arrow-up"></i> 3%</span>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer">
+                                                <button class="btn-primary">View Details</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="message-time">10:02 AM</div>
+                                </div>
+                            </div>
+
+                            <!-- User Message -->
+                            <div class="chat-message user">
+                                <div class="message-avatar">
+                                    <img src="../../assets/images/user-avatar.png" alt="User Avatar">
+                                </div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        <p>How am I doing with my budget this month?</p>
+                                    </div>
+                                    <div class="message-time">10:05 AM</div>
+                                </div>
+                            </div>
+
+                            <!-- Bot Message with Chart -->
+                            <div class="chat-message bot">
+                                <div class="message-avatar">
+                                    <img src="../../assets/images/bot-avatar.png" alt="PesaGuru Bot">
+                                </div>
+                                <div class="message-content">
+                                    <div class="message-bubble">
+                                        <p>You're doing well with your budget! Here's a breakdown of your spending categories:</p>
+                                        <div class="chart-container" id="budgetChart">
+                                            <div class="chart-placeholder">
+                                                <p>Budget Analysis Chart</p>
+                                                <p>(Chart will be rendered using JavaScript)</p>
+                                            </div>
+                                        </div>
+                                        <p>You've spent 65% of your monthly budget with 10 days remaining. You're on track to stay within your limits.</p>
+                                    </div>
+                                    <div class="message-time">10:06 AM</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Smart Suggestions -->
+                        <div class="smart-suggestions" id="smartSuggestions">
+                            <button class="suggestion-btn">How much did I spend on groceries?</button>
+                            <button class="suggestion-btn">Show my investment portfolio</button>
+                            <button class="suggestion-btn">What's my savings progress?</button>
+                            <button class="suggestion-btn">Latest NSE market updates</button>
+                        </div>
+
+                        <!-- Chat Input -->
+                        <div class="chat-input-container">
+                            <button class="input-action" id="attachmentBtn" title="Attach file">
+                                <i class="fas fa-paperclip"></i>
+                            </button>
+                            <div class="chat-input">
+                                <input type="text" id="messageInput" placeholder="Ask me about your finances..." aria-label="Type your message">
+                            </div>
+                            <button class="input-action" id="voiceInputBtn" title="Voice input">
+                                <i class="fas fa-microphone"></i>
+                            </button>
+                            <button class="input-action primary" id="sendMessageBtn" title="Send message">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools Tab -->
+                <div class="tab-pane" id="toolsTab">
+                    <div class="tools-container">
+                        <h2>Financial Tools</h2>
+                        <div class="tools-grid">
+                            <div class="tool-card">
+                                <div class="tool-icon"><i class="fas fa-calculator"></i></div>
+                                <h3>Loan Calculator</h3>
+                                <p>Calculate loan payments, interest, and compare options</p>
+                                <button class="btn-primary">Open Tool</button>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-icon"><i class="fas fa-piggy-bank"></i></div>
+                                <h3>Savings Planner</h3>
+                                <p>Set savings goals and track your progress</p>
+                                <button class="btn-primary">Open Tool</button>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-icon"><i class="fas fa-money-bill-wave"></i></div>
+                                <h3>Budget Manager</h3>
+                                <p>Create and manage your monthly budget</p>
+                                <button class="btn-primary">Open Tool</button>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-icon"><i class="fas fa-chart-pie"></i></div>
+                                <h3>Investment Calculator</h3>
+                                <p>Analyze potential investment returns</p>
+                                <button class="btn-primary">Open Tool</button>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-icon"><i class="fas fa-building"></i></div>
+                                <h3>Retirement Planner</h3>
+                                <p>Plan for your retirement needs</p>
+                                <button class="btn-primary">Open Tool</button>
+                            </div>
+                            <div class="tool-card">
+                                <div class="tool-icon"><i class="fas fa-file-invoice"></i></div>
+                                <h3>Tax Calculator</h3>
+                                <p>Estimate your tax obligations</p>
+                                <button class="btn-primary">Open Tool</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Insights Tab -->
+                <div class="tab-pane" id="insightsTab">
+                    <div class="insights-container">
+                        <h2>Financial Insights</h2>
+                        <div class="insights-grid">
+                            <div class="insight-card">
+                                <h3>NSE Market Overview</h3>
+                                <div class="insights-chart" id="nseMarketChart">
+                                    <div class="chart-placeholder">
+                                        <p>NSE Market Chart</p>
+                                        <p>(Chart will be rendered using JavaScript)</p>
+                                    </div>
+                                </div>
+                                <div class="insights-metrics">
+                                    <div class="insight-metric">
+                                        <span class="metric-label">NSE 20 Index</span>
+                                        <span class="metric-value">1,850.25</span>
+                                        <span class="metric-trend positive"><i class="fas fa-arrow-up"></i> 2.1%</span>
+                                    </div>
+                                    <div class="insight-metric">
+                                        <span class="metric-label">Top Gainer</span>
+                                        <span class="metric-value">SCOM</span>
+                                        <span class="metric-trend positive"><i class="fas fa-arrow-up"></i> 3.4%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="insight-card">
+                                <h3>Forex Exchange Rates</h3>
+                                <div class="forex-rates">
+                                    <div class="forex-rate">
+                                        <span class="currency">USD</span>
+                                        <span class="rate">147.25</span>
+                                        <span class="trend negative"><i class="fas fa-arrow-up"></i> 0.3%</span>
+                                    </div>
+                                    <div class="forex-rate">
+                                        <span class="currency">EUR</span>
+                                        <span class="rate">159.83</span>
+                                        <span class="trend positive"><i class="fas fa-arrow-down"></i> 0.2%</span>
+                                    </div>
+                                    <div class="forex-rate">
+                                        <span class="currency">GBP</span>
+                                        <span class="rate">182.76</span>
+                                        <span class="trend negative"><i class="fas fa-arrow-up"></i> 0.5%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="insight-card">
+                                <h3>Top Performing Investments</h3>
+                                <div class="investment-list">
+                                    <div class="investment-item">
+                                        <div class="investment-info">
+                                            <span class="investment-name">Safaricom</span>
+                                            <span class="investment-type">Stock</span>
+                                        </div>
+                                        <div class="investment-metrics">
+                                            <span class="investment-return positive">+12.5%</span>
+                                        </div>
+                                    </div>
+                                    <div class="investment-item">
+                                        <div class="investment-info">
+                                            <span class="investment-name">KCB Group</span>
+                                            <span class="investment-type">Stock</span>
+                                        </div>
+                                        <div class="investment-metrics">
+                                            <span class="investment-return positive">+8.3%</span>
+                                        </div>
+                                    </div>
+                                    <div class="investment-item">
+                                        <div class="investment-info">
+                                            <span class="investment-name">T-Bills (91 Day)</span>
+                                            <span class="investment-type">Government Security</span>
+                                        </div>
+                                        <div class="investment-metrics">
+                                            <span class="investment-return positive">+10.2%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learn Tab -->
+                <div class="tab-pane" id="learnTab">
+                    <div class="learn-container">
+                        <h2>Financial Education</h2>
+                        <div class="learning-paths">
+                            <div class="learning-path">
+                                <h3>Investment Basics</h3>
+                                <div class="course-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress progress-40"></div>
+                                    </div>
+                                    <span>40% Complete</span>
+                                </div>
+                                <div class="course-modules">
+                                    <div class="module completed">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>Understanding the NSE</span>
+                                    </div>
+                                    <div class="module in-progress">
+                                        <i class="fas fa-circle-half-stroke"></i>
+                                        <span>Types of Investments</span>
+                                    </div>
+                                    <div class="module">
+                                        <i class="fas fa-circle"></i>
+                                        <span>Risk & Return</span>
+                                    </div>
+                                </div>
+                                <button class="btn-primary">Continue Learning</button>
+                            </div>
+                            <div class="learning-path">
+                                <h3>Personal Finance</h3>
+                                <div class="course-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress progress-75"></div>
+                                    </div>
+                                    <span>75% Complete</span>
+                                </div>
+                                <div class="course-modules">
+                                    <div class="module completed">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>Budgeting Basics</span>
+                                    </div>
+                                    <div class="module completed">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>Saving Strategies</span>
+                                    </div>
+                                    <div class="module in-progress">
+                                        <i class="fas fa-circle-half-stroke"></i>
+                                        <span>Debt Management</span>
+                                    </div>
+                                </div>
+                                <button class="btn-primary">Continue Learning</button>
+                            </div>
+                        </div>
+                        <div class="upcoming-webinars">
+                            <h3>Upcoming Webinars</h3>
+                            <div class="webinar-list">
+                                <div class="webinar-item">
+                                    <div class="webinar-date">
+                                        <span class="day">20</span>
+                                        <span class="month">MAR</span>
+                                    </div>
+                                    <div class="webinar-details">
+                                        <h4>Investing in Kenya's Real Estate Market</h4>
+                                        <p>Learn strategies for successful real estate investments in Kenya's growing market.</p>
+                                        <div class="webinar-info">
+                                            <span><i class="fas fa-clock"></i> 6:00 PM - 7:30 PM</span>
+                                            <span><i class="fas fa-user"></i> John Kariuki, Real Estate Expert</span>
+                                        </div>
+                                    </div>
+                                    <button class="btn-primary">Register</button>
+                                </div>
+                                <div class="webinar-item">
+                                    <div class="webinar-date">
+                                        <span class="day">25</span>
+                                        <span class="month">MAR</span>
+                                    </div>
+                                    <div class="webinar-details">
+                                        <h4>Tax Planning for Entrepreneurs</h4>
+                                        <p>Essential tax strategies for small business owners and entrepreneurs in Kenya.</p>
+                                        <div class="webinar-info">
+                                            <span><i class="fas fa-clock"></i> 5:30 PM - 7:00 PM</span>
+                                            <span><i class="fas fa-user"></i> Mary Njeri, Tax Consultant</span>
+                                        </div>
+                                    </div>
+                                    <button class="btn-primary">Register</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Floating Action Button -->
+        <div class="fab-container">
+            <button class="fab-button" id="fabBtn" aria-label="Add new item">
+                <i class="fas fa-plus"></i>
+            </button>            
+            <div class="fab-actions" id="fabActions">
+                <button class="fab-action" data-action="goal">
+                    <i class="fas fa-bullseye"></i>
+                    <span>Set Financial Goal</span>
+                </button>
+                <button class="fab-action" data-action="invest">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Quick Invest</span>
+                </button>
+                <button class="fab-action" data-action="budget">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span>Update Budget</span>
+                </button>
+                <button class="fab-action" data-action="export">
+                    <i class="fas fa-download"></i>
+                    <span>Export Chat</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <!-- Settings Modal -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-cog"></i> Settings</h2>
+                <button class="close-modal" aria-label="Close">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="settings-section">
+                    <h3>Display Preferences</h3>
+                    <div class="setting-item">
+                        <label for="darkMode">Dark Mode</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="darkMode">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label for="fontSize">Text Size</label>
+                        <select id="fontSize">
+                            <option value="small">Small</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="large">Large</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <label for="language">Language</label>
+                        <select id="language">
+                            <option value="en" selected>English</option>
+                            <option value="sw">Swahili</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="settings-section">
+                    <h3>Notification Preferences</h3>
+                    <div class="setting-item">
+                        <label for="emailNotifications">Email Notifications</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="emailNotifications" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label for="smsNotifications">SMS Notifications</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="smsNotifications">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label for="pushNotifications">Push Notifications</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="pushNotifications" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="settings-section">
+                    <h3>Chat Preferences</h3>
+                    <div class="setting-item">
+                        <label for="voiceInput">Voice Input</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="voiceInput">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label for="chatSounds">Chat Sounds</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="chatSounds" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label for="autoSave">Auto-Save Conversations</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="autoSave" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary close-modal">Cancel</button>
+                <button class="btn-primary" id="saveSettings">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications Modal -->
+    <div class="modal" id="notificationsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-bell"></i> Notifications</h2>
+                <button class="close-modal" aria-label="Close">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="notifications-list">
+                    <div class="notification-item unread">
+                        <div class="notification-icon alert">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <div class="notification-content">
+                            <h4>Billing Alert</h4>
+                            <p>Your KCB loan payment of KES 28,500 is due in 3 days.</p>
+                            <span class="notification-time">1 hour ago</span>
+                        </div>
+                        <div class="notification-actions">
+                            <button title="Mark as read"><i class="fas fa-check"></i></button>
+                            <button title="Delete"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="notification-item unread">
+                        <div class="notification-icon info">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="notification-content">
+                            <h4>Investment Update</h4>
+                            <p>Your Safaricom stock has increased by 3.2% today.</p>
+                            <span class="notification-time">5 hours ago</span>
+                        </div>
+                        <div class="notification-actions">
+                            <button title="Mark as read"><i class="fas fa-check"></i></button>
+                            <button title="Delete"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="notification-item">
+                        <div class="notification-icon success">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="notification-content">
+                            <h4>Goal Achieved!</h4>
+                            <p>Congratulations! You've reached your emergency fund goal of KES 500,000.</p>
+                            <span class="notification-time">Yesterday</span>
+                        </div>
+                        <div class="notification-actions">
+                            <button title="Delete"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="clearNotifications">Clear All</button>
+                <button class="btn-primary" id="markAllRead">Mark All Read</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Modal -->
+    <div class="modal" id="searchModal">
+        <div class="modal-content search-modal-content">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search for financial topics, tools, or questions...">
+                </div>
+                <button class="close-modal" aria-label="Close">×</button>
+            </div>
+            <div class="search-body">
+                <div class="search-categories">
+                    <button class="search-category active" data-category="all">All</button>
+                    <button class="search-category" data-category="chat">Chat History</button>
+                    <button class="search-category" data-category="tools">Tools</button>
+                    <button class="search-category" data-category="insights">Insights</button>
+                    <button class="search-category" data-category="learn">Learning</button>
+                </div>
+                <div class="search-results">
+                    <p class="search-placeholder">Type to search across all PesaGuru features...</p>
+                    <!-- Search results will be populated dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Financial Goal Modal -->
+    <div class="modal" id="goalModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-bullseye"></i> Set Financial Goal</h2>
+                <button class="close-modal" aria-label="Close">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="goalForm">
+                    <div class="form-group">
+                        <label for="goalType">Goal Type</label>
+                        <select id="goalType" required>
+                            <option value="">Select a goal type</option>
+                            <option value="emergency">Emergency Fund</option>
+                            <option value="home">Home Purchase</option>
+                            <option value="education">Education</option>
+                            <option value="retirement">Retirement</option>
+                            <option value="vacation">Vacation</option>
+                            <option value="car">Vehicle</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="goalName">Goal Name</label>
+                        <input type="text" id="goalName" placeholder="E.g., Emergency Fund, Dream Home" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="goalAmount">Target Amount (KES)</label>
+                        <input type="number" id="goalAmount" min="1000" placeholder="500000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="currentAmount">Current Amount (KES)</label>
+                        <input type="number" id="currentAmount" min="0" placeholder="100000">
+                    </div>
+                    <div class="form-group">
+                        <label for="targetDate">Target Date</label>
+                        <input type="date" id="targetDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="monthlyContribution">Monthly Contribution (KES)</label>
+                        <input type="number" id="monthlyContribution" min="100" placeholder="20000" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary close-modal">Cancel</button>
+                <button class="btn-primary" id="saveGoal">Create Goal</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chart.js/3.7.1/chart.min.js"></script>
+    <script src="../../assets/js/Chatbot_Interaction/chatbot.js"></script>
+</body>
+</html>

@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PesaGuru - Report an Issue</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <style>
+        /* Global Styles and Variables */
+        :root {
+            /* Light Mode Colors */
+            --bg-color: #f7f9fc;
+            --sidebar-bg: #ffffff;
+            --primary-color: #0056b3;
+            --primary-color-rgb: 0, 86, 179;
+            --secondary-color: #6c757d;
+            --accent-color: #00a3e0;
+            --text-color: #333333;
+            --border-color: #e0e0e0;
+            --card-bg: #ffffff;
+            --hover-color: #f0f5ff;
+            --input-bg: #ffffff;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --info-color: #17a2b8;
+            
+            /* Common Variables */
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --border-radius: 8px;
+        }
+
+        /* Dark Mode Colors */
+        .dark-mode {
+            --bg-color: #1a1d21;
+            --sidebar-bg: #2a2d31;
+            --primary-color: #4a9dff;
+            --primary-color-rgb: 74, 157, 255;
+            --secondary-color: #a0a5ab;
+            --accent-color: #00c8ff;
+            --text-color: #f0f0f0;
+            --border-color: #444;
+            --card-bg: #2a2d31;
+            --hover-color: #3a3f45;
+            --input-bg: #3a3f45;
+            --success-color: #2fb757;
+            --warning-color: #ffca2c;
+            --danger-color: #e04055;
+            --info-color: #20b2c8;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: var(--transition);
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent-color);
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 250px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            padding: 20px 0;
+            overflow-y: auto;
+            transition: var(--transition);
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            padding: 0 20px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .nav-section {
+            padding: 0 15px;
+            margin-bottom: 30px;
+        }
+
+        .nav-section h3 {
+            font-size: 14px;
+            text-transform: uppercase;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            padding: 0 10px;
+        }
+
+        .nav-section ul {
+            list-style: none;
+        }
+
+        .nav-section li {
+            margin-bottom: 5px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .nav-section li a {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            color: var(--text-color);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .nav-section li a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .nav-section li:hover {
+            background-color: var(--hover-color);
+        }
+
+        .nav-section li.active {
+            background-color: var(--primary-color);
+        }
+
+        .nav-section li.active a {
+            color: white;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Header / Top Bar */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .left-controls, .right-controls {
+            display: flex;
+            align-items: center;
+        }
+
+        .left-controls h1 {
+            font-size: 24px;
+            margin: 0 15px;
+        }
+
+        .back-button, .my-issues-button, .refresh-button {
+            display: flex;
+            align-items: center;
+            padding: 8px 15px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            color: var(--text-color);
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .back-button:hover, .my-issues-button:hover, .refresh-button:hover {
+            background-color: var(--hover-color);
+        }
+
+        .back-button i, .my-issues-button i {
+            margin-right: 8px;
+        }
+
+        .refresh-button {
+            padding: 8px 12px;
+            margin: 0 10px;
+        }
+
+        .notification-icon {
+            position: relative;
+            margin: 0 15px;
+            cursor: pointer;
+        }
+
+        .notification-icon i {
+            font-size: 18px;
+        }
+
+        .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--danger-color);
+            color: white;
+            font-size: 10px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .language-selector select, #themeToggle {
+            padding: 8px 12px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            color: var(--text-color);
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .language-selector select {
+            cursor: pointer;
+        }
+
+        /* Form Styling */
+        .issue-form-container, .issue-tracking, .community-issues {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .form-section h2, .issue-tracking h2, .community-issues h2 {
+            margin-bottom: 20px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-section h2 i, .issue-tracking h2 i, .community-issues h2 i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group select, .form-group input[type="datetime-local"], .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            font-size: 15px;
+            transition: var(--transition);
+        }
+
+        .form-group select:focus, .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(0, 163, 224, 0.2);
+        }
+
+        .character-count {
+            text-align: right;
+            font-size: 12px;
+            color: var(--secondary-color);
+            margin-top: 5px;
+        }
+
+        .file-upload {
+            position: relative;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .file-upload-info {
+            border: 2px dashed var(--border-color);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .file-upload:hover .file-upload-info {
+            border-color: var(--accent-color);
+        }
+
+        .file-types {
+            font-size: 12px;
+            color: var(--secondary-color);
+            margin-top: 5px;
+        }
+
+        .file-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .file-preview-item {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .file-preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .file-preview-item .remove-file {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10px;
+            cursor: pointer;
+        }
+
+        .file-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            background-color: var(--hover-color);
+            color: var(--primary-color);
+        }
+
+        .file-name {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 3px 5px;
+            font-size: 10px;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .urgency-section, .notification-preferences .checkbox-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .urgency-checkbox, .support-call-checkbox, .notification-preferences .checkbox-group div {
+            display: flex;
+            align-items: center;
+        }
+
+        .urgency-checkbox input, .support-call-checkbox input, .notification-preferences input {
+            margin-right: 8px;
+        }
+
+        .urgency-checkbox label, .support-call-checkbox label {
+            display: flex;
+            align-items: center;
+        }
+
+        .urgency-checkbox i, .support-call-checkbox i {
+            margin-right: 5px;
+            color: var(--danger-color);
+        }
+
+        .support-call-checkbox i {
+            color: var(--primary-color);
+        }
+
+        /* AI Suggestions Section */
+        .ai-suggestions {
+            background-color: rgba(0, 86, 179, 0.05);
+            border: 1px solid rgba(0, 86, 179, 0.2);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .ai-suggestions h3 {
+            display: flex;
+            align-items: center;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .ai-suggestions h3 i {
+            margin-right: 10px;
+        }
+
+        .suggestion-list, .help-center-links ul {
+            padding-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        .suggestion-list li, .help-center-links li {
+            margin-bottom: 10px;
+        }
+
+        .help-center-links h4 {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        /* Form Actions */
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+            position: relative;
+        }
+
+        .primary-button, .secondary-button {
+            display: flex;
+            align-items: center;
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .primary-button {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .primary-button:hover {
+            background-color: #004a9f;
+        }
+
+        .secondary-button {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+        }
+
+        .secondary-button:hover {
+            background-color: var(--hover-color);
+        }
+
+        .primary-button i, .secondary-button i {
+            margin-right: 8px;
+        }
+
+        .feedback-msg {
+            position: absolute;
+            left: 0;
+            top: -40px;
+            padding: 8px 15px;
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .feedback-msg.success {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: var(--success-color);
+        }
+
+        .feedback-msg.error {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: var(--danger-color);
+        }
+
+        .feedback-msg i {
+            margin-right: 8px;
+        }
+
+        /* Issue Tracking Styles */
+        .tracking-info {
+            background-color: var(--input-bg);
+            border-radius: var(--border-radius);
+            padding: 20px;
+        }
+
+        .tracking-id {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .id-value {
+            font-weight: bold;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin: 0 10px;
+        }
+
+        .copy-id {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .status-timeline {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .status-timeline::before {
+            content: '';
+            position: absolute;
+            top: 50px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--border-color);
+            z-index: 1;
+        }
+
+        .status-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            width: 25%;
+        }
+
+        .status-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+            border: 2px solid var(--border-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+
+        .status-step.active .status-icon {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        .status-label {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .status-time {
+            font-size: 12px;
+            color: var(--secondary-color);
+        }
+
+        /* Community Issues Section */
+        .issue-filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .issue-filters select, .issue-filters input {
+            padding: 10px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background-color: var(--input-bg);
+            color: var(--text-color);
+        }
+
+        .issue-filters input {
+            flex: 1;
+        }
+
+        .issues-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .issue-card {
+            background-color: var(--input-bg);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            border-left: 4px solid var(--border-color);
+        }
+
+        .issue-card.technical {
+            border-left-color: var(--info-color);
+        }
+
+        .issue-card.payment {
+            border-left-color: var(--danger-color);
+        }
+
+        .issue-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .issue-category {
+            font-size: 12px;
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .issue-category.technical {
+            background-color: rgba(23, 162, 184, 0.1);
+            color: var(--info-color);
+        }
+
+        .issue-category.payment {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: var(--danger-color);
+        }
+
+        .issue-status {
+            font-size: 12px;
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .issue-status.pending {
+            background-color: rgba(108, 117, 125, 0.1);
+            color: var(--secondary-color);
+        }
+
+        .issue-status.review {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: var(--warning-color);
+        }
+
+        .issue-status.progress {
+            background-color: rgba(0, 123, 255, 0.1);
+            color: var(--primary-color);
+        }
+
+        .issue-status.resolved {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: var(--success-color);
+        }
+
+        .issue-title {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .issue-description {
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+
+        .issue-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 12px;
+        }
+
+        .issue-time {
+            color: var(--secondary-color);
+        }
+
+        .issue-upvote {
+            display: flex;
+            align-items: center;
+        }
+
+        .upvote-button {
+            display: flex;
+            align-items: center;
+            padding: 5px 10px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 12px;
+            margin-right: 10px;
+        }
+
+        .upvote-button i {
+            margin-right: 5px;
+        }
+
+        .upvote-count {
+            font-weight: 500;
+        }
+
+        .support-response {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-top: 10px;
+        }
+
+        .response-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .agent-avatar {
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .agent-name {
+            font-weight: 500;
+            margin-right: 10px;
+        }
+
+        .response-time {
+            font-size: 12px;
+            color: var(--secondary-color);
+        }
+
+        .load-more-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .load-more-button:hover {
+            background-color: var(--hover-color);
+        }
+
+        .load-more-button i {
+            margin-right: 8px;
+        }
+
+        /* Live Chat Styles */
+        .live-chat-bubble {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+        }
+
+        #chatButton {
+            display: flex;
+            align-items: center;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        #chatButton:hover {
+            background-color: #004a9f;
+        }
+
+        #chatButton i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        .chat-window {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 350px;
+            height: 450px;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            z-index: 101;
+            overflow: hidden;
+        }
+
+        .chat-window.minimized {
+            height: 60px;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .chat-header h3 {
+            flex: 1;
+            margin: 0;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .chat-header h3 i {
+            margin-right: 10px;
+        }
+
+        .minimize-chat, .close-chat {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-left: 10px;
+            color: white;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        .system-message, .user-message, .agent-message {
+            margin-bottom: 15px;
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .system-message {
+            background-color: var(--info-color);
+            color: white;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            max-width: 90%;
+        }
+
+        .user-message {
+            background-color: var(--accent-color);
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+
+        .agent-message {
+            background-color: var(--input-bg);
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
+        }
+
+        .message-time {
+            font-size: 10px;
+            margin-top: 5px;
+            display: block;
+            opacity: 0.7;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .chat-input textarea {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            resize: none;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+        }
+
+        .chat-input textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .send-message {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            margin-left: 10px;
+        }
+
+        /* Hidden AI suggestion section by default */
+        .hidden-suggestions {
+            display: none;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                padding: 15px;
+            }
+            
+            .nav-section {
+                margin-bottom: 15px;
+            }
+            
+            .logo {
+                padding: 0 0 15px;
+                margin-bottom: 15px;
+            }
+            
+            .main-content {
+                padding: 15px;
+            }
+            
+            .top-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .right-controls {
+                margin-top: 15px;
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .language-selector select, #themeToggle {
+                margin: 0;
+            }
+            
+            .urgency-section, .notification-preferences .checkbox-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .issue-filters {
+                flex-direction: column;
+            }
+            
+            .tracking-id {
+                flex-wrap: wrap;
+            }
+            
+            .status-timeline {
+                flex-wrap: wrap;
+            }
+            
+            .status-step {
+                width: 50%;
+                margin-bottom: 20px;
+            }
+            
+            .status-timeline::before {
+                display: none;
+            }
+            
+            .chat-window {
+                width: 100%;
+                height: 60vh;
+                bottom: 0;
+                right: 0;
+                border-radius: 0;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .primary-button, .secondary-button {
+                width: 100%;
+            }
+            
+            .issue-meta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .issue-upvote {
+                margin-top: 10px;
+            }
+            
+            .status-step {
+                width: 100%;
+            }
+        }
+
+        .logo img {
+            width: 150px;
+            height: auto;
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <div class="container">
+        <!-- Left Navigation Panel -->
+        <nav class="sidebar">
+            <div class="logo">
+                <img src="http://localhost/PesaGuru/client/assets/images/logo.png" alt="PesaGuru Logo">
+            </div>
+            <div class="nav-section">
+                <h3>Support & Assistance</h3>
+                <ul>
+                    <li class="active"><a href="#"><i class="fas fa-exclamation-circle"></i> Report an Issue</a></li>
+                    <li><a href="#"><i class="fas fa-history"></i> View Issue History & Status</a></li>
+                    <li><a href="#"><i class="fas fa-question-circle"></i> Help Center & FAQs</a></li>
+                    <li><a href="#"><i class="fas fa-comment"></i> Live Chat with Support</a></li>
+                    <li><a href="#"><i class="fas fa-bullhorn"></i> Feature Request Board</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <h3>Notifications & Alerts</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-calendar-check"></i> Updates on Issue Resolution</a></li>
+                    <li><a href="#"><i class="fas fa-exclamation-triangle"></i> Security Alerts & Warnings</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header / Top Bar -->
+            <header class="top-bar">
+                <div class="left-controls">
+                    <button class="back-button" title="Go back to previous page"><i class="fas fa-arrow-left"></i> Back</button>
+                    <h1>Report an Issue</h1>
+                </div>
+                <div class="right-controls">
+                    <button class="my-issues-button" title="View your reported issues"><i class="fas fa-list"></i> View My Reported Issues</button>
+                    <button class="refresh-button" title="Refresh the page"><i class="fas fa-sync-alt"></i> Refresh</button>
+                    <div class="notification-icon">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="language-selector">
+                        <select id="language" aria-label="Select language">
+                            <option value="en">English</option>
+                            <option value="sw">Swahili</option>
+                        </select>
+                    </div>
+                    <button class="theme-toggle" id="themeToggle" title="Toggle dark/light mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Main Form Section -->
+            <section class="issue-form-container">
+                <form id="issueReportForm">
+                    <div class="form-section">
+                        <h2><i class="fas fa-clipboard-list"></i> Issue Reporting Form</h2>
+                        
+                        <div class="form-group">
+                            <label for="issueCategory">Select Issue Category:</label>
+                            <select id="issueCategory" required aria-label="Issue category">
+                                <option value="" disabled selected>-- Select an issue type --</option>
+                                <option value="technical">🔧 Technical Bug</option>
+                                <option value="payment">💳 Payment & Transactions</option>
+                                <option value="data">📊 Market Data Issues</option>
+                                <option value="security">🔒 Security & Privacy</option>
+                                <option value="account">📄 Account Issues</option>
+                                <option value="chatbot">🤖 Chatbot Errors</option>
+                                <option value="feature">📢 Feature Requests & Suggestions</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="issueDescription">Detailed Description:</label>
+                            <textarea id="issueDescription" rows="6" placeholder="Please provide a clear explanation of the issue you're experiencing..." required></textarea>
+                            <div class="character-count"><span id="charCount">0</span>/500 characters</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="issueDateTime">Date & Time of Occurrence:</label>
+                            <input type="datetime-local" id="issueDateTime" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="fileUpload">Attach Files & Screenshots:</label>
+                            <div class="file-upload">
+                                <div class="file-upload-info">
+                                    <i class="fas fa-cloud-upload-alt fa-2x"></i>
+                                    <p>Drag & drop files here or click to browse</p>
+                                    <div class="file-types">JPG, PNG, PDF, TXT, CSV (Max 5MB per file, 3 files max)</div>
+                                </div>
+                                <input type="file" id="fileUpload" multiple accept=".jpg,.jpeg,.png,.pdf,.txt,.csv" aria-label="File upload">
+                            </div>
+                            <div class="file-preview" id="filePreview">
+                                <!-- Preview items will be added here by JS -->
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="urgency-section">
+                                <div class="urgency-checkbox">
+                                    <input type="checkbox" id="urgentIssue">
+                                    <label for="urgentIssue"><i class="fas fa-exclamation-triangle"></i> Mark as URGENT</label>
+                                </div>
+                                <div class="support-call-checkbox">
+                                    <input type="checkbox" id="supportCall">
+                                    <label for="supportCall"><i class="fas fa-phone-alt"></i> Request direct call from support team</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Notification Preferences:</label>
+                            <div class="notification-preferences">
+                                <div class="checkbox-group">
+                                    <div>
+                                        <input type="checkbox" id="emailNotifications" checked>
+                                        <label for="emailNotifications">Email</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" id="smsNotifications">
+                                        <label for="smsNotifications">SMS</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" id="appNotifications" checked>
+                                        <label for="appNotifications">In-App Alerts</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- AI Suggestions Section that appears after form partial completion -->
+                        <div class="ai-suggestions hidden-suggestions" id="aiSuggestions">
+                            <h3><i class="fas fa-robot"></i> AI-Powered Troubleshooting Suggestions</h3>
+                            <p>Based on your issue description, here are some possible solutions:</p>
+                            <ul class="suggestion-list">
+                                <li>Try clearing your browser cache and cookies, then restart the app.</li>
+                                <li>Check your internet connection and ensure it's stable.</li>
+                                <li>Verify that you have the latest version of the app installed.</li>
+                            </ul>
+                            <div class="help-center-links">
+                                <h4>Helpful resources:</h4>
+                                <ul>
+                                    <li><a href="#">Common payment transaction issues and solutions</a></li>
+                                    <li><a href="#">How to update your account information</a></li>
+                                    <li><a href="#">Troubleshooting login problems</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <div class="feedback-msg success hidden-suggestions">
+                                <i class="fas fa-check-circle"></i> Your issue has been reported successfully!
+                            </div>
+                            <div class="feedback-msg error hidden-suggestions">
+                                <i class="fas fa-exclamation-circle"></i> Please fill in all required fields.
+                            </div>
+                            <button type="button" class="secondary-button" id="resetForm" title="Clear form">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                            <button type="submit" class="primary-button" id="submitIssue" title="Submit your issue report">
+                                <i class="fas fa-paper-plane"></i> Submit Issue
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </section>
+            
+            <!-- Issue Tracking Section -->
+            <section class="issue-tracking hidden-suggestions" id="issueTracking">
+                <h2><i class="fas fa-search-location"></i> Track Issue Status</h2>
+                <div class="tracking-info">
+                    <div class="tracking-id">
+                        <span>Tracking ID:</span>
+                        <span class="id-value">ISS-2023-0572</span>
+                        <button class="copy-id" id="copyId" title="Copy tracking ID">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                    
+                    <div class="status-timeline">
+                        <div class="status-step active">
+                            <div class="status-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="status-label">Pending</div>
+                            <div class="status-time">Mar 8, 2025, 10:45 AM</div>
+                        </div>
+                        <div class="status-step active">
+                            <div class="status-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="status-label">Under Review</div>
+                            <div class="status-time">Mar 8, 2025, 11:20 AM</div>
+                        </div>
+                        <div class="status-step active">
+                            <div class="status-icon">
+                                <i class="fas fa-spinner"></i>
+                            </div>
+                            <div class="status-label">In Progress</div>
+                            <div class="status-time">Mar 8, 2025, 1:30 PM</div>
+                        </div>
+                        <div class="status-step">
+                            <div class="status-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="status-label">Resolved</div>
+                            <div class="status-time">Pending</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Community Issues Section -->
+            <section class="community-issues">
+                <h2><i class="fas fa-users"></i> Community Issue Reporting</h2>
+                
+                <div class="issue-filters">
+                    <select id="filterCategory" aria-label="Filter by category">
+                        <option value="all">All Categories</option>
+                        <option value="technical">Technical Bug</option>
+                        <option value="payment">Payment & Transactions</option>
+                        <option value="data">Market Data Issues</option>
+                        <option value="security">Security & Privacy</option>
+                        <option value="account">Account Issues</option>
+                        <option value="chatbot">Chatbot Errors</option>
+                        <option value="feature">Feature Requests</option>
+                    </select>
+                    <select id="filterStatus" aria-label="Filter by status">
+                        <option value="all">All Statuses</option>
+                        <option value="pending">Pending</option>
+                        <option value="review">Under Review</option>
+                        <option value="progress">In Progress</option>
+                        <option value="resolved">Resolved</option>
+                    </select>
+                    <input type="text" placeholder="Search issues..." id="searchIssues" aria-label="Search issues">
+                </div>
+                
+                <div class="issues-list">
+                    <!-- Issue Card 1 -->
+                    <div class="issue-card technical">
+                        <div class="issue-header">
+                            <span class="issue-category technical">🔧 Technical Bug</span>
+                            <span class="issue-status progress">In Progress</span>
+                        </div>
+                        <h3 class="issue-title">Dashboard not loading properly on mobile devices</h3>
+                        <p class="issue-description">When accessing the dashboard on mobile, charts and graphs display incorrectly and some metrics are missing.</p>
+                        <div class="issue-meta">
+                            <span class="issue-time"><i class="far fa-clock"></i> Reported 2 days ago</span>
+                            <div class="issue-upvote">
+                                <button class="upvote-button" title="Upvote this issue"><i class="fas fa-arrow-up"></i> Upvote</button>
+                                <span class="upvote-count">24 users experiencing this issue</span>
+                            </div>
+                        </div>
+                        <div class="support-response">
+                            <div class="response-header">
+                                <img src="/api/placeholder/30/30" alt="Support Agent" class="agent-avatar">
+                                <span class="agent-name">John M. (Support Team)</span>
+                                <span class="response-time">Responded: 10 hours ago</span>
+                            </div>
+                            <p>We've identified the issue with mobile rendering and our team is currently implementing a fix. The update will be deployed within the next 24 hours. Thank you for your patience.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Issue Card 2 -->
+                    <div class="issue-card payment">
+                        <div class="issue-header">
+                            <span class="issue-category payment">💳 Payment & Transactions</span>
+                            <span class="issue-status review">Under Review</span>
+                        </div>
+                        <h3 class="issue-title">Transaction delay when transferring funds between accounts</h3>
+                        <p class="issue-description">Transfers between savings and investment accounts are taking more than 2 hours to complete when they should be instant.</p>
+                        <div class="issue-meta">
+                            <span class="issue-time"><i class="far fa-clock"></i> Reported 1 day ago</span>
+                            <div class="issue-upvote">
+                                <button class="upvote-button" title="Upvote this issue"><i class="fas fa-arrow-up"></i> Upvote</button>
+                                <span class="upvote-count">18 users experiencing this issue</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="load-more-button" title="Load more issues">
+                        <i class="fas fa-sync-alt"></i> Load More Issues
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- Live Chat Bubble -->
+    <div class="live-chat-bubble">
+        <button id="chatButton" title="Start live chat with support">
+            <i class="fas fa-comment"></i> Live Chat Support
+        </button>
+    </div>
+    
+    <!-- Live Chat Window (hidden by default) -->
+    <div class="chat-window hidden" id="chatWindow">
+        <div class="chat-header">
+            <h3><i class="fas fa-headset"></i> Support Chat</h3>
+            <button class="minimize-chat" id="minimizeChat" title="Minimize chat window">
+                <i class="fas fa-minus"></i> <span class="sr-only">Minimize</span>
+            </button>
+            <button class="close-chat" id="closeChat" title="Close chat window">
+                <i class="fas fa-times"></i> <span class="sr-only">Close</span>
+            </button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="system-message">
+                Welcome to PesaGuru Support! How can we help you today?
+                <span class="message-time">Just now</span>
+            </div>
+            <div class="agent-message">
+                Hello! I'm Sarah from the support team. I can help with your issues or questions.
+                <span class="message-time">Just now</span>
+            </div>
+        </div>
+        <div class="chat-input">
+            <textarea placeholder="Type your message here..." id="chatInput" aria-label="Type your message"></textarea>
+            <button class="send-message" id="sendMessage" title="Send message">
+                <i class="fas fa-paper-plane"></i> <span class="sr-only">Send</span>
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme Toggle
+            const themeToggle = document.getElementById('themeToggle');
+            const body = document.body;
+            
+            themeToggle.addEventListener('click', function() {
+                body.classList.toggle('dark-mode');
+                
+                if (body.classList.contains('dark-mode')) {
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                    themeToggle.setAttribute('title', 'Switch to light mode');
+                } else {
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                    themeToggle.setAttribute('title', 'Switch to dark mode');
+                }
+            });
+            
+            // Character Counter
+            const issueDescription = document.getElementById('issueDescription');
+            const charCount = document.getElementById('charCount');
+            
+            issueDescription.addEventListener('input', function() {
+                const count = this.value.length;
+                charCount.textContent = count;
+                
+                if (count > 400) {
+                    charCount.style.color = count > 500 ? 'var(--danger-color)' : 'var(--warning-color)';
+                } else {
+                    charCount.style.color = 'var(--secondary-color)';
+                }
+                
+                // Show AI suggestions after user types 20+ characters
+                if (count > 20 && document.getElementById('aiSuggestions').classList.contains('hidden-suggestions')) {
+                    document.getElementById('aiSuggestions').classList.remove('hidden-suggestions');
+                }
+            });
+            
+            // File Upload Preview
+            const fileInput = document.getElementById('fileUpload');
+            const filePreview = document.getElementById('filePreview');
+            
+            fileInput.addEventListener('change', function() {
+                filePreview.innerHTML = '';
+                
+                // Limit to 3 files
+                const files = Array.from(this.files).slice(0, 3);
+                
+                files.forEach(file => {
+                    const previewItem = document.createElement('div');
+                    previewItem.className = 'file-preview-item';
+                    
+                    const removeButton = document.createElement('div');
+                    removeButton.className = 'remove-file';
+                    removeButton.innerHTML = '<i class="fas fa-times"></i>';
+                    removeButton.setAttribute('title', 'Remove file');
+                    removeButton.setAttribute('aria-label', 'Remove file: ' + file.name);
+                    removeButton.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        previewItem.remove();
+                    });
+                    
+                    if (file.type.startsWith('image/')) {
+                        const img = document.createElement('img');
+                        img.src = URL.createObjectURL(file);
+                        img.alt = file.name;
+                        previewItem.appendChild(img);
+                    } else {
+                        const fileIcon = document.createElement('div');
+                        fileIcon.className = 'file-icon';
+                        
+                        // Different icons based on file type
+                        if (file.name.endsWith('.pdf')) {
+                            fileIcon.innerHTML = '<i class="fas fa-file-pdf fa-2x"></i>';
+                        } else if (file.name.endsWith('.txt')) {
+                            fileIcon.innerHTML = '<i class="fas fa-file-alt fa-2x"></i>';
+                        } else if (file.name.endsWith('.csv')) {
+                            fileIcon.innerHTML = '<i class="fas fa-file-csv fa-2x"></i>';
+                        } else {
+                            fileIcon.innerHTML = '<i class="fas fa-file fa-2x"></i>';
+                        }
+                        
+                        previewItem.appendChild(fileIcon);
+                    }
+                    
+                    const fileName = document.createElement('div');
+                    fileName.className = 'file-name';
+                    fileName.textContent = file.name;
+                    
+                    previewItem.appendChild(removeButton);
+                    previewItem.appendChild(fileName);
+                    filePreview.appendChild(previewItem);
+                });
+            });
+            
+            // Form Submit
+            const issueForm = document.getElementById('issueReportForm');
+            const successMsg = document.querySelector('.feedback-msg.success');
+            const errorMsg = document.querySelector('.feedback-msg.error');
+            
+            issueForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simple form validation
+                const issueCategory = document.getElementById('issueCategory').value;
+                const issueDesc = document.getElementById('issueDescription').value;
+                const issueDateTime = document.getElementById('issueDateTime').value;
+                
+                if (!issueCategory || !issueDesc || !issueDateTime) {
+                    errorMsg.classList.remove('hidden-suggestions');
+                    successMsg.classList.add('hidden-suggestions');
+                    
+                    // Hide error message after 3 seconds
+                    setTimeout(() => {
+                        errorMsg.classList.add('hidden-suggestions');
+                    }, 3000);
+                    
+                    return;
+                }
+                
+                // Success submission
+                successMsg.classList.remove('hidden-suggestions');
+                errorMsg.classList.add('hidden-suggestions');
+                
+                // Show tracking section
+                document.getElementById('issueTracking').classList.remove('hidden-suggestions');
+                
+                // Scroll to tracking section
+                document.getElementById('issueTracking').scrollIntoView({ behavior: 'smooth' });
+                
+                // Hide success message after 3 seconds
+                setTimeout(() => {
+                    successMsg.classList.add('hidden-suggestions');
+                }, 3000);
+            });
+            
+            // Reset Form
+            document.getElementById('resetForm').addEventListener('click', function() {
+                issueForm.reset();
+                filePreview.innerHTML = '';
+                charCount.textContent = '0';
+                document.getElementById('aiSuggestions').classList.add('hidden-suggestions');
+            });
+            
+            // Copy Tracking ID
+            document.getElementById('copyId').addEventListener('click', function() {
+                const trackingId = document.querySelector('.id-value').textContent;
+                navigator.clipboard.writeText(trackingId);
+                
+                // Show temporary tooltip
+                this.setAttribute('title', 'Copied!');
+                setTimeout(() => {
+                    this.setAttribute('title', 'Copy tracking ID');
+                }, 2000);
+            });
+            
+            // Live Chat Functionality
+            const chatButton = document.getElementById('chatButton');
+            const chatWindow = document.getElementById('chatWindow');
+            const closeChat = document.getElementById('closeChat');
+            const minimizeChat = document.getElementById('minimizeChat');
+            const chatInput = document.getElementById('chatInput');
+            const sendMessage = document.getElementById('sendMessage');
+            const chatMessages = document.getElementById('chatMessages');
+            
+            chatButton.addEventListener('click', function() {
+                chatWindow.classList.remove('hidden');
+                chatButton.classList.add('hidden');
+            });
+            
+            closeChat.addEventListener('click', function() {
+                chatWindow.classList.add('hidden');
+                chatButton.classList.remove('hidden');
+                chatWindow.classList.remove('minimized');
+            });
+            
+            minimizeChat.addEventListener('click', function() {
+                chatWindow.classList.toggle('minimized');
+                
+                if (chatWindow.classList.contains('minimized')) {
+                    minimizeChat.innerHTML = '<i class="fas fa-expand"></i> <span class="sr-only">Expand</span>';
+                    minimizeChat.setAttribute('title', 'Expand chat window');
+                } else {
+                    minimizeChat.innerHTML = '<i class="fas fa-minus"></i> <span class="sr-only">Minimize</span>';
+                    minimizeChat.setAttribute('title', 'Minimize chat window');
+                }
+            });
+            
+            function sendChatMessage() {
+                const message = chatInput.value.trim();
+                if (!message) return;
+                
+                // Add user message
+                const userMessageElement = document.createElement('div');
+                userMessageElement.className = 'user-message';
+                userMessageElement.innerHTML = `
+                    ${message}
+                    <span class="message-time">Just now</span>
+                `;
+                chatMessages.appendChild(userMessageElement);
+                
+                // Clear input
+                chatInput.value = '';
+                
+                // Scroll to bottom
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                
+                // Simulate agent response after 1 second
+                setTimeout(() => {
+                    const agentMessageElement = document.createElement('div');
+                    agentMessageElement.className = 'agent-message';
+                    agentMessageElement.innerHTML = `
+                        Thanks for your message. Our team is reviewing your issue and will provide a personalized response shortly.
+                        <span class="message-time">Just now</span>
+                    `;
+                    chatMessages.appendChild(agentMessageElement);
+                    
+                    // Scroll to bottom
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }, 1000);
+            }
+            
+            sendMessage.addEventListener('click', sendChatMessage);
+            
+            chatInput.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendChatMessage();
+                }
+            });
+            
+            // Issue Filter Functionality
+            const filterCategory = document.getElementById('filterCategory');
+            const filterStatus = document.getElementById('filterStatus');
+            const searchIssues = document.getElementById('searchIssues');
+            
+            function filterIssues() {
+                const category = filterCategory.value;
+                const status = filterStatus.value;
+                const search = searchIssues.value.toLowerCase();
+                
+                const issueCards = document.querySelectorAll('.issue-card');
+                
+                issueCards.forEach(card => {
+                    const categoryMatch = category === 'all' || card.classList.contains(category);
+                    const statusElement = card.querySelector('.issue-status');
+                    const statusMatch = status === 'all' || statusElement.classList.contains(status);
+                    const titleElement = card.querySelector('.issue-title');
+                    const descElement = card.querySelector('.issue-description');
+                    const searchMatch = search === '' || 
+                        titleElement.textContent.toLowerCase().includes(search) || 
+                        descElement.textContent.toLowerCase().includes(search);
+                    
+                    if (categoryMatch && statusMatch && searchMatch) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+            
+            filterCategory.addEventListener('change', filterIssues);
+            filterStatus.addEventListener('change', filterIssues);
+            searchIssues.addEventListener('input', filterIssues);
+            
+            // Upvote Button Functionality
+            const upvoteButtons = document.querySelectorAll('.upvote-button');
+            
+            upvoteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const countElement = this.nextElementSibling;
+                    const currentCount = parseInt(countElement.textContent);
+                    countElement.textContent = (currentCount + 1) + ' users experiencing this issue';
+                    
+                    // Disable button after clicking
+                    this.disabled = true;
+                    this.innerHTML = '<i class="fas fa-check"></i> Upvoted';
+                    this.style.backgroundColor = 'var(--success-color)';
+                    this.style.color = 'white';
+                    this.setAttribute('title', 'You have upvoted this issue');
+                });
+            });
+            
+            // Set current date and time as default
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            
+            document.getElementById('issueDateTime').value = `${year}-${month}-${day}T${hours}:${minutes}`;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,2443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PesaGuru - Retirement Planner</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js for interactive graphs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <!-- jsPDF for PDF export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --warning-color: #e74c3c;
+            --background-color: #f5f5f5;
+            --card-background: #ffffff;
+            --text-color: #333333;
+            --border-color: #dddddd;
+            --slider-track: #d1d5db;
+            --slider-thumb: var(--primary-color);
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --header-background: #ffffff;
+            --button-text: #ffffff;
+        }
+
+        .dark-mode {
+            --primary-color: #50a8e6;
+            --secondary-color: #4cd987;
+            --warning-color: #ff6b6b;
+            --background-color: #1a1a1a;
+            --card-background: #2c2c2c;
+            --text-color: #f0f0f0;
+            --border-color: #444444;
+            --slider-track: #4b5563;
+            --slider-thumb: var(--primary-color);
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --header-background: #2c2c2c;
+            --button-text: #f0f0f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--header-background);
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .logo i {
+            margin-right: 10px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .theme-toggle {
+            margin-right: 20px;
+            cursor: pointer;
+            font-size: 20px;
+            color: var(--text-color);
+        }
+
+        .currency-select {
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            background-color: var(--card-background);
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .subheading {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 400;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .grid-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .card {
+            background-color: var(--card-background);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            color: var(--primary-color);
+        }
+
+        .card-title i {
+            margin-right: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        input[type="number"], 
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            background-color: var(--card-background);
+            color: var(--text-color);
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .input-group-text {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 0 5px 5px 0;
+            border: 1px solid var(--primary-color);
+        }
+
+        .input-group input {
+            border-radius: 5px 0 0 5px;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--button-text);
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--button-text);
+        }
+
+        .btn-secondary:hover {
+            background-color: #27ae60;
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+
+        .slider-container {
+            margin-bottom: 15px;
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 14px;
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 8px;
+            border-radius: 5px;
+            background: var(--slider-track);
+            outline: none;
+            margin-top: 10px;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--slider-thumb);
+            cursor: pointer;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--slider-thumb);
+            cursor: pointer;
+            border: none;
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 300px;
+            margin-top: 20px;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            font-weight: 500;
+        }
+
+        .result-value {
+            font-weight: 700;
+        }
+
+        .on-track {
+            color: var(--secondary-color);
+        }
+
+        .off-track {
+            color: var(--warning-color);
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+        .status-indicator i {
+            margin-right: 8px;
+        }
+
+        .strategy-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .strategy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .strategy-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .strategy-title {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .risk-indicator {
+            display: flex;
+            gap: 3px;
+        }
+
+        .risk-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--border-color);
+        }
+
+        .risk-dot.active {
+            background-color: var(--primary-color);
+        }
+
+        .risk-high .risk-dot.active {
+            background-color: var(--warning-color);
+        }
+
+        .risk-medium .risk-dot.active:nth-child(1),
+        .risk-medium .risk-dot.active:nth-child(2) {
+            background-color: #f39c12;
+        }
+
+        .strategy-description {
+            font-size: 14px;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .strategy-stat {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .milestone {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .milestone-icon {
+            min-width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 15px;
+        }
+
+        .milestone-content {
+            flex-grow: 1;
+        }
+
+        .milestone-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .milestone-description {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .comparison-table th, 
+        .comparison-table td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: center;
+        }
+
+        .comparison-table th {
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .tag-blue {
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--primary-color);
+        }
+
+        .tag-green {
+            background-color: rgba(46, 204, 113, 0.1);
+            color: var(--secondary-color);
+        }
+
+        .tag-orange {
+            background-color: rgba(243, 156, 18, 0.1);
+            color: #f39c12;
+        }
+
+        .tag-red {
+            background-color: rgba(231, 76, 60, 0.1);
+            color: var(--warning-color);
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--card-background);
+            color: var(--text-color);
+            padding: 15px 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: none;
+        }
+
+        .notification.success {
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .notification.error {
+            border-left: 4px solid var(--warning-color);
+        }
+
+        /* What-if scenario styles */
+        .scenario-toggle {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            background-color: rgba(52, 152, 219, 0.1);
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .scenario-content {
+            display: none;
+            padding: 15px;
+            background-color: rgba(52, 152, 219, 0.05);
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .scenario-content.active {
+            display: block;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header-actions {
+                margin-top: 15px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px 0;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        /* New CSS classes to replace inline styles */
+        .mt-20 {
+            margin-top: 20px;
+        }
+        
+        .flex-container {
+            display: flex;
+        }
+        
+        .gap-10 {
+            gap: 10px;
+        }
+        
+        .mt-10 {
+            margin-top: 10px;
+        }
+        
+        .mt-15 {
+            margin-top: 15px;
+        }
+        
+        .mb-10 {
+            margin-bottom: 10px;
+        }
+        
+        .mb-15 {
+            margin-bottom: 15px;
+        }
+        
+        .mb-20 {
+            margin-bottom: 20px;
+        }
+        
+        .flex-wrap {
+            flex-wrap: wrap;
+        }
+        
+        .gap-5 {
+            gap: 5px;
+        }
+        
+        .fs-16 {
+            font-size: 16px;
+        }
+        
+        .flex-align-center {
+            display: flex;
+            align-items: center;
+        }
+        
+        .ml-5 {
+            margin-left: 5px;
+        }
+        
+        .mt-25 {
+            margin-top: 25px;
+        }
+        
+        .mt-30 {
+            margin-top: 30px;
+        }
+
+        /* Main layout styles */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .mt-20 {
+    margin-top: 20px;
+  }
+  
+  .mt-15 {
+    margin-top: 15px;
+  }
+  
+  .mt-10 {
+    margin-top: 10px;
+  }
+  
+  .mb-10 {
+    margin-bottom: 10px;
+  }
+  
+  .ml-5 {
+    margin-left: 5px;
+  }
+  
+  .fs-16 {
+    font-size: 16px;
+  }
+  
+  .gap-10 {
+    gap: 10px;
+  }
+  
+  /* Card styles */
+  .card {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    background-color: #fff;
+  }
+  
+  .card-title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  .card-title i {
+    margin-right: 10px;
+    color: #4a6da7;
+  }
+  
+  /* Form elements */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .input-group {
+    display: flex;
+    align-items: center;
+  }
+  
+  .input-group-text {
+    padding: 8px 12px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+  }
+  
+  /* Slider styles */
+  .slider-container {
+    width: 100%;
+  }
+  
+  .slider-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #666;
+  }
+  
+  /* Results section */
+  .result-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .result-label {
+    font-weight: 500;
+    color: #555;
+  }
+  
+  .result-value {
+    font-weight: 600;
+    color: #2c3e50;
+  }
+  
+  /* Buttons */
+  .btn-primary, .btn-secondary {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+  }
+  
+  .btn-primary {
+    background-color: #4a6da7;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: #3a5a8f;
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #5a6268;
+  }
+  
+  .btn-block {
+    display: block;
+    width: 100%;
+  }
+  
+  /* Scenario toggle sections */
+  .scenario-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  
+  .scenario-content {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    display: none;
+  }
+  
+  /* Chart container */
+  .chart-container {
+    height: 250px;
+    margin-bottom: 15px;
+  }
+  
+  /* Flex utilities */
+  .flex-container {
+    display: flex;
+  }
+  
+  .flex-align-center {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Strategy cards */
+  .strategy-card {
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .strategy-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .strategy-title {
+    font-weight: 600;
+    font-size: 16px;
+  }
+  
+  .strategy-description {
+    color: #555;
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+  
+  .strategy-stat {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+  
+  /* Risk indicators */
+  .risk-indicator {
+    display: flex;
+    gap: 3px;
+  }
+  
+  .risk-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #ddd;
+  }
+  
+  .risk-dot.active {
+    background-color: currentColor;
+  }
+  
+  .risk-low {
+    color: #28a745;
+  }
+  
+  .risk-medium {
+    color: #ffc107;
+  }
+  
+  .risk-high {
+    color: #dc3545;
+  }
+  
+  /* Comparison table */
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .comparison-table th, .comparison-table td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .comparison-table th {
+    background-color: #f5f5f5;
+    font-weight: 500;
+  }
+  
+  /* Milestone styling */
+  .milestone {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .milestone-icon {
+    background-color: #4a6da7;
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    flex-shrink: 0;
+  }
+  
+  .milestone-title {
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  
+  .milestone-description {
+    color: #555;
+    font-size: 14px;
+  }
+  
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-wallet"></i> PesaGuru
+            </div>
+            <div class="header-actions">
+                <div class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <div>
+                    <label for="currencySelect">Select Currency:</label>
+                    <select id="currencySelect" class="currency-select">
+                        <option value="KES">KES (Ksh)</option>
+                        <option value="USD">USD ($)</option>
+                        <option value="EUR">EUR (€)</option>
+                        <option value="GBP">GBP (£)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>Retirement Planner</h1>
+        <p class="subheading">Plan your future with confidence. Project your retirement savings and achieve your financial goals.</p>
+
+        <div class="grid">
+            <!-- Retirement Savings Calculator -->
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-calculator"></i> Retirement Savings Calculator</h2>
+                <div class="form-group">
+                    <label for="currentAge">Current Age</label>
+                    <input type="number" id="currentAge" min="18" max="80" value="30">
+                </div>
+                <div class="form-group">
+                    <label for="retirementAge">Retirement Age</label>
+                    <input type="number" id="retirementAge" min="45" max="85" value="65">
+                </div>
+                <div class="form-group">
+                    <label for="currentSavings">Current Savings</label>
+                    <div class="input-group">
+                        <input type="number" id="currentSavings" min="0" value="100000">
+                        <div class="input-group-text" id="currencySymbol">Ksh</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="monthlyContribution">Monthly Contribution</label>
+                    <div class="input-group">
+                        <input type="number" id="monthlyContribution" min="0" value="5000">
+                        <div class="input-group-text" id="currencySymbol2">Ksh</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="annualReturn">Expected Annual Return (%)</label>
+                    <div class="slider-container">
+                        <input type="range" id="annualReturn" min="1" max="20" step="0.5" value="8">
+                        <div class="slider-labels">
+                            <span>1%</span>
+                            <span id="annualReturnValue">8%</span>
+                            <span>20%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inflationRate">Inflation Rate (%)</label>
+                    <div class="slider-container">
+                        <input type="range" id="inflationRate" min="0" max="10" step="0.5" value="3">
+                        <div class="slider-labels">
+                            <span>0%</span>
+                            <span id="inflationRateValue">3%</span>
+                            <span>10%</span>
+                        </div>
+                    </div>
+                </div>
+                <button id="calculateBtn" class="btn-primary btn-block">Calculate</button>
+            </div>
+
+            <!-- Retirement Projection Chart -->
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-chart-line"></i> Retirement Projection</h2>
+                <div class="chart-container">
+                    <canvas id="retirementChart"></canvas>
+                </div>
+                <div id="retirementStatus" class="status-indicator hidden">
+                    <i class="fas fa-check-circle"></i> You're on track for retirement!
+                </div>
+            </div>
+        </div>
+
+<!-- Future Retirement Fund Estimation -->
+<div class="grid mt-20">
+    <div class="card">
+        <h2 class="card-title"><i class="fas fa-piggy-bank"></i> Future Retirement Fund</h2>
+        <div id="retirementResults" class="hidden">
+            <div class="result-item">
+                <span class="result-label">Total Savings at Retirement:</span>
+                <span class="result-value" id="totalSavings">0</span>
+            </div>
+            <div class="result-item">
+                <span class="result-label">Inflation-Adjusted Value:</span>
+                <span class="result-value" id="inflationAdjustedValue">0</span>
+            </div>
+            <div class="result-item">
+                <span class="result-label">Monthly Income (4% Withdrawal):</span>
+                <span class="result-value" id="monthlyIncome">0</span>
+            </div>
+            <div class="form-group">
+                <label for="withdrawalRate">Withdrawal Rate (%)</label>
+                <div class="slider-container">
+                    <input type="range" id="withdrawalRate" min="2" max="10" step="0.5" value="4">
+                    <div class="slider-labels">
+                        <span>2%</span>
+                        <span id="withdrawalRateValue">4%</span>
+                        <span>10%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="result-item">
+                <span class="result-label">Years Savings Will Last:</span>
+                <span class="result-value" id="savingsYears">0</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Social Security & Pension Integration -->
+    <div class="card">
+        <h2 class="card-title"><i class="fas fa-hand-holding-usd"></i> Pension & Benefits</h2>
+        <div class="form-group">
+            <label for="employerPension">Monthly Employer Pension Contribution</label>
+            <div class="input-group">
+                <input type="number" id="employerPension" min="0" value="2000">
+                <div class="input-group-text" id="currencySymbol3">Ksh</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="pensionMatching">Employer Matching (%)</label>
+            <input type="number" id="pensionMatching" min="0" max="100" value="50">
+        </div>
+        <div class="form-group">
+            <label for="socialSecurity">Expected Monthly NSSF/Social Security</label>
+            <div class="input-group">
+                <input type="number" id="socialSecurity" min="0" value="10000">
+                <div class="input-group-text" id="currencySymbol4">Ksh</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="pensionAge">Pension Eligible Age</label>
+            <input type="number" id="pensionAge" min="55" max="70" value="60">
+        </div>
+        <button id="includePensionBtn" class="btn-secondary btn-block">Include in Calculations</button>
+    </div>
+</div>
+
+<!-- What-if Scenarios -->
+<div class="card mt-20">
+    <h2 class="card-title"><i class="fas fa-random"></i> "What-If" Scenarios</h2>
+    
+    <div class="scenario-toggle">
+        <span><i class="fas fa-calendar-plus"></i> Delayed Retirement</span>
+        <i class="fas fa-chevron-down"></i>
+    </div>
+    <div class="scenario-content">
+        <div class="form-group">
+            <label for="delayedRetirementAge">New Retirement Age</label>
+            <input type="number" id="delayedRetirementAge" min="45" max="85" value="70">
+        </div>
+        <button id="calculateDelayedBtn" class="btn-primary">Calculate Impact</button>
+        <div id="delayedRetirementResult" class="mt-15 hidden">
+            <div class="result-item">
+                <span class="result-label">Additional Savings:</span>
+                <span class="result-value" id="additionalSavings">0</span>
+            </div>
+            <div class="result-item">
+                <span class="result-label">Increased Monthly Income:</span>
+                <span class="result-value" id="increasedIncome">0</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="scenario-toggle">
+        <span><i class="fas fa-money-bill-wave"></i> Increased Contributions</span>
+        <i class="fas fa-chevron-down"></i>
+    </div>
+    <div class="scenario-content">
+        <div class="form-group">
+            <label for="increasedContribution">New Monthly Contribution</label>
+            <div class="input-group">
+                <input type="number" id="increasedContribution" min="0" value="10000">
+                <div class="input-group-text" id="currencySymbol5">Ksh</div>
+            </div>
+        </div>
+        <button id="calculateIncreaseBtn" class="btn-primary">Calculate Impact</button>
+        <div id="increasedContributionResult" class="mt-15 hidden">
+            <div class="result-item">
+                <span class="result-label">Additional Savings:</span>
+                <span class="result-value" id="contributionAdditionalSavings">0</span>
+            </div>
+            <div class="result-item">
+                <span class="result-label">Percentage Increase:</span>
+                <span class="result-value" id="contributionPercentageIncrease">0</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="scenario-toggle">
+        <span><i class="fas fa-chart-area"></i> Return Rate Scenarios</span>
+        <i class="fas fa-chevron-down"></i>
+    </div>
+    <div class="scenario-content">
+        <div class="chart-container">
+            <canvas id="scenarioChart"></canvas>
+        </div>
+        <div class="form-group">
+            <label>Select Scenarios to Compare:</label>
+            <div class="flex-container gap-10 mt-10">
+                <label class="flex-align-center">
+                    <input type="checkbox" id="conservativeScenario" checked>
+                    <span class="ml-5">Conservative (5%)</span>
+                </label>
+                <label class="flex-align-center">
+                    <input type="checkbox" id="moderateScenario" checked>
+                    <span class="ml-5">Moderate (8%)</span>
+                </label>
+                <label class="flex-align-center">
+                    <input type="checkbox" id="aggressiveScenario" checked>
+                    <span class="ml-5">Aggressive (11%)</span>
+                </label>
+            </div>
+        </div>
+        <button id="compareScenariosBtn" class="btn-primary">Compare Scenarios</button>
+    </div>
+</div>
+
+<div class="grid mt-20">
+    <!-- Investment & Growth Strategy Suggestions -->
+    <div class="card">
+        <h2 class="card-title"><i class="fas fa-seedling"></i> Investment Strategies</h2>
+        <div id="strategySection" class="hidden">
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-title">Conservative Portfolio</div>
+                    <div class="risk-indicator risk-low">
+                        <div class="risk-dot active"></div>
+                        <div class="risk-dot"></div>
+                        <div class="risk-dot"></div>
+                    </div>
+                </div>
+                <div class="strategy-description">Low-risk portfolio focused on capital preservation with steady, modest growth.</div>
+                <div class="strategy-stat">
+                    <span>Expected Return:</span>
+                    <span>5-6% annually</span>
+                </div>
+                <div class="strategy-stat">
+                    <span>Allocation:</span>
+                    <span>60% Bonds, 30% Blue-Chip Stocks, 10% Cash</span>
+                </div>
+            </div>
+            
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-title">Balanced Portfolio</div>
+                    <div class="risk-indicator risk-medium">
+                        <div class="risk-dot active"></div>
+                        <div class="risk-dot active"></div>
+                        <div class="risk-dot"></div>
+                    </div>
+                </div>
+                <div class="strategy-description">Moderate-risk portfolio balancing growth with income generation.</div>
+                <div class="strategy-stat">
+                    <span>Expected Return:</span>
+                    <span>7-9% annually</span>
+                </div>
+                <div class="strategy-stat">
+                    <span>Allocation:</span>
+                    <span>50% Stocks, 40% Bonds, 10% Alternatives</span>
+                </div>
+            </div>
+            
+            <div class="strategy-card">
+                <div class="strategy-header">
+                    <div class="strategy-title">Growth Portfolio</div>
+                    <div class="risk-indicator risk-high">
+                        <div class="risk-dot active"></div>
+                        <div class="risk-dot active"></div>
+                        <div class="risk-dot active"></div>
+                    </div>
+                </div>
+                <div class="strategy-description">Higher-risk portfolio focusing on capital appreciation.</div>
+                <div class="strategy-stat">
+                    <span>Expected Return:</span>
+                    <span>10-12% annually</span>
+                </div>
+                <div class="strategy-stat">
+                    <span>Allocation:</span>
+                    <span>70% Stocks, 20% Growth Funds, 10% Alternatives</span>
+                </div>
+            </div>
+            
+            <div class="mt-20">
+                <h3 class="fs-16 mb-10">Strategy Comparison</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Portfolio</th>
+                            <th>Risk Level</th>
+                            <th>30-Year Growth</th>
+                            <th>Best For</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Conservative</td>
+                            <td>Low</td>
+                            <td id="conservativeGrowth">0</td>
+                            <td>Near Retirement</td>
+                        </tr>
+                        <tr>
+                            <td>Balanced</td>
+                            <td>Medium</td>
+                            <td id="balancedGrowth">0</td>
+                            <td>Mid-Career</td>
+                        </tr>
+                        <tr>
+                            <td>Growth</td>
+                            <td>High</td>
+                            <td id="growthPortfolioGrowth">0</td>
+                            <td>Early Career</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Personalized Action Plan -->
+    <div class="card">
+        <h2 class="card-title"><i class="fas fa-tasks"></i> Personalized Action Plan</h2>
+        <div id="actionPlanSection" class="hidden">
+            <div class="milestone">
+                <div class="milestone-icon">
+                    <i class="fas fa-flag-checkered"></i>
+                </div>
+                <div class="milestone-content">
+                    <div class="milestone-title">Short-Term Goal (1-5 years)</div>
+                    <div class="milestone-description">Build emergency fund and increase contributions to <span id="shortTermSavings">0</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                    
+                    <div class="milestone">
+                        <div class="milestone-icon">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <div class="milestone-content">
+                            <div class="milestone-title">Mid-Term Goal (5-15 years)</div>
+                            <div class="milestone-description">Reach <span id="midTermSavings">0</span> in retirement savings and diversify investments</div>
+                        </div>
+                    </div>
+                    
+                    <div class="milestone">
+                        <div class="milestone-icon">
+                            <i class="fas fa-mountain"></i>
+                        </div>
+                        <div class="milestone-content">
+                            <div class="milestone-title">Long-Term Goal (15+ years)</div>
+                            <div class="milestone-description">Achieve <span id="longTermSavings">0</span> in retirement savings and begin transitioning to more conservative investments</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-25">
+                        <h3 class="fs-16 mb-15">Recommended Investment Options</h3>
+                        <div class="flex-container flex-wrap gap-5 mb-20">
+                            <span class="tag tag-blue">Index Funds</span>
+                            <span class="tag tag-blue">ETFs</span>
+                            <span class="tag tag-green">Government Bonds</span>
+                            <span class="tag tag-green">Money Market Funds</span>
+                            <span class="tag tag-orange">Real Estate Investment Trusts</span>
+                            <span class="tag tag-red">Individual Stocks</span>
+                        </div>
+                        
+                        <h3 class="fs-16 mb-15">Alternative Income Streams</h3>
+                        <div class="flex-container flex-wrap gap-5">
+                            <span class="tag tag-blue">Rental Properties</span>
+                            <span class="tag tag-green">Dividend Stocks</span>
+                            <span class="tag tag-orange">Annuities</span>
+                            <span class="tag tag-blue">Side Business</span>
+                            <span class="tag tag-green">Consultancy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons mt-30">
+            <button id="downloadPDFBtn" class="btn-primary"><i class="fas fa-file-pdf"></i> Download PDF Report</button>
+            <button id="downloadCSVBtn" class="btn-secondary"><i class="fas fa-file-csv"></i> Export Data (CSV)</button>
+            <button id="saveDataBtn" class="btn-secondary"><i class="fas fa-save"></i> Save Plan</button>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification">
+        Notification message
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 PesaGuru. All rights reserved.</p>
+        <p>Disclaimer: This tool provides estimates based on the information you provide and market assumptions. Actual results may vary.</p>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const themeToggle = document.getElementById('themeToggle');
+        const currencySelect = document.getElementById('currencySelect');
+        const currencySymbols = document.querySelectorAll('[id^="currencySymbol"]');
+        const calculateBtn = document.getElementById('calculateBtn');
+        const includePensionBtn = document.getElementById('includePensionBtn');
+        const downloadPDFBtn = document.getElementById('downloadPDFBtn');
+        const downloadCSVBtn = document.getElementById('downloadCSVBtn');
+        const saveDataBtn = document.getElementById('saveDataBtn');
+        const scenarioToggles = document.querySelectorAll('.scenario-toggle');
+        const calculateDelayedBtn = document.getElementById('calculateDelayedBtn');
+        const calculateIncreaseBtn = document.getElementById('calculateIncreaseBtn');
+        const compareScenariosBtn = document.getElementById('compareScenariosBtn');
+        const notification = document.getElementById('notification');
+
+        // Charts
+        let retirementChart = null;
+        let scenarioChart = null;
+
+        // Currency conversion rates (simplified for demo)
+        const conversionRates = {
+            KES: 1,
+            USD: 130,
+            EUR: 140,
+            GBP: 165
+        };
+
+        // Currency symbols
+        const symbols = {
+            KES: 'Ksh',
+            USD: '$',
+            EUR: '€',
+            GBP: '£'
+        };
+
+        // Global variables for calculations
+        let currentCurrency = 'KES';
+        let retirementData = {
+            totalSavings: 0,
+            inflationAdjustedValue: 0,
+            monthlyIncome: 0,
+            savingsYears: 0,
+            yearlySavings: [],
+            includePension: false
+        };
+
+        // Initialize the page
+        function init() {
+            setupEventListeners();
+            updateSliderValues();
+            setupThemeToggle();
+        }
+
+        // Setup Event Listeners
+        function setupEventListeners() {
+            // Sliders
+            document.getElementById('annualReturn').addEventListener('input', updateSliderValues);
+            document.getElementById('inflationRate').addEventListener('input', updateSliderValues);
+            document.getElementById('withdrawalRate').addEventListener('input', updateSliderValues);
+            
+            // Buttons
+            calculateBtn.addEventListener('click', calculateRetirement);
+            includePensionBtn.addEventListener('click', includePensionInCalculations);
+            downloadPDFBtn.addEventListener('click', downloadPDF);
+            downloadCSVBtn.addEventListener('click', downloadCSV);
+            saveDataBtn.addEventListener('click', saveData);
+            
+            // Scenario Buttons
+            calculateDelayedBtn.addEventListener('click', calculateDelayedRetirement);
+            calculateIncreaseBtn.addEventListener('click', calculateIncreasedContribution);
+            compareScenariosBtn.addEventListener('click', compareScenarios);
+            
+            // Currency selector
+            currencySelect.addEventListener('change', updateCurrency);
+            
+            // Scenario toggles
+            scenarioToggles.forEach(toggle => {
+                toggle.addEventListener('click', () => {
+                    const content = toggle.nextElementSibling;
+                    content.classList.toggle('active');
+                    const icon = toggle.querySelector('i.fas.fa-chevron-down');
+                    icon.classList.toggle('fa-chevron-up');
+                    icon.classList.toggle('fa-chevron-down');
+                });
+            });
+        }
+
+        // Update slider values
+        function updateSliderValues() {
+            document.getElementById('annualReturnValue').textContent = `${document.getElementById('annualReturn').value}%`;
+            document.getElementById('inflationRateValue').textContent = `${document.getElementById('inflationRate').value}%`;
+            document.getElementById('withdrawalRateValue').textContent = `${document.getElementById('withdrawalRate').value}%`;
+            
+            // If retirement data exists, update withdrawal calculations
+            if(retirementData.totalSavings > 0) {
+                updateWithdrawalCalculations();
+            }
+        }
+
+        // Theme Toggle
+        function setupThemeToggle() {
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                const isDarkMode = document.body.classList.contains('dark-mode');
+                
+                if (isDarkMode) {
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                    localStorage.setItem('theme', 'light');
+                }
+                
+                // Update charts if they exist
+                if(retirementChart) {
+                    updateChartTheme(retirementChart);
+                }
+                if(scenarioChart) {
+                    updateChartTheme(scenarioChart);
+                }
+            });
+            
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        }
+
+        // Update chart theme
+        function updateChartTheme(chart) {
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            const textColor = isDarkMode ? '#f0f0f0' : '#333333';
+            
+            chart.options.scales.x.ticks.color = textColor;
+            chart.options.scales.y.ticks.color = textColor;
+            chart.options.plugins.legend.labels.color = textColor;
+            chart.options.plugins.title.color = textColor;
+            chart.update();
+        }
+
+        // Currency update
+        function updateCurrency() {
+            const newCurrency = currencySelect.value;
+            
+            // Update all currency symbols
+            currencySymbols.forEach(element => {
+                element.textContent = symbols[newCurrency];
+            });
+            
+            // If we've already calculated retirement data, update the display
+            if(retirementData.totalSavings > 0) {
+                const conversionFactor = conversionRates[currentCurrency] / conversionRates[newCurrency];
+                
+                // Update the currency amounts in the UI
+                document.getElementById('totalSavings').textContent = formatCurrency(retirementData.totalSavings * conversionFactor, newCurrency);
+                document.getElementById('inflationAdjustedValue').textContent = formatCurrency(retirementData.inflationAdjustedValue * conversionFactor, newCurrency);
+                document.getElementById('monthlyIncome').textContent = formatCurrency(retirementData.monthlyIncome * conversionFactor, newCurrency);
+                
+                // Update scenario results if visible
+                if(document.getElementById('delayedRetirementResult').style.display !== 'none') {
+                    document.getElementById('additionalSavings').textContent = formatCurrency(
+                        parseFloat(document.getElementById('additionalSavings').textContent.replace(/[^0-9.-]+/g, '')) * conversionFactor, 
+                        newCurrency
+                    );
+                    document.getElementById('increasedIncome').textContent = formatCurrency(
+                        parseFloat(document.getElementById('increasedIncome').textContent.replace(/[^0-9.-]+/g, '')) * conversionFactor, 
+                        newCurrency
+                    );
+                }
+                
+                if(document.getElementById('increasedContributionResult').style.display !== 'none') {
+                    document.getElementById('contributionAdditionalSavings').textContent = formatCurrency(
+                        parseFloat(document.getElementById('contributionAdditionalSavings').textContent.replace(/[^0-9.-]+/g, '')) * conversionFactor, 
+                        newCurrency
+                    );
+                }
+                
+                // Update personalized action plan if visible
+                if(document.getElementById('actionPlanSection').style.display !== 'none') {
+                    document.getElementById('shortTermSavings').textContent = formatCurrency(
+                        parseFloat(document.getElementById('shortTermSavings').textContent.replace(/[^0-9.-]+/g, '')) * conversionFactor, 
+                        newCurrency
+                    );
+                    document.getElementById('midTermSavings').textContent = formatCurrency(
+                        parseFloat(document.getElementById('midTermSavings').textContent.replace(/[^0-9.-]+/g, '')) * conversionFactor, 
+                        newCurrency
+                    );
+                    document.getElementById('longTermSavings').textContent = formatCurrency(
+                        parseFloat(document.getElementById('longTermSavings').textContent.replace(/[^0-9.-]+/g, '')) * conversionFactor, 
+                        newCurrency
+                    );
+                }
+                
+                // Update strategy comparison
+                if(document.getElementById('strategySection').style.display !== 'none') {
+                    document.getElementById('conservativeGrowth').textContent = formatCurrency(
+                        parseFloat(document.getElementById('conservativeGrowth').textContent.replace(/[^0-9.-]+/g, '')) * conversionFactor, 
+                        newCurrency
+                    );
+                    document.getElementById('balancedGrowth').textContent = formatCurrency(
+                        parseFloat(document.getElementById('balancedGrowth').textContent.replace(/[^0-9.-]+/g, '')) * conversionFactor, 
+                        newCurrency
+                    );
+                    document.getElementById('growthPortfolioGrowth').textContent = formatCurrency(
+                        parseFloat(document.getElementById('growthPortfolioGrowth').textContent.replace(/[^0-9.-]+/g, '')) * conversionFactor, 
+                        newCurrency
+                    );
+                }
+                
+                // Update chart labels
+                if(retirementChart) {
+                    retirementChart.data.datasets[0].label = `Retirement Savings (${symbols[newCurrency]})`;
+                    retirementChart.update();
+                }
+                
+                if(scenarioChart) {
+                    scenarioChart.data.datasets.forEach(dataset => {
+                        dataset.label = dataset.label.replace(/\([^)]*\)/, `(${symbols[newCurrency]})`);
+                    });
+                    scenarioChart.update();
+                }
+            }
+            
+            currentCurrency = newCurrency;
+        }
+
+        // Calculate Retirement
+        function calculateRetirement() {
+            const currentAge = parseInt(document.getElementById('currentAge').value);
+            const retirementAge = parseInt(document.getElementById('retirementAge').value);
+            const currentSavings = parseFloat(document.getElementById('currentSavings').value);
+            const monthlyContribution = parseFloat(document.getElementById('monthlyContribution').value);
+            const annualReturn = parseFloat(document.getElementById('annualReturn').value) / 100;
+            const inflationRate = parseFloat(document.getElementById('inflationRate').value) / 100;
+            
+            // Validation
+            if(retirementAge <= currentAge) {
+                showNotification("Retirement age must be greater than current age", "error");
+                return;
+            }
+            
+            if(isNaN(currentSavings) || isNaN(monthlyContribution) || isNaN(annualReturn) || isNaN(inflationRate)) {
+                showNotification("Please fill in all fields with valid numbers", "error");
+                return;
+            }
+            
+            // Calculate yearly savings and total
+            const yearlySavings = [];
+            let totalSavings = currentSavings;
+            const yearsToRetirement = retirementAge - currentAge;
+            
+            for(let i = 0; i <= yearsToRetirement; i++) {
+                if(i > 0) {
+                    // Add annual contributions
+                    totalSavings += monthlyContribution * 12;
+                    // Apply annual return
+                    totalSavings *= (1 + annualReturn);
+                }
+                
+                yearlySavings.push({
+                    age: currentAge + i,
+                    savings: totalSavings
+                });
+            }
+            
+            // Calculate inflation-adjusted value
+            const inflationAdjustedValue = totalSavings / Math.pow(1 + inflationRate, yearsToRetirement);
+            
+            // Calculate monthly income (4% withdrawal rule initially)
+            const withdrawalRate = 0.04;
+            const monthlyIncome = totalSavings * withdrawalRate / 12;
+            
+            // Calculate how long savings will last
+            // Using the formula: years = -log(1 - (r * P / PMT)) / log(1 + r)
+            // Where r is annual return rate, P is principal, PMT is annual withdrawal
+            const annualWithdrawal = monthlyIncome * 12;
+            const savingsYears = -Math.log(1 - (annualReturn * totalSavings / annualWithdrawal)) / Math.log(1 + annualReturn);
+            
+            // Store results
+            retirementData = {
+                totalSavings,
+                inflationAdjustedValue,
+                monthlyIncome,
+                savingsYears: isFinite(savingsYears) ? savingsYears : 30,
+                yearlySavings,
+                includePension: false
+            };
+            
+            // Update UI
+            updateRetirementUI();
+            
+            // Show notification
+            showNotification("Retirement calculations completed successfully", "success");
+        }
+
+        // Update Retirement UI
+        function updateRetirementUI() {
+            // Show results section
+            document.getElementById('retirementResults').style.display = 'block';
+            
+            // Update values
+            document.getElementById('totalSavings').textContent = formatCurrency(retirementData.totalSavings, currentCurrency);
+            document.getElementById('inflationAdjustedValue').textContent = formatCurrency(retirementData.inflationAdjustedValue, currentCurrency);
+            document.getElementById('monthlyIncome').textContent = formatCurrency(retirementData.monthlyIncome, currentCurrency);
+            document.getElementById('savingsYears').textContent = formatYears(retirementData.savingsYears);
+            
+            // Create chart
+            createRetirementChart(retirementData.yearlySavings);
+            
+            // Show status indicator
+            updateRetirementStatus();
+            
+            // Show strategy section and action plan
+            document.getElementById('strategySection').style.display = 'block';
+            document.getElementById('actionPlanSection').style.display = 'block';
+            
+            // Calculate strategy comparison
+            updateStrategyComparison();
+            
+            // Update personalized action plan
+            updateActionPlan();
+        }
+
+        // Create Retirement Chart
+        function createRetirementChart(data) {
+            const ctx = document.getElementById('retirementChart').getContext('2d');
+            
+            // If chart already exists, destroy it
+            if(retirementChart) {
+                retirementChart.destroy();
+            }
+            
+            // Format data for chart
+            const labels = data.map(item => `Age ${item.age}`);
+            const savings = data.map(item => item.savings);
+            
+            // Calculate target line (very simple implementation)
+            const retirementAge = parseInt(document.getElementById('retirementAge').value);
+            const targetMonthlyIncome = parseFloat(document.getElementById('currentSavings').value) * 0.5 / 12;
+            const targetSavings = targetMonthlyIncome * 12 * 25; // 25 years of income
+            const targetLine = new Array(labels.length).fill(targetSavings);
+            
+            // Create chart
+            retirementChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: `Retirement Savings (${symbols[currentCurrency]})`,
+                            data: savings,
+                            backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                            borderColor: 'rgba(52, 152, 219, 1)',
+                            borderWidth: 2,
+                            tension: 0.1,
+                            fill: true
+                        },
+                        {
+                            label: 'Target Savings',
+                            data: targetLine,
+                            borderColor: 'rgba(231, 76, 60, 0.7)',
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            fill: false,
+                            pointRadius: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += formatCurrency(context.raw, currentCurrency);
+                                    return label;
+                                }
+                            }
+                        },
+                        legend: {
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return formatCurrency(value, currentCurrency, true);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Apply theme
+            updateChartTheme(retirementChart);
+        }
+
+        // Update withdrawal calculations based on slider
+        function updateWithdrawalCalculations() {
+            if(!retirementData.totalSavings) return;
+            
+            const withdrawalRate = parseFloat(document.getElementById('withdrawalRate').value) / 100;
+            const monthlyIncome = retirementData.totalSavings * withdrawalRate / 12;
+            
+            // Update monthly income
+            document.getElementById('monthlyIncome').textContent = formatCurrency(monthlyIncome, currentCurrency);
+            
+            // Update how long savings will last
+            const annualReturn = parseFloat(document.getElementById('annualReturn').value) / 100;
+            const annualWithdrawal = monthlyIncome * 12;
+            const savingsYears = -Math.log(1 - (annualReturn * retirementData.totalSavings / annualWithdrawal)) / Math.log(1 + annualReturn);
+            
+            document.getElementById('savingsYears').textContent = formatYears(isFinite(savingsYears) ? savingsYears : 30);
+        }
+
+        // Include Pension Calculations
+        function includePensionInCalculations() {
+            if(!retirementData.totalSavings) {
+                showNotification("Please calculate basic retirement first", "error");
+                return;
+            }
+            
+            const employerPension = parseFloat(document.getElementById('employerPension').value);
+            const pensionMatching = parseFloat(document.getElementById('pensionMatching').value) / 100;
+            const socialSecurity = parseFloat(document.getElementById('socialSecurity').value);
+            const pensionAge = parseInt(document.getElementById('pensionAge').value);
+            const currentAge = parseInt(document.getElementById('currentAge').value);
+            const retirementAge = parseInt(document.getElementById('retirementAge').value);
+            
+            if(isNaN(employerPension) || isNaN(pensionMatching) || isNaN(socialSecurity) || isNaN(pensionAge)) {
+                showNotification("Please fill in all pension fields with valid numbers", "error");
+                return;
+            }
+            
+            // Calculate additional employer contributions
+            const yearsUntilPension = Math.max(0, pensionAge - currentAge);
+            const yearsToRetirement = retirementAge - currentAge;
+            const annualReturn = parseFloat(document.getElementById('annualReturn').value) / 100;
+            
+            let employerTotal = 0;
+            const monthlyContribution = parseFloat(document.getElementById('monthlyContribution').value);
+            const employerMonthly = Math.min(employerPension, monthlyContribution * pensionMatching);
+            
+            for(let i = 0; i < yearsUntilPension; i++) {
+                employerTotal = (employerTotal + employerMonthly * 12) * (1 + annualReturn);
+            }
+            
+            // Calculate social security present value
+            let socialSecurityPV = 0;
+            const lifeExpectancy = 85;
+            const yearsAfterRetirement = lifeExpectancy - retirementAge;
+            
+            if(retirementAge >= pensionAge) {
+                // Simplified present value calculation
+                const inflationRate = parseFloat(document.getElementById('inflationRate').value) / 100;
+                const discountRate = Math.max(0.01, annualReturn - inflationRate);
+                socialSecurityPV = socialSecurity * 12 * (1 - Math.pow(1 + discountRate, -yearsAfterRetirement)) / discountRate;
+            }
+            
+            // Update retirement data with pension
+            retirementData.totalSavings += employerTotal;
+            
+            // Add social security to monthly income calculation
+            const withdrawalRate = parseFloat(document.getElementById('withdrawalRate').value) / 100;
+            retirementData.monthlyIncome = retirementData.totalSavings * withdrawalRate / 12;
+            
+            if(retirementAge >= pensionAge) {
+                retirementData.monthlyIncome += socialSecurity;
+            }
+            
+            retirementData.includePension = true;
+            
+            // Update UI
+            document.getElementById('totalSavings').textContent = formatCurrency(retirementData.totalSavings, currentCurrency);
+            document.getElementById('monthlyIncome').textContent = formatCurrency(retirementData.monthlyIncome, currentCurrency);
+            
+            // Update chart
+            const yearlySavings = [...retirementData.yearlySavings];
+            const lastSavings = yearlySavings[yearlySavings.length - 1].savings + employerTotal;
+            yearlySavings[yearlySavings.length - 1].savings = lastSavings;
+            createRetirementChart(yearlySavings);
+            
+            // Show notification
+            showNotification("Pension and benefits included in calculations", "success");
+            
+            // Update the button to show it's been included
+            includePensionBtn.textContent = "✓ Pension Included";
+            includePensionBtn.disabled = true;
+            
+            // Update retirement status
+            updateRetirementStatus();
+            
+            // Update action plan
+            updateActionPlan();
+        }
+
+        // Calculate Delayed Retirement
+        function calculateDelayedRetirement() {
+            if(!retirementData.totalSavings) {
+                showNotification("Please calculate basic retirement first", "error");
+                return;
+            }
+            
+            const originalRetirementAge = parseInt(document.getElementById('retirementAge').value);
+            const newRetirementAge = parseInt(document.getElementById('delayedRetirementAge').value);
+            const currentAge = parseInt(document.getElementById('currentAge').value);
+            
+            if(newRetirementAge <= originalRetirementAge) {
+                showNotification("New retirement age must be greater than original retirement age", "error");
+                return;
+            }
+            
+            // Calculate additional savings from delayed retirement
+            const additionalYears = newRetirementAge - originalRetirementAge;
+            const annualReturn = parseFloat(document.getElementById('annualReturn').value) / 100;
+            const monthlyContribution = parseFloat(document.getElementById('monthlyContribution').value);
+            
+            let additionalSavings = retirementData.totalSavings;
+            for(let i = 0; i < additionalYears; i++) {
+                additionalSavings = (additionalSavings + monthlyContribution * 12) * (1 + annualReturn);
+            }
+            additionalSavings -= retirementData.totalSavings;
+            
+            // Calculate increased monthly income
+            const withdrawalRate = parseFloat(document.getElementById('withdrawalRate').value) / 100;
+            const increasedIncome = additionalSavings * withdrawalRate / 12;
+            
+            // Update UI with delayed retirement results
+            document.getElementById('delayedRetirementResult').style.display = 'block';
+            document.getElementById('additionalSavings').textContent = formatCurrency(additionalSavings, currentCurrency);
+            document.getElementById('increasedIncome').textContent = formatCurrency(increasedIncome, currentCurrency);
+            
+            // Show notification
+            showNotification("Delayed retirement impact calculated", "success");
+        }
+
+        // Calculate Increased Contribution
+        function calculateIncreasedContribution() {
+            if(!retirementData.totalSavings) {
+                showNotification("Please calculate basic retirement first", "error");
+                return;
+            }
+            
+            const currentContribution = parseFloat(document.getElementById('monthlyContribution').value);
+            const increasedContribution = parseFloat(document.getElementById('increasedContribution').value);
+            
+            if(increasedContribution <= currentContribution) {
+                showNotification("New contribution must be greater than current contribution", "error");
+                return;
+            }
+            
+            // Recalculate with increased contribution
+            const currentAge = parseInt(document.getElementById('currentAge').value);
+            const retirementAge = parseInt(document.getElementById('retirementAge').value);
+            const currentSavings = parseFloat(document.getElementById('currentSavings').value);
+            const annualReturn = parseFloat(document.getElementById('annualReturn').value) / 100;
+            
+            // Calculate yearly savings and total with increased contribution
+            let totalSavingsOriginal = currentSavings;
+            let totalSavingsIncreased = currentSavings;
+            const yearsToRetirement = retirementAge - currentAge;
+            
+            for(let i = 1; i <= yearsToRetirement; i++) {
+                // Original calculation
+                totalSavingsOriginal += currentContribution * 12;
+                totalSavingsOriginal *= (1 + annualReturn);
+                
+                // Increased calculation
+                totalSavingsIncreased += increasedContribution * 12;
+                totalSavingsIncreased *= (1 + annualReturn);
+            }
+            
+            const additionalSavings = totalSavingsIncreased - totalSavingsOriginal;
+            const percentageIncrease = (additionalSavings / totalSavingsOriginal) * 100;
+            
+            // Update UI with increased contribution results
+            document.getElementById('increasedContributionResult').style.display = 'block';
+            document.getElementById('contributionAdditionalSavings').textContent = formatCurrency(additionalSavings, currentCurrency);
+            document.getElementById('contributionPercentageIncrease').textContent = `${percentageIncrease.toFixed(1)}%`;
+            
+            // Show notification
+            showNotification("Increased contribution impact calculated", "success");
+        }
+
+        // Compare Scenarios
+        function compareScenarios() {
+            if(!retirementData.totalSavings) {
+                showNotification("Please calculate basic retirement first", "error");
+                return;
+            }
+            
+            const conservative = document.getElementById('conservativeScenario').checked;
+            const moderate = document.getElementById('moderateScenario').checked;
+            const aggressive = document.getElementById('aggressiveScenario').checked;
+            
+            if(!conservative && !moderate && !aggressive) {
+                showNotification("Please select at least one scenario to compare", "error");
+                return;
+            }
+            
+            // Get input values
+            const currentAge = parseInt(document.getElementById('currentAge').value);
+            const retirementAge = parseInt(document.getElementById('retirementAge').value);
+            const currentSavings = parseFloat(document.getElementById('currentSavings').value);
+            const monthlyContribution = parseFloat(document.getElementById('monthlyContribution').value);
+            
+            // Define return rates for each scenario
+            const rates = {
+                conservative: 0.05,
+                moderate: 0.08,
+                aggressive: 0.11
+            };
+            
+            // Calculate each scenario
+            const scenariosData = {};
+            const selectedScenarios = [];
+            
+            if(conservative) selectedScenarios.push('conservative');
+            if(moderate) selectedScenarios.push('moderate');
+            if(aggressive) selectedScenarios.push('aggressive');
+            
+            for(const scenario of selectedScenarios) {
+                const annualReturn = rates[scenario];
+                let savings = currentSavings;
+                const yearlySavings = [];
+                
+                for(let i = 0; i <= retirementAge - currentAge; i++) {
+                    if(i > 0) {
+                        savings += monthlyContribution * 12;
+                        savings *= (1 + annualReturn);
+                    }
+                    
+                    yearlySavings.push({
+                        age: currentAge + i,
+                        savings: savings
+                    });
+                }
+                
+                scenariosData[scenario] = yearlySavings;
+            }
+            
+            // Create comparison chart
+            createScenarioChart(scenariosData);
+            
+            // Show notification
+            showNotification("Scenario comparison chart created", "success");
+        }
+
+        // Create Scenario Chart
+        function createScenarioChart(scenariosData) {
+            const ctx = document.getElementById('scenarioChart').getContext('2d');
+            
+            // If chart already exists, destroy it
+            if(scenarioChart) {
+                scenarioChart.destroy();
+            }
+            
+            // Format data for chart
+            const labels = Object.values(scenariosData)[0].map(item => `Age ${item.age}`);
+            const datasets = [];
+            
+            const colors = {
+                conservative: 'rgba(52, 152, 219, 1)',
+                moderate: 'rgba(46, 204, 113, 1)',
+                aggressive: 'rgba(231, 76, 60, 1)'
+            };
+            
+            const backgroundColors = {
+                conservative: 'rgba(52, 152, 219, 0.2)',
+                moderate: 'rgba(46, 204, 113, 0.2)',
+                aggressive: 'rgba(231, 76, 60, 0.2)'
+            };
+            
+            for(const [scenario, data] of Object.entries(scenariosData)) {
+                datasets.push({
+                    label: `${scenario.charAt(0).toUpperCase() + scenario.slice(1)} (${symbols[currentCurrency]})`,
+                    data: data.map(item => item.savings),
+                    borderColor: colors[scenario],
+                    backgroundColor: backgroundColors[scenario],
+                    borderWidth: 2,
+                    tension: 0.1,
+                    fill: false
+                });
+            }
+            
+            // Create chart
+            scenarioChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += formatCurrency(context.raw, currentCurrency);
+                                    return label;
+                                }
+                            }
+                        },
+                        legend: {
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return formatCurrency(value, currentCurrency, true);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Apply theme
+            updateChartTheme(scenarioChart);
+        }
+
+        // Update Retirement Status
+        function updateRetirementStatus() {
+            if(!retirementData.totalSavings) return;
+            
+            const statusEl = document.getElementById('retirementStatus');
+            statusEl.style.display = 'block';
+            
+            // Simple status check (can be improved with more sophisticated calculations)
+            const monthlyIncome = retirementData.monthlyIncome;
+            const currentSalary = parseFloat(document.getElementById('monthlyContribution').value) * 12 / 6; // Assuming contributions are ~6% of income
+            
+            if(monthlyIncome >= currentSalary * 0.7) {
+                statusEl.innerHTML = '<i class="fas fa-check-circle"></i> You\'re on track for retirement!';
+                statusEl.className = 'status-indicator on-track';
+            } else {
+                statusEl.innerHTML = '<i class="fas fa-exclamation-triangle"></i> You may need to increase savings to meet retirement goals.';
+                statusEl.className = 'status-indicator off-track';
+            }
+        }
+
+        // Update Strategy Comparison
+        function updateStrategyComparison() {
+            if(!retirementData.totalSavings) return;
+            
+            const currentAge = parseInt(document.getElementById('currentAge').value);
+            const currentSavings = parseFloat(document.getElementById('currentSavings').value);
+            const monthlyContribution = parseFloat(document.getElementById('monthlyContribution').value);
+            
+            // Calculate 30-year growth for each strategy
+            const conservativeGrowth = calculateCompoundGrowth(currentSavings, monthlyContribution, 0.055, 30);
+            const balancedGrowth = calculateCompoundGrowth(currentSavings, monthlyContribution, 0.08, 30);
+            const aggressiveGrowth = calculateCompoundGrowth(currentSavings, monthlyContribution, 0.11, 30);
+            
+            // Update UI
+            document.getElementById('conservativeGrowth').textContent = formatCurrency(conservativeGrowth, currentCurrency);
+            document.getElementById('balancedGrowth').textContent = formatCurrency(balancedGrowth, currentCurrency);
+            document.getElementById('growthPortfolioGrowth').textContent = formatCurrency(aggressiveGrowth, currentCurrency);
+        }
+
+        // Calculate compound growth
+        function calculateCompoundGrowth(principal, monthlyContribution, annualRate, years) {
+            let total = principal;
+            
+            for(let i = 0; i < years; i++) {
+                total += monthlyContribution * 12;
+                total *= (1 + annualRate);
+            }
+            
+            return total;
+        }
+
+        // Update Action Plan
+        function updateActionPlan() {
+            if(!retirementData.totalSavings) return;
+            
+            const currentAge = parseInt(document.getElementById('currentAge').value);
+            const retirementAge = parseInt(document.getElementById('retirementAge').value);
+            const monthlyContribution = parseFloat(document.getElementById('monthlyContribution').value);
+            
+            // Calculate savings milestones
+            const shortTermYears = Math.min(5, Math.floor((retirementAge - currentAge) * 0.25));
+            const midTermYears = Math.min(15, Math.floor((retirementAge - currentAge) * 0.5));
+            const longTermYears = Math.floor((retirementAge - currentAge) * 0.75);
+            
+            // Get savings projections for these years
+            const shortTermIndex = Math.min(shortTermYears, retirementData.yearlySavings.length - 1);
+            const midTermIndex = Math.min(midTermYears, retirementData.yearlySavings.length - 1);
+            const longTermIndex = Math.min(longTermYears, retirementData.yearlySavings.length - 1);
+            
+            const shortTermSavings = retirementData.yearlySavings[shortTermIndex].savings;
+            const midTermSavings = retirementData.yearlySavings[midTermIndex].savings;
+            const longTermSavings = retirementData.yearlySavings[longTermIndex].savings;
+            
+            // Update UI
+            document.getElementById('shortTermSavings').textContent = formatCurrency(shortTermSavings, currentCurrency);
+            document.getElementById('midTermSavings').textContent = formatCurrency(midTermSavings, currentCurrency);
+            document.getElementById('longTermSavings').textContent = formatCurrency(longTermSavings, currentCurrency);
+        }
+
+        // Download PDF
+        function downloadPDF() {
+            if(!retirementData.totalSavings) {
+                showNotification("Please calculate retirement first", "error");
+                return;
+            }
+            
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                
+                // Add title
+                doc.setFontSize(20);
+                doc.setTextColor(41, 128, 185);
+                doc.text("PesaGuru Retirement Plan", 105, 20, null, null, "center");
+                
+                // Add subtitle
+                doc.setFontSize(12);
+                doc.setTextColor(100);
+                doc.text("Personalized Retirement Analysis and Recommendations", 105, 30, null, null, "center");
+                
+                // Add date
+                const today = new Date();
+                doc.setFontSize(10);
+                doc.text(`Generated on: ${today.toLocaleDateString()}`, 105, 40, null, null, "center");
+                
+                // Add inputs section
+                doc.setFontSize(14);
+                doc.setTextColor(41, 128, 185);
+                doc.text("Your Inputs", 20, 55);
+                
+                doc.setFontSize(10);
+                doc.setTextColor(0);
+                const inputs = [
+                    ["Current Age", document.getElementById('currentAge').value],
+                    ["Retirement Age", document.getElementById('retirementAge').value],
+                    ["Current Savings", formatCurrency(parseFloat(document.getElementById('currentSavings').value), currentCurrency)],
+                    ["Monthly Contribution", formatCurrency(parseFloat(document.getElementById('monthlyContribution').value), currentCurrency)],
+                    ["Expected Annual Return", `${document.getElementById('annualReturn').value}%`],
+                    ["Inflation Rate", `${document.getElementById('inflationRate').value}%`]
+                ];
+                
+                if(retirementData.includePension) {
+                    inputs.push(
+                        ["Employer Pension Contribution", formatCurrency(parseFloat(document.getElementById('employerPension').value), currentCurrency)],
+                        ["Employer Matching", `${document.getElementById('pensionMatching').value}%`],
+                        ["Monthly NSSF/Social Security", formatCurrency(parseFloat(document.getElementById('socialSecurity').value), currentCurrency)]
+                    );
+                }
+                
+                // Create inputs table
+                doc.autoTable({
+                    startY: 60,
+                    head: [['Parameter', 'Value']],
+                    body: inputs,
+                    theme: 'grid',
+                    headStyles: {
+                        fillColor: [41, 128, 185],
+                        textColor: [255, 255, 255]
+                    }
+                });
+                
+                // Add results section
+                doc.setFontSize(14);
+                doc.setTextColor(41, 128, 185);
+                doc.text("Retirement Projections", 20, doc.autoTable.previous.finalY + 15);
+                
+                // Create results table
+                const results = [
+                    ["Total Savings at Retirement", document.getElementById('totalSavings').textContent],
+                    ["Inflation-Adjusted Value", document.getElementById('inflationAdjustedValue').textContent],
+                    ["Monthly Income (4% Withdrawal)", document.getElementById('monthlyIncome').textContent],
+                    ["Years Savings Will Last", document.getElementById('savingsYears').textContent]
+                ];
+                
+                doc.autoTable({
+                    startY: doc.autoTable.previous.finalY + 20,
+                    head: [['Metric', 'Value']],
+                    body: results,
+                    theme: 'grid',
+                    headStyles: {
+                        fillColor: [41, 128, 185],
+                        textColor: [255, 255, 255]
+                    }
+                });
+                
+                // Add strategy section
+                doc.setFontSize(14);
+                doc.setTextColor(41, 128, 185);
+                doc.text("Investment Strategy Recommendations", 20, doc.autoTable.previous.finalY + 15);
+                
+                // Create strategy table
+                const strategies = [
+                    ["Conservative (5-6%)", "60% Bonds, 30% Blue-Chip Stocks, 10% Cash", "Low", document.getElementById('conservativeGrowth').textContent],
+                    ["Balanced (7-9%)", "50% Stocks, 40% Bonds, 10% Alternatives", "Medium", document.getElementById('balancedGrowth').textContent],
+                    ["Growth (10-12%)", "70% Stocks, 20% Growth Funds, 10% Alternatives", "High", document.getElementById('growthPortfolioGrowth').textContent]
+                ];
+                
+                doc.autoTable({
+                    startY: doc.autoTable.previous.finalY + 20,
+                    head: [['Strategy', 'Allocation', 'Risk', '30-Year Growth']],
+                    body: strategies,
+                    theme: 'grid',
+                    headStyles: {
+                        fillColor: [41, 128, 185],
+                        textColor: [255, 255, 255]
+                    }
+                });
+                
+                // Add disclaimer
+                doc.setFontSize(8);
+                doc.setTextColor(100);
+                doc.text("Disclaimer: This is a projection based on the information provided and market assumptions. Actual results may vary.", 105, 280, null, null, "center");
+                doc.text("For detailed financial advice, please consult with a qualified financial advisor.", 105, 285, null, null, "center");
+                
+                // Save the PDF
+                doc.save("PesaGuru_Retirement_Plan.pdf");
+                
+                // Show notification
+                showNotification("PDF downloaded successfully", "success");
+                
+            } catch (error) {
+                console.error(error);
+                showNotification("Error generating PDF", "error");
+            }
+        }
+
+        // Download CSV
+        function downloadCSV() {
+            if(!retirementData.totalSavings || !retirementData.yearlySavings) {
+                showNotification("Please calculate retirement first", "error");
+                return;
+            }
+            
+            try {
+                // Create CSV content
+                let csvContent = "Age,Year,Yearly Savings\n";
+                
+                const currentYear = new Date().getFullYear();
+                retirementData.yearlySavings.forEach(item => {
+                    const year = currentYear + (item.age - parseInt(document.getElementById('currentAge').value));
+                    csvContent += `${item.age},${year},${item.savings.toFixed(2)}\n`;
+                });
+                
+                // Create download link
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.setAttribute("href", url);
+                link.setAttribute("download", "retirement_projections.csv");
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                // Show notification
+                showNotification("CSV downloaded successfully", "success");
+                
+            } catch (error) {
+                console.error(error);
+                showNotification("Error generating CSV", "error");
+            }
+        }
+
+        // Save Data
+        function saveData() {
+            if(!retirementData.totalSavings) {
+                showNotification("Please calculate retirement first", "error");
+                return;
+            }
+            
+            try {
+                // Get all input values
+                const data = {
+                    currentAge: parseInt(document.getElementById('currentAge').value),
+                    retirementAge: parseInt(document.getElementById('retirementAge').value),
+                    currentSavings: parseFloat(document.getElementById('currentSavings').value),
+                    monthlyContribution: parseFloat(document.getElementById('monthlyContribution').value),
+                    annualReturn: parseFloat(document.getElementById('annualReturn').value),
+                    inflationRate: parseFloat(document.getElementById('inflationRate').value),
+                    withdrawalRate: parseFloat(document.getElementById('withdrawalRate').value),
+                    employerPension: parseFloat(document.getElementById('employerPension').value),
+                    pensionMatching: parseFloat(document.getElementById('pensionMatching').value),
+                    socialSecurity: parseFloat(document.getElementById('socialSecurity').value),
+                    pensionAge: parseInt(document.getElementById('pensionAge').value),
+                    currency: currentCurrency,
+                    results: {
+                        totalSavings: retirementData.totalSavings,
+                        inflationAdjustedValue: retirementData.inflationAdjustedValue,
+                        monthlyIncome: retirementData.monthlyIncome,
+                        savingsYears: retirementData.savingsYears,
+                        includePension: retirementData.includePension
+                    },
+                    savedDate: new Date().toISOString()
+                };
+                
+                // Save to localStorage
+                localStorage.setItem('pesaGuruRetirementPlan', JSON.stringify(data));
+                
+                // Show notification
+                showNotification("Retirement plan saved successfully", "success");
+                
+            } catch (error) {
+                console.error(error);
+                showNotification("Error saving retirement plan", "error");
+            }
+        }
+
+        // Load saved data
+        function loadSavedData() {
+            try {
+                const savedData = localStorage.getItem('pesaGuruRetirementPlan');
+                if(savedData) {
+                    const data = JSON.parse(savedData);
+                    
+                    // Set input values
+                    document.getElementById('currentAge').value = data.currentAge;
+                    document.getElementById('retirementAge').value = data.retirementAge;
+                    document.getElementById('currentSavings').value = data.currentSavings;
+                    document.getElementById('monthlyContribution').value = data.monthlyContribution;
+                    document.getElementById('annualReturn').value = data.annualReturn;
+                    document.getElementById('inflationRate').value = data.inflationRate;
+                    document.getElementById('withdrawalRate').value = data.withdrawalRate;
+                    document.getElementById('employerPension').value = data.employerPension;
+                    document.getElementById('pensionMatching').value = data.pensionMatching;
+                    document.getElementById('socialSecurity').value = data.socialSecurity;
+                    document.getElementById('pensionAge').value = data.pensionAge;
+                    
+                    // Set currency
+                    if(data.currency) {
+                        currencySelect.value = data.currency;
+                        updateCurrency();
+                    }
+                    
+                    // Update sliders
+                    updateSliderValues();
+                    
+                    // Show notification
+                    showNotification("Loaded saved retirement plan", "success");
+                    
+                    // Calculate retirement
+                    calculateBtn.click();
+                    
+                    // Include pension if it was included before
+                    if(data.results.includePension) {
+                        includePensionBtn.click();
+                    }
+                }
+            } catch (error) {
+                console.error(error);
+                // Don't show error notification for loading attempt
+            }
+        }
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.style.display = 'block';
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        // Format currency
+        function formatCurrency(value, currency, abbreviated = false) {
+            if(abbreviated && value >= 1000000) {
+                return `${symbols[currency]}${(value / 1000000).toFixed(1)}M`;
+            } else if(abbreviated && value >= 1000) {
+                return `${symbols[currency]}${(value / 1000).toFixed(1)}K`;
+            }
+            
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: currency,
+                maximumFractionDigits: 0
+            }).format(value);
+        }
+
+        // Format years
+        function formatYears(years) {
+            if(years >= 100) {
+                return 'Indefinitely';
+            }
+            
+            const wholeYears = Math.floor(years);
+            const months = Math.round((years - wholeYears) * 12);
+            
+            if(months > 0) {
+                return `${wholeYears} years, ${months} months`;
+            } else {
+                return `${wholeYears} years`;
+            }
+        }
+
+        // Initialize the app
+        window.addEventListener('DOMContentLoaded', () => {
+            init();
+            // Try to load saved data
+            loadSavedData();
+        });
+
+        document.getElementById("retirementStatus").classList.toggle("hidden");
+    </script>
+</body>
+</html>

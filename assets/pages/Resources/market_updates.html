@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PesaGuru Market Updates - Get the latest financial market data, NSE stock trends, economic indicators and financial news for Kenya.">
+    <meta name="keywords" content="NSE market data, Kenya financial news, stock market updates, economic indicators, Kenyan economy, financial trends">
+    <meta name="author" content="PesaGuru">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="PesaGuru Market Updates">
+    <meta property="og:description" content="Stay updated with the latest financial market data, NSE trends, and economic indicators for Kenya">
+    <meta property="og:image" content="/assets/images/market-updates-preview.jpg">
+    <meta property="og:url" content="https://pesaguru.co.ke/resources/market_updates.html">
+    <meta property="og:type" content="website">
+    
+    <title>PesaGuru Market Updates - Latest Financial Data & Trends</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="/assets/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+    
+    <!-- Font Awesome from CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- CSS -->
+    <style>
+        :root {
+            --primary-color: #0b6623; /* Kenyan green */
+            --primary-color-light: #0d7a2a;
+            --primary-color-dark: #084d1c;
+            --secondary-color: #bf0a30; /* Accent red */
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --text-color-light: #555;
+            --light-color: #ffffff;
+            --border-color: #e1e1e1;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --focus-color: #3b82f6;
+            --lightest-green: #e6f7ec;
+            --light-green: #c1e7d0;
+            --chart-color-1: #0b6623;
+            --chart-color-2: #1e88e5;
+            --chart-color-3: #f44336;
+            --chart-color-4: #fb8c00;
+            --chart-color-5: #7b1fa2;
+            --positive-color: #4caf50;
+            --negative-color: #f44336;
+            --neutral-color: #9e9e9e;
+        }
+        
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Skip to main content - accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary-color);
+            color: white;
+            padding: 8px;
+            z-index: 1001;
+            transition: top 0.3s;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        /* Focus styles for accessibility */
+        a:focus, button:focus, input:focus {
+            outline: 3px solid var(--focus-color);
+            outline-offset: 2px;
+        }
+        
+        /* Use keyboard focus only */
+        .js-focus-visible :focus:not(.focus-visible) {
+            outline: none;
+        }
+        
+        header {
+            background-color: var(--light-color);
+            box-shadow: 0 2px 10px var(--shadow-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .logo i {
+            margin-right: 0.5rem;
+            font-size: 2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .cta-button {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-button:hover, 
+        .cta-button:focus {
+            background-color: var(--primary-color-light);
+        }
+        
+        .mobile-menu-button {
+            display: none;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        .mobile-menu-button:hover {
+            color: var(--primary-color);
+        }
+        
+        main {
+            margin-top: 74px;
+            min-height: calc(100vh - 74px - 400px); /* Accounting for header and footer */
+        }
+        
+        .page-header {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .page-description {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        
+        .search-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            padding-left: 3rem;
+            border-radius: 50px;
+            border: 2px solid var(--border-color);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .search-input:focus {
+            border-color: var(--primary-color);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-color-light);
+            font-size: 1.2rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .market-layout {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .sidebar {
+            width: 280px;
+            flex-shrink: 0;
+        }
+        
+        .main-content {
+            flex: 1;
+        }
+        
+        .dashboard-card {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        
+        .dashboard-card-header {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            padding: 1rem;
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .refresh-button {
+            background: none;
+            border: none;
+            color: var(--light-color);
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .dashboard-card-content {
+            padding: 1.5rem;
+        }
+        
+        .market-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .market-index {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .index-name {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .index-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .index-change {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .positive {
+            color: var(--positive-color);
+        }
+        
+        .negative {
+            color: var(--negative-color);
+        }
+        
+        .neutral {
+            color: var(--neutral-color);
+        }
+        
+        .market-chart {
+            height: 400px;
+            margin-top: 1.5rem;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-color-light);
+            border-radius: 8px;
+        }
+        
+        .stock-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        
+        .stock-table th,
+        .stock-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .stock-table th {
+            font-weight: 600;
+            background-color: #f5f5f5;
+        }
+        
+        .stock-table tr:hover {
+            background-color: var(--lightest-green);
+        }
+        
+        .stock-symbol {
+            font-weight: 600;
+        }
+        
+        .stock-name {
+            color: var(--text-color-light);
+        }
+        
+        .categories {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        
+        .categories-title {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            padding: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .categories-list {
+            list-style: none;
+        }
+        
+        .categories-list li {
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .categories-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .categories-list a {
+            display: block;
+            padding: 1rem;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: background-color 0.3s;
+        }
+        
+        .categories-list a:hover,
+        .categories-list a.active {
+            background-color: var(--lightest-green);
+            color: var(--primary-color);
+        }
+        
+        .categories-list a.active {
+            border-left: 4px solid var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .category-icon {
+            margin-right: 0.5rem;
+            width: 20px;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .last-updated {
+            font-size: 0.9rem;
+            color: var(--text-color-light);
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .news-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .news-card {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px var(--shadow-color);
+        }
+        
+        .news-image {
+            height: 180px;
+            background-color: #ccc;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .news-card:hover .news-image img {
+            transform: scale(1.05);
+        }
+        
+        .news-category {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .news-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .news-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .news-title a {
+            text-decoration: none;
+            color: var(--text-color);
+            transition: color 0.3s;
+        }
+        
+        .news-title a:hover {
+            color: var(--primary-color);
+        }
+        
+        .news-excerpt {
+            color: var(--text-color-light);
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+        
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-color-light);
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+        
+        .news-date,
+        .news-source {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .currency-rates {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .currency-card {
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .currency-pair {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .currency-value {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tab-container {
+            margin-bottom: 2rem;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            overflow-x: auto;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+        }
+        
+        .tab-button {
+            background-color: var(--light-color);
+            border: 1px solid var(--border-color);
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .tab-button:hover {
+            background-color: var(--lightest-green);
+        }
+        
+        .tab-button.active {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            border-color: var(--primary-color);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .economic-indicators {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .indicator-card {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 10px var(--shadow-color);
+        }
+        
+        .indicator-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .indicator-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .indicator-trend {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .indicator-date {
+            font-size: 0.9rem;
+            color: var(--text-color-light);
+            margin-top: 0.5rem;
+        }
+        
+        .cta-box {
+            background-color: var(--lightest-green);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+            border: 1px solid var(--light-green);
+        }
+        
+        .cta-box-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .cta-box-description {
+            margin-bottom: 1.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .sector-performance {
+            margin-top: 1.5rem;
+        }
+        
+        .sector-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .sector-chart {
+            height: 300px;
+            margin-top: 1rem;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-color-light);
+            border-radius: 8px;
+        }
+        
+        /* Footer styles */
+        footer {
+            background-color: #333;
+            color: var(--light-color);
+            padding: 3rem 1rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .footer-description {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .footer-social a {
+            color: var(--light-color);
+            font-size: 1.2rem;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-social a:hover {
+            color: var(--primary-color);
+            background-color: var(--light-color);
+        }
+        
+        .footer-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+            padding: 0.2rem 0;
+            display: inline-block;
+        }
+        
+        .footer-links a:hover {
+            color: var(--light-color);
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #444;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        /* Media Queries */
+        @media (max-width: 992px) {
+            .market-layout {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                margin-bottom: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 74px;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background-color: var(--light-color);
+                padding: 1rem;
+                box-shadow: 0 4px 10px var(--shadow-color);
+                gap: 0;
+            }
+            
+            .nav-links li {
+                width: 100%;
+            }
+            
+            .nav-links a {
+                display: block;
+                padding: 1rem;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-button {
+                display: block;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .market-overview {
+                grid-template-columns: 1fr;
+            }
+            
+            .news-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .tab-buttons {
+                flex-wrap: wrap;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 1.8rem;
+            }
+            
+            .currency-rates {
+                grid-template-columns: 1fr;
+            }
+            
+            .economic-indicators {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <header role="banner">
+        <nav class="navbar" aria-label="Main navigation">
+            <a href="/index.html" class="logo" aria-label="PesaGuru Home">
+                <i class="fas fa-robot" aria-hidden="true"></i> PesaGuru
+            </a>
+            <ul class="nav-links" id="nav-menu">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/features.html">Features</a></li>
+                <li><a href="/resources.html">Resources</a></li>
+                <li><a href="/chatbot.html">Chatbot</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/client/pages/Authentication/login.html">Login</a></li>
+            </ul>
+            <button class="cta-button" type="button" id="get-started-btn" onclick="location.href='/client/pages/Authentication/register.html'">Get Started</button>
+
+            <button class="mobile-menu-button" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="page-header" aria-labelledby="page-title">
+            <h1 id="page-title" class="page-title">Market Updates</h1>
+            <p class="page-description">Stay informed with real-time NSE market data, economic indicators, and financial news to make better investment decisions in Kenya.</p>
+            
+            <div class="search-container">
+                <i class="fas fa-search search-icon" aria-hidden="true"></i>
+                <input type="text" class="search-input" id="market-search" placeholder="Search for stocks, market updates..." aria-label="Search for market updates">
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="market-layout">
+                <aside class="sidebar">
+                    <div class="categories">
+                        <h2 class="categories-title">Market Categories</h2>
+                        <ul class="categories-list">
+                            <li><a href="#nse-overview" class="active"><i class="fas fa-chart-line category-icon" aria-hidden="true"></i> NSE Overview</a></li>
+                            <li><a href="#top-movers"><i class="fas fa-exchange-alt category-icon" aria-hidden="true"></i> Top Movers</a></li>
+                            <li><a href="#sector-performance"><i class="fas fa-industry category-icon" aria-hidden="true"></i> Sector Performance</a></li>
+                            <li><a href="#economic-data"><i class="fas fa-chart-bar category-icon" aria-hidden="true"></i> Economic Indicators</a></li>
+                            <li><a href="#forex-rates"><i class="fas fa-dollar-sign category-icon" aria-hidden="true"></i> Forex Rates</a></li>
+                            <li><a href="#commodities"><i class="fas fa-oil-can category-icon" aria-hidden="true"></i> Commodities</a></li>
+                            <li><a href="#market-news"><i class="fas fa-newspaper category-icon" aria-hidden="true"></i> Market News</a></li>
+                            <li><a href="#investment-opportunities"><i class="fas fa-lightbulb category-icon" aria-hidden="true"></i> Investment Opportunities</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="dashboard-card-header">
+                            <h2>Market Calendar</h2>
+                        </div>
+                        <div class="dashboard-card-content">
+                            <ul class="categories-list">
+                                <li><a href="#"><i class="fas fa-calendar-alt category-icon" aria-hidden="true"></i> March 20, 2025 - CMA Report Release</a></li>
+                                <li><a href="#"><i class="fas fa-calendar-alt category-icon" aria-hidden="true"></i> March 22, 2025 - KCB Dividend Payout</a></li>
+                                <li><a href="#"><i class="fas fa-calendar-alt category-icon" aria-hidden="true"></i> March 25, 2025 - CBK Interest Rate Decision</a></li>
+                                <li><a href="#"><i class="fas fa-calendar-alt category-icon" aria-hidden="true"></i> March 28, 2025 - GDP Data Release</a></li>
+                                <li><a href="#"><i class="fas fa-calendar-alt category-icon" aria-hidden="true"></i> April 2, 2025 - Safaricom Earnings Report</a></li>
+                            </ul>
+                            <div class="last-updated">
+                                <i class="fas fa-clock" aria-hidden="true"></i> Last updated: March 19, 2025
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+                
+                <div class="main-content">
+                    <div class="tab-container">
+                        <div class="tab-buttons" role="tablist" aria-label="Market data categories">
+                            <button type="button" class="tab-button active" id="overview-tab" role="tab" aria-selected="true" aria-controls="overview-content">Market Overview</button>
+                            <button type="button" class="tab-button" id="stocks-tab" role="tab" aria-selected="false" aria-controls="stocks-content">Stocks</button>
+                            <button type="button" class="tab-button" id="sectors-tab" role="tab" aria-selected="false" aria-controls="sectors-content">Sectors</button>
+                            <button type="button" class="tab-button" id="economy-tab" role="tab" aria-selected="false" aria-controls="economy-content">Economy</button>
+                            <button type="button" class="tab-button" id="news-tab" role="tab" aria-selected="false" aria-controls="news-content">News</button>
+                        </div>
+                        
+                        <div id="overview-content" class="tab-content active" role="tabpanel" aria-labelledby="overview-tab">
+                            <div id="nse-overview" class="dashboard-card">
+                                <div class="dashboard-card-header">
+                                    <h2>NSE Market Overview</h2>
+                                    <button type="button" class="refresh-button" aria-label="Refresh data">
+                                        <i class="fas fa-sync-alt" aria-hidden="true"></i> Refresh
+                                    </button>
+                                </div>
+                                <div class="dashboard-card-content">
+                                    <div class="market-overview">
+                                        <div class="market-index">
+                                            <div class="index-name">NSE 20 Share Index</div>
+                                            <div class="index-value">1,989.32</div>
+                                            <div class="index-change positive">
+                                                <i class="fas fa-arrow-up" aria-hidden="true"></i> +23.45 (+1.19%)
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="market-index">
+                                            <div class="index-name">NSE All Share Index</div>
+                                            <div class="index-value">176.84</div>
+                                            <div class="index-change positive">
+                                                <i class="fas fa-arrow-up" aria-hidden="true"></i> +1.73 (+0.99%)
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="market-index">
+                                            <div class="index-name">NSE 25 Share Index</div>
+                                            <div class="index-value">3,876.25</div>
+                                            <div class="index-change positive">
+                                                <i class="fas fa-arrow-up" aria-hidden="true"></i> +42.18 (+1.10%)
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="market-index">
+                                            <div class="index-name">Market Capitalization</div>
+                                            <div class="index-value">KSh 2.34T</div>
+                                            <div class="index-change positive">
+                                                <i class="fas fa-arrow-up" aria-hidden="true"></i> +1.05%
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="market-chart">
+                                        <i class="fas fa-chart-line" aria-hidden="true"></i> NSE 20 Share Index - 6 Month Chart
+                                    </div>
+                                    
+                                    <div class="last-updated">
+                                        <i class="fas fa-clock" aria-hidden="true"></i> Last updated: March 19, 2025, 15:30 EAT
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="top-movers" class="dashboard-card">
+                                <div class="dashboard-card-header">
+                                    <h2>Today's Top Movers</h2>
+                                </div>
+                                <div class="dashboard-card-content">
+                                    <div class="tab-buttons" role="tablist" aria-label="Top movers categories">
+                                        <button type="button" class="tab-button active" id="gainers-tab" role="tab" aria-selected="true" aria-controls="gainers-content">Top Gainers</button>
+                                        <button type="button" class="tab-button" id="losers-tab" role="tab" aria-selected="false" aria-controls="losers-content">Top Losers</button>
+                                        <button type="button" class="tab-button" id="volume-tab" role="tab" aria-selected="false" aria-controls="volume-content">Most Active</button>
+                                    </div>
+                                    
+                                    <div id="gainers-content" class="tab-content active" role="tabpanel" aria-labelledby="gainers-tab">
+                                        <table class="stock-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Symbol</th>
+                                                    <th>Company</th>
+                                                    <th>Price</th>
+                                                    <th>Change</th>
+                                                    <th>% Change</th>
+                                                    <th>Volume</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="stock-symbol">EABL</td>
+                                                    <td class="stock-name">East African Breweries</td>
+                                                    <td>165.25</td>
+                                                    <td class="positive">+8.75</td>
+                                                    <td class="positive">+5.59%</td>
+                                                    <td>256,789</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="stock-symbol">BAMB</td>
+                                                    <td class="stock-name">Bamburi Cement</td>
+                                                    <td>48.50</td>
+                                                    <td class="positive">+2.25</td>
+                                                    <td class="positive">+4.87%</td>
+                                                    <td>124,568</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="stock-symbol">BAT</td>
+                                                    <td class="stock-name">BAT Kenya</td>
+                                                    <td>412.00</td>
+                                                    <td class="positive">+18.75</td>
+                                                    <td class="positive">+4.77%</td>
+                                                    <td>78,932</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="stock-symbol">JUB</td>
+                                                    <td class="stock-name">Jubilee Holdings</td>
+                                                    <td>325.00</td>
+                                                    <td class="positive">+12.50</td>
+                                                    <td class="positive">+4.00%</td>
+                                                    <td>45,687</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="stock-symbol">COOP</td>
+                                                    <td class="stock-name">Co-operative Bank</td>
+                                                    <td>14.75</td>
+                                                    <td class="positive">+0.55</td>
+                                                    <td class="positive">+3.87%</td>
+                                                    <td>312,456</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
+                                    <div id="losers-content" class="tab-content" role="tabpanel" aria-labelledby="losers-tab">
+                                        <table class="stock-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Symbol</th>
+                                                    <th>Company</th>
+                                                    <th>Price</th>
+                                                    <th>Change</th>
+                                                    <th>% Change</th>
+                                                    <th>Volume</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="stock-symbol">KEGN</td>
+                                                    <td class="stock-name">KenGen</td>
+                                                    <td>4.20</td>
+                                                    <td class="negative">-0.23</td>
+                                                    <td class="negative">-5.19%</td>
+                                                    <td>789,456</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="stock-symbol">NMG</td>
+                                                    <td class="stock-name">Nation Media Group</td>
+                                                    <td>18.95</td>
+                                                    <td class="negative">-0.95</td>
+                                                    <td class="negative">-4.77%</td>
+                                                    <td>156,234</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="stock-symbol">TOTL</td>
+                                                    <td class="stock-name">Total Kenya</td>
+                                                    <td>23.15</td>
+                                                    <td class="negative">-1.05</td>
+                                                    <td class="negative">-4.34%</td>
+                                                    <td>89,546</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="stock-symbol">HFCK</td>
+                                                    <td class="stock-name">HF Group</td>
+                                                    <td>3.76</td>
+                                                    <td class="negative">-0.16</td>
+                                                    <td class="negative">-4.08%</td>
+                                                    <td>234,567</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="stock-symbol">CABL</td>
+                                                    <td class="stock-name">EA Cables</td>
+                                                    <td>1.53</td>
+                                                    <td class="negative">-0.06</td>
+                                                    <td class="negative">-3.77%</td>
+                                                    <td>467,890</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
+                                    <div id="volume-content" class="tab-content" role="tabpanel" aria-labelledby="volume-tab">
+                                        <table class="stock-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Symbol</th>
+                                                    <th>Company</th>
+                                                    <th>Price</th>
+                                                    <th>Change</th>
+                                                    <th>% Change</th>
+                                                    <th>Volume</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="stock-symbol">SCOM</td>
+                                                    <td class="stock-name">Safaricom</td>
+                                                    <td>28.70</td>
+                                                    <td class="positive">+0.35</td>
+                                                    <td class="positive">+1.23%</td>
+                                                    <td>4,567,890</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="stock-symbol">KCB</td>
+                                                    <td class="stock-name">KCB Group</td>
+                                                    <td>42.15</td>
+                                                    <td class="positive">+0.65</td>
+                                                    <td class="positive">+1.57%</td>
+                                                    <td>1,897,234</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="stock-symbol">EQTY</td>
+                                                    <td class="stock-name">Equity Group</td>
+                                                    <td>47.25</td>
+                                                    <td class="positive">+0.75</td>
+                                                    <td class="positive">+1.61%</td>
+                                                    <td>1,234,567</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="stock-symbol">KEGN</td>
+                                                    <td class="stock-name">KenGen</td>
+                                                    <td>4.20</td>
+                                                    <td class="negative">-0.23</td>
+                                                    <td class="negative">-5.19%</td>
+                                                    <td>789,456</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="stock-symbol">COOP</td>
+                                                    <td class="stock-name">Co-operative Bank</td>
+                                                    <td>14.75</td>
+                                                    <td class="positive">+0.55</td>
+                                                    <td class="positive">+3.87%</td>
+                                                    <td>312,456</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="forex-rates" class="dashboard-card">
+                                <div class="dashboard-card-header">
+                                    <h2>Forex Rates</h2>
+                                    <div class="last-updated">
+                                        <i class="fas fa-clock" aria-hidden="true"></i> Last updated: March 19, 2025, 14:00 EAT
+                                    </div>
+                                </div>
+                                <div class="dashboard-card-content">
+                                    <div class="currency-rates">
+                                        <div class="currency-card">
+                                            <div class="currency-pair">USD/KES</div>
+                                            <div class="currency-value">127.65</div>
+                                            <div class="index-change negative">
+                                                <i class="fas fa-arrow-down" aria-hidden="true"></i> -0.25 (-0.20%)
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="currency-card">
+                                            <div class="currency-pair">EUR/KES</div>
+                                            <div class="currency-value">139.87</div>
+                                            <div class="index-change negative">
+                                                <i class="fas fa-arrow-down" aria-hidden="true"></i> -0.32 (-0.23%)
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="currency-card">
+                                            <div class="currency-pair">GBP/KES</div>
+                                            <div class="currency-value">164.92</div>
+                                            <div class="index-change negative">
+                                                <i class="fas fa-arrow-down" aria-hidden="true"></i> -0.45 (-0.27%)
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="currency-card">
+                                            <div class="currency-pair">JPY/KES</div>
+                                            <div class="currency-value">0.86</div>
+                                            <div class="index-change positive">
+                                                <i class="fas fa-arrow-up" aria-hidden="true"></i> +0.01 (+1.18%)
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="currency-card">
+                                            <div class="currency-pair">AED/KES</div>
+                                            <div class="currency-value">34.76</div>
+                                            <div class="index-change negative">
+                                                <i class="fas fa-arrow-down" aria-hidden="true"></i> -0.07 (-0.20%)
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="currency-card">
+                                            <div class="currency-pair">ZAR/KES</div>
+                                            <div class="currency-value">6.98</div>
+                                            <div class="index-change positive">
+                                                <i class="fas fa-arrow-up" aria-hidden="true"></i> +0.08 (+1.16%)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                        <div id="stocks-content" class="tab-content" role="tabpanel" aria-labelledby="stocks-tab">
+                            <div class="dashboard-card">
+                                <div class="dashboard-card-header">
+                                    <h2>Top NSE Stocks</h2>
+                                </div>
+                                <div class="dashboard-card-content">
+                                    <table class="stock-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Symbol</th>
+                                                <th>Company</th>
+                                                <th>Price</th>
+                                                <th>Change</th>
+                                                <th>% Change</th>
+                                                <th>Volume</th>
+                                                <th>Market Cap (KSh B)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="stock-symbol">SCOM</td>
+                                                <td class="stock-name">Safaricom</td>
+                                                <td>28.70</td>
+                                                <td class="positive">+0.35</td>
+                                                <td class="positive">+1.23%</td>
+                                                <td>4,567,890</td>
+                                                <td>1,149.8</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="stock-symbol">EQTY</td>
+                                                <td class="stock-name">Equity Group</td>
+                                                <td>47.25</td>
+                                                <td class="positive">+0.75</td>
+                                                <td class="positive">+1.61%</td>
+                                                <td>1,234,567</td>
+                                                <td>178.2</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="stock-symbol">KCB</td>
+                                                <td class="stock-name">KCB Group</td>
+                                                <td>42.15</td>
+                                                <td class="positive">+0.65</td>
+                                                <td class="positive">+1.57%</td>
+                                                <td>1,897,234</td>
+                                                <td>135.6</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="stock-symbol">EABL</td>
+                                                <td class="stock-name">East African Breweries</td>
+                                                <td>165.25</td>
+                                                <td class="positive">+8.75</td>
+                                                <td class="positive">+5.59%</td>
+                                                <td>256,789</td>
+                                                <td>131.4</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="stock-symbol">COOP</td>
+                                                <td class="stock-name">Co-operative Bank</td>
+                                                <td>14.75</td>
+                                                <td class="positive">+0.55</td>
+                                                <td class="positive">+3.87%</td>
+                                                <td>312,456</td>
+                                                <td>86.7</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="stock-symbol">ABSA</td>
+                                                <td class="stock-name">ABSA Bank Kenya</td>
+                                                <td>12.85</td>
+                                                <td class="positive">+0.30</td>
+                                                <td class="positive">+2.39%</td>
+                                                <td>287,654</td>
+                                                <td>69.8</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="stock-symbol">SCBK</td>
+                                                <td class="stock-name">Standard Chartered Bank</td>
+                                                <td>136.50</td>
+                                                <td class="neutral">0.00</td>
+                                                <td class="neutral">0.00%</td>
+                                                <td>97,456</td>
+                                                <td>51.9</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="stock-symbol">BAT</td>
+                                                <td class="stock-name">BAT Kenya</td>
+                                                <td>412.00</td>
+                                                <td class="positive">+18.75</td>
+                                                <td class="positive">+4.77%</td>
+                                                <td>78,932</td>
+                                                <td>41.2</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="stock-symbol">JUB</td>
+                                                <td class="stock-name">Jubilee Holdings</td>
+                                                <td>325.00</td>
+                                                <td class="positive">+12.50</td>
+                                                <td class="positive">+4.00%</td>
+                                                <td>45,687</td>
+                                                <td>23.5</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="stock-symbol">KEGN</td>
+                                                <td class="stock-name">KenGen</td>
+                                                <td>4.20</td>
+                                                <td class="negative">-0.23</td>
+                                                <td class="negative">-5.19%</td>
+                                                <td>789,456</td>
+                                                <td>27.7</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="last-updated">
+                                        <i class="fas fa-clock" aria-hidden="true"></i> Last updated: March 19, 2025, 15:30 EAT
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="sectors-content" class="tab-content" role="tabpanel" aria-labelledby="sectors-tab">
+                            <div id="sector-performance" class="dashboard-card">
+                                <div class="dashboard-card-header">
+                                    <h2>Sector Performance</h2>
+                                </div>
+                                <div class="dashboard-card-content">
+                                    <div class="sector-chart">
+                                        <i class="fas fa-chart-bar" aria-hidden="true"></i> NSE Sector Performance Chart
+                                    </div>
+                                    
+                                    <table class="stock-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Sector</th>
+                                                <th>Daily Change</th>
+                                                <th>Weekly Change</th>
+                                                <th>Monthly Change</th>
+                                                <th>YTD Change</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Banking</td>
+                                                <td class="positive">+1.57%</td>
+                                                <td class="positive">+2.83%</td>
+                                                <td class="positive">+5.12%</td>
+                                                <td class="positive">+12.87%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Telecommunications</td>
+                                                <td class="positive">+1.23%</td>
+                                                <td class="positive">+2.05%</td>
+                                                <td class="positive">+3.67%</td>
+                                                <td class="positive">+8.92%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Manufacturing & Allied</td>
+                                                <td class="positive">+3.98%</td>
+                                                <td class="positive">+5.72%</td>
+                                                <td class="positive">+7.25%</td>
+                                                <td class="positive">+15.43%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Energy & Petroleum</td>
+                                                <td class="negative">-2.14%</td>
+                                                <td class="negative">-1.05%</td>
+                                                <td class="positive">+1.23%</td>
+                                                <td class="positive">+6.78%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Insurance</td>
+                                                <td class="positive">+2.57%</td>
+                                                <td class="positive">+3.68%</td>
+                                                <td class="positive">+6.92%</td>
+                                                <td class="positive">+10.45%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Investment</td>
+                                                <td class="positive">+0.87%</td>
+                                                <td class="positive">+1.24%</td>
+                                                <td class="positive">+3.05%</td>
+                                                <td class="positive">+5.76%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Commercial & Services</td>
+                                                <td class="negative">-0.95%</td>
+                                                <td class="negative">-2.34%</td>
+                                                <td class="negative">-3.67%</td>
+                                                <td class="negative">-8.92%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Agricultural</td>
+                                                <td class="positive">+1.23%</td>
+                                                <td class="positive">+3.45%</td>
+                                                <td class="positive">+5.67%</td>
+                                                <td class="positive">+9.89%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Construction & Allied</td>
+                                                <td class="positive">+2.45%</td>
+                                                <td class="positive">+4.32%</td>
+                                                <td class="positive">+7.89%</td>
+                                                <td class="positive">+11.34%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Real Estate Investment Trusts</td>
+                                                <td class="positive">+0.75%</td>
+                                                <td class="positive">+1.23%</td>
+                                                <td class="positive">+2.45%</td>
+                                                <td class="positive">+4.56%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="last-updated">
+                                        <i class="fas fa-clock" aria-hidden="true"></i> Last updated: March 19, 2025, 15:30 EAT
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="economy-content" class="tab-content" role="tabpanel" aria-labelledby="economy-tab">
+                            <div id="economic-data" class="dashboard-card">
+                                <div class="dashboard-card-header">
+                                    <h2>Economic Indicators</h2>
+                                </div>
+                                <div class="dashboard-card-content">
+                                    <div class="economic-indicators">
+                                        <div class="indicator-card">
+                                            <div class="indicator-title">Inflation Rate</div>
+                                            <div class="indicator-value">5.7%</div>
+                                            <div class="indicator-trend positive">
+                                                <i class="fas fa-arrow-down" aria-hidden="true"></i> -0.2% (YoY)
+                                            </div>
+                                            <div class="indicator-date">February 2025</div>
+                                        </div>
+                                        
+                                        <div class="indicator-card">
+                                            <div class="indicator-title">GDP Growth Rate</div>
+                                            <div class="indicator-value">5.3%</div>
+                                            <div class="indicator-trend positive">
+                                                <i class="fas fa-arrow-up" aria-hidden="true"></i> +0.4% (QoQ)
+                                            </div>
+                                            <div class="indicator-date">Q4 2024</div>
+                                        </div>
+                                        
+                                        <div class="indicator-card">
+                                            <div class="indicator-title">Interest Rate (CBR)</div>
+                                            <div class="indicator-value">8.5%</div>
+                                            <div class="indicator-trend neutral">
+                                                <i class="fas fa-minus" aria-hidden="true"></i> Unchanged
+                                            </div>
+                                            <div class="indicator-date">March 2025</div>
+                                        </div>
+                                        
+                                        <div class="indicator-card">
+                                            <div class="indicator-title">Unemployment Rate</div>
+                                            <div class="indicator-value">11.2%</div>
+                                            <div class="indicator-trend positive">
+                                                <i class="fas fa-arrow-down" aria-hidden="true"></i> -0.3% (YoY)
+                                            </div>
+                                            <div class="indicator-date">Q4 2024</div>
+                                        </div>
+                                        
+                                        <div class="indicator-card">
+                                            <div class="indicator-title">Foreign Exchange Reserves</div>
+                                            <div class="indicator-value">$8.7B</div>
+                                            <div class="indicator-trend positive">
+                                                <i class="fas fa-arrow-up" aria-hidden="true"></i> +2.4% (MoM)
+                                            </div>
+                                            <div class="indicator-date">February 2025</div>
+                                        </div>
+                                        
+                                        <div class="indicator-card">
+                                            <div class="indicator-title">Public Debt (% of GDP)</div>
+                                            <div class="indicator-value">67.8%</div>
+                                            <div class="indicator-trend negative">
+                                                <i class="fas fa-arrow-up" aria-hidden="true"></i> +1.2% (YoY)
+                                            </div>
+                                            <div class="indicator-date">Q4 2024</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="market-chart">
+                                        <i class="fas fa-chart-line" aria-hidden="true"></i> Kenyan Economic Indicators - 12 Month Trend
+                                    </div>
+                                    
+                                    <div class="last-updated">
+                                        <i class="fas fa-clock" aria-hidden="true"></i> Last updated: March 15, 2025
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="commodities" class="dashboard-card">
+                                <div class="dashboard-card-header">
+                                    <h2>Commodity Prices</h2>
+                                </div>
+                                <div class="dashboard-card-content">
+                                    <table class="stock-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Commodity</th>
+                                                <th>Price</th>
+                                                <th>Unit</th>
+                                                <th>Daily Change</th>
+                                                <th>Weekly Change</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Crude Oil (Brent)</td>
+                                                <td>$83.45</td>
+                                                <td>per barrel</td>
+                                                <td class="positive">+1.25%</td>
+                                                <td class="positive">+3.67%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Gold</td>
+                                                <td>$2,187.30</td>
+                                                <td>per ounce</td>
+                                                <td class="positive">+0.45%</td>
+                                                <td class="positive">+1.23%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Coffee (Arabica)</td>
+                                                <td>$2.35</td>
+                                                <td>per pound</td>
+                                                <td class="negative">-0.87%</td>
+                                                <td class="positive">+2.45%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tea (Kenya Grade 1)</td>
+                                                <td>$2.85</td>
+                                                <td>per kg</td>
+                                                <td class="positive">+1.42%</td>
+                                                <td class="positive">+3.64%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Corn</td>
+                                                <td>$4.85</td>
+                                                <td>per bushel</td>
+                                                <td class="negative">-0.62%</td>
+                                                <td class="negative">-1.23%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Copper</td>
+                                                <td>$4.12</td>
+                                                <td>per pound</td>
+                                                <td class="positive">+0.74%</td>
+                                                <td class="positive">+2.13%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Natural Gas</td>
+                                                <td>$2.45</td>
+                                                <td>per MMBtu</td>
+                                                <td class="negative">-1.21%</td>
+                                                <td class="negative">-3.45%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="last-updated">
+                                        <i class="fas fa-clock" aria-hidden="true"></i> Last updated: March 19, 2025, 14:30 EAT
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="news-content" class="tab-content" role="tabpanel" aria-labelledby="news-tab">
+                            <div id="market-news" class="dashboard-card">
+                                <div class="dashboard-card-header">
+                                    <h2>Latest Market News</h2>
+                                </div>
+                                <div class="dashboard-card-content">
+                                    <div class="news-cards">
+                                        <article class="news-card">
+                                            <div class="news-image">
+                                                <img src="/api/placeholder/400/320" alt="Safaricom earnings report illustration" />
+                                                <div class="news-category">Company News</div>
+                                            </div>
+                                            <div class="news-content">
+                                                <h3 class="news-title"><a href="#">Safaricom Reports 15% Growth in Annual Profits, Exceeding Expectations</a></h3>
+                                                <p class="news-excerpt">Kenya's largest telecommunications company announced stronger than expected full-year results, driven by increased data usage and M-Pesa transactions.</p>
+                                                <div class="news-meta">
+                                                    <div class="news-date">
+                                                        <i class="far fa-calendar-alt" aria-hidden="true"></i> Mar 18, 2025
+                                                    </div>
+                                                    <div class="news-source">
+                                                        <i class="fas fa-newspaper" aria-hidden="true"></i> Business Daily
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
+                                        
+                                        <article class="news-card">
+                                            <div class="news-image">
+                                                <img src="/api/placeholder/400/320" alt="CBK announcement illustration" />
+                                                <div class="news-category">Economy</div>
+                                            </div>
+                                            <div class="news-content">
+                                                <h3 class="news-title"><a href="#">Central Bank of Kenya Holds Interest Rates Steady at 8.5%</a></h3>
+                                                <p class="news-excerpt">The Monetary Policy Committee (MPC) cited stable inflation and steady economic growth as key factors in maintaining the current rate.</p>
+                                                <div class="news-meta">
+                                                    <div class="news-date">
+                                                        <i class="far fa-calendar-alt" aria-hidden="true"></i> Mar 17, 2025
+                                                    </div>
+                                                    <div class="news-source">
+                                                        <i class="fas fa-newspaper" aria-hidden="true"></i> Reuters
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
+                                        
+                                        <article class="news-card">
+                                            <div class="news-image">
+                                                <img src="/api/placeholder/400/320" alt="KCB dividend illustration" />
+                                                <div class="news-category">Dividends</div>
+                                            </div>
+                                            <div class="news-content">
+                                                <h3 class="news-title"><a href="#">KCB Group Announces 20% Increase in Dividend Payout for Shareholders</a></h3>
+                                                <p class="news-excerpt">Kenya's second-largest bank by assets will pay shareholders KSh 3.00 per share, up from KSh 2.50 last year, after reporting strong financial performance.</p>
+                                                <div class="news-meta">
+                                                    <div class="news-date">
+                                                        <i class="far fa-calendar-alt" aria-hidden="true"></i> Mar 16, 2025
+                                                    </div>
+                                                    <div class="news-source">
+                                                        <i class="fas fa-newspaper" aria-hidden="true"></i> Capital FM
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
+                                        
+                                        <article class="news-card">
+                                            <div class="news-image">
+                                                <img src="/api/placeholder/400/320" alt="GDP growth illustration" />
+                                                <div class="news-category">Economy</div>
+                                            </div>
+                                            <div class="news-content">
+                                                <h3 class="news-title"><a href="#">Kenya's GDP Growth Projected to Reach 5.8% in 2025, Says World Bank</a></h3>
+                                                <p class="news-excerpt">A new report cites infrastructure investments, agricultural sector recovery, and increased regional trade as key drivers for the optimistic outlook.</p>
+                                                <div class="news-meta">
+                                                    <div class="news-date">
+                                                        <i class="far fa-calendar-alt" aria-hidden="true"></i> Mar 15, 2025
+                                                    </div>
+                                                    <div class="news-source">
+                                                        <i class="fas fa-newspaper" aria-hidden="true"></i> Standard Media
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
+                                        
+                                        <article class="news-card">
+                                            <div class="news-image">
+                                                <img src="/api/placeholder/400/320" alt="NSE IPO illustration" />
+                                                <div class="news-category">IPO</div>
+                                            </div>
+                                            <div class="news-content">
+                                                <h3 class="news-title"><a href="#">Kenyan Fintech Firm Announces Plans for NSE Listing in Q3 2025</a></h3>
+                                                <p class="news-excerpt">The digital payments company aims to raise KSh 5 billion in what could be one of the largest IPOs on the Nairobi Securities Exchange in recent years.</p>
+                                                <div class="news-meta">
+                                                    <div class="news-date">
+                                                        <i class="far fa-calendar-alt" aria-hidden="true"></i> Mar 14, 2025
+                                                    </div>
+                                                    <div class="news-source">
+                                                        <i class="fas fa-newspaper" aria-hidden="true"></i> The East African
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
+                                        
+                                        <article class="news-card">
+                                            <div class="news-image">
+                                                <img src="/api/placeholder/400/320" alt="Forex reserves illustration" />
+                                                <div class="news-category">Currency</div>
+                                            </div>
+                                            <div class="news-content">
+                                                <h3 class="news-title"><a href="#">Kenya's Foreign Exchange Reserves Reach Six-Month High of $8.7 Billion</a></h3>
+                                                <p class="news-excerpt">The Central Bank of Kenya reports improved forex reserves, providing a stronger buffer against external economic shocks.</p>
+                                                <div class="news-meta">
+                                                    <div class="news-date">
+                                                        <i class="far fa-calendar-alt" aria-hidden="true"></i> Mar 12, 2025
+                                                    </div>
+                                                    <div class="news-source">
+                                                        <i class="fas fa-newspaper" aria-hidden="true"></i> Bloomberg
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="cta-box">
+                        <h3 class="cta-box-title">Get Personalized Investment Recommendations</h3>
+                        <p class="cta-box-description">Talk to our AI-powered chatbot for customized market insights and investment strategies based on your financial goals and risk tolerance.</p>
+                        <button class="cta-button" type="button" onclick="location.href='/chatbot.html'">Chat with PesaGuru</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="footer-logo" aria-label="PesaGuru">
+                        <i class="fas fa-robot" aria-hidden="true"></i> PesaGuru
+                    </div>
+                    <p class="footer-description">
+                        PesaGuru is an AI-powered financial advisory chatbot designed to democratize access to personalized financial guidance for Kenyans.
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://twitter.com/pesaguru" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Twitter">
+                            <i class="fab fa-twitter" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://facebook.com/pesaguru" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Facebook">
+                            <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://instagram.com/pesaguru" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">
+                            <i class="fab fa-instagram" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://linkedin.com/company/pesaguru" target="_blank" rel="noopener noreferrer" aria-label="Follow us on LinkedIn">
+                            <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="/resources/blog.html">Blog</a></li>
+                        <li><a href="/resources/guides.html">Financial Guides</a></li>
+                        <li><a href="/resources/webinars.html">Webinars</a></li>
+                        <li><a href="/resources/market_updates.html">Market Updates</a></li>
+                        <li><a href="/resources/faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year">2025</span> PesaGuru. All rights reserved. Developed with ❤️ in Kenya.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const navMenu = document.getElementById('nav-menu');
+        
+        mobileMenuButton.addEventListener('click', function() {
+            const expanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !expanded);
+            navMenu.classList.toggle('active');
+        });
+        
+        // Tab functionality
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.setAttribute('aria-selected', 'false');
+                });
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding content
+                button.classList.add('active');
+                button.setAttribute('aria-selected', 'true');
+                const contentId = button.id.replace('-tab', '-content');
+                document.getElementById(contentId).classList.add('active');
+            });
+        });
+        
+        // Inner tabs functionality (for Top Movers)
+        const innerTabButtons = document.querySelectorAll('#top-movers .tab-button');
+        const innerTabContents = document.querySelectorAll('#top-movers .tab-content');
+        
+        innerTabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all inner buttons and contents
+                innerTabButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.setAttribute('aria-selected', 'false');
+                });
+                innerTabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding content
+                button.classList.add('active');
+                button.setAttribute('aria-selected', 'true');
+                const contentId = button.id.replace('-tab', '-content');
+                document.getElementById(contentId).classList.add('active');
+            });
+        });
+        
+        // Category links functionality
+        const categoryLinks = document.querySelectorAll('.categories-list a');
+        
+        categoryLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                categoryLinks.forEach(l => l.classList.remove('active'));
+                
+                // Add active class to clicked link
+                link.classList.add('active');
+                
+                // Get the target id
+                const targetId = link.getAttribute('href').substring(1);
+                
+                // Scroll to the target section
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Search functionality
+        const searchInput = document.getElementById('market-search');
+        
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            // You would implement actual search functionality here
+            // For now, we'll just log to console
+            console.log('Searching for:', searchTerm);
+        });
+        
+        // Refresh button functionality
+        const refreshButton = document.querySelector('.refresh-button');
+        
+        refreshButton.addEventListener('click', () => {
+            // In a real application, this would fetch fresh market data
+            alert('Refreshing market data...');
+        });
+    </script>
+</body>
+</html>
