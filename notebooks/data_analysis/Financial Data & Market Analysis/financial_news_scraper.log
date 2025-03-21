@@ -1,0 +1,21 @@
+2025-03-14 19:30:17,769 - financial_news_scraper - INFO - Starting financial news scraping...
+2025-03-14 19:30:18,405 - financial_news_scraper - INFO - Retrieved 18 articles from NewsAPI
+2025-03-14 19:30:19,820 - financial_news_scraper - INFO - Retrieved 10 articles from NewsData.io
+2025-03-14 19:30:19,840 - financial_news_scraper - INFO - Retrieved 3 articles from Reuters Kenya simulation
+2025-03-14 19:30:19,844 - financial_news_scraper - INFO - Collected 31 news articles
+2025-03-14 19:30:19,882 - financial_news_scraper - INFO - Data successfully saved to financial_news_data.csv
+2025-03-14 19:30:19,884 - financial_news_scraper - INFO - Script completed
+2025-03-14 19:31:18,253 - financial_news_scraper - INFO - Starting financial news scraping...
+2025-03-14 19:31:19,028 - financial_news_scraper - INFO - Retrieved 18 articles from NewsAPI
+2025-03-14 19:31:19,871 - financial_news_scraper - INFO - Retrieved 10 articles from NewsData.io
+2025-03-14 19:31:19,896 - financial_news_scraper - INFO - Retrieved 3 articles from Reuters Kenya simulation
+2025-03-14 19:31:19,900 - financial_news_scraper - INFO - Collected 31 news articles
+2025-03-14 19:31:19,908 - financial_news_scraper - INFO - Data successfully saved to financial_news_data.csv
+2025-03-14 19:31:19,910 - financial_news_scraper - INFO - Script completed
+2025-03-14 19:31:37,915 - financial_news_scraper - INFO - Starting financial news scraping...
+2025-03-14 19:31:38,871 - financial_news_scraper - INFO - Retrieved 18 articles from NewsAPI
+2025-03-14 19:31:39,691 - financial_news_scraper - INFO - Retrieved 10 articles from NewsData.io
+2025-03-14 19:31:39,698 - financial_news_scraper - INFO - Retrieved 3 articles from Reuters Kenya simulation
+2025-03-14 19:31:39,703 - financial_news_scraper - INFO - Collected 31 news articles
+2025-03-14 19:31:39,710 - financial_news_scraper - INFO - Data successfully saved to financial_news_data.csv
+2025-03-14 19:31:39,712 - financial_news_scraper - INFO - Script completed

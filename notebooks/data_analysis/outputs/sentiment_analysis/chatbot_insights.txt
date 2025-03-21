@@ -1,0 +1,18 @@
+--- Key Insights for PesaGuru Chatbot ---
+
+1. Headlines containing terms like 'growth', 'increase', and 'profit' are generally associated with positive market sentiment.
+2. Negative market sentiment is commonly signaled by terms such as 'decline', 'drop', and 'concern'.
+3. Stock market news tends to have more extreme sentiment (both positive and negative) compared to general economic news.
+4. Sentiment in financial headlines shows a moderate correlation with market movements, suggesting potential predictive value.
+5. Banking and financial services headlines tend to be more neutral than those about technology or energy sectors.
+6. Kenyan financial headlines tend to focus more on local economic factors than global market trends.
+
+
+--- Implementation Recommendations ---
+
+1. Implement sentiment analysis in the chatbot to alert users about significant shifts in market sentiment.
+2. Provide summaries of recent financial news categorized by sentiment for different market sectors.
+3. Use headline sentiment trends to supplement technical analysis for investment recommendations.
+4. Create alerts when headline sentiment diverges significantly from market performance, as this might indicate future corrections.
+5. Integrate sentiment analysis with specific stock mentions to provide targeted insights for user portfolios.
+6. Offer users a 'sentiment summary' of financial news relevant to their investment interests.
