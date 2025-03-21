@@ -1,1 +1,244 @@
-{ "schedule": [] } 
+{
+  "version": "1.0",
+  "global_settings": {
+    "output_directory": "notebooks/outputs",
+    "log_directory": "notebooks/logs",
+    "notification": {
+      "email": {
+        "enabled": true,
+        "recipients": ["admin@pesaguru.co.ke"],
+        "on_failure": true,
+        "on_success": false
+      },
+      "slack": {
+        "enabled": true,
+        "webhook_url": "https://hooks.slack.com/services/YOUR_WEBHOOK_ID",
+        "channel": "#data-pipelines"
+      }
+    },
+    "retry": {
+      "max_attempts": 3,
+      "delay_minutes": 10
+    },
+    "timeout_minutes": 60
+  },
+  "scheduled_notebooks": [
+    {
+      "id": "nse_data_collection",
+      "name": "NSE Market Data Collection",
+      "notebook_path": "api_integration/NSE_Market_Data_Collection.ipynb",
+      "schedule": {
+        "frequency": "daily",
+        "time": "18:00",
+        "timezone": "Africa/Nairobi"
+      },
+      "parameters": {
+        "data_source": "nse_api",
+        "save_path": "data/external/nse_daily"
+      },
+      "dependencies": [],
+      "description": "Collects daily stock data from the Nairobi Stock Exchange API"
+    },
+    {
+      "id": "forex_data_collection",
+      "name": "Forex Exchange Rates Collection",
+      "notebook_path": "api_integration/Forex_Exchange_Analysis.ipynb",
+      "schedule": {
+        "frequency": "daily",
+        "time": "18:30",
+        "timezone": "Africa/Nairobi"
+      },
+      "parameters": {
+        "currency_pairs": ["USD/KES", "EUR/KES", "GBP/KES"],
+        "save_path": "data/external/forex_daily"
+      },
+      "dependencies": [],
+      "description": "Fetches daily currency exchange rates for the Kenyan Shilling"
+    },
+    {
+      "id": "market_trend_analysis",
+      "name": "Market Trend Analysis",
+      "notebook_path": "data_analysis/financial_data/Market_Trend_Analysis.ipynb",
+      "schedule": {
+        "frequency": "daily",
+        "time": "20:00",
+        "timezone": "Africa/Nairobi"
+      },
+      "parameters": {
+        "lookback_days": 30,
+        "generate_charts": true
+      },
+      "dependencies": ["nse_data_collection"],
+      "description": "Analyzes stock market trends and generates insights"
+    },
+    {
+      "id": "sector_performance_analysis",
+      "name": "Sector Performance Analysis",
+      "notebook_path": "data_analysis/financial_data/Sector_Performance_Analysis.ipynb",
+      "schedule": {
+        "frequency": "weekly",
+        "day": "Monday",
+        "time": "08:00",
+        "timezone": "Africa/Nairobi"
+      },
+      "parameters": {
+        "sectors": ["Banking", "Energy", "Manufacturing", "Agriculture", "Telecommunications"],
+        "lookback_weeks": 4
+      },
+      "dependencies": ["nse_data_collection"],
+      "description": "Analyzes performance by industry sector on the NSE"
+    },
+    {
+      "id": "financial_news_sentiment",
+      "name": "Financial News Sentiment Analysis",
+      "notebook_path": "data_analysis/sentiment_analysis/Sentiment_Analysis_News_Content.ipynb",
+      "schedule": {
+        "frequency": "daily",
+        "time": "06:00",
+        "timezone": "Africa/Nairobi"
+      },
+      "parameters": {
+        "sources": ["BusinessDaily", "Reuters", "Bloomberg", "KenyanWallStreet"],
+        "keywords": ["NSE", "Central Bank of Kenya", "Kenyan Economy", "Safaricom", "KCB", "Equity Bank"]
+      },
+      "dependencies": [],
+      "description": "Analyzes sentiment in financial news related to Kenyan markets"
+    },
+    {
+      "id": "investment_recommendation_training",
+      "name": "Investment Recommendation Model Training",
+      "notebook_path": "ai_model_development/investment_advisory/Investment_Recommendation_Model.ipynb",
+      "schedule": {
+        "frequency": "weekly",
+        "day": "Saturday",
+        "time": "02:00",
+        "timezone": "Africa/Nairobi"
+      },
+      "parameters": {
+        "model_version": "incremental",
+        "training_months": 6,
+        "validation_split": 0.2
+      },
+      "dependencies": ["nse_data_collection", "market_trend_analysis"],
+      "description": "Weekly retraining of the investment recommendation model"
+    },
+    {
+      "id": "risk_analysis_model_update",
+      "name": "Risk Analysis Model Update",
+      "notebook_path": "ai_model_development/investment_advisory/Risk_Analysis_Model.ipynb",
+      "schedule": {
+        "frequency": "weekly",
+        "day": "Saturday",
+        "time": "03:30",
+        "timezone": "Africa/Nairobi"
+      },
+      "parameters": {
+        "risk_categories": ["Conservative", "Moderate", "Aggressive"],
+        "market_volatility_window": 90
+      },
+      "dependencies": ["nse_data_collection", "forex_data_collection"],
+      "description": "Updates the risk analysis model with latest market data"
+    },
+    {
+      "id": "stock_price_prediction",
+      "name": "Stock Price Prediction Models",
+      "notebook_path": "predictive_modeling/Stock_Price_Prediction.ipynb",
+      "schedule": {
+        "frequency": "daily",
+        "time": "22:00",
+        "timezone": "Africa/Nairobi"
+      },
+      "parameters": {
+        "top_stocks": ["SCOM", "EQTY", "KCB", "EABL", "BAT"],
+        "forecast_days": 5,
+        "models": ["ARIMA", "LSTM", "Prophet"]
+      },
+      "dependencies": ["nse_data_collection"],
+      "description": "Generates price predictions for top NSE stocks"
+    },
+    {
+      "id": "user_behavior_analysis",
+      "name": "User Behavior Analysis",
+      "notebook_path": "data_analysis/user_behavior/User_Behavior_Analysis.ipynb",
+      "schedule": {
+        "frequency": "weekly",
+        "day": "Monday",
+        "time": "09:00",
+        "timezone": "Africa/Nairobi"
+      },
+      "parameters": {
+        "segment_by": ["age_group", "risk_profile", "investment_goals"],
+        "anonymize": true
+      },
+      "dependencies": [],
+      "description": "Analyzes user interaction patterns and financial preferences"
+    },
+    {
+      "id": "chatbot_response_optimization",
+      "name": "Chatbot Response Optimization",
+      "notebook_path": "ai_model_development/chatbot_ai/Chatbot_Response_Optimization.ipynb",
+      "schedule": {
+        "frequency": "weekly",
+        "day": "Sunday",
+        "time": "01:00",
+        "timezone": "Africa/Nairobi"
+      },
+      "parameters": {
+        "train_on_recent_conversations": true,
+        "max_conversation_history": 5000,
+        "languages": ["English", "Swahili"]
+      },
+      "dependencies": ["user_behavior_analysis"],
+      "description": "Optimizes chatbot responses based on recent user interactions"
+    },
+    {
+      "id": "system_performance_evaluation",
+      "name": "AI Model Performance Evaluation",
+      "notebook_path": "deployment_testing/AI_Model_Performance_Evaluation.ipynb",
+      "schedule": {
+        "frequency": "daily",
+        "time": "23:30",
+        "timezone": "Africa/Nairobi"
+      },
+      "parameters": {
+        "models_to_evaluate": [
+          "investment_recommendation", 
+          "risk_analysis", 
+          "stock_prediction", 
+          "sentiment_analysis"
+        ],
+        "generate_report": true
+      },
+      "dependencies": [
+        "investment_recommendation_training", 
+        "risk_analysis_model_update", 
+        "stock_price_prediction", 
+        "financial_news_sentiment"
+      ],
+      "description": "Evaluates performance metrics of all AI models"
+    },
+    {
+      "id": "monthly_economic_indicators",
+      "name": "Monthly Economic Indicators Analysis",
+      "notebook_path": "data_analysis/financial_data/Macroeconomic_Indicators_Analysis.ipynb",
+      "schedule": {
+        "frequency": "monthly",
+        "day": 1,
+        "time": "08:00",
+        "timezone": "Africa/Nairobi"
+      },
+      "parameters": {
+        "indicators": [
+          "inflation_rate", 
+          "gdp_growth", 
+          "interest_rates", 
+          "unemployment_rate", 
+          "consumer_price_index"
+        ],
+        "source": "kenya_national_bureau_of_statistics"
+      },
+      "dependencies": [],
+      "description": "Monthly analysis of key Kenyan economic indicators"
+    }
+  ]
+}
